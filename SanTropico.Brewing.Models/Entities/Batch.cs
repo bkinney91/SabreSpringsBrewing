@@ -4,11 +4,14 @@ using System.Text;
 
 namespace SanTropico.Brewing.Models.Entities
 {
-    public class BrewLog
+    public class Batch
     {
         public int Id { get; set; }
         public int Beer { get; set; }
-        public int Batch { get; set; }
+        public int BatchNumber { get; set; }
+        public string BatchName { get; set; }
+        public string Status { get; set; }
+        public string SubStatus { get; set; }
         public string Brewers { get; set; }
         public string Recipe { get; set; }
         public string Yeast { get; set; }
@@ -16,9 +19,10 @@ namespace SanTropico.Brewing.Models.Entities
         public decimal OriginalGravity { get; set; }
         public decimal FinalGravity { get; set; }
         public decimal ABV { get; set; }
-        public DateTime DateBrewed { get; set; }
-        public DateTime DatePackaged { get; set; }
-        public DateTime DateTapped { get; set; }
+        public decimal PintsRemaining { get; set; }
+        public DateTime? DateBrewed { get; set; }
+        public DateTime? DatePackaged { get; set; }
+        public DateTime? DateTapped { get; set; }
         public string BrewingNotes { get; set; }
         public string TastingNotes { get; set; }
         public DateTime Created { get; set; }

@@ -4,13 +4,12 @@ using System.Text;
 
 namespace SanTropico.Brewing.Models.Entities
 {
-    public class Tap
+    public class BillOfMaterial
     {
         public int Id { get; set; }
-        public int TapNumber { get; set; }
-        public int BrewLog { get; set; }
-        public decimal PintsRemaining { get; set; }
-        public string Status { get; set; }
+        public int Batch { get; set; }
+        public int Inventory { get; set; }
+        public decimal Quantity { get; set; }
         public DateTime Created { get; set; }
         public string CreatedBy { get; set; }
     }

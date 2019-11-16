@@ -63,6 +63,6 @@
     <Build Include="Reviews.sql" />
     <Build Include="Tasks.sql" />
     <Build Include="Inventory.sql" />
-    <Build Include="BatchBillOfMaterials.sql" />
+    <Build Include="BillOfMaterials.sql" />
   </ItemGroup>
 </Project>
