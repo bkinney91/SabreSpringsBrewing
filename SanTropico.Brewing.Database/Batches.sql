@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Batches]
 (
 	[Id] INT IDENTITY NOT NULL PRIMARY KEY, 
-    [Beer] INT FOREIGN KEY REFERENCES Beers(Id),
+    [Beer] INT FOREIGN KEY REFERENCES Beers(Id) NOT NULL,
 	[BatchNumber] INT not null,
 	[BatchName] nvarchar(255) null,
 	[Status] nvarchar(255),
@@ -19,6 +19,6 @@
 	[DateTapped] DateTime null,
 	[BrewingNotes] nvarchar(max) null,
 	[TastingNotes] nvarchar(max) null,
-	[Created] nvarchar(max) null,
+	[Created] nvarchar(max) NOT null DEFAULT GETDATE(),
 	[CreatedBy] nvarchar(255) null
 )
