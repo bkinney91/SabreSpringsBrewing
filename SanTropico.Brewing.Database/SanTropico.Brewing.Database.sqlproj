@@ -59,9 +59,10 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Beers.sql" />
-    <Build Include="BrewLog.sql" />
+    <Build Include="Batches.sql" />
     <Build Include="Reviews.sql" />
-    <Build Include="Taps.sql" />
     <Build Include="Tasks.sql" />
+    <Build Include="Inventory.sql" />
+    <Build Include="BatchBillOfMaterials.sql" />
   </ItemGroup>
 </Project>
