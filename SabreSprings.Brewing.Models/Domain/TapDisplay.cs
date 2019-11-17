@@ -10,8 +10,10 @@ namespace SabreSprings.Brewing.Models.Domain
         public int BatchNumber { get; set; }
         public string Style { get; set; }
         public string ABV { get; set; }
-        public string SuggestedGlassware { get; set; }
+        public string SuggestedGlassType{ get; set; }
         public string Brewers { get; set; }
+        public int TapNumber { get; set; }
+        public decimal PintsRemaining { get; set; }
         
     }
 }

@@ -1,16 +1,50 @@
-﻿using SabreSprings.Brewing.Models.Domain;
+﻿using SabreSprings.Brewing.Data.Interfaces;
+using SabreSprings.Brewing.Models.Domain;
+using SabreSprings.Brewing.Models.Entities;
 using SabreSprings.Brewing.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace SabreSprings.Brewing.Services
 {
     public class TapService : ITapService
     {
+        private readonly IBatchDataProvider _batchDataProvider;
+        private readonly IBeerDataProvider _beerDataProvider;
+        public TapService(IBatchDataProvider batchDataProvider, IBeerDataProvider beerDataProvider)
+        {
+            _batchDataProvider = batchDataProvider;
+            _beerDataProvider = beerDataProvider;
+        }
+
+
         public List<TapDisplay> GetOnTapDisplay()
         {
             List<TapDisplay> tapList = new List<TapDisplay>();
-            //List<Batch> batchesOnTap = new 
-
+            List<Batch> batchesOnTap = _batchDataProvider.GetOnTap();
+            foreach (Batch batch in batchesOnTap)
+            {
+                Beer beer = _beerDataProvider.Get(batch.Beer);
+                TapDisplay tapDisplay = new TapDisplay
+                {
+                    BeerDisplayName = batch.BatchName,
+                    BatchNumber = batch.BatchNumber,
+                    Style = beer.Style,
+                    PintsRemaining = batch.PintsRemaining,
+                    ABV = String.Format("{0:0%}", batch.ABV),
+                    SuggestedGlassType = beer.SuggestedGlassType,
+                    Brewers = batch.Brewers
+                };
+                int tapNumber = 0;
+                bool properFormat = Int32.TryParse(batch.SubStatus, out tapNumber);
+                if(properFormat == false)
+                {
+                    throw new FormatException("SubStatus for this beer could not be parsed to determine a tap number," +
+                        $" please configure sub status for batch ID \"{batch.Id}\" properly.");
+                }
+                tapDisplay.TapNumber = tapNumber;                
+                tapList.Add(tapDisplay);
+            }
             return tapList;
         }
     }
