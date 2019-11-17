@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SabreSprings.Brewing.Models.Domain
 {
-    public class TapDisplay
+    public class Tap
     {
         public string BeerDisplayName { get; set; }
         public int BatchNumber { get; set; }

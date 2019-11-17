@@ -18,14 +18,14 @@ namespace SabreSprings.Brewing.Services
         }
 
 
-        public List<TapDisplay> GetOnTapDisplay()
+        public List<Tap> GetOnTapDisplay()
         {
-            List<TapDisplay> tapList = new List<TapDisplay>();
+            List<Tap> tapList = new List<Tap>();
             List<Batch> batchesOnTap = _batchDataProvider.GetOnTap();
             foreach (Batch batch in batchesOnTap)
             {
                 Beer beer = _beerDataProvider.Get(batch.Beer);
-                TapDisplay tapDisplay = new TapDisplay
+                Tap tapDisplay = new Tap
                 {
                     BeerDisplayName = batch.BatchName,
                     BatchNumber = batch.BatchNumber,
