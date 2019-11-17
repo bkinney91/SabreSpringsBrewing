@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SanTropico.Brewing.Models.Entities
+namespace SabreSprings.Brewing.Models.Entities
 {
     public class Inventory
     {

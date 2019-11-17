@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace SanTropico.Brewing.TapHouse
+namespace SabreSprings.Brewing.TapHouse
 {
     public class Program
     {

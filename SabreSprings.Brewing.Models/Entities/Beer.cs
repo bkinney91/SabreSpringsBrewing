@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SanTropico.Brewing.Models.Entities
+namespace SabreSprings.Brewing.Models.Entities
 {
-    public class BillOfMaterial
+    public class Beer
     {
         public int Id { get; set; }
-        public int Batch { get; set; }
-        public int Inventory { get; set; }
-        public decimal Quantity { get; set; }
+        public string Name { get; set; }
+        public string Style { get; set; }
         public DateTime Created { get; set; }
         public string CreatedBy { get; set; }
     }

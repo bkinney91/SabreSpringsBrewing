@@ -1,6 +1,6 @@
 using System;
 
-namespace SanTropico.Brewing.TapHouse.Models
+namespace SabreSprings.Brewing.TapHouse.Models
 {
     public class ErrorViewModel
     {

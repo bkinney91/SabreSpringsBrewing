@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace SanTropico.Brewing.TapHouse.Controllers
+namespace SabreSprings.Brewing.TapHouse.Controllers
 {
     public class TaproomController : Controller
     {

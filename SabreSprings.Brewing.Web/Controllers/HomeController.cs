@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SanTropico.Brewing.TapHouse.Models;
+using SabreSprings.Brewing.TapHouse.Models;
 
-namespace SanTropico.Brewing.TapHouse.Controllers
+namespace SabreSprings.Brewing.TapHouse.Controllers
 {
     public class HomeController : Controller
     {

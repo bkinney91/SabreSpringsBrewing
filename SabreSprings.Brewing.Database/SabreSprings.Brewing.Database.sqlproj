@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>SanTropico.Brewing.Database</Name>
+    <Name>SabreSprings.Brewing.Database</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{5aea2ab2-21d5-4b62-a6c0-121cffd3e768}</ProjectGuid>
@@ -11,8 +11,8 @@
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>SanTropico.Brewing.Database</RootNamespace>
-    <AssemblyName>SanTropico.Brewing.Database</AssemblyName>
+    <RootNamespace>SabreSprings.Brewing.Database</RootNamespace>
+    <AssemblyName>SabreSprings.Brewing.Database</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
