@@ -10,6 +10,8 @@ namespace SabreSprings.Brewing.Services
         {
             List<TapDisplay> tapList = new List<TapDisplay>();
             //List<Batch> batchesOnTap = new 
+
+            return tapList;
         }
     }
 }

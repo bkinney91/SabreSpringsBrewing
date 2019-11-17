@@ -9,7 +9,9 @@ namespace SabreSprings.Brewing.Data
     {
         public Beer Get(int id)
         {
+            Beer beer = new Beer();
 
+            return beer;
         }
     }
 }

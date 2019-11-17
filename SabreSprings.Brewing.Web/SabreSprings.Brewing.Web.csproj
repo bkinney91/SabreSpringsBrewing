@@ -15,4 +15,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\SabreSprings.Brewing.Services\SabreSprings.Brewing.Services.csproj" />
+  </ItemGroup>
+
 </Project>
