@@ -1,9 +1,11 @@
-﻿CREATE TABLE [dbo].[BrewLogBillOfMaterials]
+﻿CREATE TABLE [BillOfMaterials]
 (
-	[Id] INT IDENTITY NOT NULL PRIMARY KEY,
-	[Batch] INT FOREIGN KEY REFERENCES Batches(Id) NOT NULL,
-	[Inventory] INT FOREIGN KEY REFERENCES Inventory(Id) NOT NULL,
+	[Id] INTEGER NOT NULL PRIMARY KEY,
+	[Batch] INTEGER NOT NULL,
+	[Inventory] INTEGER NOT NULL,
 	[Quantity] decimal not null,
-	[Created] DateTime not null DEFAULT GETDATE(),
-	[CreatedBy] nvarchar(255) null
+	[Created] DateTime not null DEFAULT CURRENT_TIMESTAMP,
+	[CreatedBy] TEXT null,
+	FOREIGN KEY(Batch) REFERENCES Batches(Id),
+	FOREIGN KEY(Inventory) REFERENCES Inventory(Id)
 )

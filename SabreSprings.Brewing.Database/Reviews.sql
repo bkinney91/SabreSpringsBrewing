@@ -1,9 +1,10 @@
-﻿CREATE TABLE [dbo].[Reviews]
+﻿CREATE TABLE Reviews
 (
-	[Id] INT IDENTITY NOT NULL PRIMARY KEY,
-	[Beer] INT FOREIGN KEY REFERENCES Beers(Id) NOT NULL,
-	[Rating] int not null,
-	[Notes] nvarchar(max) null,
-	[CreatedBy] nvarchar(255) null,
-	[Created] DateTime NOT NULL default GETDATE()
+	Id INTEGER PRIMARY KEY,
+	Beer INTEGER NOT NULL,	
+	Rating INTEGER not null,
+	Notes TEXT null,
+	CreatedBy TEXT null,
+	Created DateTime NOT NULL default CURRENT_TIMESTAMP,
+	FOREIGN KEY(Beer) REFERENCES Beers(Id)
 )

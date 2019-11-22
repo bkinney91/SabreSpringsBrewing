@@ -1,10 +1,10 @@
-﻿CREATE TABLE [dbo].[Tasks]
+﻿CREATE TABLE [Tasks]
 (
-	[Id] INT IDENTITY NOT NULL PRIMARY KEY,
-	[Batch] INT FOREIGN KEY REFERENCES Batches(Id) NOT NULL,
-	[Description] nvarchar(max) null,
+	[Id] INTEGER NOT NULL PRIMARY KEY,
+	[Batch] INTEGER NOT NULL,
+	[Description] TEXT null,
 	[ProjectedCompletion] DateTime not null,
 	[ActualCompletion] DateTime null,
-	[CompletedBy] nvarchar(255) null,
-	[Created] DateTime not null default GETDATE()
+	[CompletedBy] TEXT null,
+	[Created] DateTime not null default CURRENT_TIMESTAMP
 )

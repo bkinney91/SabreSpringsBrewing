@@ -1,14 +1,14 @@
-﻿CREATE TABLE [dbo].[Batches]
+﻿CREATE TABLE Batches
 (
-	[Id] INT IDENTITY NOT NULL PRIMARY KEY, 
-    [Beer] INT FOREIGN KEY REFERENCES Beers(Id) NOT NULL,
-	[BatchNumber] INT not null,
-	[BatchName] nvarchar(255) null,
-	[Status] nvarchar(255),
-	[SubStatus]nvarchar(255),
-	[Brewers] Nvarchar(max), 
-	[Recipe] Nvarchar(max),
-	[Yeast] Nvarchar(max),
+	[Id] INTEGER PRIMARY KEY, 
+    [Beer] INTEGER NOT NULL,
+	[BatchNumber] INTEGER not null,
+	[BatchName] TEXT null,
+	[Status] TEXT null,
+	[SubStatus] TEXT null,
+	[Brewers] TEXT null, 
+	[Recipe] TEXT null,
+	[Yeast] TEXT null,
 	[PreBoilGravity] decimal(4,3) null,
 	[OriginalGravity] decimal(4,3) null,
 	[FinalGravity] decimal(4,3) null,
@@ -17,8 +17,9 @@
 	[DateBrewed] DateTime null,
 	[DatePackaged] DateTime null,
 	[DateTapped] DateTime null,
-	[BrewingNotes] nvarchar(max) null,
-	[TastingNotes] nvarchar(max) null,
-	[Created] nvarchar(max) NOT null DEFAULT GETDATE(),
-	[CreatedBy] nvarchar(255) null
+	[BrewingNotes] TEXT null,
+	[TastingNotes] TEXT null,
+	[Created] TEXT NOT null DEFAULT CURRENT_TIMESTAMP,
+	[CreatedBy] TEXT null,
+	FOREIGN KEY(Beer) REFERENCES Beers(Id)
 )

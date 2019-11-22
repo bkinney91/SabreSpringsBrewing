@@ -1,13 +1,13 @@
-﻿CREATE TABLE [dbo].[Inventory]
+﻿CREATE TABLE [Inventory]
 (
-	[Id] INT IDENTITY NOT NULL PRIMARY KEY,
-	[Brand] nvarchar(255) NOT NULL,
-	[Description] nvarchar(max) NOT NULL,
-	[Type] nvarchar(255) NOT NULL,
-	[UnitOfMeasure] nvarchar(255) NOT NULL,
+	[Id] INTEGER PRIMARY KEY NOT NULL,
+	[Brand] TEXT NOT NULL,
+	[Description] TEXT NOT NULL,
+	[Type] TEXT NOT NULL,
+	[UnitOfMeasure] TEXT NOT NULL,
 	[PricePerUnitOfMeasure] decimal not null,
 	[Quantity] decimal not null,
-	[Notes] nvarchar(max),
-	[Created] DateTime not null default GETDATE(),
-	[CreatedBy] nvarchar(255)
+	[Notes] TEXT,
+	[Created] DateTime not null default CURRENT_TIMESTAMP,
+	[CreatedBy] TEXT NOT NULL
 )
