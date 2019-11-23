@@ -1,16 +1,15 @@
 ﻿using Dapper;
+using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
+using SabreSprings.Brewing.Data.Interfaces;
 using SabreSprings.Brewing.Models.Entities;
 using Serilog;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Text;
+
 
 namespace SabreSprings.Brewing.Data
 {
-    public class BeerDataProvider
+    public class BeerDataProvider : IBeerDataProvider
     {
         private readonly IConfiguration _configuration;
         private readonly ILogger _logger;
@@ -23,7 +22,7 @@ namespace SabreSprings.Brewing.Data
         {
             Beer beer = new Beer();
             string sql = "Select * from Beer where Id= @Id;";
-            using (IDbConnection db = new SqlConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
+            using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 beer = db.QueryFirst<Beer>(sql, new { Id = id });
             }

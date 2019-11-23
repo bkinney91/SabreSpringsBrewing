@@ -18,7 +18,7 @@ namespace SabreSprings.Brewing.Services
         }
 
 
-        public List<Tap> GetOnTapDisplay()
+        public List<Tap> GetOnTap()
         {
             List<Tap> tapList = new List<Tap>();
             List<Batch> batchesOnTap = _batchDataProvider.GetOnTap();
