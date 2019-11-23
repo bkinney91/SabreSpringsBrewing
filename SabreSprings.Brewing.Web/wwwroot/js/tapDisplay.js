@@ -4,11 +4,11 @@
 
 function GetTaps() {
     $.ajax({
-        url: "/api/TapController/GetOnTap",
+        url: "/api/Tap/GetOnTap",
         type: 'GET',
         dataType: "json",
         contentType: "application/json;charset=utf-8",
-        sucess: function (data) {
+        success: function (data) {
             DisplayTaps(data);
         },
         error: function (data) {
@@ -18,13 +18,11 @@ function GetTaps() {
 }
 
 function DisplayTaps(data) {
-   
+    var a = 5;
     $.each(data, function (i, obj) {
-        var htmlString = "<table>";
-        //use obj.id and obj.name here, for example:
-        htmlstring += "<tr><td>" + obj.BeerDisplayName + "</td><td>" + obj.BatchNumber + "</td></tr>";
-        htmlstring += "</table>";
-        $("#tapDisplay"+ obj.TapNumber.toString()).html(htmlString);
+       var  htmlString =  "<h3>" + obj.beerDisplayName + "</h3>Batch #" +  obj.batchNumber + "<br/>" +
+           "ABV: " + obj.abv + "<br/>Pints Remaining: " + obj.pintsRemaining;
+        $("#tapDisplay"+ obj.tapNumber.toString()).html(htmlString);
     });
     
   
