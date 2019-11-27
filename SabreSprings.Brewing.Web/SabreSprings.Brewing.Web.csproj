@@ -27,6 +27,13 @@
 
 
   <ItemGroup>
+    <Content Update="wwwroot\js\tapDisplay.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+
+  <ItemGroup>
     <Folder Include="wwwroot\lib\devextreme\" />
   </ItemGroup>
 

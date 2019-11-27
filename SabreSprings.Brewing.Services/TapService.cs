@@ -27,11 +27,11 @@ namespace SabreSprings.Brewing.Services
                 Beer beer = _beerDataProvider.Get(batch.Beer);
                 Tap tapDisplay = new Tap
                 {
-                    BeerDisplayName = batch.BatchName,
+                    BeerDisplayName = beer.Name,
                     BatchNumber = batch.BatchNumber,
                     Style = beer.Style,
                     PintsRemaining = batch.PintsRemaining,
-                    ABV = String.Format("{0:0%}", batch.ABV),
+                    ABV = String.Format("{0:0%}", batch.ABV/100),
                     SuggestedGlassType = beer.SuggestedGlassType,
                     Brewers = batch.Brewers
                 };
