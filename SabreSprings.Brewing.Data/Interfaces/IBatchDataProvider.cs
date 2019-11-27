@@ -9,5 +9,6 @@ namespace SabreSprings.Brewing.Data.Interfaces
     {
         Batch Get(int id);
         List<Batch> GetOnTap();
+        List<Batch> GetAllBatches();
     }
 }

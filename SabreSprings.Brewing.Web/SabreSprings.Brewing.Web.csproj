@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="DevExtreme.Web" Version="19.2.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
@@ -22,6 +23,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SabreSprings.Brewing.Services\SabreSprings.Brewing.Services.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\devextreme\" />
   </ItemGroup>
 
 </Project>

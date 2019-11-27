@@ -13,17 +13,17 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
     [ApiController]
     public class TapController : ControllerBase
     {
-        private ITapService _tapService;
+        private readonly ITapService TapService;
         public TapController(ITapService tapService)
         {
-            _tapService = tapService;
+            TapService = tapService;
         }
 
         [Route("GetOnTap")]
         [HttpGet]
         public IActionResult GetOnTap()
         {
-            List<Tap> tapListDisplays = _tapService.GetOnTap();
+            List<Tap> tapListDisplays = TapService.GetOnTap();
             return Ok(tapListDisplays);
         }
     }

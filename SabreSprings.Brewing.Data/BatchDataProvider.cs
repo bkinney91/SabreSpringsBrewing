@@ -42,5 +42,24 @@ namespace SabreSprings.Brewing.Data
             }
             return batchesOnTap;
         }
+
+        public void Add(Batch batch)
+        {
+            string sql = "Insert into Batches (Beer, BatchNumber, BatchName, Status, Substatus) VALUES (@Beer, @BatchNumber, @BatchName, @Status, @SubStatus);";
+            using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
+            {
+                db.Execute(sql, batch);
+            }
+        }
+
+        public List<Batch> GetAllBatches()
+        {
+            string sql = "Select * from Batches;";
+            using(IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
+            {
+                List<Batch> batches = db.Query<Batch>(sql).ToList();
+                return batches;
+            }
+        }
     }
 }
