@@ -45,6 +45,15 @@ namespace SabreSprings.Brewing.Data
             return batchesOnTap;
         }
 
+        public async Task<int> GetBatchOnTap(int tapNumber)
+        {
+            string sql = "Select Id from Batches where Status = 'On Tap' and Substatus = @TapNumber;";
+            using(IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSrpingsBrewing")))
+            {
+                return await db.ExecuteScalarAsync<int>(sql, new { tapNumber });
+            }
+        }
+
         public async Task Add(Batch batch)
         {
             string sql = "Insert into Batches (Beer, BatchNumber, BatchName, Status, Substatus) VALUES (@Beer, @BatchNumber, @BatchName, @Status, @SubStatus);";

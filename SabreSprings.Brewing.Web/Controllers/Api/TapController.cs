@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SabreSprings.Brewing.Models.DataTransfer;
 using SabreSprings.Brewing.Models.Domain;
 using SabreSprings.Brewing.Services.Interfaces;
 
@@ -27,6 +28,13 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
             return Ok(tapListDisplays);
         }
 
+        [Route("ProcessPour")]
+        [HttpPost]
+        public async Task<IActionResult> ProcressPour(Pour pour)
+        {
+            await TapService.ProcessPour(pour);
+            return Ok();
+        }
 
     }
 }

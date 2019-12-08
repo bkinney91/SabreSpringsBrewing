@@ -1,4 +1,5 @@
 ﻿using SabreSprings.Brewing.Data.Interfaces;
+using SabreSprings.Brewing.Models.DataTransfer;
 using SabreSprings.Brewing.Models.Domain;
 using SabreSprings.Brewing.Models.Entities;
 using SabreSprings.Brewing.Services.Interfaces;
@@ -12,6 +13,7 @@ namespace SabreSprings.Brewing.Services
     {
         private readonly IBatchDataProvider BatchDataProvider;
         private readonly IBeerDataProvider BeerDataProvider;
+        public static readonly object TapLock = new object();
         public TapService(IBatchDataProvider batchDataProvider, IBeerDataProvider beerDataProvider)
         {
             BatchDataProvider = batchDataProvider;
@@ -49,9 +51,11 @@ namespace SabreSprings.Brewing.Services
             return tapList;
         }
 
-        public async Task ProcessPour(int tapNumber, decimal amountPoured)
-        {
-
+        public async Task ProcessPour(Pour pour)
+        {            
+            int batchId = await BatchDataProvider.GetBatchOnTap(pour.TapNumber);
+            decimal currentAmount = await BatchDataProvider.GetPintsRemaining(batchId);
+            await BatchDataProvider.DecrementPintsRemaining(batchId, currentAmount - pour.AmountPoured);
         }
     }
 }
