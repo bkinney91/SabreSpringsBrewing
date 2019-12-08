@@ -13,6 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SabreSprings.Brewing.Web", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SabreSprings.Brewing.Models", "SabreSprings.Brewing.Models\SabreSprings.Brewing.Models.csproj", "{E5073F41-F5FB-4A8D-A9A4-9D847EA650DB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TapListener", "TapListener", "{BD74DBF7-BAFD-4D33-84BD-9B6EA59CFC5D}"
+	ProjectSection(SolutionItems) = preProject
+		TapListener\flowmeter.py = TapListener\flowmeter.py
+		TapListener\TapListener.py = TapListener\TapListener.py
+		TapListener\TapListener.service = TapListener\TapListener.service
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -1,0 +1,13 @@
+[Unit]
+Description=TapListener
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=centos
+ExecStart=sudo python3 TapListener.py
+
+[Install]
+WantedBy=multi-user.target
