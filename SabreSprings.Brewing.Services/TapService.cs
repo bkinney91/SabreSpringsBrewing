@@ -4,27 +4,28 @@ using SabreSprings.Brewing.Models.Entities;
 using SabreSprings.Brewing.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SabreSprings.Brewing.Services
 {
     public class TapService : ITapService
     {
-        private readonly IBatchDataProvider _batchDataProvider;
-        private readonly IBeerDataProvider _beerDataProvider;
+        private readonly IBatchDataProvider BatchDataProvider;
+        private readonly IBeerDataProvider BeerDataProvider;
         public TapService(IBatchDataProvider batchDataProvider, IBeerDataProvider beerDataProvider)
         {
-            _batchDataProvider = batchDataProvider;
-            _beerDataProvider = beerDataProvider;
+            BatchDataProvider = batchDataProvider;
+            BeerDataProvider = beerDataProvider;
         }
 
 
-        public List<Tap> GetOnTap()
+        public async Task<List<Tap>> GetOnTap()
         {
             List<Tap> tapList = new List<Tap>();
-            List<Batch> batchesOnTap = _batchDataProvider.GetOnTap();
+            List<Batch> batchesOnTap = await BatchDataProvider.GetOnTap();
             foreach (Batch batch in batchesOnTap)
             {
-                Beer beer = _beerDataProvider.Get(batch.Beer);
+                Beer beer = await BeerDataProvider.Get(batch.Beer);
                 Tap tapDisplay = new Tap
                 {
                     BeerDisplayName = beer.Name,
@@ -46,6 +47,11 @@ namespace SabreSprings.Brewing.Services
                 tapList.Add(tapDisplay);
             }
             return tapList;
+        }
+
+        public async Task ProcessPour(int tapNumber, decimal amountPoured)
+        {
+
         }
     }
 }

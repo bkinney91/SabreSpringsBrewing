@@ -2,13 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SabreSprings.Brewing.Data.Interfaces
 {
     public interface IBatchDataProvider
     {
-        Batch Get(int id);
-        List<Batch> GetOnTap();
-        List<Batch> GetAllBatches();
+        Task<Batch> Get(int id);
+        Task<List<Batch>> GetOnTap();
+        Task<List<Batch>> GetAllBatches();
+        Task DecrementPintsRemaining(int batchId, decimal newAmount);
+        Task<decimal> GetPintsRemaining(int batchId);
     }
 }

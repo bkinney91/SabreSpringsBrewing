@@ -21,10 +21,12 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
 
         [Route("GetOnTap")]
         [HttpGet]
-        public IActionResult GetOnTap()
+        public async Task<IActionResult> GetOnTap()
         {
-            List<Tap> tapListDisplays = TapService.GetOnTap();
+            List<Tap> tapListDisplays = await TapService.GetOnTap();
             return Ok(tapListDisplays);
         }
+
+
     }
 }

@@ -7,6 +7,7 @@ using Dapper;
 using SabreSprings.Brewing.Data.Interfaces;
 using System.Linq;
 using Microsoft.Data.Sqlite;
+using System.Threading.Tasks;
 
 namespace SabreSprings.Brewing.Data
 {
@@ -21,44 +22,69 @@ namespace SabreSprings.Brewing.Data
             _logger = logger;
         }
 
-        public Batch Get(int id)
+        public async Task<Batch> Get(int id)
         {
             Batch batch = new Batch();
             string sql = "Select * from Batches where Id= @Id;";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
-                batch = db.QueryFirst<Batch>(sql, new { Id = id });
+                batch = await db.QueryFirstAsync<Batch>(sql, new { Id = id });
             }
             return batch;
         }
 
-        public List<Batch> GetOnTap()
+        public async Task<List<Batch>> GetOnTap()
         {
             List<Batch> batchesOnTap = new List<Batch>();
             string sql = "Select * from Batches where Status = 'On Tap';";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
-                batchesOnTap = db.Query<Batch>(sql).ToList();
+                var taps = await db.QueryAsync<Batch>(sql);
+                batchesOnTap = taps.ToList();
             }
             return batchesOnTap;
         }
 
-        public void Add(Batch batch)
+        public async Task Add(Batch batch)
         {
             string sql = "Insert into Batches (Beer, BatchNumber, BatchName, Status, Substatus) VALUES (@Beer, @BatchNumber, @BatchName, @Status, @SubStatus);";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
-                db.Execute(sql, batch);
+                await db.ExecuteAsync(sql, batch);
             }
         }
 
-        public List<Batch> GetAllBatches()
+        public async Task<List<Batch>> GetAllBatches()
         {
             string sql = "Select * from Batches;";
             using(IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
-                List<Batch> batches = db.Query<Batch>(sql).ToList();
-                return batches;
+                var batches = await db.QueryAsync<Batch>(sql);
+                return batches.ToList();
+            }
+        }
+        
+
+        public async Task DecrementPintsRemaining(int batchId, decimal newAmount)
+        {
+            string sql = "Update Batches set PintsRemaining = @PintsRemaining where Id = @BatchId;";
+            using(IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
+            {
+                await db.ExecuteAsync(sql, new
+                {
+                    newAmount,
+                    batchId
+                });
+            }
+        }
+
+        public async Task<decimal> GetPintsRemaining(int batchId)
+        {
+            string sql = "Select PintsRemaining from Batches where Id = @BatchId;";
+            using(IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
+            {
+                decimal pintsRemaining = await db.QueryFirstAsync<decimal>(sql, new { batchId });
+                return pintsRemaining;
             }
         }
     }

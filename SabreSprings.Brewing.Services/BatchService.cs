@@ -1,13 +1,15 @@
 ﻿using SabreSprings.Brewing.Data.Interfaces;
 using SabreSprings.Brewing.Models.Entities;
 using SabreSprings.Brewing.Models.View;
+using SabreSprings.Brewing.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SabreSprings.Brewing.Services
 {
-    public class BatchService
+    public class BatchService : IBatchService
     {
         private readonly IBatchDataProvider BatchDataProvider;
         private readonly IBeerDataProvider BeerDataProvider;
@@ -17,13 +19,13 @@ namespace SabreSprings.Brewing.Services
             BeerDataProvider = beerDataProvider;
         }
 
-        public List<BatchTableRow> GetBatchTable()
+        public async Task<List<BatchTableRow>> GetBatchTable()
         {
             List<BatchTableRow> tableRows = new List<BatchTableRow>();
-            List<Batch> batches = BatchDataProvider.GetAllBatches();
+            List<Batch> batches = await BatchDataProvider.GetAllBatches();
             foreach(Batch batch in batches)
             {
-                Beer beer = BeerDataProvider.Get(batch.Beer);
+                Beer beer = await BeerDataProvider.Get(batch.Beer);
                 BatchTableRow row = new BatchTableRow()
                 {
                     BatchId = batch.Id,
@@ -32,7 +34,8 @@ namespace SabreSprings.Brewing.Services
                     BeerName = beer.Name,
 
                 };
-            }            
+            }
+            return tableRows;
         }
     }
 }

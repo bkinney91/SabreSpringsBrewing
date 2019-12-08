@@ -1,11 +1,13 @@
-﻿using System;
+﻿using SabreSprings.Brewing.Models.View;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SabreSprings.Brewing.Services.Interfaces
 {
     public interface IBatchService
     {
-        
+        Task<List<BatchTableRow>> GetBatchTable();
     }
 }

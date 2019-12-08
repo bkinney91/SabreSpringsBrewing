@@ -24,11 +24,11 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
         
         [HttpGet]
         [Route("GetAllBatches")]
-        public IActionResult GetAllBatches()
+        public async Task<IActionResult> GetAllBatches()
         {
             try
             {
-                List<Batch> batches = BatchDataProvider.GetAllBatches();
+                List<Batch> batches = await BatchDataProvider.GetAllBatches();
                 return Ok(batches);
             }
             catch(Exception ex)

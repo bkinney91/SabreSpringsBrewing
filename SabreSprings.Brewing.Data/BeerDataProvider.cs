@@ -5,7 +5,7 @@ using SabreSprings.Brewing.Data.Interfaces;
 using SabreSprings.Brewing.Models.Entities;
 using Serilog;
 using System.Data;
-
+using System.Threading.Tasks;
 
 namespace SabreSprings.Brewing.Data
 {
@@ -18,13 +18,15 @@ namespace SabreSprings.Brewing.Data
             _configuration = configuration;
             _logger = logger;
         }
-        public Beer Get(int id)
+
+
+        public async Task<Beer> Get(int id)
         {
             Beer beer = new Beer();
             string sql = "Select * from Beers where Id= @Id;";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
-                beer = db.QueryFirst<Beer>(sql, new { Id = id });
+                beer = await db.QueryFirstAsync<Beer>(sql, new { Id = id });
             }
             return beer;
         }
