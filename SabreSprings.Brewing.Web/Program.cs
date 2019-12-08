@@ -16,6 +16,7 @@ namespace SabreSprings.Brewing.TapHouse
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseUrls("http://localhost:80", "http://192.168.1.2:80");
                 }).UseServiceProviderFactory(new AutofacServiceProviderFactory());
     }
 }
