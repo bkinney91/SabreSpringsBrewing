@@ -20,9 +20,12 @@ function GetTaps() {
 function DisplayTaps(data) {
     var a = 5;
     $.each(data, function (i, obj) {
-       var  htmlString =  "<h3>" + obj.beerDisplayName + "</h3>Batch #" +  obj.batchNumber + "<br/>" +
-           "ABV: " + obj.abv + "<br/>Pints Remaining: " + obj.pintsRemaining;
-        $("#tapDisplay"+ obj.tapNumber.toString()).html(htmlString);
+        $('#tap' + obj.tapNumber + 'BeerDisplayName').html(obj.beerDisplayName);
+        $('#tap' + obj.tapNumber + 'Style').html(obj.style);
+        $('#tap' + obj.tapNumber + 'ABV').html(parseFloat(obj.abv).toFixed(1) + "%");
+        $('#tap' + obj.tapNumber + 'PintsRemaining').html(obj.pintsRemaining + " pints remaining");
+        $('#tap' + obj.tapNumber + 'TastingNotes').html(obj.tastingNotes);
+        $('#tap' + obj.tapNumber + 'Logo').attr("src", obj.logo);
     });
     
   

@@ -34,9 +34,11 @@ namespace SabreSprings.Brewing.Services
                     BatchNumber = batch.BatchNumber,
                     Style = beer.Style,
                     PintsRemaining = batch.PintsRemaining,
-                    ABV = String.Format("{0:0%}", batch.ABV/100),
+                    ABV = batch.ABV,
                     SuggestedGlassType = beer.SuggestedGlassType,
-                    Brewers = batch.Brewers
+                    Brewers = batch.Brewers,
+                    TastingNotes = batch.TastingNotes,
+                    Logo = beer.Logo
                 };
                 int tapNumber = 0;
                 bool properFormat = Int32.TryParse(batch.SubStatus, out tapNumber);

@@ -36,7 +36,28 @@ namespace SabreSprings.Brewing.Data
         public async Task<List<Batch>> GetOnTap()
         {
             List<Batch> batchesOnTap = new List<Batch>();
-            string sql = "Select * from Batches where Status = 'On Tap';";
+            string sql = @"Select 
+                            Id,
+                            Beer,
+                            BatchNumber,
+                            Status,
+                            SubStatus,
+                            Brewers,
+                            Recipe,
+                            Yeast,
+                            PreBoilGravity,
+                            OriginalGravity,
+                            FinalGravity,
+                            CAST(ABV as REAL) as ABV,
+                            PintsRemaining,
+                            DateBrewed,
+                            DatePackaged,
+                            DateTapped,
+                            BrewingNotes,
+                            TastingNotes,
+                            Created,
+                            CreatedBy
+                            from Batches where Status = 'On Tap';";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 var taps = await db.QueryAsync<Batch>(sql);

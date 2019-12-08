@@ -24,16 +24,30 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
         [HttpGet]
         public async Task<IActionResult> GetOnTap()
         {
-            List<Tap> tapListDisplays = await TapService.GetOnTap();
-            return Ok(tapListDisplays);
+            try
+            {
+                List<Tap> tapListDisplays = await TapService.GetOnTap();
+                return Ok(tapListDisplays);
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+            }
         }
 
         [Route("ProcessPour")]
         [HttpPost]
         public async Task<IActionResult> ProcressPour(Pour pour)
         {
-            await TapService.ProcessPour(pour);
-            return Ok();
+            try
+            {
+                await TapService.ProcessPour(pour);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+            }
         }
 
     }

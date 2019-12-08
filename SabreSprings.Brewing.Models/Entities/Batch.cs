@@ -18,7 +18,7 @@ namespace SabreSprings.Brewing.Models.Entities
         public decimal PreBoilGravity { get; set; }
         public decimal OriginalGravity { get; set; }
         public decimal FinalGravity { get; set; }
-        public decimal ABV { get; set; }
+        public double ABV { get; set; }
         public decimal PintsRemaining { get; set; }
         public DateTime? DateBrewed { get; set; }
         public DateTime? DatePackaged { get; set; }
