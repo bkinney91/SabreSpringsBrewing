@@ -40,6 +40,7 @@ namespace SabreSprings.Brewing.Data
                             Id,
                             Beer,
                             BatchNumber,
+                            BatchName,
                             Status,
                             SubStatus,
                             Brewers,
@@ -86,7 +87,28 @@ namespace SabreSprings.Brewing.Data
 
         public async Task<List<Batch>> GetAllBatches()
         {
-            string sql = "Select * from Batches;";
+            string sql = @"Select  
+                            Id,
+                            Beer,
+                            BatchNumber,
+                            BatchName,
+                            Status,
+                            SubStatus,
+                            Brewers,
+                            Recipe,
+                            Yeast,
+                            PreBoilGravity,
+                            OriginalGravity,
+                            FinalGravity,
+                            CAST(ABV as REAL) as ABV,
+                            PintsRemaining,
+                            DateBrewed,
+                            DatePackaged,
+                            DateTapped,
+                            BrewingNotes,
+                            TastingNotes,
+                            Created,
+                            CreatedBy from Batches;";
             using(IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 var batches = await db.QueryAsync<Batch>(sql);

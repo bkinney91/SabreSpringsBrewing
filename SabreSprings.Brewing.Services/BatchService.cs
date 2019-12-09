@@ -4,6 +4,7 @@ using SabreSprings.Brewing.Models.View;
 using SabreSprings.Brewing.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,8 +24,14 @@ namespace SabreSprings.Brewing.Services
         {
             List<BatchTableRow> tableRows = new List<BatchTableRow>();
             List<Batch> batches = await BatchDataProvider.GetAllBatches();
+            batches = batches.OrderByDescending(x=>x.DateBrewed).ToList();
             foreach(Batch batch in batches)
             {
+                string statusText = batch.Status;
+                if (string.IsNullOrEmpty(batch.SubStatus) == false)
+                {
+                    statusText += ": " + batch.SubStatus;
+                }
                 Beer beer = await BeerDataProvider.Get(batch.Beer);
                 BatchTableRow row = new BatchTableRow()
                 {
@@ -32,9 +39,14 @@ namespace SabreSprings.Brewing.Services
                     BatchName = batch.BatchName,
                     BatchNumber = batch.BatchNumber,
                     BeerName = beer.Name,
-
+                    Style = beer.Style,
+                    DateBrewed = batch.DateBrewed,
+                    DatePackaged = batch.DatePackaged,
+                    StatusText = statusText
                 };
+                tableRows.Add(row);
             }
+
             return tableRows;
         }
     }

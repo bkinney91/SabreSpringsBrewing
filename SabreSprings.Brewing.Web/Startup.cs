@@ -48,6 +48,7 @@ namespace SabreSprings.Brewing.TapHouse
             builder.RegisterType<BeerDataProvider>().As<IBeerDataProvider>();
             //Services
             builder.RegisterType<TapService>().As<ITapService>();
+            builder.RegisterType<BatchService>().As<IBatchService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

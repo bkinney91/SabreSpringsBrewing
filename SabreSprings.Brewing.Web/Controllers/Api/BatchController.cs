@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SabreSprings.Brewing.Data.Interfaces;
 using SabreSprings.Brewing.Models.Entities;
+using SabreSprings.Brewing.Models.View;
+using SabreSprings.Brewing.Services.Interfaces;
 using Serilog;
 
 namespace SabreSprings.Brewing.Web.Controllers.Api
@@ -14,21 +16,21 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
     [ApiController]
     public class BatchController : ControllerBase
     {
-        private readonly IBatchDataProvider BatchDataProvider;
+        private readonly IBatchService BatchService;
         private readonly ILogger Logger;
-        public BatchController(IBatchDataProvider batchDataProvider, ILogger logger)
+        public BatchController(IBatchService batchService, ILogger logger)
         {
-            BatchDataProvider = batchDataProvider;
+            BatchService = batchService;
             Logger = logger;
         }
         
         [HttpGet]
-        [Route("GetAllBatches")]
-        public async Task<IActionResult> GetAllBatches()
+        [Route("GetBatchTable")]
+        public async Task<IActionResult> GetBatchTable()
         {
             try
             {
-                List<Batch> batches = await BatchDataProvider.GetAllBatches();
+                List<BatchTableRow> batches = await BatchService.GetBatchTable();
                 return Ok(batches);
             }
             catch(Exception ex)
