@@ -11,7 +11,7 @@ namespace SabreSprings.Brewing.Data.Interfaces
         Task<Batch> Get(int id);
         Task<List<Batch>> GetOnTap();
         Task<List<Batch>> GetAllBatches();
-        Task DecrementPintsRemaining(int batchId, decimal newAmount);
+        Task SubtractPour(int batchId, decimal pour);
         Task<decimal> GetPintsRemaining(int batchId);
         Task<int> GetBatchOnTap(int tapNumber);
     }

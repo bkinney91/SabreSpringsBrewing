@@ -56,8 +56,7 @@ namespace SabreSprings.Brewing.Services
         public async Task ProcessPour(Pour pour)
         {            
             int batchId = await BatchDataProvider.GetBatchOnTap(pour.TapNumber);
-            decimal currentAmount = await BatchDataProvider.GetPintsRemaining(batchId);
-            await BatchDataProvider.DecrementPintsRemaining(batchId, currentAmount - pour.AmountPoured);
+            await BatchDataProvider.SubtractPour(batchId, pour.AmountPoured);
         }
     }
 }

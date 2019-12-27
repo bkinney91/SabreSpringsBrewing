@@ -37,7 +37,7 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
 
         [Route("ProcessPour")]
         [HttpPost]
-        public async Task<IActionResult> ProcressPour(Pour pour)
+        public async Task<IActionResult> ProcessPour(Pour pour)
         {
             try
             {

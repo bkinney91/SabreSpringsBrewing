@@ -70,9 +70,10 @@ namespace SabreSprings.Brewing.Data
         public async Task<int> GetBatchOnTap(int tapNumber)
         {
             string sql = "Select Id from Batches where Status = 'On Tap' and Substatus = @TapNumber;";
-            using(IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSrpingsBrewing")))
+            string connectionString = _configuration.GetConnectionString("SabreSpringsBrewing");
+            using (IDbConnection db = new SqliteConnection(connectionString))
             {
-                return await db.ExecuteScalarAsync<int>(sql, new { tapNumber });
+                return await db.ExecuteScalarAsync<int>(sql, new { TapNumber = tapNumber });
             }
         }
 
@@ -117,15 +118,15 @@ namespace SabreSprings.Brewing.Data
         }
         
 
-        public async Task DecrementPintsRemaining(int batchId, decimal newAmount)
+        public async Task SubtractPour(int batchId, decimal pour)
         {
-            string sql = "Update Batches set PintsRemaining = @PintsRemaining where Id = @BatchId;";
+            string sql = "Update Batches set PintsRemaining = PintsRemaining - @Pour where Id = @BatchId;";
             using(IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 await db.ExecuteAsync(sql, new
                 {
-                    newAmount,
-                    batchId
+                    Pour = pour,
+                    BatchId = batchId
                 });
             }
         }
