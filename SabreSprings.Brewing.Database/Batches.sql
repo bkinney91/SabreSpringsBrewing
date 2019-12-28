@@ -13,7 +13,7 @@
 	[OriginalGravity] decimal(4,3) null,
 	[FinalGravity] decimal(4,3) null,
 	[ABV] decimal(2,1) null,
-	[PintsRemaining]  decimal(5,2) null,
+	[PintsRemaining]  decimal null,
 	[DateBrewed] DateTime null,
 	[DatePackaged] DateTime null,
 	[DateTapped] DateTime null,

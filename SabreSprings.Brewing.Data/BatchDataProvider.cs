@@ -50,7 +50,7 @@ namespace SabreSprings.Brewing.Data
                             OriginalGravity,
                             FinalGravity,
                             CAST(ABV as REAL) as ABV,
-                            PintsRemaining,
+                            CAST(PintsRemaining as REAL) as PintsRemaining,
                             DateBrewed,
                             DatePackaged,
                             DateTapped,
