@@ -37,16 +37,14 @@ GPIO.add_event_detect(24, GPIO.RISING, callback=doAClick2, bouncetime=20) # Beer
 # main loop
 while True:  
   currentTime = int(time.time() * FlowMeter.MS_IN_A_SECOND)
-  if (tap1.thisPour > 0.23 and currentTime - tap1.lastClick > 3000): # 10 seconds of inactivity triggers http request
+  if (tap1.thisPour > 0.125 and currentTime - tap1.lastClick > 3000): # 3 seconds of inactivity triggers http request
     postContent = {'TapNumber': 1, 'AmountPoured': tap1.getThisPourInPints}
-    request = requests.post('http://192.168.1.2/api/Tap/ProcessPour', data = postContent)
-    print("Someone just poured " + tap1.getThisPourInPints() + " pints from Tap #1")
+    request = requests.post('http://192.168.1.2/api/Tap/ProcessPour', json = postContent)
     tap1.thisPour = 0.0
  
-  if (tap2.thisPour > 0.23 and currentTime - tap2.lastClick > 3000): # 10 seconds of inactivity triggers http request
-    postContent = {'TapNumber': 2, 'AmountPoured': tap1.getThisPourInPints}
-    request = requests.post('http://192.168.1.2/api/Tap/ProcessPour', data = postContent)
-    print("Someone just poured " + tap2.getThisPourInPints() + " pints from Tap #2")
+  if (tap2.thisPour > 0.125 and currentTime - tap2.lastClick > 3000): # 3 seconds of inactivity triggers http request
+    postContent = {'TapNumber': 2, 'AmountPoured': tap2.getThisPourInPints}
+    request = requests.post('http://192.168.1.2/api/Tap/ProcessPour', json = postContent)
     tap2.thisPour = 0.0
 
   # the following block was in the original code but I do not feel like it is necessary
