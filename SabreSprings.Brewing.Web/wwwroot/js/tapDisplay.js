@@ -1,6 +1,11 @@
 ﻿$(document).ready(function () {
     GetTaps();
+    window.setInterval(function () {
+        GetTaps()
+    }, 5000);
 });
+
+
 
 function GetTaps() {
     $.ajax({
