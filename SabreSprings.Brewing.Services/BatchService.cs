@@ -24,7 +24,13 @@ namespace SabreSprings.Brewing.Services
         {
             List<BatchTableRow> tableRows = new List<BatchTableRow>();
             List<Batch> batches = await BatchDataProvider.GetAllBatches();
-            batches = batches.OrderByDescending(x=>x.DateBrewed).ToList();
+            batches = batches.OrderByDescending(x=>x.Status == "On Tap")
+                .ThenBy(x=> x.SubStatus)
+                .ThenBy(x=> x.Status == "Conditioning")
+                .ThenByDescending(x=> x.Status == "Fermenting")
+                .ThenByDescending(x=> x.Status == "Planned")
+                .ThenByDescending(x=> x.Status == "Archived")
+                .ThenByDescending(x=> x.DateBrewed).ToList();
             foreach(Batch batch in batches)
             {
                 string statusText = batch.Status;
