@@ -36,6 +36,7 @@ namespace SabreSprings.Brewing.Data
         public async Task<List<Batch>> GetOnTap()
         {
             List<Batch> batchesOnTap = new List<Batch>();
+            string connectionString = _configuration.GetConnectionString("SabreSpringsBrewing");
             string sql = @"Select 
                             Id,
                             Beer,
@@ -46,9 +47,9 @@ namespace SabreSprings.Brewing.Data
                             Brewers,
                             Recipe,
                             Yeast,
-                            PreBoilGravity,
-                            OriginalGravity,
-                            FinalGravity,
+                            CAST(PreBoilGravity as REAL) as PreBoilGravity,
+                            CAST(OriginalGravity as REAL) as OriginalGravity,
+                            CAST(FinalGravity as REAL) as FinalGravity,
                             CAST(ABV as REAL) as ABV,
                             CAST(PintsRemaining as REAL) as PintsRemaining,
                             DateBrewed,
@@ -59,8 +60,8 @@ namespace SabreSprings.Brewing.Data
                             Created,
                             CreatedBy
                             from Batches where Status = 'On Tap';";
-            using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
-            {
+            using (IDbConnection db = new SqliteConnection(connectionString)) 
+            { 
                 var taps = await db.QueryAsync<Batch>(sql);
                 batchesOnTap = taps.ToList();
             }
@@ -98,11 +99,11 @@ namespace SabreSprings.Brewing.Data
                             Brewers,
                             Recipe,
                             Yeast,
-                            PreBoilGravity,
-                            OriginalGravity,
-                            FinalGravity,
+                            CAST(PreBoilGravity as REAL) as PreBoilGravity,
+                            CAST(OriginalGravity as REAL) as OriginalGravity,
+                            CAST(FinalGravity as REAL) as FinalGravity,
                             CAST(ABV as REAL) as ABV,
-                            PintsRemaining,
+                            CAST(PintsRemaining as REAL) as PintsRemaining,
                             DateBrewed,
                             DatePackaged,
                             DateTapped,

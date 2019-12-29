@@ -23,7 +23,6 @@ function GetTaps() {
 }
 
 function DisplayTaps(data) {
-    var a = 5;
     $.each(data, function (i, obj) {
         $('#tap' + obj.tapNumber + 'BeerDisplayName').html(obj.beerDisplayName);
         $('#tap' + obj.tapNumber + 'Style').html(obj.style);
