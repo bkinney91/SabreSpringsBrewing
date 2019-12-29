@@ -26,7 +26,7 @@ namespace SabreSprings.Brewing.Services
             List<Batch> batches = await BatchDataProvider.GetAllBatches();
             batches = batches.OrderByDescending(x=>x.Status == "On Tap")
                 .ThenBy(x=> x.SubStatus)
-                .ThenBy(x=> x.Status == "Conditioning")
+                .ThenByDescending(x=> x.Status == "Conditioning")
                 .ThenByDescending(x=> x.Status == "Fermenting")
                 .ThenByDescending(x=> x.Status == "Planned")
                 .ThenByDescending(x=> x.Status == "Archived")
