@@ -28,6 +28,7 @@ function DisplayTaps(data) {
         $('#tap' + obj.tapNumber + 'BeerDisplayName').html(obj.beerDisplayName);
         $('#tap' + obj.tapNumber + 'Style').html(obj.style);
         $('#tap' + obj.tapNumber + 'ABV').html(parseFloat(obj.abv).toFixed(1) + "%");
+        $('#tap' + obj.tapNumber + 'BatchNumber').html('Batch Number: ' + obj.batchNumber);
         $('#tap' + obj.tapNumber + 'PintsRemaining').html(obj.pintsRemaining.toFixed(2) + " pints remaining");
         $('#tap' + obj.tapNumber + 'TastingNotes').html(obj.tastingNotes);
         $('#tap' + obj.tapNumber + 'Logo').attr("src", obj.logo);
