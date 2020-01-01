@@ -45,7 +45,11 @@ function DisplayCards(data) {
         thisCard += obj.style;
         thisCard += '<p class="card-text">';
         thisCard += 'Date Brewed: ' + (new Date(obj.dateBrewed)).toLocaleDateString('en-US') + '<br/>';
-        thisCard += 'DatePackaged: ' + (new Date(obj.datePackaged)).toLocaleDateString('en-US') + '<br/>';
+        //Original DateTime(not DateTime2) returns default of 12/31/1969 when null
+        if (new Date(obj.datePackaged).toLocaleDateString('en-US') !== '12/31/1969')
+        {   
+            thisCard += 'DatePackaged: ' + (new Date(obj.datePackaged)).toLocaleDateString('en-US') + '<br/>';
+        }        
         thisCard += '</p>';
         thisCard += '<a href="#" class="card-link" onclick="openBatchDetails(' + obj.batchId + ')">Batch Details</a>';
         thisCard += '</div></div>';
