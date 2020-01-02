@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Details";
+}
+
+    <head>
+        <script src="~/js/batchDetails.js" asp-append-version="true"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                GetBatchDetails(@ViewBag.id);
+            });
+        </script>
+    </head>
+
+<h1>Details</h1>
+
+<div id="detailTable"></div>

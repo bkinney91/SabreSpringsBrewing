@@ -17,10 +17,12 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
     public class BatchController : ControllerBase
     {
         private readonly IBatchService BatchService;
+        private readonly IBatchDataProvider BatchDataProvider;
         private readonly ILogger Logger;
-        public BatchController(IBatchService batchService, ILogger logger)
+        public BatchController(IBatchService batchService, IBatchDataProvider batchDataProvider, ILogger logger)
         {
             BatchService = batchService;
+            batchDataProvider = batchDataProvider;
             Logger = logger;
         }
         
@@ -32,6 +34,21 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
             {
                 List<BatchTableRow> batches = await BatchService.GetBatchTable();
                 return Ok(batches);
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetBatch")]
+        public async Task<IActionResult> GetBatch(int id)
+        {
+            try
+            {
+                Batch batch = await BatchDataProvider.GetBatch(id);
+                return Ok(batch);
             }
             catch(Exception ex)
             {
