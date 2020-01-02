@@ -57,11 +57,11 @@ function DisplayDetails(data) {
     html += '</ul></div>';
     if (data.brewingNotes != null) {
         html += '<div><h3>Brewing Notes</h3>';
-        html += '<p>' + data.brewingNotes + '</p>';
+        html += '<p style="white-space: pre-line">' + data.brewingNotes + '</p>';
     }
     if (data.tastingNotes != null) {
         html += '<div><h3>Tasting Notes</h3>';
-        html += '<p>' + data.tastingNotes + '</p>';
+        html += '<p style="white-space: pre-line">' + data.tastingNotes + '</p>';
         html += '</div>';  
     }
 
