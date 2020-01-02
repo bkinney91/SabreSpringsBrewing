@@ -20,7 +20,7 @@ namespace SabreSprings.Brewing.Data
         }
 
 
-        public async Task<Beer> Get(int id)
+        public async Task<Beer> GetBeer(int id)
         {
             Beer beer = new Beer();
             string sql = "Select * from Beers where Id= @Id;";

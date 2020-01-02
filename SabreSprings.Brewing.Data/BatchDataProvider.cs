@@ -117,7 +117,39 @@ namespace SabreSprings.Brewing.Data
                 return batches.ToList();
             }
         }
-        
+
+        public async Task<Batch> GetBatch(int id)
+        {
+            string sql = @"Select  
+                            Id,
+                            Beer,
+                            BatchNumber,
+                            BatchName,
+                            Status,
+                            SubStatus,
+                            Brewers,
+                            Recipe,
+                            Yeast,
+                            CAST(PreBoilGravity as REAL) as PreBoilGravity,
+                            CAST(OriginalGravity as REAL) as OriginalGravity,
+                            CAST(FinalGravity as REAL) as FinalGravity,
+                            CAST(ABV as REAL) as ABV,
+                            CAST(PintsRemaining as REAL) as PintsRemaining,
+                            DateBrewed,
+                            DatePackaged,
+                            DateTapped,
+                            BrewingNotes,
+                            TastingNotes,
+                            Created,
+                            CreatedBy from Batches
+                            where Id = @Id;";
+            using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
+            {
+                var batch = await db.QueryFirstAsync<Batch>(sql, new { Id = id });
+                return batch;
+            }
+        }
+
 
         public async Task SubtractPour(int batchId, decimal pour)
         {

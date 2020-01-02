@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SabreSprings.Brewing.Data.Interfaces;
+using SabreSprings.Brewing.Models.DataTransfer;
 using SabreSprings.Brewing.Models.Entities;
 using SabreSprings.Brewing.Models.View;
 using SabreSprings.Brewing.Services.Interfaces;
@@ -17,12 +17,10 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
     public class BatchController : ControllerBase
     {
         private readonly IBatchService BatchService;
-        private readonly IBatchDataProvider BatchDataProvider;
         private readonly ILogger Logger;
-        public BatchController(IBatchService batchService, IBatchDataProvider batchDataProvider, ILogger logger)
+        public BatchController(IBatchService batchService, ILogger logger)
         {
             BatchService = batchService;
-            batchDataProvider = batchDataProvider;
             Logger = logger;
         }
         
@@ -42,12 +40,12 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
         }
 
         [HttpGet]
-        [Route("GetBatch")]
-        public async Task<IActionResult> GetBatch(int id)
+        [Route("GetBatchDetails")]
+        public async Task<IActionResult> GetBatchDetails(int id)
         {
             try
             {
-                Batch batch = await BatchDataProvider.GetBatch(id);
+                BatchDetailsDto batch = await BatchService.GetBatchDetails(id);
                 return Ok(batch);
             }
             catch(Exception ex)

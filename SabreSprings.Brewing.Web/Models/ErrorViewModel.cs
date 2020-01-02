@@ -1,5 +1,3 @@
-using System;
-
 namespace SabreSprings.Brewing.TapHouse.Models
 {
     public class ErrorViewModel

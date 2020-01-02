@@ -1,11 +1,10 @@
 ﻿using SabreSprings.Brewing.Data.Interfaces;
+using SabreSprings.Brewing.Models.DataTransfer;
 using SabreSprings.Brewing.Models.Entities;
 using SabreSprings.Brewing.Models.View;
 using SabreSprings.Brewing.Services.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SabreSprings.Brewing.Services
@@ -38,7 +37,7 @@ namespace SabreSprings.Brewing.Services
                 {
                     statusText += ": " + batch.SubStatus;
                 }
-                Beer beer = await BeerDataProvider.Get(batch.Beer);
+                Beer beer = await BeerDataProvider.GetBeer(batch.Beer);
                 BatchTableRow row = new BatchTableRow()
                 {
                     BatchId = batch.Id,
@@ -54,6 +53,36 @@ namespace SabreSprings.Brewing.Services
             }
 
             return tableRows;
+        }
+
+        public async Task<BatchDetailsDto> GetBatchDetails(int id)
+        {
+            Batch batch = await BatchDataProvider.GetBatch(id);
+            Beer beer = await BeerDataProvider.GetBeer(batch.Beer);
+            BatchDetailsDto batchDetailsDto = new BatchDetailsDto()
+            {
+                Beer = beer.Name,
+                Style = beer.Style,
+                BatchName = batch.BatchName,
+                BatchNumber = batch.BatchNumber,
+                Status = batch.Status,
+                SubStatus = batch.SubStatus,
+                Brewers = batch.Brewers,
+                Recipe = batch.Recipe,
+                Yeast = batch.Yeast,
+                PreBoilGravity = batch.PreBoilGravity,
+                OriginalGravity = batch.OriginalGravity,
+                FinalGravity = batch.FinalGravity,
+                ABV = batch.ABV,
+                DateBrewed = batch.DateBrewed,
+                DatePackaged = batch.DatePackaged,
+                DateTapped = batch.DateTapped,
+                BrewingNotes = batch.BrewingNotes,
+                TastingNotes = batch.TastingNotes,
+                Created = batch.Created,
+                CreatedBy = batch.CreatedBy
+            };
+            return batchDetailsDto;
         }
     }
 }

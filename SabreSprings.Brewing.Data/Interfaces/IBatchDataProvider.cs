@@ -1,7 +1,5 @@
 ﻿using SabreSprings.Brewing.Models.Entities;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SabreSprings.Brewing.Data.Interfaces
@@ -14,5 +12,6 @@ namespace SabreSprings.Brewing.Data.Interfaces
         Task SubtractPour(int batchId, decimal pour);
         Task<decimal> GetPintsRemaining(int batchId);
         Task<int> GetBatchOnTap(int tapNumber);
+        Task<Batch> GetBatch(int id);
     }
 }

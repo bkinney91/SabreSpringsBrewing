@@ -1,4 +1,4 @@
-﻿
+﻿@model int
 @{
     ViewData["Title"] = "Details";
 }
@@ -7,11 +7,12 @@
         <script src="~/js/batchDetails.js" asp-append-version="true"></script>
         <script type="text/javascript">
             $(document).ready(function () {
-                GetBatchDetails(@ViewBag.id);
+                GetBatchDetails(@Model);
             });
         </script>
+      
     </head>
 
 <h1>Details</h1>
 
-<div id="detailTable"></div>
+<div id="details"></div>

@@ -27,7 +27,7 @@ namespace SabreSprings.Brewing.Services
             List<Batch> batchesOnTap = await BatchDataProvider.GetOnTap();
             foreach (Batch batch in batchesOnTap)
             {
-                Beer beer = await BeerDataProvider.Get(batch.Beer);
+                Beer beer = await BeerDataProvider.GetBeer(batch.Beer);
                 Tap tapDisplay = new Tap
                 {
                     BeerDisplayName = beer.Name,

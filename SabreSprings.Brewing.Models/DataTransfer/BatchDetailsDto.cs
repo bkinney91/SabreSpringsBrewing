@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace SabreSprings.Brewing.Models.Entities
+namespace SabreSprings.Brewing.Models.DataTransfer
 {
-    public class Batch
+    public class BatchDetailsDto
     {
-        public int Id { get; set; }
-        public int Beer { get; set; }
+        public string Beer { get; set; }
         public int BatchNumber { get; set; }
         public string BatchName { get; set; }
+        public string Style { get; set; }
         public string Status { get; set; }
         public string SubStatus { get; set; }
         public string Brewers { get; set; }

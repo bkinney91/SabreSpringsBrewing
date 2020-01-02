@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SabreSprings.Brewing.Models.Domain
+﻿namespace SabreSprings.Brewing.Models.Domain
 {
     public class Tap
     {
