@@ -30,7 +30,11 @@ function DisplayTaps(data) {
         $('#tap' + obj.tapNumber + 'PintsRemaining').html(obj.pintsRemaining.toFixed(2) + " pints remaining");
         $('#tap' + obj.tapNumber + 'TastingNotes').html(obj.tastingNotes);
         $('#tap' + obj.tapNumber + 'Logo').attr("src", obj.logo);
-    });
-    
-  
+        $('#tap' + obj.tapNumber + 'Details').attr("onclick", 'openBatchDetails(' + obj.batchId + ')');
+    }); 
+}
+
+function openBatchDetails(id) {
+    var win = window.open('/Batch/Details/' + id, '_blank');
+    win.focus();
 }

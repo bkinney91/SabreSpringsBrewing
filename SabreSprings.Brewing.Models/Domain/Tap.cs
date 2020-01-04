@@ -3,6 +3,7 @@
     public class Tap
     {
         public string BeerDisplayName { get; set; }
+        public int BatchId { get; set; }
         public int BatchNumber { get; set; }
         public string Style { get; set; }
         public double ABV { get; set; }

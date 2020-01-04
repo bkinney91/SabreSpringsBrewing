@@ -31,6 +31,7 @@ namespace SabreSprings.Brewing.Services
                 Tap tapDisplay = new Tap
                 {
                     BeerDisplayName = beer.Name,
+                    BatchId = batch.Id,
                     BatchNumber = batch.BatchNumber,
                     Style = beer.Style,
                     PintsRemaining = batch.PintsRemaining,
