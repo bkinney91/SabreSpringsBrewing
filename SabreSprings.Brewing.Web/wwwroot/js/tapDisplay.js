@@ -30,7 +30,7 @@ function DisplayTaps(data) {
         $('#tap' + obj.tapNumber + 'PintsRemaining').html(obj.pintsRemaining.toFixed(2) + " pints remaining");
         $('#tap' + obj.tapNumber + 'TastingNotes').html(obj.tastingNotes);
         $('#tap' + obj.tapNumber + 'Logo').attr("src", obj.logo);
-        $('#tap' + obj.tapNumber + 'Details').attr("onclick", 'openBatchDetails(' + obj.batchId + ')');
+        $('#tap' + obj.tapNumber + 'Details').attr("href", '/Batch/Details/' + obj.batchId);
     }); 
 }
 

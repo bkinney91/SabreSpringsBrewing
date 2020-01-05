@@ -18,6 +18,7 @@ function GetBatchDetails(id) {
 
 
 function DisplayDetails(data) {
+    $('#header').html(data.beer);
     var html = '<div id="attributes">';
     var color = '';
     if (data.status.includes("On Tap")) {
@@ -35,6 +36,8 @@ function DisplayDetails(data) {
     else if (data.status === "Planned") {
         color = "#B11313";
     }
+    $('#header').html(data.beer);
+    $('#header').css('color', color);
     html += '<ul>';
     html += '<li><b style="color:'+color+'">Batch Number:</b>&nbsp;' + data.batchNumber + '</li>';
     html += '<li><b style="color:'+color+'">Style:</b>&nbsp;' + data.style + '</li>';
