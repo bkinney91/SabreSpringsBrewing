@@ -22,10 +22,17 @@ function openBatchDetails(id) {
     win.focus();
 }
 
+Date.prototype.addDays = function (days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+}
+
 function DisplayCards(data) {
     var html ='';
     $.each(data, function (i, obj) {
         var color;
+        var dateBrewed = new Date(obj.dateBrewed);
         if (obj.statusText.includes("On Tap")) {
             color = "green";
         }
@@ -49,12 +56,16 @@ function DisplayCards(data) {
         thisCard += '</h5><h6 class="card-subtitle mb-2 text-muted">';
         thisCard += obj.style;
         thisCard += '<p class="card-text">';
-        thisCard += 'Date Brewed: ' + (new Date(obj.dateBrewed)).toLocaleDateString('en-US') + '<br/>';
+        thisCard += 'Date Brewed: ' + dateBrewed.toLocaleDateString('en-US') + '<br/>';
         //Original DateTime(not DateTime2) returns default of 12/31/1969 when null
-        if (new Date(obj.datePackaged).toLocaleDateString('en-US') !== '12/31/1969')
-        {   
-            thisCard += 'DatePackaged: ' + (new Date(obj.datePackaged)).toLocaleDateString('en-US') + '<br/>';
-        }        
+        if (new Date(obj.datePackaged).toLocaleDateString('en-US') !== '12/31/1969') {
+            thisCard += 'Date Packaged: ' + (new Date(obj.datePackaged)).toLocaleDateString('en-US') + '<br/>';
+        }
+        else {
+            var scheduledDatePackaged = dateBrewed;
+            scheduledDatePackaged = scheduledDatePackaged.addDays(28);
+            thisCard += 'Scheduled Package Date: ' + scheduledDatePackaged.toLocaleDateString('en-US') + '<br/>';
+        }
         thisCard += '</p>';
         thisCard += '<a href="#" class="card-link" onclick="openBatchDetails(' + obj.batchId + ')">Batch Details</a>';
         thisCard += '</div></div>';
@@ -64,3 +75,6 @@ function DisplayCards(data) {
     $('#batchTable').html(html);
 
 }
+
+
+
