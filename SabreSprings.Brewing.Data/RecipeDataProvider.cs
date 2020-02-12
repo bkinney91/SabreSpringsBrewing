@@ -43,7 +43,7 @@ namespace SabreSprings.Brewing.Data
                             "CAST(FinalGravity as REAL) as FinalGravity, " +
                             "CAST(ABV as REAL) as ABV, " +
                             "CAST(IBU as REAL) as IBU, " +
-                            "CAST(SRM as SRM) as SRM, " +
+                            "CAST(SRM as REAL) as SRM, " +
                             "CAST(MashPh as REAL) as MashPh, " +
                             "BrewingNotes, " + 
                             "FermentationNotes, " +
