@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Recipes]
+﻿CREATE TABLE [Recipes]
 (
 	[Id] INT NOT NULL PRIMARY KEY,
 	[Name] TEXT NOT NULL,
@@ -23,5 +23,5 @@
 	[BrewingNotes] TEXT null,
 	[FermentationNotes] TEXT null,
 	[Created] TEXT NOT null DEFAULT CURRENT_TIMESTAMP,
-	[CreatedBy] TEXT null,
+	[CreatedBy] TEXT null
 )

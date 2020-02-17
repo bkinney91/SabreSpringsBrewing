@@ -1,3 +1,8 @@
+
+#Serilog Log files
+*.log
+
+
 *.swp
 *.*~
 project.lock.json

@@ -37,16 +37,18 @@ namespace SabreSprings.Brewing.TapHouse
             //Create and register logger
             ILogger logger = new LoggerConfiguration()
                                 .WriteTo.Console()
-                                .WriteTo.File("Log-.txt", rollingInterval: RollingInterval.Day)
+                                .WriteTo.File("SabreSpringsBrewing.{Date}.log", rollingInterval: RollingInterval.Day)
                                 .CreateLogger();
             //Register logger
             builder.RegisterInstance(logger);
             //Data Providers
             builder.RegisterType<BatchDataProvider>().As<IBatchDataProvider>();
             builder.RegisterType<BeerDataProvider>().As<IBeerDataProvider>();
+            builder.RegisterType<RecipeDataProvider>().As<IRecipeDataProvider>();
             //Services
             builder.RegisterType<TapService>().As<ITapService>();
             builder.RegisterType<BatchService>().As<IBatchService>();
+            builder.RegisterType<RecipeService>().As<IRecipeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -35,7 +35,8 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
             }
             catch(Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                Logger.Error(ex, $"Error getting batch table.");
+                throw;
             }
         }
 
@@ -50,7 +51,8 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
             }
             catch(Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                Logger.Error($"Error getting details for batch with ID \"{id}\".");
+                throw;
             }
         }
     }

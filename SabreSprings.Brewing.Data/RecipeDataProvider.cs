@@ -1,18 +1,17 @@
 ﻿using Dapper;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
+using SabreSprings.Brewing.Data.Interfaces;
 using SabreSprings.Brewing.Models.Entities;
 using Serilog;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SabreSprings.Brewing.Data
 {
-    public class RecipeDataProvider
+    public class RecipeDataProvider : IRecipeDataProvider
     {
         private readonly IConfiguration _configuration;
         private readonly ILogger _logger;
@@ -48,8 +47,8 @@ namespace SabreSprings.Brewing.Data
                             "BrewingNotes, " + 
                             "FermentationNotes, " +
                             "Created, " +
-                            "CreatedBy, " +
-                            "from Recipe where Id = @Id;";
+                            "CreatedBy " +
+                            " from Recipes where Id = @Id;";
             using (IDbConnection db = new SqliteConnection(connectionString))
             {
                 recipe = await db.QueryFirstAsync<Recipe>(sql, new { Id = id });                
@@ -65,10 +64,10 @@ namespace SabreSprings.Brewing.Data
             string sql = "Select " +
                             "r.Id, " +
                             "r.Recipe, " +
-                            "m.Material, " +
+                            "r.Material, " +
                             "r.Quantity, " +
                             "m.Description, " +
-                            "m.Attribute, " +
+                            "m.Attributes " +
                             "from RecipeMaterials r " +
                             "join Materials m on r.Material = m.Id " +
                             "where r.Recipe = @RecipeId;";

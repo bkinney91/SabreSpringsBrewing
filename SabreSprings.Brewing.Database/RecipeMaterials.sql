@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[RecipeMaterial]
+﻿CREATE TABLE [RecipeMaterials]
 (
 	[Id] INT NOT NULL PRIMARY KEY,
 	[Recipe] INT Not null,
