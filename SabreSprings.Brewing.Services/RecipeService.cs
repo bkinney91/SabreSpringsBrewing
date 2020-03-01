@@ -67,7 +67,7 @@ namespace SabreSprings.Brewing.Services
         public async Task<List<RecipeMaterialDto>> GetRecipeMaterials(int recipeId)
         {
             List<RecipeMaterialDto> dtos = new List<RecipeMaterialDto>();
-            List<RecipeMaterial> entities = await RecipeDataProvider.GetRecipeMaterials(recipeId);
+            List<RecipeMaterialDto> entities = await RecipeDataProvider.GetRecipeMaterials(recipeId);
             foreach(RecipeMaterial entity in entities)
             {
                 RecipeMaterialDto dto = new RecipeMaterialDto()

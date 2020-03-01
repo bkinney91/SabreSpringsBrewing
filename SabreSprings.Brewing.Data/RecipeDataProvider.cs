@@ -2,6 +2,7 @@
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
 using SabreSprings.Brewing.Data.Interfaces;
+using SabreSprings.Brewing.Models.DataTransfer;
 using SabreSprings.Brewing.Models.Entities;
 using Serilog;
 using System.Collections.Generic;
@@ -57,23 +58,23 @@ namespace SabreSprings.Brewing.Data
         }
 
 
-        public async Task<List<RecipeMaterial>> GetRecipeMaterials(int recipeId)
+        public async Task<List<RecipeMaterialDto>> GetRecipeMaterials(int recipeId)
         {
-            List<RecipeMaterial> recipeMaterials = new List<RecipeMaterial>();
+            List<RecipeMaterialDto> recipeMaterials = new List<RecipeMaterialDto>();
             string connectionString = _configuration.GetConnectionString("SabreSpringsBrewing");
             string sql = "Select " +
                             "r.Id, " +
                             "r.Recipe, " +
                             "r.Material, " +
                             "r.Quantity, " +
-                            "m.Description, " +
-                            "m.Attributes " +
+                            "m.Description as MaterialDescription, " +
+                            "m.Attributes as MaterialAttributes, " +
                             "from RecipeMaterials r " +
                             "join Materials m on r.Material = m.Id " +
                             "where r.Recipe = @RecipeId;";
             using (IDbConnection db = new SqliteConnection(connectionString))
             {
-                var results = await db.QueryAsync<RecipeMaterial>(sql, new { RecipeId = recipeId });
+                var results = await db.QueryAsync<RecipeMaterialDto>(sql, new { RecipeId = recipeId });
                 recipeMaterials = results.ToList();
             }
             return recipeMaterials;
