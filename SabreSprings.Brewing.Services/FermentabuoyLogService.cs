@@ -11,7 +11,7 @@ namespace SabreSprings.Brewing.Services
 {
     public class FermentabuoyLogService : IFermentabuoyLogService
     {
-        private readonly IFermentabuoyLogService FermentabuoyLogDataProvider;
+        private readonly IFermentabuoyLogDataProvider FermentabuoyLogDataProvider;
         
         public FermentabuoyLogService(IFermentabuoyLogDataProvider fermentabuoyLogDataProvider)
         {

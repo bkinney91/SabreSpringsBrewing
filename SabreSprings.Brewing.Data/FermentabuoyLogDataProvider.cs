@@ -20,7 +20,7 @@ namespace SabreSprings.Brewing.Data
         }
 
 
-        public async Task<FermentabuoyLog> PostFermentaboyLog()
+        public async Task<FermentabuoyLog> PostFermentabuoyLog()
         {
             FermentabuoyLog log = new FermentabuoyLog();
             string sql = "----------------------------------------------------------------WRITE SQL STATEMENT---------------------------------------------------------";
