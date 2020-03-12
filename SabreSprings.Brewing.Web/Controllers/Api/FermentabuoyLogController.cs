@@ -25,9 +25,10 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
         }
         
         [HttpPost]
-        [Route("PostFermentabuoyLog")]
-        public async Task<IActionResult> PostFermentabuoyLog()
+        [Route("Post")]
+        public async Task<IActionResult> Post([FromBody] FermentabuoyLogDto fermentabuoyLogDto)
         {
+            ///give dto to service function
             try
             {
                 List<FermentabuoyLog> Logs = await FermentabuoyLogService.PostFermentabuoyLog();

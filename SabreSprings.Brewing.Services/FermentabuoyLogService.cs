@@ -20,7 +20,8 @@ namespace SabreSprings.Brewing.Services
 
         
 
-        public async Task<FermentabuoyLogDto> PostFermentabuoyLog()
+        public async Task<FermentabuoyLogDto> PostFermentabuoyLog() //fix method, dont need to return dto. controller needs to give dto to this 
+            //function and translate dto to entity and give entity to data provider
         {
             FermentabuoyLog log = await FermentabuoyLogDataProvider.PostFermentabuoyLog();
             FermentabuoyLogDto fermentabuoyLogDto = new FermentabuoyLogDto()
@@ -29,7 +30,7 @@ namespace SabreSprings.Brewing.Services
                 ID = log.DeviceId,
                 Angle = log.Angle,
                 Temperature = log.Temperature,
-                Batter = log.Batter,
+                Battery = log.Battery,
                 Gravity = log.Gravity,
                 RSSI = log.RSSI
             };

@@ -20,7 +20,8 @@ namespace SabreSprings.Brewing.Data
         }
 
 
-        public async Task<FermentabuoyLog> PostFermentabuoyLog()
+        public async Task<FermentabuoyLog> PostFermentabuoyLog() //take items from entity and insert them into sql statement for the db
+            //-----for post man use localhost:51193/api/fermentabuoylog/post or set verb to post and leave out post.  pass json payload use json generator to get dto info and pass to function.
         {
             FermentabuoyLog log = new FermentabuoyLog();
             string sql = "----------------------------------------------------------------WRITE SQL STATEMENT---------------------------------------------------------";
