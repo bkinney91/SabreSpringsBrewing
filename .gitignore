@@ -1,6 +1,7 @@
 
 #Serilog Log files
 *.log
+*.Log
 
 
 *.swp

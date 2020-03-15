@@ -2,10 +2,12 @@
 @{
     ViewData["Title"] = "Details";
 }
-
+<head>
+    <script src="~/js/recipeDetails.js" asp-append-version="true"></script>
+</head>
 <h1>Details</h1>
-<h1 id="recipeTitle">Recipe Title</h1>
 <h3>Attributes</h3>
+<input hidden id="recipeId" value="@ViewBag.recipeId" />
 <table class="table table-dark">
     <tr>
         <td>

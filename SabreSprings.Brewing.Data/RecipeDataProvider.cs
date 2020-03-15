@@ -68,7 +68,7 @@ namespace SabreSprings.Brewing.Data
                             "r.Material, " +
                             "r.Quantity, " +
                             "m.Description as MaterialDescription, " +
-                            "m.Attributes as MaterialAttributes, " +
+                            "m.Attributes as MaterialAttributes  " +
                             "from RecipeMaterials r " +
                             "join Materials m on r.Material = m.Id " +
                             "where r.Recipe = @RecipeId;";

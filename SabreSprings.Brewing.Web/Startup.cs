@@ -37,7 +37,7 @@ namespace SabreSprings.Brewing.TapHouse
             //Create and register logger
             ILogger logger = new LoggerConfiguration()
                                 .WriteTo.Console()
-                                .WriteTo.File("SabreSpringsBrewing.{Date}.log", rollingInterval: RollingInterval.Day)
+                                .WriteTo.File("SabreSpringsBrewing.log", rollingInterval: RollingInterval.Day)
                                 .CreateLogger();
             //Register logger
             builder.RegisterInstance(logger);

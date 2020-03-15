@@ -13,8 +13,9 @@ namespace SabreSprings.Brewing.Web.Controllers
             return View();
         }
 
-        public IActionResult Details()
+        public IActionResult Details(int id)
         {
+            ViewBag.recipeId = id;
             return View();
         }
     }
