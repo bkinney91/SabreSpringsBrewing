@@ -6,6 +6,7 @@ using SabreSprings.Brewing.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
 
 namespace SabreSprings.Brewing.Services
 {
@@ -20,21 +21,27 @@ namespace SabreSprings.Brewing.Services
 
         
 
-        public async Task<FermentabuoyLogDto> PostFermentabuoyLog() //fix method, dont need to return dto. controller needs to give dto to this 
+        public async Task<FermentabuoyLogDto> addFermentabuoyLog(FermentabuoyLogDto fermentabuoyLogDto) //fix method, dont need to return dto. controller needs to give dto to this 
             //function and translate dto to entity and give entity to data provider
-        {
-            FermentabuoyLog log = await FermentabuoyLogDataProvider.PostFermentabuoyLog();
-            FermentabuoyLogDto fermentabuoyLogDto = new FermentabuoyLogDto()
+        {            
+            
+            FermentabuoyLog Log = new FermentabuoyLog()            
             {
-                Name = log.Name,
-                ID = log.DeviceId,
-                Angle = log.Angle,
-                Temperature = log.Temperature,
-                Battery = log.Battery,
-                Gravity = log.Gravity,
-                RSSI = log.RSSI
+                Name = fermentabuoyLogDto.Name,
+                DeviceId = fermentabuoyLogDto.DeviceId,
+                Angle = fermentabuoyLogDto.Angle,
+                Temperature = fermentabuoyLogDto.Temperature,
+                Battery = fermentabuoyLogDto.Battery,
+                Gravity = fermentabuoyLogDto.Gravity,
+                RSSI = fermentabuoyLogDto.RSSI
             };
-            return fermentabuoyLogDto;
+            await FermentabuoyLogDataProvider.addFermentabuoyLog(Log);
+            return Ok(Log);
+        }
+
+        private FermentabuoyLogDto Ok(FermentabuoyLog log)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace SabreSprings.Brewing.Models.DataTransfer
     public class FermentabuoyLogDto
     {
         public string Name { get; set; }
-        public int ID { get; set; }
+        public int DeviceId { get; set; }
         public decimal Angle { get; set; }
         public decimal Temperature { get; set; }
         public decimal Battery { get; set; }

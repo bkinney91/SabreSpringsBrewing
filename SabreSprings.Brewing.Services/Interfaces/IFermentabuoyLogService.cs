@@ -7,6 +7,6 @@ namespace SabreSprings.Brewing.Services.Interfaces
 {
     public interface IFermentabuoyLogService
     {
-        Task <FermentabuoyLogDto> PostFermentabuoyLog();        
+        Task <FermentabuoyLogDto> addFermentabuoyLog(FermentabuoyLogDto fermentabuoyLogDto);        
     }
 }
