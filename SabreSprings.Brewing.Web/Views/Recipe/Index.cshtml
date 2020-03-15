@@ -3,56 +3,15 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 id="recipeTitle">Recipe Title</h1>
-<h3>Attributes</h3>
-<table class="table table-dark">
-    <tr>
-        <td>
-            <b>ABV:</b> <text id="ABV">5.0</text>% 
-        </td>
-        <td>
-           <b>Original Gravity:</b><text id="OriginalGravity">1.054</text>
-        </td>
-        <td>
-            <b>Final Gravity:</b> <text id="FinalGravity">1.014</text>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <b>IBU:</b> <text id="IBU">90</text>
-        </td>
-        <td>
-            <b>SRM:</b><text id="SRM">5.4</text>
-        </td>
-        <td>
-            <b>Lead Time:</b> <text id="LeadTime">35</text> days
-        </td>
-    </tr>
-</table>
+<head>
+    <script src="~/js/recipeTable.js" asp-append-version="true"></script>
+</head>
+<h1>Recipes</h1>
+<div class="table-container">
+    <div id="gridContainer"></div>
+    @*<div id="employeeInfo">
+            <img class="employeePhoto" />
+            <p class="employeeNotes"></p>S
+        </div>*@
 
-<h3>Fermentables</h3>
-<table>
-    <thead>
-        <th>
-
-        </th>
-    </thead>
-</table>
-
-<h3>Mash</h3>
-<i><p id="Mash Instructions">Rest at 155 for 60 minutes then pull grains and raise temp to 175 and sparge with 171 degree water.</p></i>
-<table class="table table-dark">
-    <tr>
-        <td>
-            <b>Mash Temperature:</b> <text id="MashTemperature">155</text>‎°F
-        </td>
-        <td>
-            <b>Strike Water Volume: </b><text id="StrikeWaterVolume">4.2</text> gal.
-        </td>
-        <td>
-            <b>Strike Water Temperature</b> <text id="StrikeWaterTemperature">170</text>°F
-        </td>
-    </tr>
-</table>
-
-<h3>Fermentation</h3>
+</div>

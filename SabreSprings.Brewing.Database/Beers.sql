@@ -2,8 +2,10 @@
 	Id INTEGER PRIMARY KEY, 
     Name TEXT NULL, 
     Style TEXT NULL,
+	Recipe INT NOT NULL,
 	SuggestedGlassType TEXT null,
 	Logo TEXT NULL,
 	Created DateTime default CURRENT_TIMESTAMP,
-	CreatedBy TEXT null
+	CreatedBy TEXT null,
+	FOREIGN KEY(Recipe) REFERENCES Recipes(Id)
 )

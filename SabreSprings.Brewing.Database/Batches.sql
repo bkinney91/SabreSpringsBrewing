@@ -7,7 +7,6 @@
 	[Status] TEXT null,
 	[SubStatus] TEXT null,
 	[Brewers] TEXT null, 
-	[Recipe] TEXT null,
 	[Yeast] TEXT null,
 	[PreBoilGravity] decimal(4,3) null,
 	[OriginalGravity] decimal(4,3) null,

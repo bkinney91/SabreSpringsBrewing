@@ -57,6 +57,11 @@ namespace SabreSprings.Brewing.Services
             return recipeDto;
         }
 
+        public async Task<List<RecipeHeaderDto>> GetRecipeHeaders()
+        {
+            return await RecipeDataProvider.GetRecipeHeaders();
+        }
+
         /// <summary>
         /// Retrieves all of the recipe materials for a recipe.
         /// Note: is called by GetRecipe, and recipe materials 
@@ -65,23 +70,8 @@ namespace SabreSprings.Brewing.Services
         /// <param name="recipeId"></param>
         /// <returns></returns>
         public async Task<List<RecipeMaterialDto>> GetRecipeMaterials(int recipeId)
-        {
-            List<RecipeMaterialDto> dtos = new List<RecipeMaterialDto>();
-            List<RecipeMaterialDto> entities = await RecipeDataProvider.GetRecipeMaterials(recipeId);
-            foreach(RecipeMaterial entity in entities)
-            {
-                RecipeMaterialDto dto = new RecipeMaterialDto()
-                {
-                    Id = entity.Id,
-                    Material = entity.Material,
-                    Quantity = entity.Quantity,
-                    Recipe = entity.Recipe,
-                    Created = entity.Created,
-                    CreatedBy = entity.CreatedBy
-                };
-                dtos.Add(dto);
-            }
-            return dtos;
+        {            
+            return await RecipeDataProvider.GetRecipeMaterials(recipeId);            
         }
     }
 }

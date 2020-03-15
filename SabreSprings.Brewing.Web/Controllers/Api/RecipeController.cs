@@ -38,5 +38,21 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
                 throw;
             }
         }
+
+        [HttpGet]
+        [Route("GetRecipeHeaders")]
+        public async Task<IActionResult> GetRecipeHeaders()
+        {
+            try
+            {
+                List<RecipeHeaderDto> recipes = await RecipeService.GetRecipeHeaders();
+                return Ok(recipes);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, $"Error getting all recipes.");
+                throw;
+            }
+        }
     }
 }

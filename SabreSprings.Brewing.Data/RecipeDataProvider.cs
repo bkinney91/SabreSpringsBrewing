@@ -79,5 +79,30 @@ namespace SabreSprings.Brewing.Data
             }
             return recipeMaterials;
         }
+
+        /// <summary>
+        /// Gets a small amount of data related to a recipe 
+        /// in order to display a large amount of recipes
+        /// </summary>
+        /// <param name="recipeId"></param>
+        /// <returns></returns>
+        public async Task<List<RecipeHeaderDto>> GetRecipeHeaders()
+        {
+            List<RecipeHeaderDto> recipeHeaders = new List<RecipeHeaderDto>();
+            string connectionString = _configuration.GetConnectionString("SabreSpringsBrewing");
+            string sql = "Select " +
+                            "Name, " +
+                            "Style, " +
+                            "Recipe " +
+                            "from Beers " +
+                            "order by Style;";
+                           
+            using (IDbConnection db = new SqliteConnection(connectionString))
+            {
+                var results = await db.QueryAsync<RecipeHeaderDto>(sql);
+                recipeHeaders = results.ToList();
+            }
+            return recipeHeaders;
+        }
     }
 }
