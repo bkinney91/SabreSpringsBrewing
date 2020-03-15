@@ -30,5 +30,17 @@ namespace SabreSprings.Brewing.Data
             }
             return beer;
         }
+
+
+        public async Task<Beer> GetBeerFromRecipe(int recipeId)
+        {
+            Beer beer = new Beer();
+            string sql = "Select * from Beers where Recipe = @RecipeId;";
+            using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
+            {
+                beer = await db.QueryFirstAsync<Beer>(sql, new { RecipeId = recipeId });
+            }
+            return beer;
+        }
     }
 }

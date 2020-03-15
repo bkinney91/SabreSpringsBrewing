@@ -27,7 +27,6 @@ namespace SabreSprings.Brewing.Data
             string connectionString = _configuration.GetConnectionString("SabreSpringsBrewing");
             string sql = "Select " +
                             "Id, " +
-                            "Name, " + 
                             "Yeast, " + 
                             "PitchTemperature, " +
                             "FermentationTemperatureLow, " + 

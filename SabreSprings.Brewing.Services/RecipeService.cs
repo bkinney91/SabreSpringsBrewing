@@ -13,9 +13,11 @@ namespace SabreSprings.Brewing.Services
     public class RecipeService : IRecipeService
     {
         private readonly IRecipeDataProvider RecipeDataProvider;
-        public RecipeService(IRecipeDataProvider recipeDataProvider)
+        private readonly IBeerDataProvider BeerDataProvider;
+        public RecipeService(IRecipeDataProvider recipeDataProvider, IBeerDataProvider beerDataProvider)
         {
             RecipeDataProvider = recipeDataProvider;
+            BeerDataProvider = beerDataProvider;
         }
 
         /// <summary>
@@ -27,11 +29,12 @@ namespace SabreSprings.Brewing.Services
         public async Task<RecipeDto> GetRecipe(int id)
         {            
             Recipe recipe = await RecipeDataProvider.GetRecipe(id);
+            Beer beer = await BeerDataProvider.GetBeerFromRecipe(id);
             RecipeDto recipeDto = new RecipeDto()
             {
                 Materials = await GetRecipeMaterials(id),
                 Id = recipe.Id,
-                Name = recipe.Name,
+                Name = beer.Name,
                 Yeast = recipe.Yeast,
                 PitchTemperature = recipe.PitchTemperature,
                 FermentationTemperatureLow = recipe.FermentationTemperatureLow,
