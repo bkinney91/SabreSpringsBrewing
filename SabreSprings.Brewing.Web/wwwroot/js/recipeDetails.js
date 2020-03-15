@@ -20,5 +20,6 @@ function GetRecipeDetails(id) {
 }
 
 function DisplayDetails(data){
-   // $('#beerName').html(data.)
+    $('#beerName').html(data.name);
+    $('#style').html("<i>" + data.style + "</i>");
 }

@@ -9,6 +9,7 @@ namespace SabreSprings.Brewing.Models.DataTransfer
     {
         public List<RecipeMaterialDto> Materials { get; set; }
         public int Id { get; set; }
+        public string Style { get; set; }
         public string Name { get; set; }
         public string Yeast { get; set; }
         public int PitchTemperature { get; set; }

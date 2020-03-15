@@ -35,6 +35,7 @@ namespace SabreSprings.Brewing.Services
                 Materials = await GetRecipeMaterials(id),
                 Id = recipe.Id,
                 Name = beer.Name,
+                Style = beer.Style,
                 Yeast = recipe.Yeast,
                 PitchTemperature = recipe.PitchTemperature,
                 FermentationTemperatureLow = recipe.FermentationTemperatureLow,
