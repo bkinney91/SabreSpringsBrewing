@@ -31,7 +31,7 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
             ///give dto to service function
             try
             {
-                await FermentabuoyLogService.addFermentabuoyLog(fermentabuoyLogDto);
+                await FermentabuoyLogService.AddFermentabuoyLog(fermentabuoyLogDto);
                 return Ok();
             }
             catch(Exception ex)

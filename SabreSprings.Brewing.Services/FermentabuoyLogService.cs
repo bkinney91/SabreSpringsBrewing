@@ -21,7 +21,7 @@ namespace SabreSprings.Brewing.Services
 
         
 
-        public async Task<FermentabuoyLogDto> addFermentabuoyLog(FermentabuoyLogDto fermentabuoyLogDto) //fix method, dont need to return dto. controller needs to give dto to this 
+        public async Task<FermentabuoyLogDto> AddFermentabuoyLog(FermentabuoyLogDto fermentabuoyLogDto) //fix method, dont need to return dto. controller needs to give dto to this 
             //function and translate dto to entity and give entity to data provider
         {            
             
@@ -35,7 +35,7 @@ namespace SabreSprings.Brewing.Services
                 Gravity = fermentabuoyLogDto.Gravity,
                 RSSI = fermentabuoyLogDto.RSSI
             };
-            await FermentabuoyLogDataProvider.addFermentabuoyLog(Log);
+            await FermentabuoyLogDataProvider.AddFermentabuoyLog(Log);
             return Ok(Log);
         }
 
