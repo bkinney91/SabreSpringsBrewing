@@ -20,9 +20,13 @@ namespace SabreSprings.Brewing.Services
         }
 
         
-
-        public async Task<FermentabuoyLogDto> AddFermentabuoyLog(FermentabuoyLogDto fermentabuoyLogDto) //fix method, dont need to return dto. controller needs to give dto to this 
-            //function and translate dto to entity and give entity to data provider
+        /// <summary>
+        /// This method takes the dto from the API controller and translates the data to a 
+        /// matching entity which is then given to the data provider to be inserted into the database.
+        /// </summary>
+        /// <param name="fermentabuoyLogDto"> The Dto received by the controller layer</param>
+        /// <returns></returns>
+        public async Task<FermentabuoyLogDto> AddFermentabuoyLog(FermentabuoyLogDto fermentabuoyLogDto) 
         {            
             
             FermentabuoyLog Log = new FermentabuoyLog()            

@@ -24,11 +24,15 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
             Logger = logger;
         }
         
+        /// <summary>
+        /// This method takes in the raw data from a buoy device and puts it into a DTO which is then given to the service layer to be translated into an entity.
+        /// </summary>
+        /// <param name="fermentabuoyLogDto"> This is the dto received from the buoy raw data</param>
+        /// <returns></returns>
         [HttpPost]
         [Route("Post")]
         public async Task<IActionResult> Post([FromBody] FermentabuoyLogDto fermentabuoyLogDto)
-        {
-            ///give dto to service function
+        {            
             try
             {
                 await FermentabuoyLogService.AddFermentabuoyLog(fermentabuoyLogDto);
