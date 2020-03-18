@@ -29,7 +29,7 @@ namespace SabreSprings.Brewing.Services
         public async Task<FermentabuoyLogDto> AddFermentabuoyLog(FermentabuoyLogDto fermentabuoyLogDto) 
         {            
             
-            FermentabuoyLog Log = new FermentabuoyLog()            
+            FermentabuoyLog log = new FermentabuoyLog()            
             {
                 Name = fermentabuoyLogDto.Name,
                 DeviceId = fermentabuoyLogDto.DeviceId,
@@ -39,8 +39,8 @@ namespace SabreSprings.Brewing.Services
                 Gravity = fermentabuoyLogDto.Gravity,
                 RSSI = fermentabuoyLogDto.RSSI
             };
-            await FermentabuoyLogDataProvider.AddFermentabuoyLog(Log);
-            return Ok(Log);
+            await FermentabuoyLogDataProvider.AddFermentabuoyLog(log);
+            return Ok(log);
         }
 
         private FermentabuoyLogDto Ok(FermentabuoyLog log)
