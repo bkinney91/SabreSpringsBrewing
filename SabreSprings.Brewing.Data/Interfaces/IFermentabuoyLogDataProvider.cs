@@ -5,7 +5,7 @@ namespace SabreSprings.Brewing.Data.Interfaces
 {
     public interface IFermentabuoyLogDataProvider
     {
-        Task<FermentabuoyLog> AddFermentabuoyLog(FermentabuoyLog log);
+        Task AddFermentabuoyLog(FermentabuoyLog log);
 
     }
 }

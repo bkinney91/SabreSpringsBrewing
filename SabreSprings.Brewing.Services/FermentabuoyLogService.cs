@@ -26,26 +26,20 @@ namespace SabreSprings.Brewing.Services
         /// </summary>
         /// <param name="fermentabuoyLogDto"> The Dto received by the controller layer</param>
         /// <returns></returns>
-        public async Task<FermentabuoyLogDto> AddFermentabuoyLog(FermentabuoyLogDto fermentabuoyLogDto) 
+        public async Task AddFermentabuoyLog(FermentabuoyLogDto fermentabuoyLogDto) 
         {            
             
             FermentabuoyLog log = new FermentabuoyLog()            
             {
                 Name = fermentabuoyLogDto.Name,
-                DeviceId = fermentabuoyLogDto.DeviceId,
+                DeviceId = fermentabuoyLogDto.ID,
                 Angle = fermentabuoyLogDto.Angle,
                 Temperature = fermentabuoyLogDto.Temperature,
                 Battery = fermentabuoyLogDto.Battery,
                 Gravity = fermentabuoyLogDto.Gravity,
                 RSSI = fermentabuoyLogDto.RSSI
             };
-            await FermentabuoyLogDataProvider.AddFermentabuoyLog(log);
-            return Ok(log);
-        }
-
-        private FermentabuoyLogDto Ok(FermentabuoyLog log)
-        {
-            throw new NotImplementedException();
+            await FermentabuoyLogDataProvider.AddFermentabuoyLog(log);   
         }
     }
 }

@@ -24,14 +24,14 @@ namespace SabreSprings.Brewing.Data
         /// </summary>
         /// <param name="log"> The Entity that is received from the service</param>
         /// <returns></returns>
-        public async Task<FermentabuoyLog> AddFermentabuoyLog(FermentabuoyLog log) 
+        public async Task AddFermentabuoyLog(FermentabuoyLog log) 
         {            
-            string sql = "Insert into FermentationLog (Name, Temperature, Gravity, Angle, DeviceNumber, Battery, RSSI) VALUES (@Name, @Temperature, @Gravity, @Angle, @DeviceId, @Battery, @RSSI);";
+            string sql = "Insert into FermentationLog (Name, Temperature, Gravity, Angle, DeviceId, Battery, RSSI) VALUES (@Name, @Temperature, @Gravity, @Angle, @DeviceId, @Battery, @RSSI);";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
-                log = await db.QueryFirstAsync<FermentabuoyLog>(sql);
+                await db.ExecuteAsync(sql, log);
             }
-            return log;
+            
         }
     }
 }
