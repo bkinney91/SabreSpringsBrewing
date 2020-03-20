@@ -1,11 +1,12 @@
-﻿CREATE TABLE [dbo].[FermentationLog]
+﻿CREATE TABLE FermentationLog
 (
-	[Id] INT NOT NULL PRIMARY KEY,
-	[Batch] INTEGER NOT NULL,
+	[Id] INTEGER PRIMARY KEY,
+	[Name] TEXT NOT NULL,
 	[Temperature] DECIMAL NOT NULL,
 	[Gravity] DECIMAL NOT NULL,
 	[Angle] DECIMAL NOT NULL,
-	[DeviceNumber] INTEGER NOT NULL,
-	[Created] DateTime default CURRENT_TIMESTAMP,
-	FOREIGN KEY(Batch) REFERENCES Batches(Id),
+	[DeviceId] INTEGER NOT NULL,
+	[Battery] DECIMAL NOT NULL,
+	[RSSI] INTEGER NOT NULL,
+	[Created] DateTime default CURRENT_TIMESTAMP	
 )
