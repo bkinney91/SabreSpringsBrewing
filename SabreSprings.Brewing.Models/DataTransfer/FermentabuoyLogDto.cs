@@ -10,7 +10,7 @@ namespace SabreSprings.Brewing.Models.DataTransfer
         public int ID { get; set; }
         public decimal Angle { get; set; }
         public decimal Temperature { get; set; }
-        public decimal Battery { get; set; }
+        public decimal Batter { get; set; }
         public decimal Gravity { get; set; }
         public int RSSI { get; set; }
 
