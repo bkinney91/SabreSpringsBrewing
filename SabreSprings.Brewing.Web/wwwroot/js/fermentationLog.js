@@ -1,15 +1,15 @@
 ﻿$(document).ready(function () {
-    GetLogs();
+    GetAllLogs();
     window.setInterval(function () {
-        GetLogs()
+        GetAllLogs()
     }, 5000);
 });
 
 
 
-function GetLogs() {
+function GetAllLogs() {
     $.ajax({
-        url: "/api/FermentabuoyLog/GetLogs",
+        url: "/api/FermentabuoyLog/GetAllLogs",
         type: 'GET',
         dataType: "json",
         contentType: "application/json;charset=utf-8",
