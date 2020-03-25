@@ -28,6 +28,9 @@
 
 
   <ItemGroup>
+    <Content Update="wwwroot\js\fermentationLog.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\js\tapDisplay.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
