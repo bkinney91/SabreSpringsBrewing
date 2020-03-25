@@ -4,7 +4,9 @@ using Microsoft.Extensions.Configuration;
 using SabreSprings.Brewing.Data.Interfaces;
 using SabreSprings.Brewing.Models.Entities;
 using Serilog;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SabreSprings.Brewing.Data
@@ -33,5 +35,37 @@ namespace SabreSprings.Brewing.Data
             }
             
         }
+
+        /// <summary>
+        /// Retrieves a Log entity from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<FermentabuoyLog> GetLog(int id)
+        {
+            FermentabuoyLog log = new FermentabuoyLog();
+            string sql = @"Select * from FermentabuoyLog where Id = @Id;";
+            using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
+            {
+                log = await db.QueryFirstAsync<FermentabuoyLog>(sql, new { Id = id });
+            }
+            return log;
+        }
+
+        /// <summary>
+        /// Retrieves all log entities from the database
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<FermentabuoyLog>> GetAllLogs()
+        {
+            string sql = @"Select * from FermentabuoyLog;";
+            using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
+            {
+                IEnumerable<FermentabuoyLog> logs = await db.QueryAsync<FermentabuoyLog>(sql);
+                return logs.ToList();
+            }
+        }
+
+
     }
 }
