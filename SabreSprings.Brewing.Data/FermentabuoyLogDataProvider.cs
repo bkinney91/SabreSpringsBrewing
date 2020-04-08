@@ -44,7 +44,7 @@ namespace SabreSprings.Brewing.Data
         public async Task<FermentabuoyLog> GetLog(int id)
         {
             FermentabuoyLog log = new FermentabuoyLog();
-            string sql = @"Select * from FermentabuoyLog where Id = @Id;";
+            string sql = @"Select * from FermentationLog where Id = @Id;";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 log = await db.QueryFirstAsync<FermentabuoyLog>(sql, new { Id = id });
@@ -58,7 +58,7 @@ namespace SabreSprings.Brewing.Data
         /// <returns></returns>
         public async Task<List<FermentabuoyLog>> GetAllLogs()
         {
-            string sql = @"Select * from FermentabuoyLog;";
+            string sql = @"Select * from FermentationLog;";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 IEnumerable<FermentabuoyLog> logs = await db.QueryAsync<FermentabuoyLog>(sql);
