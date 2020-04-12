@@ -34,5 +34,28 @@ function DisplayLogsTable(data) {
         ],
         showBorders: true,
         columnAutoWidth: true,
+        showColumnLines: true,
+        showRowLines: true,
+        rowAlternationEnabled: true,
+        paging: {
+            pageSize: 25
+        },
+        pager: {
+            showPageSizeSelector: true,
+            allowedPageSizes: [25, 50, 100],
+            showInfo: true
+        },
+        filterRow: {
+            visible: true,
+            applyFilter: "auto"
+        },
+        searchPanel: {
+            visible: true,
+            width: 240,
+            placeholder: "Search..."
+        },
+        headerFilter: {
+            visible: true
+        },
         }); 
 }
