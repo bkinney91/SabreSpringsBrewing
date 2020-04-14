@@ -13,6 +13,7 @@ namespace SabreSprings.Brewing.Models.DataTransfer
         public decimal Battery { get; set; }
         public decimal Gravity { get; set; }
         public int RSSI { get; set; }
+        public DateTime Created { get; set; }
 
     }
 }

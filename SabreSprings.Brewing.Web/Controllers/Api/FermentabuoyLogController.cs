@@ -44,6 +44,41 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
             }
         }
 
+        /// <summary>
+        /// Get a specific log from the Log ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("Get")]
+        [Produces(typeof(FermentabuoyLogDto))]
+        public async Task<IActionResult> Get(int id)
+        {
+            try
+            {
+                FermentabuoyLogDto log = await FermentabuoyLogService.GetLog(id);
+                return Ok(log);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
 
+        [HttpGet]
+        [Route("GetAll")]
+        [Produces(typeof(List<FermentabuoyLogDto>))]
+        public async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                List<FermentabuoyLogDto> logs = await FermentabuoyLogService.GetAllLogs();
+                return Ok(logs);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
