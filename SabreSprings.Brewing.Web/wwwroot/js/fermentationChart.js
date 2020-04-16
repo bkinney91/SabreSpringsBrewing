@@ -24,7 +24,8 @@ function DisplayLogsChart(data) {
         dataSource: data,
         commonSeriesSettings: {
             argumentField: "created",
-            aggregationInterval: "week",
+            argumentType: "datetime",
+            aggregationInterval: "month",
             displayFormat: "short",
             //valueField: "name",
             type: "line"
@@ -39,7 +40,11 @@ function DisplayLogsChart(data) {
         argumentAxis: {
             valueMarginsEnabled: false,
             discreteAxisDivisionMode: "crossLabels",
-            tickInterval: { weeks: 2 },
+            argumentType: "date",
+            //aggregationInterval: "month",
+            displayFormat: "short",
+            //tickInterval: { weeks: 3 },
+            //categories: ["name"],
             grid: {
                 visible: true
             }
