@@ -23,12 +23,11 @@ function DisplayLogsChart(data) {
     var fermentationChart = $("#fermentationChart").dxChart({        
         dataSource: data,
         commonSeriesSettings: {
-            argumentField: "created",
-            argumentType: "datetime",
-            aggregationInterval: "month",
-            displayFormat: "short",
-            //valueField: "name",
-            type: "line"
+            argumentField: "created",            
+            type: "line",
+            aggregation: {
+                enabled: true
+            }
         },
         margin: {
             bottom: 20
@@ -36,25 +35,22 @@ function DisplayLogsChart(data) {
         size: {
             height: 800,
             width: 1000
-        },
+        },       
         argumentAxis: {
-            valueMarginsEnabled: false,
-            discreteAxisDivisionMode: "crossLabels",
-            argumentType: "date",
-            //aggregationInterval: "month",
-            displayFormat: "short",
-            //tickInterval: { weeks: 3 },
-            //categories: ["name"],
+            valueMarginsEnabled: false,            
+            argumentType: "datetime",            
+            aggregationInterval:"day",
+            tickInterval: { days: 2 },           
             grid: {
                 visible: true
             }
-        },
+        },       
         series: [            
             { valueField: "temperature", name: "Temperature" },
             { valueField: "gravity", name: "Gravity" },
             { valueField: "angle", name: "Angle" },
             { valueField: "battery", name: "Battery" },
-            { valueField: "rssi", name: "RSSI" }
+            { valueField: "rssi", name: "RSSI" },
         ],
         legend: {
             verticalAlignment: "bottom",
@@ -64,7 +60,7 @@ function DisplayLogsChart(data) {
         title: {
             text: "Fermentation Chart",
             subtitle: {
-                text: "(Timelapse)"
+                text: "(Timelapse Trend)"
             }
         },
         "export": {
@@ -76,5 +72,5 @@ function DisplayLogsChart(data) {
         loadingIndicator: {
             enabled: true
         }
-     }).dxChart("instance"); 
+    }).dxChart("instance");    
 }
