@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
     GetAllLogs();
+    GetBuoyNames();
 });
 
 
@@ -19,7 +20,22 @@ function GetAllLogs() {
     });
 }
 
-function DisplayLogsChart(data) {
+function GetBuoyNames() {
+    $.ajax({
+        url: "/api/FermentabuoyLog/GetBuoyNames",
+        type: 'GET',
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function (buoyNames) {
+            BuoySelectionBox(buoyNames);
+        },
+        error: function (buoyNames) {
+
+        }
+    });
+}
+
+function DisplayLogsChart(data, buoyNames) {
     var fermentationChart = $("#fermentationChart").dxChart({        
         dataSource: data,
         commonSeriesSettings: {
@@ -33,7 +49,7 @@ function DisplayLogsChart(data) {
             bottom: 20
         },
         size: {
-            height: 800,
+            height: 750,
             width: 1000
         },       
         argumentAxis: {
@@ -72,5 +88,54 @@ function DisplayLogsChart(data) {
         loadingIndicator: {
             enabled: true
         }
-    }).dxChart("instance");    
+    }).dxChart("instance");  
+
+    /*$("#names").dxSelectBox({
+        dataSource: buoyNames,
+        valueExpr: "name",
+        displayExpre: "name",
+        height: function () {
+            return window.innerHeight / "50px";
+        },
+        width: function () {
+            return window.innerWidth / "100px";
+        },
+        //onValueChanged: function (e) {
+            //chart.option("commonSeriesSettings.type", e.value);
+       // }
+        padding: 20,
+        margin: {
+            top: 20,
+            bottom: 20,
+            right: 10,
+        },
+        fontSize: 18,
+        fontWeight: 500,
+    });*/
+}
+
+function BuoySelectionBox(buoyNames) {
+    var buoyBox = $("#names").dxSelectBox({
+        dataSource: buoyNames,
+        valueExpr: "name",
+        displayExpr: "name",
+        value: "FermentABuoy001",
+        height: function () {
+            return window.innerHeight / "50px";
+        },
+        width: function () {
+            return window.innerWidth / "100px";
+        },
+        //onValueChanged: function (e) {
+        //chart.option("commonSeriesSettings.type", e.value);
+        // }
+        padding: 20,
+        margin: {
+            top: 20,
+            bottom: 20,
+            right: 10,
+        },
+        fontSize: 18,
+        fontWeight: 500,
+    });
 }

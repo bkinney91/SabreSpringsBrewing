@@ -93,5 +93,47 @@ namespace SabreSprings.Brewing.Services
             }
             return dtos;
         }
+
+        /// <summary>
+        /// get all buoy names
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<FermentabuoyLogDto>> GetBuoyNames()
+        {
+            List<FermentabuoyLogDto> dtos = new List<FermentabuoyLogDto>();
+            List<FermentabuoyLog> entities = await FermentabuoyLogDataProvider.GetBuoyNames();
+            foreach (FermentabuoyLog entity in entities)
+            {
+                FermentabuoyLogDto fermentabuoyLogDto = new FermentabuoyLogDto()
+                {
+                    Name = entity.Name                    
+                };
+                dtos.Add(fermentabuoyLogDto);
+            }
+            return dtos;
+        }
+
+
+        public async Task<List<FermentabuoyLogDto>> GetLogsByBuoy(string buoyName)
+        {
+            List<FermentabuoyLogDto> dtos = new List<FermentabuoyLogDto>();
+            List<FermentabuoyLog> entities = await FermentabuoyLogDataProvider.GetLogsByBuoy(buoyName);
+            foreach (FermentabuoyLog entity in entities)
+            {
+                FermentabuoyLogDto fermentabuoyLogDto = new FermentabuoyLogDto()
+                {
+                    Name = entity.Name,
+                    ID = entity.DeviceId,
+                    Angle = entity.Angle,
+                    Temperature = entity.Temperature,
+                    Battery = entity.Battery,
+                    Gravity = entity.Gravity,
+                    RSSI = entity.RSSI,
+                    Created = entity.Created
+                };
+                dtos.Add(fermentabuoyLogDto);
+            }
+            return dtos;
+        }
     }
 }
