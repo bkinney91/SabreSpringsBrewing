@@ -1,13 +1,26 @@
 ﻿$(document).ready(function () {
-    GetAllLogs();
-    GetBuoyNames();
+        GetBuoyNames();
 });
 
-
-
-function GetAllLogs() {
+function GetBuoyNames() {
     $.ajax({
-        url: "/api/FermentabuoyLog/GetAll",
+        url: "/api/FermentabuoyLog/GetBuoyNames",
+        type: 'GET',
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function (buoyNames) {
+            BuoySelectionBox(buoyNames);
+            GetLogsByBuoy(buoyNames[0].name);
+        },
+        error: function (buoyNames) {
+
+        }
+    });
+}
+
+function GetLogsByBuoy(name) {
+    $.ajax({
+        url: "/api/FermentabuoyLog/GetLogsByBuoy?buoyName="+name,
         type: 'GET',
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -20,22 +33,9 @@ function GetAllLogs() {
     });
 }
 
-function GetBuoyNames() {
-    $.ajax({
-        url: "/api/FermentabuoyLog/GetBuoyNames",
-        type: 'GET',
-        dataType: "json",
-        contentType: "application/json;charset=utf-8",
-        success: function (buoyNames) {
-            BuoySelectionBox(buoyNames);
-        },
-        error: function (buoyNames) {
 
-        }
-    });
-}
 
-function DisplayLogsChart(data, buoyNames) {
+function DisplayLogsChart(data) {
     var fermentationChart = $("#fermentationChart").dxChart({        
         dataSource: data,
         commonSeriesSettings: {
@@ -88,30 +88,7 @@ function DisplayLogsChart(data, buoyNames) {
         loadingIndicator: {
             enabled: true
         }
-    }).dxChart("instance");  
-
-    /*$("#names").dxSelectBox({
-        dataSource: buoyNames,
-        valueExpr: "name",
-        displayExpre: "name",
-        height: function () {
-            return window.innerHeight / "50px";
-        },
-        width: function () {
-            return window.innerWidth / "100px";
-        },
-        //onValueChanged: function (e) {
-            //chart.option("commonSeriesSettings.type", e.value);
-       // }
-        padding: 20,
-        margin: {
-            top: 20,
-            bottom: 20,
-            right: 10,
-        },
-        fontSize: 18,
-        fontWeight: 500,
-    });*/
+    }).dxChart("instance");   
 }
 
 function BuoySelectionBox(buoyNames) {
@@ -126,9 +103,9 @@ function BuoySelectionBox(buoyNames) {
         width: function () {
             return window.innerWidth / "100px";
         },
-        //onValueChanged: function (e) {
-        //chart.option("commonSeriesSettings.type", e.value);
-        // }
+        onValueChanged: function (e) {
+        GetLogsByBuoy(e.value);
+         },
         padding: 20,
         margin: {
             top: 20,
