@@ -92,7 +92,11 @@ namespace SabreSprings.Brewing.Data
             }
         }
 
-
+        /// <summary>
+        /// returns all logs from db associated with given buoy.
+        /// </summary>
+        /// <param name="buoyName"></param>
+        /// <returns></returns>
         public async Task<List<FermentabuoyLog>> GetLogsByBuoy(string buoyName)
         {
             string sql = @"Select

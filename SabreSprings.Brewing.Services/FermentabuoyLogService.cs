@@ -113,7 +113,11 @@ namespace SabreSprings.Brewing.Services
             return dtos;
         }
 
-
+        /// <summary>
+        /// gets all logs for a specifc buoy name
+        /// </summary>
+        /// <param name="buoyName"></param>
+        /// <returns></returns>
         public async Task<List<FermentabuoyLogDto>> GetLogsByBuoy(string buoyName)
         {
             List<FermentabuoyLogDto> dtos = new List<FermentabuoyLogDto>();
