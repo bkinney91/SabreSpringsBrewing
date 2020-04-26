@@ -31,6 +31,10 @@ export function configureContainer(): Container {
 		.bind<BaseApiService>(ServiceTypes.BaseApiService)
 		.to(BaseApiService)
 		.inSingletonScope();
+	container
+		.bind<BatchApiService>(ServiceTypes.BatchApiService)
+		.to(BatchApiService)
+		.inSingletonScope();
 	
 	return container;
 }

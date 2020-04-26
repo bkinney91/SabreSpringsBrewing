@@ -22,7 +22,7 @@
     import Router from "./router";
     import
     {
-       
+       BatchApiService
     } from "@/core/services";
     import { ServiceTypes } from "@/core/symbols";
     import NavigationComponent from "@/modules/layout/nav-container.component.vue";
