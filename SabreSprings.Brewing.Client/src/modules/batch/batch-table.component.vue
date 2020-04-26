@@ -1,5 +1,9 @@
 <template>
- 
+ <div>
+   <div v-for="batch in batchTableRows">
+     
+     </div>
+ </div>
 </template>
 
 <script lang="ts">
@@ -7,7 +11,7 @@
 import { Vue, Component, Inject, Prop } from "vue-property-decorator";
 import { BatchApiService } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
-import { } from "@/core/models";
+import { BatchTableRow } from "@/core/models";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 
 @Component({
@@ -17,7 +21,8 @@ import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 })
 export default class BatchTableComponent extends Vue {
   @Inject(ServiceTypes.BatchApiService)
-  private componentApiService!: BatchApiService;
+  private batchApiService!: BatchApiService;
+  private batchTableRows: BatchTableRow[] = [];
   constructor() {
     super();
   }
@@ -26,7 +31,16 @@ export default class BatchTableComponent extends Vue {
     
   }
 
-  
+  private getTableRows(){
+    this.batchApiService
+      .getBatchTableRows()
+      .then(response => {
+        this.batchTableRows = response;
+      })
+      .catch(error => {
+        NotifyHelper.displayError(error);
+      });
+  }
 
 
 

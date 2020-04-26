@@ -12,7 +12,7 @@ export class BatchApiService extends BaseApiService
     }
 
 
-    public getBatchTable(): Promise<any>
+    public getBatchTableRows(): Promise<any>
     {
         return this.client.get(`${this.apiUrl}/getBatchTable`)
             .then(response => { return response.data })
