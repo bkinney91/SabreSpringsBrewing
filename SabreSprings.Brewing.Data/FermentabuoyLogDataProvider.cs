@@ -76,6 +76,46 @@ namespace SabreSprings.Brewing.Data
             }
         }
 
+        /// <summary>
+        /// get all buoy names from db
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<FermentabuoyLog>> GetBuoyNames()
+        {
+            string sql = @"Select
+                            distinct name
+                            from FermentationLog;";
+            using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
+            {
+                IEnumerable<FermentabuoyLog> logs = await db.QueryAsync<FermentabuoyLog>(sql);
+                return logs.ToList();
+            }
+        }
 
+        /// <summary>
+        /// returns all logs from db associated with given buoy.
+        /// </summary>
+        /// <param name="buoyName"></param>
+        /// <returns></returns>
+        public async Task<List<FermentabuoyLog>> GetLogsByBuoy(string buoyName)
+        {
+            string sql = @"Select
+                            Id,
+                            Name,
+                            CAST(Temperature as REAL) as Temperature,
+                            CAST(Gravity as REAL) as Gravity,
+                            CAST(Angle as REAL) as Angle,
+                            DeviceId,
+                            CAST(Battery as REAL) as Battery,
+                            RSSI,
+                            Created
+                            from FermentationLog
+                            where Name = @Name;";
+            using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
+            {
+                IEnumerable<FermentabuoyLog> logs = await db.QueryAsync<FermentabuoyLog>(sql, new { Name = buoyName });
+                return logs.ToList();
+            }
+        }
     }
 }

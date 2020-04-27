@@ -17,7 +17,7 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
     public class FermentabuoyLogController : ControllerBase
     {
         private readonly IFermentabuoyLogService FermentabuoyLogService;
-        private readonly ILogger Logger;
+        private readonly ILogger Logger;   
         public FermentabuoyLogController(IFermentabuoyLogService fermentabuoyLogService, ILogger logger)
         {
             FermentabuoyLogService = fermentabuoyLogService;
@@ -65,6 +65,10 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
             }
         }
 
+        /// <summary>
+        /// returns all logs in the fermentation table
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetAll")]
         [Produces(typeof(List<FermentabuoyLogDto>))]
@@ -73,6 +77,47 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
             try
             {
                 List<FermentabuoyLogDto> logs = await FermentabuoyLogService.GetAllLogs();
+                return Ok(logs);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// returns distinct buoy names in the fermentation table
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("GetBuoyNames")]
+        [Produces(typeof(List<FermentabuoyLogDto>))]
+        public async Task<IActionResult> GetBuoyNames()
+        {
+            try
+            {
+                List<FermentabuoyLogDto> logs = await FermentabuoyLogService.GetBuoyNames();
+                return Ok(logs);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// returns all logs for a specific buoy name
+        /// </summary>
+        /// <param name="buoyName"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("GetLogsByBuoy")]
+        [Produces(typeof(List<FermentabuoyLogDto>))]
+        public async Task<IActionResult> GetLogsByBuoy(string buoyName)
+        {
+            try
+            {
+                List<FermentabuoyLogDto> logs = await FermentabuoyLogService.GetLogsByBuoy(buoyName);
                 return Ok(logs);
             }
             catch (Exception e)
