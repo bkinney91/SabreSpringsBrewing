@@ -81,7 +81,7 @@ export default class BatchTableRowComponent extends Vue {
   }
 
   private openBatchDetails(batchId: number){
-    console.log("opening batchID:" + batchId);
+    this.$router.push("/batch/details?id="+batchId);
   }
 }
 </script>
