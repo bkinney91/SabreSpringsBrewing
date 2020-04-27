@@ -10,7 +10,7 @@
                 </a>
                 
             </li>
-            <NavUserComponent></NavUserComponent>
+            
         </ul>
     </div>
 </template>

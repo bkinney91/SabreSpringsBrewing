@@ -36,12 +36,13 @@ import { Template } from 'devextreme/core/templates/template';
     @Component({
         components:
         {
-            NavigationComponent
+            NavigationComponent,
+            
         },
         provide:
         {
             [ServiceTypes.Container]: container,
-         
+            [ServiceTypes.BatchApiService]: container.get<BatchApiService>(ServiceTypes.BatchApiService),
             
         }
     })

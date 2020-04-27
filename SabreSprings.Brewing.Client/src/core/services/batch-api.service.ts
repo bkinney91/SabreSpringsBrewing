@@ -18,6 +18,7 @@ export class BatchApiService extends BaseApiService
             .then(response => { return response.data })
             .catch(error =>
             {
+                console.log(error);
                 let message = "Error.";
 
                 if (error.reponse) {

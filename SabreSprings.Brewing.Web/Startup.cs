@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using SabreSprings.Brewing.Data;
 using SabreSprings.Brewing.Data.Interfaces;
@@ -30,6 +31,19 @@ namespace SabreSprings.Brewing.TapHouse
             services.AddMvc(option => option.EnableEndpointRouting = false)
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+                services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins", builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
+            });
+
+            // disable automatic model validation
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -66,7 +80,7 @@ namespace SabreSprings.Brewing.TapHouse
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseCors("AllowAllOrigins");
             app.UseRouting();
 
             app.UseAuthorization();

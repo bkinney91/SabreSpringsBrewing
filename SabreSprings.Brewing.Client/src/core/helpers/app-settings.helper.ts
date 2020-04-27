@@ -28,10 +28,10 @@ export class AppSettingsHelper {
 
 
 
-	public static apiUrl(): string {
-		if (AppSettingsHelper.baseUrl.indexOf("localhost") >= 0) {
-			return "https://localhost:XXX/api";
+	public static apiUrl(): string {		
+		if (BaseUrlHelper.getBaseUrl().indexOf("localhost") >= 0) {
+			return "http://localhost:8090/api";
 		}
-		return "http:/10.0.0.2/api";
+		return "http://10.0.0.2/api";
 	}
 }

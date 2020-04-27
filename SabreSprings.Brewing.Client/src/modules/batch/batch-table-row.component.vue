@@ -1,23 +1,31 @@
 <template>
+<div v-if="batch != null">
   <div
     class="card"
-    style="border-color:{{color}};border-top-width:5px;border-width:5px"
-    :onclick="openBatchDetails()"
+    :style="'border-color:' + getColor() + ';border-top-width:5px;border-width:5px'"
+    v-on:click="openBatchDetails(batch.batchId)"
   >
     <div
       class="card-header"
-      style="border-color:{{color}};border-bottom-width: 10px"
+      :style="'border-color:'+ getColor() + ';border-bottom-width: 10px'"
     >{{batch.statusText}}</div>
     <div class="card-body">
       <h5 class="card-title">{{batch.beerName}} Batch #{{batch.batchNumber}}</h5>
       <h6 class="card-subtitle mb-2 text-muted">{{batch.style}}</h6>
       <p class="card-text">
-        Date Brewed: {{batch.dateBrewed}}
+        Date Brewed: {{new Date(batch.dateBrewed).toLocaleDateString('en-US')}}
         <br />
-        Date Packaged: {{batch.datePackaged}}
-        <br />
+        <div v-if="batch.datePackaged !== null || new Date(batch.datePackaged).toLocaleDateString('en-US') !== '12/31/1969'">
+        Date Packaged: {{new Date(batch.datePackaged).toLocaleDateString('en-US')}}        
+        </div>
+        <div v-else>
+          Scheduled Package Date: {{getScheduledPackageDate(batch.dateBrewed).toLocaleDateString('en-US')}}
+        </div>
       </p>
     </div>
+  </div>
+  <br/>
+  <br/>
   </div>
 </template>
 
@@ -32,12 +40,48 @@ import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 @Component({
   components: {}
 })
-export default class BatchTableComponent extends Vue {
-  @Prop() private batch!: BatchTableRow;
+export default class BatchTableRowComponent extends Vue {
+  @Prop() private batch!: BatchTableRow;  
   constructor() {
     super();
+    
   }
 
-  created(): void {}
+  created(): void {
+   
+      
+
+  }
+
+  private getColor(){
+    let color: string= "";
+     if (this.batch.statusText.includes("On Tap")) {
+            color = "green";
+        }
+        else if (this.batch.statusText === "Fermenting") {
+            color = "red";
+        }
+        else if (this.batch.statusText === "Conditioning") {
+            color = "#D2D545";
+        }
+        else if (this.batch.statusText === "Archived") {
+            color = "#1369B1";
+        }
+        else if (this.batch.statusText === "Planned") {
+            color = "#B11313";
+        }
+        return color;
+  }
+
+  private getScheduledPackageDate(dateBrewed: Date):  Date | null {
+    let scheduledPackageDate : Date;   
+        scheduledPackageDate = new Date(dateBrewed);
+        scheduledPackageDate.setDate(scheduledPackageDate.getDate() + 28);
+        return scheduledPackageDate;     
+  }
+
+  private openBatchDetails(batchId: number){
+    console.log("opening batchID:" + batchId);
+  }
 }
 </script>

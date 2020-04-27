@@ -7,6 +7,7 @@ import NotFoundComponent from "./modules/home/not-found.component.vue";
 import ProcessingComponent from "./modules/home/processing.component.vue";
 import AdminComponent from "./modules/main/admin.component.vue";
 import TemplateComponent from "./modules/main/template.component.vue";
+import BatchTableComponent from "./modules/batch/batch-table.component.vue";
 Vue.use(Router);
 
 export default new Router({
@@ -51,7 +52,11 @@ export default new Router({
 			name: "processing",
 			component: ProcessingComponent
 		},
-		
+		{
+			path: "/batches",
+			name: "batches",
+			component: BatchTableComponent
+		},
 		{
 			path: "/",
 			redirect: { name: "home" }

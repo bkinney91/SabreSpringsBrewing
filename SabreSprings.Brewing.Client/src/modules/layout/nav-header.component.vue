@@ -9,7 +9,7 @@
                     Automation
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <router-link class="dropdown-item" to="/material/master">On Tap</router-link>
+                    <router-link class="dropdown-item" to="/Taproom/OnTap">On Tap</router-link>
                 </div>
             </li>
                         
@@ -18,8 +18,8 @@
                     Beers
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <router-link class="dropdown-item" to="/template/master">Batches</router-link>
-                    <router-link class="dropdown-item" to="/template/master">Fermentation Log</router-link>
+                    <router-link class="dropdown-item" to="/batches">Batches</router-link>
+                    <router-link class="dropdown-item" to="/FermentationLog">Fermentation Log</router-link>
                 </div>
             </li>           
         </ul>  

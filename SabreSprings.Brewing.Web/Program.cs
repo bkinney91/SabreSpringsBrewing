@@ -19,7 +19,7 @@ namespace SabreSprings.Brewing.TapHouse
                     webBuilder.UseStartup<Startup>();
                     var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
                     if(environment == Environments.Development){
-                        webBuilder.UseUrls("http://*:80");
+                        webBuilder.UseUrls("http://localhost:8090");
                     }
                     else{
                          webBuilder.UseUrls("http://*:80", "http://10.0.0.2");
