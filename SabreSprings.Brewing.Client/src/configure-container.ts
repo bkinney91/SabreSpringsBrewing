@@ -2,7 +2,8 @@ import { Container } from "inversify";
 import {
 	ContainerService,
 	BaseApiService,
-	BatchApiService
+	BatchApiService,
+	TapHubService
 
 } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
@@ -31,6 +32,9 @@ export function configureContainer(): Container {
 		.bind<BatchApiService>(ServiceTypes.BatchApiService)
 		.to(BatchApiService)
 		.inSingletonScope();
-	
+	container
+		.bind<TapHubService>(ServiceTypes.TapHubService)
+		.to(TapHubService)
+		.inSingletonScope();
 	return container;
 }

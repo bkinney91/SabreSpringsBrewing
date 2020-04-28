@@ -1,6 +1,6 @@
 <template>
  <div style="margin-left:15%;margin-right:15%">
-   <div v-for="batch in batchTableRows">
+   <div v-for="batch in batchTableRows" v-bind:key="batch">
      <BatchTableRowComponent :batch="batch"/>
      </div>
  </div>

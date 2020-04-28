@@ -9,6 +9,7 @@ import AdminComponent from "./modules/main/admin.component.vue";
 import TemplateComponent from "./modules/main/template.component.vue";
 import BatchTableComponent from "./modules/batch/batch-table.component.vue";
 import BatchDetailsComponent from "./modules/batch/batch-details.component.vue";
+import OnTapComponent from "./modules/tap/on-tap.component.vue";
 Vue.use(Router);
 
 export default new Router({
@@ -62,6 +63,11 @@ export default new Router({
 			path: "/batch/details",
 			name: "batch/details",
 			component: BatchDetailsComponent
+		},
+		{
+			path: "/tap/ontap",
+			name: "Tap/OnTap",
+			component: OnTapComponent
 		},
 		{
 			path: "/",

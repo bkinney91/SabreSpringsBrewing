@@ -22,7 +22,7 @@
     import Router from "./router";
     import
     {
-       BatchApiService
+       BatchApiService, TapHubService
     } from "@/core/services";
     import { ServiceTypes } from "@/core/symbols";
     import NavigationComponent from "@/modules/layout/nav-container.component.vue";
@@ -43,7 +43,7 @@ import { Template } from 'devextreme/core/templates/template';
         {
             [ServiceTypes.Container]: container,
             [ServiceTypes.BatchApiService]: container.get<BatchApiService>(ServiceTypes.BatchApiService),
-            
+            [ServiceTypes.TapHubService]: container.get<TapHubService>(ServiceTypes.TapHubService),
         }
     })
 
