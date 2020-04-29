@@ -35,7 +35,7 @@ namespace SabreSprings.Brewing.TapHouse
             {
                 options.AddPolicy("AllowAllOrigins", builder =>
                 {
-                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:8080");
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:8080", "http://10.0.0.2", "http://10.0.0.2:8000");
                 });
             });
 
@@ -82,7 +82,7 @@ namespace SabreSprings.Brewing.TapHouse
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCors(r => r.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:8080"));
+            app.UseCors(r => r.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:8080","http://10.0.0.2", "http://10.0.0.2:8000"));
             app.UseRouting();
 
             app.UseAuthorization();
