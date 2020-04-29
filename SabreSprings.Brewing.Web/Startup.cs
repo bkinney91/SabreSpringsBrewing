@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Http;
+using SabreSprings.Brewing.Web.Hubs;
 using Newtonsoft.Json;
 using SabreSprings.Brewing.Data;
 using SabreSprings.Brewing.Data.Interfaces;
@@ -35,7 +35,7 @@ namespace SabreSprings.Brewing.TapHouse
             {
                 options.AddPolicy("AllowAllOrigins", builder =>
                 {
-                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:8080", "http://10.0.0.2", "http://10.0.0.2:8000");
                 });
             });
 
@@ -44,6 +44,8 @@ namespace SabreSprings.Brewing.TapHouse
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
+
+            services.AddSignalR();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -80,7 +82,7 @@ namespace SabreSprings.Brewing.TapHouse
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCors("AllowAllOrigins");
+            app.UseCors(r => r.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:8080","http://10.0.0.2", "http://10.0.0.2:8000"));
             app.UseRouting();
 
             app.UseAuthorization();
@@ -90,7 +92,10 @@ namespace SabreSprings.Brewing.TapHouse
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<TapHub>("/tapHub");
             });
+            
+           
         }
     }
 }

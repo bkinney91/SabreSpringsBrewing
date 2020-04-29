@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using SabreSprings.Brewing.Models.DataTransfer;
 using SabreSprings.Brewing.Models.Domain;
 using SabreSprings.Brewing.Services.Interfaces;
+using Microsoft.AspNetCore.SignalR;
+using SabreSprings.Brewing.Web.Hubs;
 
 namespace SabreSprings.Brewing.Web.Controllers.Api
 {
@@ -14,9 +16,11 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
     public class TapController : ControllerBase
     {
         private readonly ITapService TapService;
-        public TapController(ITapService tapService)
+        private readonly IHubContext<TapHub> TapHubContext;
+        public TapController(ITapService tapService, IHubContext<TapHub> tapHubContext)
         {
             TapService = tapService;
+            TapHubContext = tapHubContext;
         }
 
         [Route("GetOnTap")]
@@ -28,7 +32,7 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
                 List<Tap> tapListDisplays = await TapService.GetOnTap();
                 return Ok(tapListDisplays);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
@@ -41,12 +45,23 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
             try
             {
                 await TapService.ProcessPour(pour);
+                List<Tap> tapListDisplays = await TapService.GetOnTap();
+                TapHubContext.Clients.All.SendAsync("TapData", tapListDisplays);
                 return Ok();
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
+        }
+
+        [Route("KickTires")]
+        [HttpGet]
+        public async Task<IActionResult> KickTires()
+        {
+            List<Tap> tapListDisplays = await TapService.GetOnTap();
+            TapHubContext.Clients.All.SendAsync("TapData", tapListDisplays);
+            return Ok("ding");
         }
 
     }

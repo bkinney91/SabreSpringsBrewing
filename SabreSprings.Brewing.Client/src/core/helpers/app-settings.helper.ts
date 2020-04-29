@@ -32,6 +32,15 @@ export class AppSettingsHelper {
 		if (BaseUrlHelper.getBaseUrl().indexOf("localhost") >= 0) {
 			return "http://localhost:8090/api";
 		}
-		return "http://10.0.0.2/api";
+		return "http://10.0.0.2:8080/api";
 	}
+
+	public static hubUrl(): string {		
+		if (BaseUrlHelper.getBaseUrl().indexOf("localhost") >= 0) {
+			return "http://localhost:8080/";
+		}
+		return "http://10.0.0.2:8080/";
+	}
+
+	
 }
