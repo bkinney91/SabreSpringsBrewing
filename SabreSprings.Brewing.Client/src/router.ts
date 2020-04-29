@@ -65,8 +65,8 @@ export default new Router({
 			component: BatchDetailsComponent
 		},
 		{
-			path: "/tap/ontap",
-			name: "Tap/OnTap",
+			path: "/taproom/ontap",
+			name: "Taproom/OnTap",
 			component: OnTapComponent
 		},
 		{
