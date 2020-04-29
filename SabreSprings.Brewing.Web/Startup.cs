@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SabreSprings.Brewing.Web.Hubs;
 using Newtonsoft.Json;
 using SabreSprings.Brewing.Data;
 using SabreSprings.Brewing.Data.Interfaces;
@@ -30,6 +31,21 @@ namespace SabreSprings.Brewing.TapHouse
             services.AddMvc(option => option.EnableEndpointRouting = false)
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+                services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins", builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:8080", "http://10.0.0.2", "http://10.0.0.2:8000");
+                });
+            });
+
+            // disable automatic model validation
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
+
+            services.AddSignalR();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -66,7 +82,7 @@ namespace SabreSprings.Brewing.TapHouse
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseCors(r => r.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:8080","http://10.0.0.2", "http://10.0.0.2:8000"));
             app.UseRouting();
 
             app.UseAuthorization();
@@ -76,7 +92,10 @@ namespace SabreSprings.Brewing.TapHouse
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<TapHub>("/tapHub");
             });
+            
+           
         }
     }
 }

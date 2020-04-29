@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SabreSprings.Brewing.TapHouse.Models;
+using SabreSprings.Brewing.Web.Hubs;
+using Microsoft.AspNetCore.SignalR;
 
 namespace SabreSprings.Brewing.TapHouse.Controllers
 {
@@ -15,7 +17,7 @@ namespace SabreSprings.Brewing.TapHouse.Controllers
         }
 
         public IActionResult Index()
-        {
+        {       
             return View();
         }
 

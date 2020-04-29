@@ -40,21 +40,14 @@ while True:
   if (tap1.thisPour > 0.125 and currentTime - tap1.lastClick > 3000): # 3 seconds of inactivity triggers http request
     print('Tap2:' + tap2.getThisPourInPints())
     postContent = {'TapNumber': 1, 'AmountPoured': tap1.getThisPourInPints()}
-    request = requests.post('http://10.0.0.2/api/Tap/ProcessPour', json = postContent)
+    request = requests.post('http://10.0.0.2:8080/api/Tap/ProcessPour', json = postContent)
     tap1.thisPour = 0.0
  
   if (tap2.thisPour > 0.125 and currentTime - tap2.lastClick > 3000): # 3 seconds of inactivity triggers http request    
     print('Tap2:' + tap2.getThisPourInPints())
     postContent = {'TapNumber': 2, 'AmountPoured': tap2.getThisPourInPints()}
-    request = requests.post('http://10.0.0.2/api/Tap/ProcessPour', json = postContent)
+    request = requests.post('http://10.0.0.2:8080/api/Tap/ProcessPour', json = postContent)
     tap2.thisPour = 0.0
 
-  # the following block was in the original code but I do not feel like it is necessary
-  # reset flow meter after each pour (2 secs of inactivity)
-  #if (tap1.thisPour <= 0.23 and currentTime - tap1.lastClick > 2000):
-  #  tap1.thisPour = 0.0
-  #  
-  #if (tap2.thisPour <= 0.23 and currentTime - tap2.lastClick > 2000):
-  #  tap2.thisPour = 0.0
   
 
