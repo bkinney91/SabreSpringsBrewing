@@ -22,7 +22,7 @@ namespace SabreSprings.Brewing.TapHouse
                         webBuilder.UseUrls("http://localhost:8090");
                     }
                     else{
-                         webBuilder.UseUrls("http://*:80", "http://10.0.0.2");
+                         webBuilder.UseUrls("http://10.0.0.2");
                     }
                    
                 }).UseServiceProviderFactory(new AutofacServiceProviderFactory());
