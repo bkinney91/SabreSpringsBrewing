@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-left:10%;margin-right:10%">
     <h1>On Tap</h1>
     <div class="row">
       <div class="col-lg-6" v-if="taps[0] != null">
@@ -9,7 +9,7 @@
               class="card-img-top"
               style="max-height:400px;width:auto"
               id="tap1Logo"
-              :src="taps[0].logo"
+              :src="'/Content/images' + taps[0].logo"
               alt="Card image cap"
             />
             <div class="card-body">
@@ -59,7 +59,7 @@
 <script lang="ts">
 // IMPORTS ----------------------------------
 import { Vue, Component, Inject } from "vue-property-decorator";
-import { TapHubService } from "@/core/services";
+import { TapHubService, TapApiService } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
 import { TapDto } from "@/core/models";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
@@ -70,6 +70,8 @@ import * as SignalR from "@microsoft/signalr";
 export default class OnTapComponent extends Vue {
   @Inject(ServiceTypes.TapHubService)
   private tapHubService!: TapHubService;
+  @Inject(ServiceTypes.TapApiService)
+  private tapApiService!: TapApiService;
   private taps: TapDto[] = [];  
   private messages!: string[] | null;
   constructor() {
@@ -81,6 +83,7 @@ export default class OnTapComponent extends Vue {
 
   created(): void {
     this.tapHubService.SetTapDataCallback(this.showTapCards);
+    this.getOnTap();
   }
 
   private showTapCards(data: any) {
@@ -88,9 +91,17 @@ export default class OnTapComponent extends Vue {
       console.log(data);
   }
 
-  private sendMessage(message: string){
-      console.log("doing it");
-      this.tapHubService.SendMessage(message);
+  private getOnTap(){
+    this.tapApiService
+      .getOnTap()
+      .then(response => {
+        this.taps = response;
+      })
+      .catch(error => {
+        NotifyHelper.displayError(error);
+      });
   }
+
+
 }
 </script>

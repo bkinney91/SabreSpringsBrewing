@@ -16,7 +16,6 @@ export class TapHubService
 
     public async StartConnection(){
         await this.InitializeConnection();
-        this.SetReceiveMessage();
     }
 
     public GetState(){
@@ -28,22 +27,7 @@ export class TapHubService
             receiveFunc(data);
         });
     }
-
-    public SendMessage(message: string){
-        console.log("service");
-        this.hubConnection.invoke("SendMessage", message).catch(function(error) {
-            console.log("CANT INVOKE");
-            return console.error(error);
-          });
-    }
-
-    public SetReceiveMessage(){
-       
-        this.hubConnection.on("ReceiveMessage", function(data: string){
-           
-            console.log("The data:" + data);
-        });
-    }
+    
 
     private async InitializeConnection(){
         if(!this.hubConnection)

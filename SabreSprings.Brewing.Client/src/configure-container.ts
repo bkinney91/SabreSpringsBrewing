@@ -3,7 +3,8 @@ import {
 	ContainerService,
 	BaseApiService,
 	BatchApiService,
-	TapHubService
+	TapHubService,
+	TapApiService
 
 } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
@@ -35,6 +36,10 @@ export function configureContainer(): Container {
 	container
 		.bind<TapHubService>(ServiceTypes.TapHubService)
 		.to(TapHubService)
+		.inSingletonScope();
+	container
+		.bind<TapApiService>(ServiceTypes.TapApiService)
+		.to(TapApiService)
 		.inSingletonScope();
 	return container;
 }

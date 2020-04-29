@@ -10,20 +10,15 @@ namespace SabreSprings.Brewing.TapHouse.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IHubContext<TapHub> TapHub;
 
-        public HomeController(ILogger<HomeController> logger, IHubContext<TapHub> tapHub)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            TapHub = tapHub;
         }
 
         public IActionResult Index()
-        {
-            
-            TapHub.Clients.All.SendAsync("ReceiveMessage","Home bruh");
+        {       
             return View();
-
         }
 
         public IActionResult About()
