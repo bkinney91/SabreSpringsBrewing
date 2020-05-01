@@ -18,7 +18,7 @@
                 <h5 id="tap1Style">{{taps[0].style}}</h5>
               </i>
               <h6 id="tap1ABV">ABV: {{taps[0].abv}}%</h6>
-              <h6 id="tap1PintsRemaining">Approx. Pints Remaining: {{taps[0].pintsRemaining}}</h6>
+              <h6 id="tap1PintsRemaining">Approx. Pints Remaining: {{Math.round(taps[0].pintsRemaining *10) / 10}}</h6>
               <div style="min-height:120px">
                 <p id="tap1TastingNotes" class="card-text">{{taps[0].tastingNotes}}</p>
               </div>
@@ -43,7 +43,7 @@
                 <h5 id="tap2Style">{{taps[1].style}}</h5>
               </i>
               <h6 id="tap2ABV">ABV:{{taps[1].abv}}%</h6>
-              <h6 id="tap2PintsRemaining">Approx. Pints Remaining:{{taps[1].pintsRemaining}}</h6>
+              <h6 id="tap2PintsRemaining">Approx. Pints Remaining:{{Math.round(taps[1].pintsRemaining *10) / 10}}</h6>
               <div style="min-height:120px">
                 <p id="tap2TastingNotes" class="card-text">{{taps[1].tastingNotes}}</p>
               </div>
