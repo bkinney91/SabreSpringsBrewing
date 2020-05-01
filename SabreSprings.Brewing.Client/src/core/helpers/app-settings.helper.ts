@@ -37,7 +37,7 @@ export class AppSettingsHelper {
 
 	public static hubUrl(): string {		
 		if (BaseUrlHelper.getBaseUrl().indexOf("localhost") >= 0) {
-			return "http://localhost:8080/";
+			return "http://localhost:8090/";
 		}
 		return "http://10.0.0.2:8080/";
 	}
