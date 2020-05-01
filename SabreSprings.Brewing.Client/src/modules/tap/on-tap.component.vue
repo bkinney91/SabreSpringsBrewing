@@ -1,5 +1,6 @@
 <template>
   <div style="margin-left:10%;margin-right:10%">
+    <META HTTP-EQUIV="refresh" CONTENT="3600">
     <h1>On Tap</h1>
     <div class="row">
       <div class="col-lg-6" v-if="taps[0] != null">
