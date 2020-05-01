@@ -1,54 +1,68 @@
 <template>
   <div style="margin-left:10%;margin-right:10%">
-    <META HTTP-EQUIV="refresh" CONTENT="3600">
+    <META http-equiv="refresh" content="3600"></META>
     <h1>On Tap</h1>
     <div class="row">
-      <div class="col-lg-6" v-if="taps[0] != null">
+      <div class="col-lg-6" v-if="tap1 != null">
         <div id="tap1">
           <div style="min-height:700px;max-height:710px;" class="card">
             <img
               class="card-img-top"
               style="max-height:400px;width:auto"
               id="tap1Logo"
-              :src="'/Content/images' + taps[0].logo"
+              :src="'/Content/images' + tap1.logo"
               alt="Card image cap"
             />
             <div class="card-body">
-              <h4 class="card-title" id="tap1BeerDisplayName">{{taps[0].beerDisplayName}}</h4>
+              <h4 class="card-title" id="tap1BeerDisplayName">{{tap1.beerDisplayName}}</h4>
               <i>
-                <h5 id="tap1Style">{{taps[0].style}}</h5>
+                <h5 id="tap1Style">{{tap1.style}}</h5>
               </i>
-              <h6 id="tap1ABV">ABV: {{taps[0].abv}}%</h6>
-              <h6 id="tap1PintsRemaining">Approx. Pints Remaining: {{Math.round(taps[0].pintsRemaining *10) / 10}}</h6>
+              <h6 id="tap1ABV">ABV: {{tap1.abv}}%</h6>
+              <h6
+                id="tap1PintsRemaining"
+              >Approx. Pints Remaining: {{Math.round(tap1.pintsRemaining *10) / 10}}</h6>
               <div style="min-height:120px">
-                <p id="tap1TastingNotes" class="card-text">{{taps[0].tastingNotes}}</p>
+                <p id="tap1TastingNotes" class="card-text">{{tap1.tastingNotes}}</p>
               </div>
-              <button href="#" id="tap1Details" class="btn btn-primary" v-on:click="launchBatchDetails(taps[0].batchId)">View Batch Details</button>
+              <button
+                href="#"
+                id="tap1Details"
+                class="btn btn-primary"
+                v-on:click="launchBatchDetails(tap1.batchId)"
+              >View Batch Details</button>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-6" v-if="taps[1] != null">
+      <div class="col-lg-6" v-if="tap2 != null">
         <div style="min-height:700px" id="tap2">
           <div style="min-height:700px;max-height:710px;" class="card">
             <img
               style="max-height:400px;width:auto"
               class="card-img-top"
               id="tap2Logo"
-              :src="'/Content/images' + taps[1].logo"
+              :src="'/Content/images' + tap2.logo"
               alt="Card image cap"
             />
             <div class="card-body">
-              <h4 class="card-title" id="tap2BeerDisplayName">{{taps[1].beerDisplayName}}</h4>
+              <h4 class="card-title" id="tap2BeerDisplayName">{{tap2.beerDisplayName}}</h4>
               <i>
-                <h5 id="tap2Style">{{taps[1].style}}</h5>
+                <h5 id="tap2Style">{{tap2.style}}</h5>
               </i>
-              <h6 id="tap2ABV">ABV:{{taps[1].abv}}%</h6>
-              <h6 id="tap2PintsRemaining">Approx. Pints Remaining:{{Math.round(taps[1].pintsRemaining *10) / 10}}</h6>
+              <h6 id="tap2ABV">ABV:{{tap2.abv}}%</h6>
+              <h6
+                id="tap2PintsRemaining"
+              >Approx. Pints Remaining:{{Math.round(tap2.pintsRemaining *10) / 10}}</h6>
               <div style="min-height:120px">
-                <p id="tap2TastingNotes" class="card-text">{{taps[1].tastingNotes}}</p>
+                <p id="tap2TastingNotes" class="card-text">{{tap2.tastingNotes}}</p>
               </div>
-              <button href="#" id="tap2Details" class="btn btn-primary" v-on:click="launchBatchDetails(taps[1].batchId)">View Batch Details</button>
+              <button
+                href="#"
+                id="tap2Details"
+                class="btn btn-primary"
+                v-on:click="launchBatchDetails(tap2.batchId)"
+              >View Batch Details</button>
             </div>
           </div>
         </div>
@@ -74,11 +88,15 @@ export default class OnTapComponent extends Vue {
   @Inject(ServiceTypes.TapApiService)
   private tapApiService!: TapApiService;
   private taps: TapDto[] = [];
+  private tap1!: TapDto | undefined | null;
+  private tap2!: TapDto | undefined | null;
   private messages!: string[] | null;
   constructor() {
     super();
     this.messages = null;
     this.tapHubService.StartConnection();
+    this.tap1 = null;
+    this.tap2 = null;
   }
 
   created(): void {
@@ -88,14 +106,15 @@ export default class OnTapComponent extends Vue {
 
   private showTapCards(data: any) {
     this.taps = data;
-    console.log(data);
+    this.tap1 = this.taps.find(x => x.tapNumber === 1);
+    this.tap2 = this.taps.find(x => x.tapNumber === 2);
   }
 
   private getOnTap() {
     this.tapApiService
       .getOnTap()
       .then(response => {
-        this.taps = response;
+        this.showTapCards(response);
       })
       .catch(error => {
         NotifyHelper.displayError(error);
