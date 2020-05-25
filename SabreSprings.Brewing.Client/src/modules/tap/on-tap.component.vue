@@ -3,12 +3,10 @@
     <META http-equiv="refresh" content="3600"></META>
     <h1>On Tap</h1>
     <div class="row">
-      
-      <div v-for="tap in taps" class="col-md-4">
-
-        </div>
-   
-    
+      <div v-for="tap in taps" class="col-md-4" v-bind:key="tap">
+        <TapCardComponent :tap="tap"></TapCardComponent>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -23,7 +21,9 @@ import * as SignalR from "@microsoft/signalr";
 import TapCardComponent from "./tap-card.component.vue";
 
 @Component({
-  components: {}
+  components: {
+    TapCardComponent
+  }
 })
 export default class OnTapComponent extends Vue {
   @Inject(ServiceTypes.TapHubService)
@@ -35,7 +35,6 @@ export default class OnTapComponent extends Vue {
   constructor() {
     super();
     this.tapHubService.StartConnection();
-
   }
 
   created(): void {
@@ -44,7 +43,7 @@ export default class OnTapComponent extends Vue {
   }
 
   private updateTapCards(data: any) {
-      this.taps = data;
+    this.taps = data;
   }
 
   private getOnTap() {
