@@ -1,10 +1,16 @@
 <template>
   <div style="margin-left:10%;margin-right:10%">
-    <META http-equiv="refresh" content="3600"></META>
+    <!--<META http-equiv="refresh" content="3600"></META> -->
     <h1>On Tap</h1>
     <div class="row">
-      <div v-for="tap in taps" class="col-md-4" v-bind:key="tap">
-        <TapCardComponent :tap="tap"></TapCardComponent>
+      <div class="col-md-4">
+        <TapCardComponent :tap="this.taps.find(x => x.tapNumber === 1)"></TapCardComponent>
+      </div>
+      <div class="col-md-4">
+        <TapCardComponent :tap="this.taps.find(x => x.tapNumber === 2)"></TapCardComponent>
+      </div>
+      <div class="col-md-4">
+        <TapCardComponent :tap="this.taps.find(x => x.tapNumber === 3)"></TapCardComponent>
       </div>
     </div>
   </div>
@@ -32,6 +38,7 @@ export default class OnTapComponent extends Vue {
   private tapApiService!: TapApiService;
   private taps: TapDto[] = [];
 
+
   constructor() {
     super();
     this.tapHubService.StartConnection();
@@ -42,7 +49,7 @@ export default class OnTapComponent extends Vue {
     this.getOnTap();
   }
 
-  private updateTapCards(data: any) {
+  private updateTapCards(data: any){
     this.taps = data;
   }
 

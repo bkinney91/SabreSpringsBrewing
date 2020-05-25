@@ -1,5 +1,6 @@
 <template>
-  <div>
+<div>
+  <div v-if="tap != null">
     <div class="card">
       <img
         class="card-img-top"
@@ -8,19 +9,19 @@
         alt="Card image cap"
       />
       <div class="card-body">
-        <h4 class="card-title">{{tap.beerDisplayName}}</h4>
+        <h2 class="card-title"><b>{{tap.beerDisplayName}}</b></h2>
         <i>
-          <h5>{{tap.style}}</h5>
+          <h3>{{tap.style}}</h3>
         </i>
-        <h6>
-          <b>
-            <i>Batch #{{tap.batchNumber}}</i>
-          </b>
-        </h6>
-        <h6>ABV: {{tap.abv}}%</h6>
-        <h6
+        <h5>
+          
+            <b>Batch #{{tap.batchNumber}}</b>
+          
+        </h5>
+        <h5>ABV: {{tap.abv}}%</h5>
+        <h5
           id="tap1PintsRemaining"
-        >Approx. Pints Remaining: {{Math.round(tap.pintsRemaining *10) / 10}}</h6>
+        >Approx. Pints Remaining: {{Math.round(tap.pintsRemaining *10) / 10}}</h5>
         <div style="min-height:120px">
           <p class="card-text">{{tap.tastingNotes}}</p>
         </div>
@@ -31,6 +32,7 @@
         >View Batch Details</button>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
