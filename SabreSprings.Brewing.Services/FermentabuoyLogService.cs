@@ -29,11 +29,12 @@ namespace SabreSprings.Brewing.Services
         /// <param name="fermentabuoyLogDto"> The Dto received by the controller layer</param>
         /// <returns></returns>
         public async Task AddFermentabuoyLog(FermentabuoyLogDto fermentabuoyLogDto) 
-        {            
-            FermentabuoyAssignment currentAssignment = FermentabuoyAssignmentDataProvider.GetLatestAssginment(fermentabuoyLogDto.)
-            FermentabuoyLog log = new FermentabuoyLog()            
+        {
+            FermentabuoyAssignment currentAssignment = await FermentabuoyAssignmentDataProvider.GetLatestAssginment(fermentabuoyLogDto.ID);
+            FermentabuoyLog log = new FermentabuoyLog()
             {
                 Name = fermentabuoyLogDto.Name,
+                Batch = currentAssignment.Batch,
                 DeviceId = fermentabuoyLogDto.ID,
                 Angle = fermentabuoyLogDto.Angle,
                 Temperature = fermentabuoyLogDto.Temperature,

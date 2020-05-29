@@ -9,6 +9,6 @@ namespace SabreSprings.Brewing.Data.Interfaces
     public interface IFermentabuoyAssignmentDataProvider
     {
         Task AddFermentabuoyLog(FermentabuoyAssignment assignment);
-        Task<FermentabuoyAssignment> GetLatestAssginment(int );
+        Task<FermentabuoyAssignment> GetLatestAssginment(int deviceId);
     }
 }
