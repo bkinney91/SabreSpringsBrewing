@@ -10,6 +10,7 @@ namespace SabreSprings.Brewing.Models.Entities
 
         public string Name { get; set; }
         public int DeviceId { get; set; }
+        public int Batch { get; set; }
         public decimal Angle { get; set; }
         public decimal Temperature { get; set; }
         public decimal Battery { get; set; }

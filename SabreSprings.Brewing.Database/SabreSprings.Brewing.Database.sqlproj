@@ -65,5 +65,7 @@
     <Build Include="Inventory.sql" />
     <Build Include="BillOfMaterials.sql" />
     <Build Include="FermentationLog.sql" />
+    <Build Include="FermentabouyAssignment.sql" />
+    <Build Include="Fermentabuoy.sql" />
   </ItemGroup>
 </Project>

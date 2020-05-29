@@ -2,6 +2,7 @@
 (
 	[Id] INTEGER PRIMARY KEY,
 	[Name] TEXT NOT NULL,
+	[Batch] INTEGER NOT NULL default 0,
 	[Temperature] DECIMAL NOT NULL,
 	[Gravity] DECIMAL NOT NULL,
 	[Angle] DECIMAL NOT NULL,
