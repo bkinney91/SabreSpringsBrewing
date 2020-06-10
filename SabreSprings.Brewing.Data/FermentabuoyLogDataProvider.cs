@@ -28,7 +28,8 @@ namespace SabreSprings.Brewing.Data
         /// <returns></returns>
         public async Task AddFermentabuoyLog(FermentabuoyLog log) 
         {            
-            string sql = "Insert into FermentationLog (Name, Temperature, Gravity, Angle, DeviceId, Battery, RSSI) VALUES (@Name, @Temperature, @Gravity, @Angle, @DeviceId, @Battery, @RSSI);";
+            string sql = "Insert into FermentationLog (Name, Batch, Temperature, Gravity, Angle, DeviceId, Battery, RSSI) " +
+                "VALUES (@Name, @Batch, @Temperature, @Gravity, @Angle, @DeviceId, @Battery, @RSSI);";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 await db.ExecuteAsync(sql, log);
@@ -61,6 +62,7 @@ namespace SabreSprings.Brewing.Data
             string sql = @"Select
                             Id,
                             Name,
+                            Batch,
                             CAST(Temperature as REAL) as Temperature,
                             CAST(Gravity as REAL) as Gravity,
                             CAST(Angle as REAL) as Angle,
@@ -102,6 +104,7 @@ namespace SabreSprings.Brewing.Data
             string sql = @"Select
                             Id,
                             Name,
+                            Batch,
                             CAST(Temperature as REAL) as Temperature,
                             CAST(Gravity as REAL) as Gravity,
                             CAST(Angle as REAL) as Angle,
@@ -114,6 +117,34 @@ namespace SabreSprings.Brewing.Data
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 IEnumerable<FermentabuoyLog> logs = await db.QueryAsync<FermentabuoyLog>(sql, new { Name = buoyName });
+                return logs.ToList();
+            }
+        }
+
+
+        /// <summary>
+        /// returns all logs from db associated with given batch id.
+        /// </summary>
+        /// <param name="batchId"></param>
+        /// <returns></returns>
+        public async Task<List<FermentabuoyLog>> GetLogsByBatchId(int batchId)
+        {
+            string sql = @"Select
+                            Id,
+                            Name,
+                            Batch,
+                            CAST(Temperature as REAL) as Temperature,
+                            CAST(Gravity as REAL) as Gravity,
+                            CAST(Angle as REAL) as Angle,
+                            DeviceId,
+                            CAST(Battery as REAL) as Battery,
+                            RSSI,
+                            Created
+                            from FermentationLog
+                            where Batch = @Batch;";
+            using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
+            {
+                IEnumerable<FermentabuoyLog> logs = await db.QueryAsync<FermentabuoyLog>(sql, new { BatchId = batchId });
                 return logs.ToList();
             }
         }

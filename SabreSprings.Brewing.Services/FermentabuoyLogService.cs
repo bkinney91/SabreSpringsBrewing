@@ -1,22 +1,24 @@
 ﻿using SabreSprings.Brewing.Data.Interfaces;
 using SabreSprings.Brewing.Models.DataTransfer;
 using SabreSprings.Brewing.Models.Entities;
-using SabreSprings.Brewing.Models.View;
 using SabreSprings.Brewing.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System;
+using SabreSprings.Brewing.Data;
 
 namespace SabreSprings.Brewing.Services
 {
     public class FermentabuoyLogService : IFermentabuoyLogService
     {
         private readonly IFermentabuoyLogDataProvider FermentabuoyLogDataProvider;
+        private readonly IFermentabuoyAssignmentDataProvider FermentabuoyAssignmentDataProvider;
         
-        public FermentabuoyLogService(IFermentabuoyLogDataProvider fermentabuoyLogDataProvider)
+        public FermentabuoyLogService(IFermentabuoyLogDataProvider fermentabuoyLogDataProvider, IFermentabuoyAssignmentDataProvider fermentabuoyAssignmentDataProvider)
         {
-            FermentabuoyLogDataProvider = fermentabuoyLogDataProvider;      
+            this.FermentabuoyLogDataProvider = fermentabuoyLogDataProvider;
+            this.FermentabuoyAssignmentDataProvider = fermentabuoyAssignmentDataProvider;
         }
 
         
@@ -27,11 +29,12 @@ namespace SabreSprings.Brewing.Services
         /// <param name="fermentabuoyLogDto"> The Dto received by the controller layer</param>
         /// <returns></returns>
         public async Task AddFermentabuoyLog(FermentabuoyLogDto fermentabuoyLogDto) 
-        {            
-            
-            FermentabuoyLog log = new FermentabuoyLog()            
+        {
+            FermentabuoyAssignment currentAssignment = await FermentabuoyAssignmentDataProvider.GetLatestAssginment(fermentabuoyLogDto.ID);
+            FermentabuoyLog log = new FermentabuoyLog()
             {
                 Name = fermentabuoyLogDto.Name,
+                Batch = currentAssignment.Batch,
                 DeviceId = fermentabuoyLogDto.ID,
                 Angle = fermentabuoyLogDto.Angle,
                 Temperature = fermentabuoyLogDto.Temperature,

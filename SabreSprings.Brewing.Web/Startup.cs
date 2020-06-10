@@ -61,6 +61,7 @@ namespace SabreSprings.Brewing.TapHouse
             builder.RegisterType<BatchDataProvider>().As<IBatchDataProvider>();
             builder.RegisterType<BeerDataProvider>().As<IBeerDataProvider>();
             builder.RegisterType<FermentabuoyLogDataProvider>().As<IFermentabuoyLogDataProvider>();
+            builder.RegisterType<FermentabuoyAssignmentDataProvider>().As<IFermentabuoyAssignmentDataProvider>();
             //Services
             builder.RegisterType<TapService>().As<ITapService>();
             builder.RegisterType<BatchService>().As<IBatchService>();
