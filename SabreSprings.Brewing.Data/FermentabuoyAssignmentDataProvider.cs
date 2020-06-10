@@ -49,7 +49,7 @@ namespace SabreSprings.Brewing.Data
         public async Task<FermentabuoyAssignment> GetLatestAssginment(int deviceId)
         {
             FermentabuoyAssignment assignment = new FermentabuoyAssignment();
-            string sql = @"Select * from FermentabuoyAssignment assign join Fermentabuoy buoy on assing.Fermentabuoy = buoy.Id where buoy.DeviceId = @DeviceId order  by Created desc;";
+            string sql = @"Select * from FermentabuoyAssignment assign join Fermentabuoy buoy on assign.Fermentabuoy = buoy.Id where buoy.DeviceId = @DeviceId order  by Created desc;";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 assignment = await db.QueryFirstAsync<FermentabuoyAssignment>(sql, new { DeviceId = deviceId });
