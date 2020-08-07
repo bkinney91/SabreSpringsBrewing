@@ -55,14 +55,7 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
             }
         }
 
-        [Route("KickTires")]
-        [HttpGet]
-        public async Task<IActionResult> KickTires()
-        {
-            List<Tap> tapListDisplays = await TapService.GetOnTap();
-            TapHubContext.Clients.All.SendAsync("TapData", tapListDisplays);
-            return Ok("ding");
-        }
+       
 
     }
 }
