@@ -2,6 +2,7 @@
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
 using SabreSprings.Brewing.Data.Interfaces;
+using SabreSprings.Brewing.Models.DataTransfer;
 using SabreSprings.Brewing.Models.Entities;
 using Serilog;
 using System;
@@ -88,6 +89,34 @@ namespace SabreSprings.Brewing.Data
             }
 
         }
+
+
+
+        public async Task<FermentabuoySummaryDto> GetFermentabuoySummaryDto(int fermentabuoyId)
+        {
+            FermentabuoySummaryDto summary = new FermentabuoySummaryDto();
+            string sql = @"Select 
+                                    buoy.Id as Id,
+                                    Batches.Id as BatchId,
+                                    Batches.BatchNumber as BatchNumber,
+                                    Beers.Name as AssignedBeerName,
+                                    assign.Created as AssignmentDate,
+                                    buoy.DeviceId as DeviceId,
+                                    buoy.DeviceNumber as DeviceNumber,
+                                    buoy.MacAddress as MacAddress
+                                from FermentabuoyAssignment assign 
+                                join Fermentabuoy buoy on assign.Fermentabuoy = buoy.Id
+                                join Batches on assign.Batch = Batches.Id
+                                join Beers on Batches.Beer = Beers.Id
+                                where buoy.Id = @Id 
+                                order by assign.Created desc;";
+            using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
+            {
+                summary = await db.QueryFirstAsync<FermentabuoySummaryDto>(sql, new { Id = fermentabuoyId });
+            }
+            return summary;
+        }
+
 
     }
 }

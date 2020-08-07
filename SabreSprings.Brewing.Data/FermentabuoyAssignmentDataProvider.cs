@@ -24,11 +24,7 @@ namespace SabreSprings.Brewing.Data
             _logger = logger;
         }
 
-        /// <summary>
-        /// This method receives a FermentationLog entity from the servcie and inserts the data into the SQLite DB
-        /// </summary>
-        /// <param name="log"> The Entity that is received from the service</param>
-        /// <returns></returns>
+      
         public async Task AddFermentabuoyAssignment(FermentabuoyAssignment assignment)
         {
             string sql = "Insert into FermentabuoyAssignment (Fermentabouy, Batch, CreatedBy) " +
@@ -49,13 +45,14 @@ namespace SabreSprings.Brewing.Data
         public async Task<FermentabuoyAssignment> GetLatestAssginment(int deviceId)
         {
             FermentabuoyAssignment assignment = new FermentabuoyAssignment();
-            string sql = @"Select * from FermentabuoyAssignment assign join Fermentabuoy buoy on assing.Fermentabuoy = buoy.Id where buoy.DeviceId = @DeviceId order  by Created desc;";
+            string sql = @"Select * from FermentabuoyAssignment assign join Fermentabuoy buoy on assign.Fermentabuoy = buoy.Id where buoy.DeviceId = @DeviceId order  by Created desc;";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 assignment = await db.QueryFirstAsync<FermentabuoyAssignment>(sql, new { DeviceId = deviceId });
             }
             return assignment;
         }
+
 
 
     }
