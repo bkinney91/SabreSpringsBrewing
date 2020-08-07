@@ -43,14 +43,16 @@ import {
   DxDataGrid,
   DxColumn,
   DxPaging,
-  DxEditing
+  DxEditing,
+  DxPosition
 } from "devextreme-vue/data-grid";
 @Component({
   components: {
     DxDataGrid,
     DxColumn,
     DxPaging,
-    DxEditing
+    DxEditing,
+    DxPosition
   }
 })
 export default class FermentabuoyTableComponent extends Vue {
@@ -65,7 +67,7 @@ export default class FermentabuoyTableComponent extends Vue {
     this.getSummary();
   }
 
-  private getSummary() : void {
+  private getSummary(): void {
     this.buoyApiService
       .getSummary()
       .then(response => {
@@ -76,10 +78,25 @@ export default class FermentabuoyTableComponent extends Vue {
       });
   }
 
-  private editingStartCheck(e: any) : void {
-      if((e.dataField === "assignmentDate" || e.dataField === "assignedBeerName") && e.parentType === "dataRow"){
-          e.editorOptions.disabled = true;
-      }
+  private editingStartCheck(e: any): void {
+    if (
+      (e.dataField === "assignmentDate" ||
+        e.dataField === "assignedBeerName") &&
+      e.parentType === "dataRow"
+    ) {
+      e.editorOptions.disabled = true;
+    }
+  }
+
+  private updateFermentabuoy(data: any): void { 
+    this.buoyApiService
+      .put(data.oldData)
+      .then(Response => {
+        NotifyHelper.displayMessage("Successfully updated Fermentabuoy");
+      })
+      .catch(error => {
+        NotifyHelper.displayError(error);
+      });
   }
 }
 </script>
