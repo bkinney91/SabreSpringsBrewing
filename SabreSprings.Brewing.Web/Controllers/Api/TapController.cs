@@ -46,7 +46,7 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
             {
                 await TapService.ProcessPour(pour);
                 List<Tap> tapListDisplays = await TapService.GetOnTap();
-                TapHubContext.Clients.All.SendAsync("TapData", tapListDisplays);
+                await TapHubContext.Clients.All.SendAsync("TapData", tapListDisplays);
                 return Ok();
             }
             catch (Exception ex)
