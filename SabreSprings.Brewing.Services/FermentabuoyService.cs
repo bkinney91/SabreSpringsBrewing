@@ -4,7 +4,8 @@ using System.Text;
 
 namespace SabreSprings.Brewing.Services
 {
-    public class FermentabuoyAssignmentService
+    public class FermentabuoyService
     {
+        public 
     }
 }

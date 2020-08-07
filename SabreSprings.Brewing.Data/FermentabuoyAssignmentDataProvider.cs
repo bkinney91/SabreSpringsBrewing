@@ -29,7 +29,7 @@ namespace SabreSprings.Brewing.Data
         /// </summary>
         /// <param name="log"> The Entity that is received from the service</param>
         /// <returns></returns>
-        public async Task AddFermentabuoyLog(FermentabuoyAssignment assignment)
+        public async Task AddFermentabuoyAssignment(FermentabuoyAssignment assignment)
         {
             string sql = "Insert into FermentabuoyAssignment (Fermentabouy, Batch, CreatedBy) " +
                 "VALUES (@Fermentabuoy, @Batch, @CreatedBy);";
