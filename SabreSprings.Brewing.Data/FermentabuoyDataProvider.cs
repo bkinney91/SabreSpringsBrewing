@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
+using SabreSprings.Brewing.Data.Interfaces;
 using SabreSprings.Brewing.Models.Entities;
 using Serilog;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace SabreSprings.Brewing.Data
 {
-    public class FermentabuoyDataProvider
+    public class FermentabuoyDataProvider : IFermentabuoyDataProvider
     {
 
         private readonly IConfiguration _configuration;
