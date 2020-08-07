@@ -40,8 +40,8 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
 
 
         [HttpGet]
-        [Route("GetFermentabuoy")]
-        public async Task<IActionResult> GetFermentabuoy(int id)
+        [Route("Get")]
+        public async Task<IActionResult> Get(int id)
         {
             try
             {
@@ -56,8 +56,8 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
 
 
         [HttpPost]
-        [Route("AddFermentabuoy")]
-        public async Task<IActionResult> AddFermentabuoy(FermentabuoyDto dto)
+        [Route("Post")]
+        public async Task<IActionResult> Post(FermentabuoyDto dto)
         {
             try
             {
@@ -72,8 +72,8 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
 
 
         [HttpPut]
-        [Route("AddFermentabuoy")]
-        public async Task<IActionResult> UpdateFermentabuoy(FermentabuoyDto dto)
+        [Route("Put")]
+        public async Task<IActionResult> Put(FermentabuoyDto dto)
         {
             try
             {

@@ -21,8 +21,8 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
 
 
         [HttpPost]
-        [Route("AddFermentabuoyAssignment")]
-        public async Task<IActionResult> AddFermentabuoyAssignment(FermentabuoyAssignmentDto dto)
+        [Route("Post")]
+        public async Task<IActionResult> Post(FermentabuoyAssignmentDto dto)
         {
             try
             {
