@@ -4,7 +4,9 @@ import {
 	BaseApiService,
 	BatchApiService,
 	TapHubService,
-	TapApiService
+	TapApiService,
+	FermentabuoyApiService,
+	FermentabuoyAssignmentApiService
 
 } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
@@ -40,6 +42,14 @@ export function configureContainer(): Container {
 	container
 		.bind<TapApiService>(ServiceTypes.TapApiService)
 		.to(TapApiService)
+		.inSingletonScope();
+	container
+		.bind<FermentabuoyApiService>(ServiceTypes.FermentabuoyApiService)
+		.to(FermentabuoyApiService)
+		.inSingletonScope();
+	container
+		.bind<FermentabuoyAssignmentApiService>(ServiceTypes.FermentabuoyAssignmentApiService)
+		.to(FermentabuoyAssignmentApiService)
 		.inSingletonScope();
 	return container;
 }

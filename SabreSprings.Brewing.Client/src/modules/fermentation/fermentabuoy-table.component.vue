@@ -1,60 +1,35 @@
 <template>
- <div style="margin-left:15%;margin-right:15%">
-
+  <div style="margin-left:15%;margin-right:15%">
+    <h3>Fermentabuoys</h3>
     <DxDataGrid
-      :data-source="dataSource"
+      id="grid-container"
+      :data-source="summaryRows"
+      :column-auto-width="true"
       :show-borders="true"
-      key-expr="ID"
+      key-expr="id"
+      @row-updating="updateFermentabuoy"
+      @editor-preparing="editingStartCheck"
     >
-      <DxEditing
-        :allow-updating="true"
-        mode="form"
-      />
-      <DxPaging :enabled="false"/>
+      <DxEditing :allow-updating="true" mode="form">
+        <DxPosition my="top" at="top" of="window" />
+        <DxForm>
+          <DxItem data-field="deviceNumber" />
+          <DxItem data-field="deviceId" />
+          <DxItem data-field="macAddress" />
+        </DxForm>
+      </DxEditing>
+      <DxColumn data-field="deviceNumber" caption="Device Number" />
+      <DxColumn data-field="deviceId" caption="Device ID" />
+      <DxColumn data-field="macAddress" />
+      <DxColumn data-field="assignedBeerName" caption="Current Assignment" />
       <DxColumn
-        :width="70"
-        data-field="Prefix"
-        caption="Title"
-      />
-      <DxColumn
-        data-field="FirstName"
-      />
-      <DxColumn
-        data-field="LastName"
-      />
-      <DxColumn
-        :width="170"
-        data-field="Position"
-      />
-      <DxColumn
-        :width="125"
-        data-field="StateID"
-        caption="State"
-      >
-        <DxLookup
-          :data-source="states"
-          value-expr="ID"
-          display-expr="Name"
-        />
-      </DxColumn>
-      <DxColumn
-        data-field="BirthDate"
         data-type="date"
+        display-format="short"
+        data-field="assignmentDate"
+        caption="Date Assigned"
       />
-      <DxColumn
-        :visible="false"
-        data-field="Notes"
-      >
-        <DxFormItem
-          :col-span="2"
-          :editor-options="{ height: 100 }"
-          editor-type="dxTextArea"
-        />
-      </DxColumn>
     </DxDataGrid>
   </div>
-
- 
 </template>
 
 <script lang="ts">
@@ -64,15 +39,22 @@ import { FermentabuoyApiService } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
 import { FermentabuoySummaryDto } from "@/core/models";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
-import BatchTableRowComponent from "./batch-table-row.component.vue";
+import {
+  DxDataGrid,
+  DxColumn,
+  DxPaging,
+  DxEditing
+} from "devextreme-vue/data-grid";
 @Component({
   components: {
-    BatchTableRowComponent
-   
+    DxDataGrid,
+    DxColumn,
+    DxPaging,
+    DxEditing
   }
 })
-export default class BatchTableComponent extends Vue {
-  @Inject(ServiceTypes.BatchApiService)
+export default class FermentabuoyTableComponent extends Vue {
+  @Inject(ServiceTypes.FermentabuoyApiService)
   private buoyApiService!: FermentabuoyApiService;
   private summaryRows: FermentabuoySummaryDto[] = [];
   constructor() {
@@ -83,7 +65,7 @@ export default class BatchTableComponent extends Vue {
     this.getSummary();
   }
 
-  private getSummary(){
+  private getSummary() : void {
     this.buoyApiService
       .getSummary()
       .then(response => {
@@ -94,7 +76,10 @@ export default class BatchTableComponent extends Vue {
       });
   }
 
-
-
+  private editingStartCheck(e: any) : void {
+      if((e.dataField === "assignmentDate" || e.dataField === "assignedBeerName") && e.parentType === "dataRow"){
+          e.editorOptions.disabled = true;
+      }
+  }
 }
 </script>
