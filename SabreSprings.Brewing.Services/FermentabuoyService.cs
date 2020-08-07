@@ -2,6 +2,7 @@
 using SabreSprings.Brewing.Data.Interfaces;
 using SabreSprings.Brewing.Models.DataTransfer;
 using SabreSprings.Brewing.Models.Entities;
+using SabreSprings.Brewing.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SabreSprings.Brewing.Services
 {
-    public class FermentabuoyService
+    public class FermentabuoyService : IFermentabuoyService
     {
         private readonly IFermentabuoyDataProvider FermentabuoyDataProvider;
         
@@ -79,8 +80,12 @@ namespace SabreSprings.Brewing.Services
             return dtos;
         }
 
+        public async Task<List<FermentabuoySummaryDto>> GetFermentabuoySummary()
+        {
+            return await FermentabuoyDataProvider.GetFermentabuoySummary();
+        }
 
-        
+
 
     }
 }

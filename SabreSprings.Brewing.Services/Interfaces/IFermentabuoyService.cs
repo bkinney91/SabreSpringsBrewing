@@ -12,5 +12,6 @@ namespace SabreSprings.Brewing.Services.Interfaces
         Task UpdateFermentabuoy(FermentabuoyDto dto);
         Task<FermentabuoyDto> GetFermentabuoy(int id);
         Task<List<FermentabuoyDto>> GetAllFermentabuoys();
+        Task<List<FermentabuoySummaryDto>> GetFermentabuoySummary();
     }
 }

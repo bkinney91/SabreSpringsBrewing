@@ -8,6 +8,7 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -91,10 +92,13 @@ namespace SabreSprings.Brewing.Data
         }
 
 
-
-        public async Task<FermentabuoySummaryDto> GetFermentabuoySummaryDto(int fermentabuoyId)
+        /// <summary>
+        /// Get a summary of each buoy with the latest assignments
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<FermentabuoySummaryDto>> GetFermentabuoySummary()
         {
-            FermentabuoySummaryDto summary = new FermentabuoySummaryDto();
+            List<FermentabuoySummaryDto> summary = new List<FermentabuoySummaryDto>();
             string sql = @"Select 
                                     buoy.Id as Id,
                                     Batches.Id as BatchId,
@@ -104,15 +108,15 @@ namespace SabreSprings.Brewing.Data
                                     buoy.DeviceId as DeviceId,
                                     buoy.DeviceNumber as DeviceNumber,
                                     buoy.MacAddress as MacAddress
-                                from FermentabuoyAssignment assign 
-                                join Fermentabuoy buoy on assign.Fermentabuoy = buoy.Id
-                                join Batches on assign.Batch = Batches.Id
-                                join Beers on Batches.Beer = Beers.Id
-                                where buoy.Id = @Id 
+                                from Fermentabuoy buoy
+                                left join FermentabuoyAssignment assign on assign.Fermentabuoy = buoy.Id
+                                left join Batches on assign.Batch = Batches.Id
+                                left join Beers on Batches.Beer = Beers.Id
                                 order by assign.Created desc;";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
-                summary = await db.QueryFirstAsync<FermentabuoySummaryDto>(sql, new { Id = fermentabuoyId });
+                var queryResult = await db.QueryAsync<FermentabuoySummaryDto>(sql);
+                summary = queryResult.ToList();
             }
             return summary;
         }
