@@ -27,8 +27,8 @@ namespace SabreSprings.Brewing.Data
       
         public async Task AddFermentabuoyAssignment(FermentabuoyAssignment assignment)
         {
-            string sql = "Insert into FermentabuoyAssignment (Fermentabouy, Batch, CreatedBy) " +
-                "VALUES (@Fermentabuoy, @Batch, @CreatedBy);";
+            string sql = "Insert into FermentabuoyAssignment (Fermentabouy, Batch, CreatedBy, Created) " +
+                "VALUES (@Fermentabuoy, @Batch, @CreatedBy, @Created);";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 await db.ExecuteAsync(sql, assignment);
