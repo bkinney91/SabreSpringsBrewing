@@ -39,12 +39,14 @@ import { FermentabuoyApiService } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
 import { FermentabuoySummaryDto } from "@/core/models";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
+import { DxItem } from 'devextreme-vue/form';
 import {
   DxDataGrid,
   DxColumn,
   DxPaging,
   DxEditing,
-  DxPosition
+  DxPosition,
+  DxForm
 } from "devextreme-vue/data-grid";
 @Component({
   components: {
@@ -52,7 +54,9 @@ import {
     DxColumn,
     DxPaging,
     DxEditing,
-    DxPosition
+    DxPosition,
+    DxForm,
+    DxItem
   }
 })
 export default class FermentabuoyTableComponent extends Vue {
