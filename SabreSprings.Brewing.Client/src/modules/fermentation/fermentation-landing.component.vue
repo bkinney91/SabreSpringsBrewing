@@ -31,14 +31,15 @@
               <div class="value">
                 <DxSelectBox
                   v-if="batches != null"
-                  v-model="fermentabuoy"
-                  :items="batches"
-                  :display-expr="showBuoyForSelectBox"
+                  v-model="assignment.Fermentabuoy"
+                  :items="summaryRows"
+                  display-expr="deviceId"
                   value-expr="id"
                 />
               </div>
             </div>
           </div>
+          <br/>
           <div class="column">
             <div class="field">
               <div class="label">
@@ -47,7 +48,7 @@
               <div class="value">
                 <DxSelectBox
                   v-if="batches != null"
-                  v-model="batch"
+                  v-model="assignment.Batch"
                   :items="batches"
                   :display-expr="showBatchForSelectBox"
                   value-expr="batchId"
@@ -61,7 +62,7 @@
               <button
                 style="margin:10px;width:75px"
                 class="btn btn-success"
-                v-on:click="addFermentabuoyAssignment()"
+                v-on:click="addAssignment()"
               >Add</button>
               <button
                 v-if="showAddAssignmentModal != null"
@@ -135,8 +136,7 @@
           </div>
         </div>
       </DxPopup>
-
-      <FermentabuoyTableComponent />
+      <FermentabuoyTableComponent  v-if="summaryRows != null" :summaryRows="summaryRows" />
     </div>
   </div>
 </template>
@@ -151,7 +151,7 @@ import {
   FermentabuoyAssignmentApiService,
 } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
-import { FermentabuoyDto, BatchTableRow } from "@/core/models";
+import { FermentabuoyDto, BatchTableRow, FermentabuoySummaryDto, FermentabuoyAssignmentDto } from "@/core/models";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 import FermentabuoyTableComponent from "./fermentabuoy-table.component.vue";
 import DxTextBox from "devextreme-vue/text-box";
@@ -180,13 +180,18 @@ export default class FermentabuoyLandingComponent extends Vue {
   private newBuoy: FermentabuoyDto | {} = {};
   private batches: BatchTableRow[] = [];
   private batch: number = 0;
+  private summaryRows: FermentabuoySummaryDto[] = [];
+  private assignment: FermentabuoyAssignmentDto | {} = {};
+
 
   constructor() {
     super();
   }
 
-  created(): void {
+  mounted(): void {
     this.getBatches();
+    this.getSummary();
+
   }
 
   private getBatches(): void {
@@ -211,11 +216,11 @@ export default class FermentabuoyLandingComponent extends Vue {
       });
   }
 
-
   
   private addAssignment(): void {
+
     this.assignmentApiService
-      .post(this.newBuoy)
+      .post(this.assignment)
       .then((response) => {
         NotifyHelper.displayMessage("Successfully added assignment");
       })
@@ -223,6 +228,19 @@ export default class FermentabuoyLandingComponent extends Vue {
         NotifyHelper.displayError(error);
       });
   }
+
+    private getSummary(): void {
+    this.buoyApiService
+      .getSummary()
+      .then(response => {
+        this.summaryRows = response;
+      })
+      .catch(error => {
+        NotifyHelper.displayError(error);
+      });
+  }
+
+
 
   private showBatchForSelectBox(item: any): string {
     return item ? `${item.beerName} Batch #${item.batchNumber}` : "";

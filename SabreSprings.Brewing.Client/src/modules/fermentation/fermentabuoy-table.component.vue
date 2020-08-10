@@ -62,25 +62,17 @@ import {
 export default class FermentabuoyTableComponent extends Vue {
   @Inject(ServiceTypes.FermentabuoyApiService)
   private buoyApiService!: FermentabuoyApiService;
-  private summaryRows: FermentabuoySummaryDto[] = [];
+  @Prop() private summaryRows!: FermentabuoySummaryDto[];
+
   constructor() {
     super();
   }
 
   created(): void {
-    this.getSummary();
+    
   }
 
-  private getSummary(): void {
-    this.buoyApiService
-      .getSummary()
-      .then(response => {
-        this.summaryRows = response;
-      })
-      .catch(error => {
-        NotifyHelper.displayError(error);
-      });
-  }
+
 
   private editingStartCheck(e: any): void {
     if (
