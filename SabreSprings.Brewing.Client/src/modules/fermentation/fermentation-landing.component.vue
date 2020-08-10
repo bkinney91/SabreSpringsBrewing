@@ -7,7 +7,10 @@
         <div class="col-md-3">
           <button v-on:click="showAddBuoyModal = true" class="btn btn-primary">Add Fermentabuoy</button>
           &nbsp;
-          <button v-on:click="showAddAssignmentModal = true" class="btn btn-primary">Add Assignment</button>
+          <button
+            v-on:click="showAddAssignmentModal = true"
+            class="btn btn-primary"
+          >Add Assignment</button>
         </div>
       </div>
       <DxPopup
@@ -23,10 +26,32 @@
           <div class="column">
             <div class="field">
               <div class="label">
+                <b>Fermentabuoy</b>
+              </div>
+              <div class="value">
+                <DxSelectBox
+                  v-if="batches != null"
+                  v-model="fermentabuoy"
+                  :items="batches"
+                  :display-expr="showBuoyForSelectBox"
+                  value-expr="id"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="field">
+              <div class="label">
                 <b>Batch</b>
               </div>
               <div class="value">
-                <DxSelectBox v-if="batches != null" v-model="batch" :items="batches" :display-expr="showBatchForSelectBox" value-expr="batchId" />
+                <DxSelectBox
+                  v-if="batches != null"
+                  v-model="batch"
+                  :items="batches"
+                  :display-expr="showBatchForSelectBox"
+                  value-expr="batchId"
+                />
               </div>
             </div>
           </div>
@@ -120,7 +145,11 @@
 <script lang="ts">
 // IMPORTS ----------------------------------
 import { Vue, Component, Inject, Prop } from "vue-property-decorator";
-import { FermentabuoyApiService, BatchApiService } from "@/core/services";
+import {
+  FermentabuoyApiService,
+  BatchApiService,
+  FermentabuoyAssignmentApiService,
+} from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
 import { FermentabuoyDto, BatchTableRow } from "@/core/models";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
@@ -141,7 +170,11 @@ import DxSelectBox from "devextreme-vue/select-box";
 })
 export default class FermentabuoyLandingComponent extends Vue {
   @Inject(ServiceTypes.BatchApiService)
-  private batchApiService!: BatchApiService;  
+  private batchApiService!: BatchApiService;
+  @Inject(ServiceTypes.FermentabuoyApiService)
+  private buoyApiService!: FermentabuoyApiService;
+  @Inject(ServiceTypes.FermentabuoyAssignmentApiService)
+  private assignmentApiService!: FermentabuoyAssignmentApiService;
   private showAddAssignmentModal: boolean = false;
   private showAddBuoyModal: boolean = false;
   private newBuoy: FermentabuoyDto | {} = {};
@@ -156,24 +189,43 @@ export default class FermentabuoyLandingComponent extends Vue {
     this.getBatches();
   }
 
-  private getBatches() : void {
+  private getBatches(): void {
     this.batchApiService
       .getBatchTableRows()
-      .then(response => {
+      .then((response) => {
         this.batches = response;
       })
-      .catch(error => {
+      .catch((error) => {
+        NotifyHelper.displayError(error);
+      });
+  }
+
+  private addFermentabuoy(): void {
+    this.buoyApiService
+      .post(this.newBuoy)
+      .then((response) => {
+        NotifyHelper.displayMessage("Successfully added fermentabuoy");
+      })
+      .catch((error) => {
         NotifyHelper.displayError(error);
       });
   }
 
 
-  private showBatchForSelectBox(item: any) : string {
-    console.log(item);
-    return item ? `${item.beerName} Batch #${item.batchNumber}` : '';
+  
+  private addAssignment(): void {
+    this.assignmentApiService
+      .post(this.newBuoy)
+      .then((response) => {
+        NotifyHelper.displayMessage("Successfully added assignment");
+      })
+      .catch((error) => {
+        NotifyHelper.displayError(error);
+      });
   }
 
-
-
+  private showBatchForSelectBox(item: any): string {
+    return item ? `${item.beerName} Batch #${item.batchNumber}` : "";
+  }
 }
 </script>
