@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SabreSprings.Brewing.Models.Entities
+namespace SabreSprings.Brewing.Models.DataTransfer
 {
-    public class FermentabuoyAssignment
+    public class FermentabuoyAssignmentDto
     {
         public int Id { get; set; }
         public int Fermentabuoy { get; set; }

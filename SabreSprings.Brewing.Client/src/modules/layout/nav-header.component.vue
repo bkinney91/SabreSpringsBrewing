@@ -10,6 +10,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <router-link class="dropdown-item" to="/Taproom/OnTap">On Tap</router-link>
+                    <router-link class="dropdown-item" to="/Fermentation">Fermentation</router-link>
                 </div>
             </li>
                         
@@ -18,8 +19,7 @@
                     Beers
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <router-link class="dropdown-item" to="/batches">Batches</router-link>
-                    <router-link class="dropdown-item" to="/FermentationLog">Fermentation Log</router-link>
+                    <router-link class="dropdown-item" to="/batches">Batches</router-link>                    
                 </div>
             </li>           
         </ul>  
