@@ -113,7 +113,9 @@
                 <b>MAC Address</b>
               </div>
               <div class="value">
-                <DxNumberBox v-model="newBuoy.macAddress" />
+                <DxTextBox v-model="newBuoy.macAddress" >
+                  <DxPatternRule :pattern ="macAddressRegex" message="Use valid MAC Address format"/>
+                    </DxTextBox>
               </div>
             </div>
           </div>
@@ -159,10 +161,13 @@ import {
 } from "@/core/models";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 import FermentabuoyTableComponent from "./fermentabuoy-table.component.vue";
-import DxTextBox from "devextreme-vue/text-box";
+import {DxTextBox } from "devextreme-vue/text-box";
 import DxNumberBox from "devextreme-vue/number-box";
 import { DxPopup } from "devextreme-vue/popup";
 import DxSelectBox from "devextreme-vue/select-box";
+import {
+  DxPatternRule, 
+} from 'devextreme-vue/validator';
 
 @Component({
   components: {
@@ -171,6 +176,7 @@ import DxSelectBox from "devextreme-vue/select-box";
     DxNumberBox,
     DxPopup,
     DxSelectBox,
+    DxPatternRule,
   },
 })
 export default class FermentabuoyLandingComponent extends Vue {
@@ -187,6 +193,7 @@ export default class FermentabuoyLandingComponent extends Vue {
   private batch: number = 0;
   private summaryRows: FermentabuoySummaryDto[] = [];
   private assignment: FermentabuoyAssignmentDto | {} = {};
+  public macAddressRegex: string = '^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$';
 
   constructor() {
     super();
