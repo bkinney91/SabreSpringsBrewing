@@ -39,7 +39,7 @@
               </div>
             </div>
           </div>
-          <br/>
+          <br />
           <div class="column">
             <div class="field">
               <div class="label">
@@ -136,7 +136,7 @@
           </div>
         </div>
       </DxPopup>
-      <FermentabuoyTableComponent  v-if="summaryRows != null" :summaryRows="summaryRows" />
+      <FermentabuoyTableComponent v-if="summaryRows != null" :summaryRows="summaryRows" />
     </div>
   </div>
 </template>
@@ -151,7 +151,12 @@ import {
   FermentabuoyAssignmentApiService,
 } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
-import { FermentabuoyDto, BatchTableRow, FermentabuoySummaryDto, FermentabuoyAssignmentDto } from "@/core/models";
+import {
+  FermentabuoyDto,
+  BatchTableRow,
+  FermentabuoySummaryDto,
+  FermentabuoyAssignmentDto,
+} from "@/core/models";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 import FermentabuoyTableComponent from "./fermentabuoy-table.component.vue";
 import DxTextBox from "devextreme-vue/text-box";
@@ -183,7 +188,6 @@ export default class FermentabuoyLandingComponent extends Vue {
   private summaryRows: FermentabuoySummaryDto[] = [];
   private assignment: FermentabuoyAssignmentDto | {} = {};
 
-
   constructor() {
     super();
   }
@@ -191,7 +195,6 @@ export default class FermentabuoyLandingComponent extends Vue {
   mounted(): void {
     this.getBatches();
     this.getSummary();
-
   }
 
   private getBatches(): void {
@@ -216,31 +219,30 @@ export default class FermentabuoyLandingComponent extends Vue {
       });
   }
 
-  
   private addAssignment(): void {
-
     this.assignmentApiService
       .post(this.assignment)
       .then((response) => {
         NotifyHelper.displayMessage("Successfully added assignment");
+        this.showAddAssignmentModal = false;
+        this.getBatches();
+        this.getSummary();
       })
       .catch((error) => {
         NotifyHelper.displayError(error);
       });
   }
 
-    private getSummary(): void {
+  private getSummary(): void {
     this.buoyApiService
       .getSummary()
-      .then(response => {
+      .then((response) => {
         this.summaryRows = response;
       })
-      .catch(error => {
+      .catch((error) => {
         NotifyHelper.displayError(error);
       });
   }
-
-
 
   private showBatchForSelectBox(item: any): string {
     return item ? `${item.beerName} Batch #${item.batchNumber}` : "";

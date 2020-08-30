@@ -99,20 +99,26 @@ namespace SabreSprings.Brewing.Data
         public async Task<List<FermentabuoySummaryDto>> GetFermentabuoySummary()
         {
             List<FermentabuoySummaryDto> summary = new List<FermentabuoySummaryDto>();
-            string sql = @"Select 
-                                    buoy.Id as Id,
-                                    Batches.Id as BatchId,
-                                    Batches.BatchNumber as BatchNumber,
-                                    Beers.Name as AssignedBeerName,
-                                    assign.Created as AssignmentDate,
-                                    buoy.DeviceId as DeviceId,
-                                    buoy.DeviceNumber as DeviceNumber,
-                                    buoy.MacAddress as MacAddress
-                                from Fermentabuoy buoy
-                                left join FermentabuoyAssignment assign on assign.Fermentabuoy = buoy.Id
-                                left join Batches on assign.Batch = Batches.Id
-                                left join Beers on Batches.Beer = Beers.Id
-                                order by assign.Created desc;";
+            string sql = @"select 	
+                            buoy.Id as Id,
+                            Batches.Id as BatchId,
+                            Batches.BatchNumber as BatchNumber,
+                            Beers.Name as AssignedBeerName,
+                            assign.Created as AssignmentDate,
+                            buoy.DeviceId as DeviceId,
+                            buoy.DeviceNumber as DeviceNumber,
+                            buoy.MacAddress as MacAddress
+                        from Fermentabuoy buoy
+                        left join (select * from FermentabuoyAssignment a
+                                    left outer join FermentabuoyAssignment b
+                                    on a.Fermentabuoy = b.Fermentabuoy
+                                    and a.created < b.Created
+                                    where b.Fermentabuoy IS NULL
+                                    order by a.Created desc) 
+                        assign on assign.Fermentabuoy = buoy.Id
+                        left join Batches on assign.Batch = Batches.Id
+                        left join Beers on Batches.Beer = Beers.Id
+                        order by assign.Created desc;";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 var queryResult = await db.QueryAsync<FermentabuoySummaryDto>(sql);
