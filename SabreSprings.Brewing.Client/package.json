@@ -24,7 +24,7 @@
     "devextreme-aspnet-data-nojquery": "^2.6.1",
     "devextreme-vue": "19.2.6",
     "inversify": "5.0.1",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "oidc-client": "1.5.4",
     "qs": "^6.9.3",
     "reflect-metadata": "0.1.13",
