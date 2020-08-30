@@ -18,7 +18,7 @@
 <script lang="ts">
 // IMPORTS ----------------------------------
 import Router from "./router";
-import { BatchApiService, TapHubService, TapApiService } from "@/core/services";
+import { BatchApiService, TapHubService, TapApiService, FermentabuoyApiService, FermentabuoyAssignmentApiService } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
 import NavigationComponent from "@/modules/layout/nav-container.component.vue";
 import { configureContainer } from "@/configure-container";
@@ -42,6 +42,12 @@ let container = configureContainer();
     ),
     [ServiceTypes.TapApiService]: container.get<TapApiService>(
       ServiceTypes.TapApiService
+    ),
+      [ServiceTypes.FermentabuoyApiService]: container.get<FermentabuoyApiService>(
+      ServiceTypes.FermentabuoyApiService
+    ),
+      [ServiceTypes.FermentabuoyAssignmentApiService]: container.get<FermentabuoyAssignmentApiService>(
+      ServiceTypes.FermentabuoyAssignmentApiService
     )
   }
 })

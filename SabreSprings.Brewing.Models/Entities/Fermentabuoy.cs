@@ -4,12 +4,14 @@ using System.Text;
 
 namespace SabreSprings.Brewing.Models.Entities
 {
-    public class FermentabuoyAssignment
+    public class Fermentabuoy
     {
         public int Id { get; set; }
-        public int Fermentabuoy { get; set; }
-        public int Batch { get; set; }
-        public DateTime Created { get; set; }
+        public int DeviceId { get; set;}
+        public int DeviceNumber { get; set; }
+        public string MacAddress { get; set; }
         public string CreatedBy { get; set; }
+        public DateTime Created { get; set; }
+
     }
 }

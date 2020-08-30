@@ -46,7 +46,7 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
             {
                 await TapService.ProcessPour(pour);
                 List<Tap> tapListDisplays = await TapService.GetOnTap();
-                TapHubContext.Clients.All.SendAsync("TapData", tapListDisplays);
+                await TapHubContext.Clients.All.SendAsync("TapData", tapListDisplays);
                 return Ok();
             }
             catch (Exception ex)
@@ -55,14 +55,7 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
             }
         }
 
-        [Route("KickTires")]
-        [HttpGet]
-        public async Task<IActionResult> KickTires()
-        {
-            List<Tap> tapListDisplays = await TapService.GetOnTap();
-            TapHubContext.Clients.All.SendAsync("TapData", tapListDisplays);
-            return Ok("ding");
-        }
+       
 
     }
 }
