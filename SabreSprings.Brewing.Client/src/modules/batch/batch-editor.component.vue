@@ -17,6 +17,9 @@
         <DxItem data-field="tastingNotes" editor-type="dxTextArea" :col-span="3" />
         </DxGroupItem>
       </DxForm>
+      <button class="btn btn-danger"
+                    v-on:click="cancel()"
+                    >Cancel</button>
       <button
                 style="margin:10px;width:75px"
                 class="btn btn-success float-right"
@@ -48,13 +51,15 @@ export default class BatchEditorComponent extends Vue {
   @Inject(ServiceTypes.BatchApiService)
   private batchApiService!: BatchApiService;
   private batchDetails!: BatchDetailsDto | null;
+  private batchId!: number;
   constructor() {
     super();
     this.batchDetails = null;
   }
 
   created(): void {
-    this.getBatchDetails(+this.$route.query.id);
+    this.batchId = +this.$route.query.id;
+    this.getBatchDetails(this.batchId);
   }
 
   private getBatchDetails(id: number) {
@@ -68,20 +73,23 @@ export default class BatchEditorComponent extends Vue {
       });
   }
 
-  private getColor(statusText: string) {
-    let color: string = "";
-    if (statusText != null && statusText.includes("On Tap")) {
-      color = "green";
-    } else if (statusText === "Fermenting") {
-      color = "red";
-    } else if (statusText === "Conditioning") {
-      color = "#D2D545";
-    } else if (statusText === "Archived") {
-      color = "#1369B1";
-    } else if (statusText === "Planned") {
-      color = "#B11313";
-    }
-    return color;
+  private updateBatch(){
+    this.batchApiService
+      .put(this.batchDetails)
+      .then((response) => {
+        this.batchDetails = response;
+      })
+      .catch((error) => {
+        NotifyHelper.displayError(error);
+      });
+  }
+
+  private getColor(status: string): string{
+    return AppSettingsHelper.getStatusColor(status);
+  }
+
+  private cancel(){
+    this.$router.push("/batch/details?id=" + this.batchId);
   }
 }
 </script>

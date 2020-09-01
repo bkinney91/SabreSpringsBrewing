@@ -61,6 +61,7 @@ namespace SabreSprings.Brewing.Services
             Beer beer = await BeerDataProvider.GetBeer(batch.Beer);
             BatchDetailsDto batchDetailsDto = new BatchDetailsDto()
             {
+                Id = batch.Id,
                 Beer = beer.Name,
                 Style = beer.Style,
                 BatchName = batch.BatchName,
