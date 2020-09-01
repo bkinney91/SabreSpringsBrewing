@@ -24,6 +24,22 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
             Logger = logger;
         }
         
+
+        [HttpGet]
+        [Route("Get")]
+        public async Task<IActionResult> Get(int id)
+        {
+            try
+            {
+                BatchDto batch = await BatchService.GetBatch(id);
+                return Ok(batch);
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+            }
+        }
+
         [HttpGet]
         [Route("GetBatchTable")]
         public async Task<IActionResult> GetBatchTable()

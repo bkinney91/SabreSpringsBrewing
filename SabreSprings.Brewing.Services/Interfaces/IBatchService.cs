@@ -12,5 +12,6 @@ namespace SabreSprings.Brewing.Services.Interfaces
         Task<BatchDetailsDto> GetBatchDetails(int id);
          Task Update(BatchDto dto);
          Task Add(BatchDto dto);
+         Task<BatchDto> GetBatch(int id);
     }
 }

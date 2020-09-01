@@ -20,6 +20,36 @@ namespace SabreSprings.Brewing.Services
             BeerDataProvider = beerDataProvider;
         }
 
+
+        public async Task<BatchDto> GetBatch(int id)
+        {
+            Batch batch = await BatchDataProvider.GetBatch(id);
+            BatchDto dto = new BatchDto()
+            {
+                Id = batch.Id,
+                Beer = batch.Beer,
+                BatchName = batch.BatchName,
+                BatchNumber = batch.BatchNumber,
+                Status = batch.Status,
+                SubStatus = batch.SubStatus,
+                Brewers = batch.Brewers,
+                Recipe = batch.Recipe,
+                Yeast = batch.Yeast,
+                PreBoilGravity = batch.PreBoilGravity,
+                OriginalGravity = batch.OriginalGravity,
+                FinalGravity = batch.FinalGravity,
+                ABV = batch.ABV,
+                DateBrewed = batch.DateBrewed,
+                DatePackaged = batch.DatePackaged,
+                DateTapped = batch.DateTapped,
+                BrewingNotes = batch.BrewingNotes,
+                TastingNotes = batch.TastingNotes,
+                Created = batch.Created,
+                CreatedBy = batch.CreatedBy
+            };
+            return dto;
+        }
+
         public async Task<List<BatchTableRow>> GetBatchTable()
         {
             List<BatchTableRow> tableRows = new List<BatchTableRow>();
@@ -102,26 +132,23 @@ namespace SabreSprings.Brewing.Services
 
         public async Task Update(BatchDto dto)
         {
-            Batch entity = new Batch()
-            {
-                Id = dto.Id,
-                Beer = dto.Beer,
-                BatchName = dto.BatchName,
-                Status = dto.Status,
-                SubStatus = dto.SubStatus,
-                Brewers = dto.Brewers,
-                Yeast = dto.Yeast,
-                PreBoilGravity = dto.PreBoilGravity,
-                OriginalGravity = dto.OriginalGravity,
-                FinalGravity = dto.FinalGravity,
-                ABV = dto.ABV,
-                DateBrewed = dto.DateBrewed,
-                DatePackaged = dto.DatePackaged,
-                DateTapped = dto.DateTapped,
-                BrewingNotes = dto.BrewingNotes,
-                TastingNotes = dto.TastingNotes,
-                Created = DateTime.Now                
-            };
+            
+            Batch entity = await BatchDataProvider.Get(dto.Id);
+            entity.BatchName = dto.BatchName;
+            entity.Status = dto.Status;
+            entity.SubStatus = dto.SubStatus;
+            entity.Brewers = dto.Brewers;
+            entity.Yeast = dto.Yeast;
+            entity.PreBoilGravity = dto.PreBoilGravity;
+            entity.OriginalGravity = dto.OriginalGravity;
+            entity.FinalGravity = dto.FinalGravity;
+            entity.ABV = dto.ABV;
+            entity.DateBrewed = dto.DateBrewed;
+            entity.DatePackaged = dto.DatePackaged;
+            entity.DateTapped = dto.DateTapped;
+            entity.BrewingNotes = dto.BrewingNotes;
+            entity.TastingNotes = dto.TastingNotes;
+            entity.Created = DateTime.Now;            
             await BatchDataProvider.Update(entity);
         }
     }

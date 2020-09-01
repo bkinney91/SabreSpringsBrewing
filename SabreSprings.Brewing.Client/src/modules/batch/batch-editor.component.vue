@@ -1,8 +1,8 @@
 <template>
-  <div v-if="batchDetails != null">
+  <div v-if="batch != null">
     <div style="margin-left:15%;margin-right:15%" id="attributes">
-      <h1 id="header" :style="'color:' + getColor(batchDetails.status)">{{batchDetails.beer}}</h1>
-      <DxForm id="form" :form-data="batchDetails" label-location="top" col-count="3">
+      <h1 id="header" :style="'color:' + getColor(batch.status)">{{beerName}} Batch #{{batch.batchNumber}}</h1>
+      <DxForm id="form" :form-data="batch" label-location="top" col-count="3">
         <DxItem data-field="brewers" name="Brewers" />
         <DxItem data-field="yeast" />
         <DxItem data-field="ABV" editor-type="dxNumberBox" />
@@ -34,7 +34,7 @@
 import { Vue, Component, Inject } from "vue-property-decorator";
 import { BatchApiService } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
-import { BatchDetailsDto } from "@/core/models";
+import { BatchDto } from "@/core/models";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 import { DxForm, DxItem, DxGroupItem } from "devextreme-vue/form";
 import { DxTextArea } from 'devextreme-vue/text-area';
@@ -50,23 +50,38 @@ import { DxTextArea } from 'devextreme-vue/text-area';
 export default class BatchEditorComponent extends Vue {
   @Inject(ServiceTypes.BatchApiService)
   private batchApiService!: BatchApiService;
-  private batchDetails!: BatchDetailsDto | null;
+  private batch!: BatchDto | null;
   private batchId!: number;
+  private beerName: string ="";
   constructor() {
     super();
-    this.batchDetails = null;
+    this.batch = null;
   }
 
   created(): void {
     this.batchId = +this.$route.query.id;
-    this.getBatchDetails(this.batchId);
+    this.getBatch(this.batchId);
+  }
+
+  private getBatch(id: number) {
+    this.batchApiService
+      .get(id)
+      .then((response) => {
+        this.batch = response;
+        this.getBatchDetails(id);
+        
+      })
+      .catch((error) => {
+        NotifyHelper.displayError(error);
+      });
   }
 
   private getBatchDetails(id: number) {
     this.batchApiService
       .getBatchDetails(id)
       .then((response) => {
-        this.batchDetails = response;
+        this.beerName = response.beer;
+        
       })
       .catch((error) => {
         NotifyHelper.displayError(error);
@@ -75,9 +90,9 @@ export default class BatchEditorComponent extends Vue {
 
   private updateBatch(){
     this.batchApiService
-      .put(this.batchDetails)
+      .put(this.batch)
       .then((response) => {
-        this.batchDetails = response;
+        NotifyHelper.displayMessage("Updated batch");
       })
       .catch((error) => {
         NotifyHelper.displayError(error);
