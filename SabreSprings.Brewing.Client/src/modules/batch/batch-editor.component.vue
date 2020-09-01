@@ -5,7 +5,7 @@
       <DxForm id="form" :form-data="batch" label-location="top" col-count="3">
         <DxItem data-field="brewers" name="Brewers" />
         <DxItem data-field="yeast" />
-        <DxItem data-field="ABV" editor-type="dxNumberBox" />
+        <DxItem data-field="abv" editor-type="dxNumberBox" />
         <DxItem data-field="preBoilGravity" editor-type="dxNumberBox" />
         <DxItem data-field="originalGravity" editor-type="dxNumberBox" />
         <DxItem data-field="finalGravity" editor-type="dxNumberBox" />        

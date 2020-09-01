@@ -134,6 +134,7 @@ namespace SabreSprings.Brewing.Services
         {
             
             Batch entity = await BatchDataProvider.Get(dto.Id);
+            entity.ABV = dto.ABV;
             entity.BatchName = dto.BatchName;
             entity.Status = dto.Status;
             entity.SubStatus = dto.SubStatus;
