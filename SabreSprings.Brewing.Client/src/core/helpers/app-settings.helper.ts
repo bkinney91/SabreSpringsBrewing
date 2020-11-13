@@ -42,5 +42,19 @@ export class AppSettingsHelper {
 		return "http://10.0.0.2:8080/";
 	}
 
-	
+	public static getStatusColor(statusText: string) {
+		let color: string = "";
+		if (statusText != null && statusText.includes("On Tap")) {
+		  color = "green";
+		} else if (statusText === "Fermenting") {
+		  color = "red";
+		} else if (statusText === "Conditioning") {
+		  color = "#D2D545";
+		} else if (statusText === "Archived") {
+		  color = "#1369B1";
+		} else if (statusText === "Planned") {
+		  color = "#B11313";
+		}
+		return color;
+	  }
 }

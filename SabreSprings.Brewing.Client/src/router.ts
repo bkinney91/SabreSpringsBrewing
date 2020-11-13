@@ -11,6 +11,7 @@ import BatchTableComponent from "./modules/batch/batch-table.component.vue";
 import BatchDetailsComponent from "./modules/batch/batch-details.component.vue";
 import OnTapComponent from "./modules/tap/on-tap.component.vue";
 import FermentationLandingComponent from "./modules/fermentation/fermentation-landing.component.vue";
+import BatchEditorComponent from "./modules/batch/batch-editor.component.vue";
 Vue.use(Router);
 
 export default new Router({
@@ -64,6 +65,11 @@ export default new Router({
 			path: "/batch/details",
 			name: "batch/details",
 			component: BatchDetailsComponent
+		},
+		{
+			path: "/batch/editor",
+			name: "batch/editor",
+			component: BatchEditorComponent
 		},
 		{
 			path: "/taproom/ontap",

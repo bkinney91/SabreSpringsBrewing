@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -14,13 +14,13 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BatchController : ControllerBase
+    public class BeerController : ControllerBase
     {
-        private readonly IBatchService BatchService;
+        private readonly IBeerService BeerService;
         private readonly ILogger Logger;
-        public BatchController(IBatchService batchService, ILogger logger)
+        public BeerController(IBeerService beerService, ILogger logger)
         {
-            BatchService = batchService;
+            BeerService = beerService;
             Logger = logger;
         }
         
@@ -31,8 +31,8 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
         {
             try
             {
-                BatchDto batch = await BatchService.GetBatch(id);
-                return Ok(batch);
+                BeerDto beer = await BeerService.GetBeer(id);
+                return Ok(beer);
             }
             catch(Exception ex)
             {
@@ -41,13 +41,13 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
         }
 
         [HttpGet]
-        [Route("GetBatchTable")]
-        public async Task<IActionResult> GetBatchTable()
+        [Route("GetAll")]
+        public async Task<IActionResult> GetAll()
         {
             try
             {
-                List<BatchTableRow> batches = await BatchService.GetBatchTable();
-                return Ok(batches);
+                List<BeerDto> beers = await BeerService.GetBeers();
+                return Ok(beers);
             }
             catch(Exception ex)
             {
@@ -55,29 +55,15 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
             }
         }
 
-        [HttpGet]
-        [Route("GetBatchDetails")]
-        public async Task<IActionResult> GetBatchDetails(int id)
-        {
-            try
-            {
-                BatchDetailsDto batch = await BatchService.GetBatchDetails(id);
-                return Ok(batch);
-            }
-            catch(Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
-            }
-        }
-
+      
 
         [HttpPost]
         [Route("Post")]
-        public async Task<IActionResult> Post([FromBody]BatchDto dto)
+        public async Task<IActionResult> Post([FromBody]BeerDto dto)
         {
             try
             {
-                await BatchService.Add(dto);
+                await BeerService.Add(dto);
                 return NoContent();
             }
             catch(Exception ex)
@@ -88,11 +74,11 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
 
         [HttpPut]
         [Route("Put")]
-        public async Task<IActionResult> Put([FromBody]BatchDto dto)
+        public async Task<IActionResult> Put([FromBody]BeerDto dto)
         {
             try
             {
-                await BatchService.Update(dto);
+                await BeerService.Update(dto);
                 return NoContent();
             }
             catch(Exception ex)

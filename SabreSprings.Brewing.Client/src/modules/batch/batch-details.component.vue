@@ -1,5 +1,5 @@
 <template>
-  <div  v-if="batchDetails != null">
+  <div v-if="batchDetails != null">
     <div style="margin-left:15%;margin-right:15%" id="attributes">
       <h1 id="header" :style="'color:' + getColor(batchDetails.status)">{{batchDetails.beer}}</h1>
       <ul>
@@ -56,9 +56,13 @@
         <h3 :style="'color:' + getColor(batchDetails.status)">Brewing Notes</h3>
         <p style="padding-left:30px;white-space:pre-line">{{batchDetails.brewingNotes}}</p>
       </div>
-       <div>
+      <div>
         <h3 :style="'color:' + getColor(batchDetails.status)">Tasting Notes</h3>
         <p style="padding-left:30px;white-space:pre-line">{{batchDetails.tastingNotes}}</p>
+      </div>
+      <div class="row">
+        <br/>
+        <button class="btn btn-primary" v-on:click="goToEditor(batchDetails.id)">Edit</button>
       </div>
     </div>
   </div>
@@ -73,7 +77,7 @@ import { BatchDetailsDto } from "@/core/models";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 
 @Component({
-  components: {}
+  components: {},
 })
 export default class BatchDetailsComponent extends Vue {
   @Inject(ServiceTypes.BatchApiService)
@@ -91,28 +95,20 @@ export default class BatchDetailsComponent extends Vue {
   private getBatchDetails(id: number) {
     this.batchApiService
       .getBatchDetails(id)
-      .then(response => {
+      .then((response) => {
         this.batchDetails = response;
       })
-      .catch(error => {
+      .catch((error) => {
         NotifyHelper.displayError(error);
       });
   }
 
   private getColor(statusText: string) {
-    let color: string = "";
-    if (statusText != null && statusText.includes("On Tap")) {
-      color = "green";
-    } else if (statusText === "Fermenting") {
-      color = "red";
-    } else if (statusText === "Conditioning") {
-      color = "#D2D545";
-    } else if (statusText === "Archived") {
-      color = "#1369B1";
-    } else if (statusText === "Planned") {
-      color = "#B11313";
-    }
-    return color;
+    return AppSettingsHelper.getStatusColor(statusText);
+  }
+
+  private goToEditor(batchId: number) {
+    this.$router.push("/batch/editor?id=" + batchId);
   }
 }
 </script>
