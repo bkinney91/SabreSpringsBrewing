@@ -35,6 +35,28 @@ namespace SabreSprings.Brewing.Services
             return dto;
         }
 
+        public async Task<List<BeerDto>> GetBeers()
+        {
+            List<BeerDto> dtos = new List<BeerDto>();
+            List<Beer> beers = await BeerDataProvider.GetBeers();
+            foreach(Beer beer in beers)
+            {
+                BeerDto dto = new BeerDto()
+                {
+                    Id = beer.Id,
+                    Name = beer.Name,
+                    Style = beer.Style,
+                    Logo = beer.Logo,
+                    SuggestedGlassType = beer.SuggestedGlassType,                
+                    Created = beer.Created,
+                    CreatedBy = beer.CreatedBy
+                };
+                dtos.Add(dto);
+            }
+            return dtos;
+        }
+
+
         
 
         public async Task Add(BeerDto dto)
@@ -58,8 +80,7 @@ namespace SabreSprings.Brewing.Services
                 Name = dto.Name,
                 Style = dto.Style,
                 Logo = dto.Logo,
-                SuggestedGlassType = dto.SuggestedGlassType,
-                Updated = DateTime.Now        
+                SuggestedGlassType = dto.SuggestedGlassType      
             };
             await BeerDataProvider.Update(entity);
         }

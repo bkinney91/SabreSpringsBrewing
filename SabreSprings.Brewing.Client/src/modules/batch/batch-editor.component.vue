@@ -77,6 +77,7 @@ export default class BatchEditorComponent extends Vue {
   private batch: BatchDto = <BatchDto>{};
   private batchId: number | null = null;
   private beerName: string = "";
+  
   constructor() {
     super();
   }

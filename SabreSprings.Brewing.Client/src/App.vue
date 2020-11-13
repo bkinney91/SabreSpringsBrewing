@@ -18,7 +18,14 @@
 <script lang="ts">
 // IMPORTS ----------------------------------
 import Router from "./router";
-import { BatchApiService, TapHubService, TapApiService, FermentabuoyApiService, FermentabuoyAssignmentApiService } from "@/core/services";
+import {
+  BatchApiService,
+  BeerApiService,
+  TapHubService,
+  TapApiService,
+  FermentabuoyApiService,
+  FermentabuoyAssignmentApiService,
+} from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
 import NavigationComponent from "@/modules/layout/nav-container.component.vue";
 import { configureContainer } from "@/configure-container";
@@ -30,12 +37,15 @@ let container = configureContainer();
 
 @Component({
   components: {
-    NavigationComponent
+    NavigationComponent,
   },
   provide: {
     [ServiceTypes.Container]: container,
     [ServiceTypes.BatchApiService]: container.get<BatchApiService>(
       ServiceTypes.BatchApiService
+    ),
+    [ServiceTypes.BeerApiService]: container.get<BeerApiService>(
+      ServiceTypes.BeerApiService
     ),
     [ServiceTypes.TapHubService]: container.get<TapHubService>(
       ServiceTypes.TapHubService
@@ -43,13 +53,13 @@ let container = configureContainer();
     [ServiceTypes.TapApiService]: container.get<TapApiService>(
       ServiceTypes.TapApiService
     ),
-      [ServiceTypes.FermentabuoyApiService]: container.get<FermentabuoyApiService>(
-      ServiceTypes.FermentabuoyApiService
-    ),
-      [ServiceTypes.FermentabuoyAssignmentApiService]: container.get<FermentabuoyAssignmentApiService>(
-      ServiceTypes.FermentabuoyAssignmentApiService
-    )
-  }
+    [ServiceTypes.FermentabuoyApiService]: container.get<
+      FermentabuoyApiService
+    >(ServiceTypes.FermentabuoyApiService),
+    [ServiceTypes.FermentabuoyAssignmentApiService]: container.get<
+      FermentabuoyAssignmentApiService
+    >(ServiceTypes.FermentabuoyAssignmentApiService),
+  },
 })
 
 // APP --------------------------------------

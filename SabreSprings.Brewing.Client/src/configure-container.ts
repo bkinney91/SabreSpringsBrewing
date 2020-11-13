@@ -3,6 +3,7 @@ import {
 	ContainerService,
 	BaseApiService,
 	BatchApiService,
+	BeerApiService,
 	TapHubService,
 	TapApiService,
 	FermentabuoyApiService,
@@ -34,6 +35,10 @@ export function configureContainer(): Container {
 	container
 		.bind<BatchApiService>(ServiceTypes.BatchApiService)
 		.to(BatchApiService)
+		.inSingletonScope();
+	container
+		.bind<BeerApiService>(ServiceTypes.BeerApiService)
+		.to(BeerApiService)
 		.inSingletonScope();
 	container
 		.bind<TapHubService>(ServiceTypes.TapHubService)

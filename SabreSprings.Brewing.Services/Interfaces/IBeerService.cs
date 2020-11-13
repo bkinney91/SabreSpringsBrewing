@@ -8,9 +8,9 @@ namespace SabreSprings.Brewing.Services.Interfaces
 {
     public interface IBeerService
     {
-        Task<List<Beer>> GetBeers();
-        Task<Beer> GetBeer(int id);
+        Task<List<BeerDto>> GetBeers();
+        Task<BeerDto> GetBeer(int id);
          Task Update(BeerDto dto);
-         Task Add(BeerTo dto);        
+         Task Add(BeerDto dto);        
     }
 }
