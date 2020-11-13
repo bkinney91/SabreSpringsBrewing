@@ -8,7 +8,31 @@
       >
         {{ beerName }} Batch #{{ batch.batchNumber }}
       </h1>
+      <hr/>
       <h1 v-if="this.batchId == false">Add new batch</h1>
+     
+      <div class="row">
+        <div class="col-lg-6" v-if="this.batchId == false">
+           <h5>Select a beer</h5>
+          <DxSelectBox
+            v-if="beers"
+            :items="beers"
+            :value.sync="batch.beer"
+            value-expr="id"
+            display-expr="name"
+          />
+        </div>
+        <div class="col-lg-6" v-if="this.batchId">
+          <h5>Status</h5>
+          <DxSelectBox            
+            :items="['Planned', 'Fermenting', 'Conditioning', 'On Tap', 'Archived']"
+            :value.sync="batch.status"
+          
+          />
+        </div>
+      </div>
+      <hr />
+      <h5>Details</h5>
       <DxForm id="form" :form-data="batch" label-location="top" col-count="3">
         <DxItem data-field="brewers" name="Brewers" />
         <DxItem data-field="yeast" />
@@ -62,6 +86,7 @@ import { BatchDto, BeerDto } from "@/core/models";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 import { DxForm, DxItem, DxGroupItem } from "devextreme-vue/form";
 import { DxTextArea } from "devextreme-vue/text-area";
+import DxSelectBox from "devextreme-vue/select-box";
 
 @Component({
   components: {
@@ -69,27 +94,41 @@ import { DxTextArea } from "devextreme-vue/text-area";
     DxItem,
     DxTextArea,
     DxGroupItem,
+    DxSelectBox,
   },
 })
 export default class BatchEditorComponent extends Vue {
   @Inject(ServiceTypes.BatchApiService)
   private batchApiService!: BatchApiService;
-  @Inject(ServiceTypes.BatchApiService)
+  @Inject(ServiceTypes.BeerApiService)
   private beerApiService!: BeerApiService;
-  private beers: BeerDto [] = [];
+  private beers: BeerDto[] = [];
   private batch: BatchDto = <BatchDto>{};
   private batchId: number | null = null;
   private beerName: string = "";
-  
+
   constructor() {
     super();
   }
 
-  created(): void {
+  mounted(): void {
     this.batchId = +this.$route.query.id;
     if (this.batchId != 0) {
       this.getBatch(this.batchId);
+    } else {
+      this.getBeers();
     }
+  }
+
+  private getBeers() {
+    this.beerApiService
+      .getAll()
+      .then((response) => {
+        this.beers = response;
+      })
+      .catch((error) => {
+        NotifyHelper.displayError(error);
+      });
   }
 
   private getBatch(id: number) {

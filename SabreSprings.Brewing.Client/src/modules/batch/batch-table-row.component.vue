@@ -12,7 +12,7 @@
     <div class="card-body">
       <h5 class="card-title">{{batch.beerName}} Batch #{{batch.batchNumber}}</h5>
       <h6 class="card-subtitle mb-2 text-muted">{{batch.style}}</h6>
-      <div class="card-text">
+      <div class="card-text" v-if="batch.dateBrewed !== null || new Date(batch.dateBrewed).toLocaleDateString('en-US') !== '12/31/1969'">
         Date Brewed: {{new Date(batch.dateBrewed).toLocaleDateString('en-US')}}
         <br />
         <div v-if="batch.datePackaged !== null || new Date(batch.datePackaged).toLocaleDateString('en-US') !== '12/31/1969'">
@@ -22,6 +22,9 @@
           Scheduled Package Date: {{getScheduledPackageDate(batch.dateBrewed).toLocaleDateString('en-US')}}
         </div>
       </div>
+      <div v-else>
+        Planned
+        </div>
     </div>
   </div>
   <br/>
