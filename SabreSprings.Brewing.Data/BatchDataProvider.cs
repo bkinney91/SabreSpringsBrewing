@@ -25,7 +25,7 @@ namespace SabreSprings.Brewing.Data
         public async Task<Batch> Get(int id)
         {
             Batch batch = new Batch();
-            string sql = "Select * from Batches where Id= @Id;";
+            string sql = "Select * from Batches where Id = @Id;";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 batch = await db.QueryFirstAsync<Batch>(sql, new { Id = id });

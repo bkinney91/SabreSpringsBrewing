@@ -71,6 +71,21 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
         }
 
 
+        [HttpPost]
+        [Route("Post")]
+        public async Task<IActionResult> Post([FromBody]BatchDto dto)
+        {
+            try
+            {
+                await BatchService.Add(dto);
+                return NoContent();
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+            }
+        }
+
         [HttpPut]
         [Route("Put")]
         public async Task<IActionResult> Put([FromBody]BatchDto dto)
@@ -85,5 +100,7 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
         }
+
+        
     }
 }
