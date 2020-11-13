@@ -30,6 +30,12 @@
           
           />
         </div>
+        <div class="col-lg-6" v-if="this.batchId">
+          <h5>Substatus</h5>
+          <DxTextBox            
+           :value.sync="batch.subStatus"         
+          />
+        </div>
       </div>
       <hr />
       <h5>Details</h5>
@@ -87,7 +93,7 @@ import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 import { DxForm, DxItem, DxGroupItem } from "devextreme-vue/form";
 import { DxTextArea } from "devextreme-vue/text-area";
 import DxSelectBox from "devextreme-vue/select-box";
-
+import DxTextBox from 'devextreme-vue/text-box';
 @Component({
   components: {
     DxForm,
@@ -95,6 +101,7 @@ import DxSelectBox from "devextreme-vue/select-box";
     DxTextArea,
     DxGroupItem,
     DxSelectBox,
+    DxTextBox
   },
 })
 export default class BatchEditorComponent extends Vue {
