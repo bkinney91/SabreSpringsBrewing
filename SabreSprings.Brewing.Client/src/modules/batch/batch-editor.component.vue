@@ -118,7 +118,7 @@ export default class BatchEditorComponent extends Vue {
     super();
   }
 
-  mounted(): void {
+  created(): void {
     this.batchId = +this.$route.query.id;
     if (this.batchId != 0) {
       this.getBatch(this.batchId);

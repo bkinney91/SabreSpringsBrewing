@@ -62,7 +62,7 @@
       </div>
       <div class="row">
         <br/>
-        <button class="btn btn-primary" v-on:click="goToEditor(batchDetails.id)">Edit</button>
+        <a :href="'/batch/editor?id=' + batchDetails.id" class="btn btn-primary" onclick="goToEditor(batchDetails.id)">Edit</a>
       </div>
     </div>
   </div>
