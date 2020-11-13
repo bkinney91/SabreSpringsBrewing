@@ -56,9 +56,9 @@
 <script lang="ts">
 // IMPORTS ----------------------------------
 import { Vue, Component, Inject } from "vue-property-decorator";
-import { BatchApiService } from "@/core/services";
+import { BatchApiService, BeerApiService } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
-import { BatchDto } from "@/core/models";
+import { BatchDto, BeerDto } from "@/core/models";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 import { DxForm, DxItem, DxGroupItem } from "devextreme-vue/form";
 import { DxTextArea } from "devextreme-vue/text-area";
@@ -74,6 +74,9 @@ import { DxTextArea } from "devextreme-vue/text-area";
 export default class BatchEditorComponent extends Vue {
   @Inject(ServiceTypes.BatchApiService)
   private batchApiService!: BatchApiService;
+  @Inject(ServiceTypes.BatchApiService)
+  private beerApiService!: BeerApiService;
+  private beers: BeerDto [] = [];
   private batch: BatchDto = <BatchDto>{};
   private batchId: number | null = null;
   private beerName: string = "";
