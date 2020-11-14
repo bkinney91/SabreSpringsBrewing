@@ -49,7 +49,7 @@ namespace SabreSprings.Brewing.Data
         {
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
-                string sql = @"Insert into Beer 
+                string sql = @"Insert into Beers
                                 (Name, Style, Logo)
                                 VALUES (@Name, @Style, @Logo);";
                 await db.ExecuteAsync(sql, beer);
@@ -60,7 +60,7 @@ namespace SabreSprings.Brewing.Data
         {
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
-                string sql = @"Update Beer set Name = @Name, Style = @Style, Logo = @Logo where Id = @Id";
+                string sql = @"Update Beers set Name = @Name, Style = @Style, Logo = @Logo , SuggestedGlassType = @SuggestedGlassType where Id = @Id";
                 await db.ExecuteAsync(sql, beer);
             }
         }
