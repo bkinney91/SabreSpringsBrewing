@@ -61,7 +61,7 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
             }
             catch (Exception e)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -81,7 +81,7 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
             }
             catch (Exception e)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -101,7 +101,7 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
             }
             catch (Exception e)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -122,7 +122,7 @@ namespace SabreSprings.Brewing.Web.Controllers.Api
             }
             catch (Exception e)
             {
-                throw e;
+                throw;
             }
         }
     }
