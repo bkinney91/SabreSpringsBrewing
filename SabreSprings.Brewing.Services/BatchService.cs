@@ -125,6 +125,19 @@ namespace SabreSprings.Brewing.Services
                 Beer = dto.Beer,
                 BatchName = dto.BatchName,
                 BatchNumber = batchNumber+1,
+                Status = "Planned",
+                Brewers = dto.Brewers,
+                Yeast = dto.Yeast,
+                PreBoilGravity = dto.PreBoilGravity,
+                OriginalGravity = dto.OriginalGravity,
+                FinalGravity = dto.FinalGravity,
+                ABV = dto.ABV,
+                PintsRemaining = dto.PintsRemaining,
+                DateBrewed = dto.DateBrewed,
+                DatePackaged = dto.DatePackaged,
+                DateTapped = dto.DateTapped,
+                BrewingNotes = dto.BrewingNotes,
+                TastingNotes = dto.TastingNotes,
                 Created = DateTime.Now                
             };
             await BatchDataProvider.Add(entity);

@@ -36,32 +36,7 @@
             <!-- SideNav Navigation Start -->
 
             <div id="sideNav" class="panel-group sidebar-nav">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown d-sm-none d-md-none d-lg-block d-xl-block">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Example
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <router-link class="dropdown-item" to="/organization">Manage Organizations</router-link>
-                        </div>
-                    </li>
-                     <li class="nav-item dropdown d-sm-none d-md-none d-lg-block d-xl-block">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Stuff
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <router-link class="dropdown-item" to="/Project">Manage Projects</router-link>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown d-sm-none d-md-none d-lg-block d-xl-block" >
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Here
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <router-link class="dropdown-item" to="/Vendor">Manage Vendors</router-link>
-                        </div>
-                    </li>
-                </ul>   
+                
               
                 <div class="d-xs-block d-md-block d-lg-none">
                     <NavHeaderComponent></NavHeaderComponent>

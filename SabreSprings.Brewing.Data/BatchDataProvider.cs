@@ -116,7 +116,8 @@ namespace SabreSprings.Brewing.Data
                             DatePackaged = @DatePackaged,
                             DateTapped = @DateTapped,
                             BrewingNotes = @BrewingNotes,
-                            TastingNotes = @TastingNotes;";
+                            TastingNotes = @TastingNotes
+                            where Id = @Id;";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 await db.ExecuteAsync(sql, batch);
