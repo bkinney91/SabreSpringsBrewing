@@ -4,13 +4,13 @@
      <DxDataGrid
         :data-source="beers"
         :show-borders="true"
-        key-expre="id"
+        key-expr="id"
         :selection="{mode: 'single'}"
         :hover-state-enabled="true"
      >
      <DxHeaderFilter :visible="true"/>
      <DxSearchPanel :visible="true"/>
-     <DxEditing :allow-updating="true" :allow-deleting="false" :allow-adding="true" mode="popup">
+     <DxEditing :allow-updating="true" :allow-deleting="false" :allow-adding="true" mode="form">
          <DxForm>
             <DxItem data-field="name"/>
         <DxItem data-field="style"/>
@@ -90,6 +90,29 @@ export default class BaeerTableComponent extends Vue {
       });
   }
 
+
+private addBeer(e: any){
+
+    this.beerApiService
+      .post(e.data)
+      .then(response => {
+        this.beers = response;
+      })
+      .catch(error => {
+        NotifyHelper.displayError(error);
+      });
+  }
+
+  private updateBeer(){
+    this.beerApiService
+      .getAll()
+      .then(response => {
+        this.beers = response;
+      })
+      .catch(error => {
+        NotifyHelper.displayError(error);
+      });
+  }
 
 
 
