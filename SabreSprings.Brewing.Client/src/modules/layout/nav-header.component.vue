@@ -19,6 +19,7 @@
                     Beers
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <router-link class="dropdown-item" to="/beers">Beers</router-link>     
                     <router-link class="dropdown-item" to="/batches">Batches</router-link>                    
                 </div>
             </li>           
