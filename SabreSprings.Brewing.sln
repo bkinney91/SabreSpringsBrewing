@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TapListener", "TapListener"
 		TapListener\TapListener.service = TapListener\TapListener.service
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SabreSprings.Brewing.BrewController.Api", "SabreSprings.Brewing.BrewController.Api\SabreSprings.Brewing.BrewController.Api.csproj", "{426F9C4E-4EC6-44F1-8C8F-5C904AC2A50B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +62,12 @@ Global
 		{E5073F41-F5FB-4A8D-A9A4-9D847EA650DB}.Production|Any CPU.Build.0 = Production|Any CPU
 		{E5073F41-F5FB-4A8D-A9A4-9D847EA650DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5073F41-F5FB-4A8D-A9A4-9D847EA650DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{426F9C4E-4EC6-44F1-8C8F-5C904AC2A50B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{426F9C4E-4EC6-44F1-8C8F-5C904AC2A50B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{426F9C4E-4EC6-44F1-8C8F-5C904AC2A50B}.Production|Any CPU.ActiveCfg = Debug|Any CPU
+		{426F9C4E-4EC6-44F1-8C8F-5C904AC2A50B}.Production|Any CPU.Build.0 = Debug|Any CPU
+		{426F9C4E-4EC6-44F1-8C8F-5C904AC2A50B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{426F9C4E-4EC6-44F1-8C8F-5C904AC2A50B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
