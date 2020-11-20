@@ -19,12 +19,8 @@
 // IMPORTS ----------------------------------
 import Router from "./router";
 import {
-  BatchApiService,
-  BeerApiService,
-  TapHubService,
-  TapApiService,
-  FermentabuoyApiService,
-  FermentabuoyAssignmentApiService,
+  KettleHubService,
+  PumpApiService,
 } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
 import NavigationComponent from "@/modules/layout/nav-container.component.vue";
@@ -41,24 +37,13 @@ let container = configureContainer();
   },
   provide: {
     [ServiceTypes.Container]: container,
-    [ServiceTypes.BatchApiService]: container.get<BatchApiService>(
-      ServiceTypes.BatchApiService
+   
+    [ServiceTypes.KettleHubService]: container.get<KettleHubService>(
+      ServiceTypes.KettleHubService
     ),
-    [ServiceTypes.BeerApiService]: container.get<BeerApiService>(
-      ServiceTypes.BeerApiService
+    [ServiceTypes.PumpApiService]: container.get<PumpApiService>(
+      ServiceTypes.PumpApiService
     ),
-    [ServiceTypes.TapHubService]: container.get<TapHubService>(
-      ServiceTypes.TapHubService
-    ),
-    [ServiceTypes.TapApiService]: container.get<TapApiService>(
-      ServiceTypes.TapApiService
-    ),
-    [ServiceTypes.FermentabuoyApiService]: container.get<
-      FermentabuoyApiService
-    >(ServiceTypes.FermentabuoyApiService),
-    [ServiceTypes.FermentabuoyAssignmentApiService]: container.get<
-      FermentabuoyAssignmentApiService
-    >(ServiceTypes.FermentabuoyAssignmentApiService),
   },
 })
 

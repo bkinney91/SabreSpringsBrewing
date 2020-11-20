@@ -3,8 +3,8 @@ const ServiceTypes =
 {
 	BaseApiService: Symbol.for("BaseApiService"),
 	BaseAxiosInstance: Symbol.for("BaseAxiosInstance"),
-	TapHubService: Symbol.for("TapHubService"),
-	TapApiService: Symbol.for("TapApiService"),
+	KettleHubService: Symbol.for("KettleHubService"),
+	PumpApiService: Symbol.for("PumpApiService"),
 	Container: Symbol.for("Container")
 };
 

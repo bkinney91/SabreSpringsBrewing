@@ -2,8 +2,8 @@ import { Container } from "inversify";
 import {
 	ContainerService,
 	BaseApiService,
-	TapHubService,
-	TapApiService,
+	KettleHubService,
+	PumpApiService,
 
 } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
@@ -29,12 +29,12 @@ export function configureContainer(): Container {
 		.to(BaseApiService)
 		.inSingletonScope();
 	container
-		.bind<TapHubService>(ServiceTypes.TapHubService)
-		.to(TapHubService)
+		.bind<KettleHubService>(ServiceTypes.KettleHubService)
+		.to(KettleHubService)
 		.inSingletonScope();
 	container
-		.bind<TapApiService>(ServiceTypes.TapApiService)
-		.to(TapApiService)
+		.bind<PumpApiService>(ServiceTypes.PumpApiService)
+		.to(PumpApiService)
 		.inSingletonScope();
 	return container;
 }
