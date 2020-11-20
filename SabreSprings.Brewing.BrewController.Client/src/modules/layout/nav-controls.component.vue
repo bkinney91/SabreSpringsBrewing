@@ -4,12 +4,7 @@
 <template>
     <div id="navigationBarControlsContainer">
         <ul class="navbar-nav">
-            <li class="nav-item dropdown" v-if="isLoggedIn">
-                <a id="customShortcutButton1" class="nav-link dropdown-toggle nav-bar-button" href="#" data-toggle="dropdown">
-                    <i class="fab fa-buffer"></i>
-                </a>
-                
-            </li>
+              
             
         </ul>
     </div>

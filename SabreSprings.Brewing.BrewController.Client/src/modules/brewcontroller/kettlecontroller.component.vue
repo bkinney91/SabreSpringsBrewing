@@ -1,7 +1,7 @@
 <template>
  <div >
-   
-     <KettleController :batch="batch"/>
+   hey hey
+     
      
  </div>
 </template>

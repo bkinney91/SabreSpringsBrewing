@@ -4,25 +4,7 @@
 <template>
     <div id="navMenuContainer">
         <ul class="navbar-nav">            
-            <li class="nav-item dropdown d-sm-none d-md-none d-lg-block d-xl-block">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Automation
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <router-link class="dropdown-item" to="/Taproom/OnTap">On Tap</router-link>
-                    <router-link class="dropdown-item" to="/Fermentation">Fermentation</router-link>
-                </div>
-            </li>
-                        
-            <li class="nav-item dropdown d-sm-none d-md-none d-lg-block d-xl-block">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Beers
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <router-link class="dropdown-item" to="/beers">Beers</router-link>     
-                    <router-link class="dropdown-item" to="/batches">Batches</router-link>                    
-                </div>
-            </li>           
+              
         </ul>  
     </div>
 </template>

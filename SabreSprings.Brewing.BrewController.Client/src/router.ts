@@ -7,6 +7,7 @@ import NotFoundComponent from "./modules/home/not-found.component.vue";
 import ProcessingComponent from "./modules/home/processing.component.vue";
 import AdminComponent from "./modules/main/admin.component.vue";
 import TemplateComponent from "./modules/main/template.component.vue";
+import BrewControllerComponent from "./modules/brewcontroller/brewcontroller.component.vue";
 
 Vue.use(Router);
 
@@ -51,7 +52,12 @@ export default new Router({
 			path: "/processing",
 			name: "processing",
 			component: ProcessingComponent
-		},
+		},	
+		{
+			path: "/brewcontroller",
+			name: "brewcontroller",
+			component: BrewControllerComponent
+		},	
 		{
 			path: "/",
 			redirect: { name: "home" }

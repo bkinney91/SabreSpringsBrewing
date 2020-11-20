@@ -10,8 +10,8 @@ export class AppSettingsHelper {
 		let settings: ApplicationSettings = {
 			environment: AppSettingsHelper.environment(),
 			baseUrl: AppSettingsHelper.baseUrl,
-			appName: "SabreSprings.Brewing.BreweryController.Client",
-			appDescription: "Brew Controller",
+			appName: "Brew Controller",
+			appDescription: "Client for Brewing Manager",
 			appAbbreviation: "SS B&E",
 			appIcon: "fa-beer"		
 		};

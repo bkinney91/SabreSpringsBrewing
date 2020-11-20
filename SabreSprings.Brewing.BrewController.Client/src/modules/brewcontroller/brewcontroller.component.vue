@@ -1,9 +1,8 @@
 <template>
- <div style="margin-left:15%;margin-right:15%">
-   
-     <KettleController :batch="batch"/>
-     
- </div>
+  <div style="margin-left: 15%; margin-right: 15%">
+    WHAT WHAT
+    <KettleController :batch="batch" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -14,17 +13,14 @@ import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 import KettleController from "./kettlecontroller.component.vue";
 @Component({
   components: {
-    KettleController
-   
-  }
+    KettleController,
+  },
 })
 export default class BrewControllerComponent extends Vue {
-
   constructor() {
     super();
   }
 
-  created(): void {    
-  }
+  created(): void {}
 }
 </script>
