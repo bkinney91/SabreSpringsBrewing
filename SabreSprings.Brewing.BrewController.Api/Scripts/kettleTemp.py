@@ -33,11 +33,11 @@ print('The humidity is: %.1f percent\r' % humidity)
 #My code
 
 #Read Temp 
-TempReadFunction = 03
+TempReadFunction = 3
 TempReadPayload ="01 64 00 02 85 AC"
-Temperature = instrument.write_register(05, TempReadPayload, number_of_decimals=3,functioncode=03, signed=False)
+Temperature = instrument.write_register(5, TempReadPayload, number_of_decimals=3,functioncode=3, signed=False)
 
 #set Temp
 NewTemperature = 76.5
 SetTempPayload = "00 00 00 02 04"
-instrument.write_register(05, SetTempPayload + NewTemperature.to_bytes(4, byteorder='big') + "52 CF", functioncode=10, signed=false)
+instrument.write_register(5, SetTempPayload + NewTemperature.to_bytes(4, byteorder='big') + "52 CF", functioncode=10, signed=false)

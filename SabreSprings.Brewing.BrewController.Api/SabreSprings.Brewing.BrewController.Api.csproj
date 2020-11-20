@@ -15,14 +15,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="lib\" />
+   <ItemGroup>
+    <ProjectReference Include="..\SabreSprings.Brewing.BrewController.Services\SabreSprings.Brewing.BrewController.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="EasyModbus">
-      <HintPath>lib\EasyModbus.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+ 
 
 </Project>

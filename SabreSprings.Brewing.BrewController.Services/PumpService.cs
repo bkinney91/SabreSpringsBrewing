@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 
 namespace SabreSprings.Brewing.BrewController.Services
 {
-    public class KettleService
+    public class PumpService
     {
-        public decimal GetTemperature()
+        public decimal PowerPump1()
         {
             decimal temperature;
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = "python";
-            start.Arguments = "getKettleTemperature.py";
+            start.Arguments = "pumpRealy.py";
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             using (Process process = Process.Start(start))
@@ -24,11 +24,11 @@ namespace SabreSprings.Brewing.BrewController.Services
             }
         }
 
-        public decimal SetTemperature(decimal temperature)
+        public decimal PowerPump2()
         {
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = "python";
-            start.Arguments = "setKettleTemperature.py " + temperature;
+            start.Arguments = "pumpRelay.py";
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             using (Process process = Process.Start(start))
