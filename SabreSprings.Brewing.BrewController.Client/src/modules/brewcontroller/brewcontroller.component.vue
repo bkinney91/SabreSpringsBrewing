@@ -11,10 +11,10 @@
 import { Vue, Component, Inject, Prop } from "vue-property-decorator";
 import { ServiceTypes } from "@/core/symbols";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
-import BatchTableRowComponent from "./batch-table-row.component.vue";
+import KettleController from "./kettlecontroller.component.vue";
 @Component({
   components: {
-    BatchTableRowComponent
+    KettleController
    
   }
 })

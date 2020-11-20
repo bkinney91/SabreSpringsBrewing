@@ -3,7 +3,10 @@
 <!-- ------------------------------------------------------------------------------------------ -->
 <template>
   <div class="container-xl center-xy">
-    <brew-controller></brew-controller>
+      <div class="row">
+      <p>SSBE Brew Center</p>
+      </div>
+    <BrewController></BrewController>
   </div>
 </template>
 
@@ -19,7 +22,7 @@ import { ApplicationConstants } from "@/core/services";
 import { Subscription } from "rxjs";
 import { ApplicationSettings } from "@/core/models";
 import { NotifyHelper, AppSettingsHelper } from "@/core/helpers";
-import BrewController from "..brewcontroller/brewcontroller.component.vue";
+import BrewController from "../brewcontroller/brewcontroller.component.vue";
 @Component({
   components: {
     BrewController,
