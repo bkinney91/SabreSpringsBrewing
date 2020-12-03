@@ -37,7 +37,7 @@
     </div>
     <div class="row">
       <div class="col-lg-10">
-        <h4>PID Value</h4>
+        <h4>Target Temperature</h4>
         <br />
         <DxSlider
           style="margin-left: 6%"
@@ -157,7 +157,7 @@ import {
   },
 })
 export default class KettleControllerComponent extends Vue {
-  private temperatureGoal: number = 0;
+  private targetTemperature: number = 0;
   private currentTemperature: number = 187;
   private kettlePower :boolean = false;
   constructor() {
