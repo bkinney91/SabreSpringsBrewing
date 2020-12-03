@@ -5,7 +5,7 @@
   <div id="app">
     <NavigationComponent></NavigationComponent>
     <!--Main Outlet-->
-    <div id="bodyComponent">
+    <div >
       <router-view></router-view>
     </div>
   </div>

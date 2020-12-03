@@ -2,52 +2,7 @@
 <!-- TEMPLATE --------------------------------------------------------------------------------- -->
 <!-- ------------------------------------------------------------------------------------------ -->
 <template>
-    <div>
-        <div id="navContainer">
-            <!-- NavBar Navigation Start -->
-            <nav class="navbar navbar-expand-lg">
-                <div id="navBarBrandContainer">
-                    <a href="#"
-                       class="hamburger-menu"
-                       id="sidebarToggle"
-                       v-on:click="toggle"
-                       v-bind:class="{ 'active': show}">
-                        <i class="fa fa-bars"></i>
-                        <i class="fal fa-times"></i>
-                    </a>
-                    <router-link to="/"
-                                 class="navbar-brand"
-                                 id="homePageLink"
-                                 data-toggle="tooltip"
-                                 v-bind:title="appAbbreviation">{{ appAbbreviation }}</router-link>
-                </div>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <div class="mr-auto">
-                        <NavHeaderComponent></NavHeaderComponent>
-                    </div>
-                    <div>
-                        <NavControlsComponent></NavControlsComponent>
-                    </div>
-                </div>
-            </nav>
-            <!-- NavBar Navigation End -->
-        </div>
-        <div id="sidebarContainer" ref="sidebarContainer" v-bind:class="{ 'active': show }">
-            <!-- SideNav Navigation Start -->
-
-            <div id="sideNav" class="panel-group sidebar-nav">
-                
-              
-                <div class="d-xs-block d-md-block d-lg-none">
-                    <NavHeaderComponent></NavHeaderComponent>
-                </div>
-                <div class="d-xs-block d-md-block d-lg-none">
-                    <NavControlsComponent></NavControlsComponent>
-                </div>
-            </div>
-            <!-- SideNav Navigation End -->
-        </div>
-    </div>
+   
 </template>
 
 

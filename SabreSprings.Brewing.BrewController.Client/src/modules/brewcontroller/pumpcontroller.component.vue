@@ -1,67 +1,58 @@
 <template>
-  <div class="card" style="height: 100%">
-    <div class="card-body">
-      <div class="row">
-        <div class="col-lg-10"><h2>Kettle</h2></div>
-        <div class="col-lg-2">
-          <div class="float-right">
-            <div class="onoffswitch">
-              <input
-                type="checkbox"
-                name="onoffswitch"
-                class="onoffswitch-checkbox"
-                id="myonoffswitch"
-                tabindex="0"
-                v-model="kettlePower"
-              />
-              <label class="onoffswitch-label" for="myonoffswitch">
-                <span class="onoffswitch-inner"></span>
-                <span class="onoffswitch-switch"></span>
-              </label>
-            </div>
-          </div>
-        </div>
+ <div class="card" style="height:100%; margin-top: 5%" >
+  <div class="card-body">
+    <div class="row" >
+      <div class="col-lg-10">
+        <h2>Pumps</h2>
       </div>
-      <hr />
-      <div class="row">
-        <div class="col-lg-10">
-          <h4>Current Temperature</h4>
-          <DxLinearGauge :value.sync="currentTemperature">
-            <DxScale :start-value="120" :end-value="220" :tick-interval="20">
-              <DxLabel :customize-text="customizeText" />
-            </DxScale>
-            <DxValueIndicator type="textCloud" color="#734F96" />
-          </DxLinearGauge>
-        </div>
-
-        <div class="col-lg-2">
-          <br />
-          <h3 class="float-right">{{ this.currentTemperature }}&deg;F</h3>
-        </div>
+    </div>
+    <hr />
+    <div style="height:30%" class="row">
+      <div class="col-lg-6">
+        <h3>Kettle</h3>
       </div>
-      <div class="row">
-        <div class="col-lg-10">
-          <h4>Target Temperature</h4>
-          <br />
-          <DxSlider
-            style="margin-left: 4%"
-            width="92%"
-            v-model:value="targetTemperature"
-            :min="120"
-            :max="220"
-            :tooltip="{ enabled: true }"
+      <div class="col-lg-6">
+        <div class="onoffswitch">
+          <input
+            type="checkbox"
+            name="kettlePumpSwitch"
+            class="onoffswitch-checkbox"
+            id="kettlePumpSwitch"
+            tabindex="0"
+            v-model="kettlePumpPower"
           />
-        </div>
-        <div class="col-lg-2">
-          <br />
-          <h3 class="float-right">{{ this.targetTemperature }}&deg;F</h3>
+          <label class="onoffswitch-label" for="kettlePumpSwitch">
+            <span class="onoffswitch-inner"></span>
+            <span class="onoffswitch-switch"></span>
+          </label>
         </div>
       </div>
     </div>
+    <br />   
+      <div class="row">
+        <div class="col-lg-6">
+          <h3>Mash</h3>
+        </div>
+        <div class="col-lg-6">
+          <div class="onoffswitch">
+            <input
+              type="checkbox"
+              name="mashPumpSwitch"
+              class="onoffswitch-checkbox"
+              id="mashPumpSwitch"
+              tabindex="0"
+              v-model="mashPumpPower"
+            />
+            <label class="onoffswitch-label" for="mashPumpSwitch">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+  </div>
   </div>
 </template>
-
-
 <!--Style generated from https://proto.io/freebies/onoff/-->
 <style>
 .onoffswitch {
@@ -142,8 +133,6 @@
 import { Vue, Component, Inject, Prop } from "vue-property-decorator";
 import { ServiceTypes } from "@/core/symbols";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
-
-import BootstrapToggle from "vue-bootstrap-toggle";
 import { DxSlider } from "devextreme-vue/slider";
 import { DxNumberBox } from "devextreme-vue/number-box";
 import {
@@ -162,7 +151,7 @@ import {
     DxValueIndicator,
   },
 })
-export default class KettleControllerComponent extends Vue {
+export default class PumpControllerComponent extends Vue {
   private targetTemperature: number = 0;
   private currentTemperature: number = 187;
   private kettlePower: boolean = false;
