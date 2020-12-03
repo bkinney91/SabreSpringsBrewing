@@ -2,8 +2,9 @@
 <!-- TEMPLATE --------------------------------------------------------------------------------- -->
 <!-- ------------------------------------------------------------------------------------------ -->
 <template>
-  <div class="container-xl center-xy">
-    <TestControllerComponent></TestControllerComponent>
+  <div style="margin-left:5%; margin-right:5%">
+
+   <BrewControllerComponent></BrewControllerComponent>
   </div>
 </template>
 
@@ -19,10 +20,11 @@ import { ApplicationConstants } from "@/core/services";
 import { Subscription } from "rxjs";
 import { ApplicationSettings } from "@/core/models";
 import { NotifyHelper, AppSettingsHelper } from "@/core/helpers";
+import BrewControllerComponent from "../brewcontroller/brewcontroller.component.vue";
 
 @Component({
   components: {
-    
+    BrewControllerComponent
    
   }
 })

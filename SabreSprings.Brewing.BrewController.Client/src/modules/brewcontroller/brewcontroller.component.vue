@@ -1,7 +1,12 @@
 <template>
-  <div style="margin-left: 15%; margin-right: 15%">
-    WHAT WHAT
-    <KettleController :batch="batch" />
+  <div>
+    <h1>SSB&E Automated Brewing Control Center</h1>
+    <hr/>
+    <div class="row">
+      <div class="col-md-6">
+        <KettleController />
+      </div>
+    </div>
   </div>
 </template>
 
