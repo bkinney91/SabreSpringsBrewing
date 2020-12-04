@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using SabreSprings.Brewing.BrewController.HostedServices;
 using Serilog;
 using Serilog.Core;
 using System;
@@ -37,6 +38,7 @@ namespace SabreSprings.Brewing.BrewController.Api
             });
             services.AddControllers();
             services.AddSignalR();
+            services.AddHostedService<KettleHostedService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SabreSprings.Brewing.BrewController.Api", Version = "v1" });

@@ -6,7 +6,7 @@ namespace SabreSprings.Brewing.BrewController.Services
 {
     public class PumpService
     {
-        public decimal PowerPump1()
+        public void PowerPump1()
         {
             decimal temperature;
             ProcessStartInfo start = new ProcessStartInfo();
@@ -24,7 +24,7 @@ namespace SabreSprings.Brewing.BrewController.Services
             }
         }
 
-        public decimal PowerPump2()
+        public void PowerPump2()
         {
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = "python";

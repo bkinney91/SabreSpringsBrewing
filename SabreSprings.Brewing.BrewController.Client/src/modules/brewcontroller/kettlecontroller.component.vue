@@ -142,7 +142,7 @@
 import { Vue, Component, Inject, Prop } from "vue-property-decorator";
 import { ServiceTypes } from "@/core/symbols";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
-
+import { KettleHubService } from "@/core/services";
 import BootstrapToggle from "vue-bootstrap-toggle";
 import { DxSlider } from "devextreme-vue/slider";
 import { DxNumberBox } from "devextreme-vue/number-box";
@@ -163,13 +163,23 @@ import {
   },
 })
 export default class KettleControllerComponent extends Vue {
+  @Inject(ServiceTypes.KettleHubService)
+  private kettleHubService!: KettleHubService;
   private targetTemperature: number = 0;
   private currentTemperature: number = 187;
   private kettlePower: boolean = false;
+
   constructor() {
     super();
   }
 
-  created(): void {}
+  created(): void {
+    this.kettleHubService.SetTapDataCallback(this.updateCurrentTemperature);
+    }
+
+    public updateCurrentTemperature(temperature: number){
+      this.targetTemperature = temperature;
+    }
+
 }
 </script>

@@ -11,5 +11,6 @@ namespace SabreSprings.Brewing.BrewController.Api.Controllers
     [ApiController]
     public class KettleController : ControllerBase
     {
+
     }
 }

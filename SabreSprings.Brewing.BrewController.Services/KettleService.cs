@@ -22,9 +22,10 @@ namespace SabreSprings.Brewing.BrewController.Services
                     
                 }
             }
+            return temperature;
         }
 
-        public decimal SetTemperature(decimal temperature)
+        public void SetTemperature(decimal temperature)
         {
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = "python";
