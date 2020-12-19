@@ -6,12 +6,13 @@ namespace SabreSprings.Brewing.BrewController.Services
 {
     public class KettleService
     {
-        public decimal GetTemperature()
+
+        public int GetCurrentTemperature()
         {
-            decimal temperature;
+            int temperature;
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = "python";
-            start.Arguments = "getKettleTemperature.py";
+            start.Arguments = "pidController.py --current";
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             using (Process process = Process.Start(start))
@@ -25,19 +26,41 @@ namespace SabreSprings.Brewing.BrewController.Services
             return temperature;
         }
 
-        public void SetTemperature(decimal temperature)
+
+
+        public int GetTargetTemperature()
         {
+            int temperature;
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = "python";
-            start.Arguments = "setKettleTemperature.py " + temperature;
+            start.Arguments = "pidController.py --target";
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             using (Process process = Process.Start(start))
             {
                 using (StreamReader reader = process.StandardOutput)
                 {
-                    string output = reader.ReadToEnd();
+                    temperature = Convert.ToInt32(reader.ReadToEnd());
                     
+                }
+            }
+            return temperature;
+        }
+
+
+
+        public void SetTemperature(int temperature)
+        {
+            ProcessStartInfo start = new ProcessStartInfo();
+            start.FileName = "python";
+            start.Arguments = "pidController.py --set " + temperature;
+            start.UseShellExecute = false;
+            start.RedirectStandardOutput = true;
+            using (Process process = Process.Start(start))
+            {
+                using (StreamReader reader = process.StandardOutput)
+                {
+                    string output = reader.ReadToEnd();                    
                 }
             }
         }
