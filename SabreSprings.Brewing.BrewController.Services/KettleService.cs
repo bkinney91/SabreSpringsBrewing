@@ -7,12 +7,34 @@ namespace SabreSprings.Brewing.BrewController.Services
 {
     public class KettleService : IKettleService
     {
-        public decimal GetTemperature()
+
+        public int GetCurrentTemperature()
         {
-            decimal temperature;
+            int temperature;
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = "python";
-            start.Arguments = "getKettleTemperature.py";
+            start.Arguments = "pidController.py --current";
+            start.UseShellExecute = false;
+            start.RedirectStandardOutput = true;
+            using (Process process = Process.Start(start))
+            {
+                using (StreamReader reader = process.StandardOutput)
+                {
+                    temperature = Convert.ToInt32(reader.ReadToEnd());
+                    
+                }
+            }
+            return temperature;
+        }
+
+
+
+        public int GetTargetTemperature()
+        {
+            int temperature;
+            ProcessStartInfo start = new ProcessStartInfo();
+            start.FileName = "python";
+            start.Arguments = "pidController.py --target";
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             using (Process process = Process.Start(start))
@@ -30,15 +52,14 @@ namespace SabreSprings.Brewing.BrewController.Services
         {
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = "python";
-            start.Arguments = "setKettleTemperature.py " + temperature;
+            start.Arguments = "pidController.py --set " + temperature;
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             using (Process process = Process.Start(start))
             {
                 using (StreamReader reader = process.StandardOutput)
                 {
-                    string output = reader.ReadToEnd();
-                    
+                    string output = reader.ReadToEnd();                    
                 }
             }
         }

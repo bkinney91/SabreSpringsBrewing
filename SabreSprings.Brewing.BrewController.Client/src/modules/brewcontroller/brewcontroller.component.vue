@@ -1,5 +1,5 @@
 <template>
-  <div style="height:100%;overflow:hidden;margin:0;">
+  <div style="height:100%;overflow:hidden;margin:1%;">
     <h1>SSB&E Automated Brewing Control Center</h1>
     <hr/>
     <div class="row">

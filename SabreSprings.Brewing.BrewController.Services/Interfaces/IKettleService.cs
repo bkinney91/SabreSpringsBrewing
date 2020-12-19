@@ -6,7 +6,8 @@ namespace SabreSprings.Brewing.BrewController.Services.Interfaces
 {
     public interface IKettleService
     {
-        decimal GetTemperature();
+        int GetTargetTemperature();
+        int GetCurrentTemperature();
         void SetTemperature(int temperature);
     }
 }
