@@ -4,9 +4,9 @@ using System.Text;
 
 namespace SabreSprings.Brewing.BrewController.Services.Interfaces
 {
-    public interface IKettleService
+    public interface IPumpService
     {
-        decimal GetTemperature();
-        void SetTemperature(int temperature);
+        void PowerPump1();
+        void PowerPump2();
     }
 }

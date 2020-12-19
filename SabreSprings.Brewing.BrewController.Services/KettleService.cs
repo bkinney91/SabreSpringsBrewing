@@ -1,10 +1,11 @@
-﻿using System;
+﻿using SabreSprings.Brewing.BrewController.Services.Interfaces;
+using System;
 using System.Diagnostics;
 using System.IO;
 
 namespace SabreSprings.Brewing.BrewController.Services
 {
-    public class KettleService
+    public class KettleService : IKettleService
     {
         public decimal GetTemperature()
         {
@@ -25,7 +26,7 @@ namespace SabreSprings.Brewing.BrewController.Services
             return temperature;
         }
 
-        public void SetTemperature(decimal temperature)
+        public void SetTemperature(int temperature)
         {
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = "python";

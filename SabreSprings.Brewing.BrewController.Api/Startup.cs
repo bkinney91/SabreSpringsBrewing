@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using SabreSprings.Brewing.BrewController.HostedServices;
+using SabreSprings.Brewing.BrewController.Services;
+using SabreSprings.Brewing.BrewController.Services.Interfaces;
 using Serilog;
 using Serilog.Core;
 using System;
@@ -54,12 +56,8 @@ namespace SabreSprings.Brewing.BrewController.Api
                                 .WriteTo.File("Log-.txt", rollingInterval: RollingInterval.Day)
                                 .CreateLogger();
 
-            //Data Providers
-           // builder.RegisterType<BatchDataProvider>().As<IBatchDataProvider>();
-          
-
-            //Services
-
+            builder.RegisterType<PumpService>().As<IPumpService>();
+            builder.RegisterType<KettleService>().As<IKettleService>();      
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

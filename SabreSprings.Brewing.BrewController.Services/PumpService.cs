@@ -1,10 +1,11 @@
+using SabreSprings.Brewing.BrewController.Services.Interfaces;
 using System;
 using System.Diagnostics;
 using System.IO;
 
 namespace SabreSprings.Brewing.BrewController.Services
 {
-    public class PumpService
+    public class PumpService : IPumpService
     {
         public void PowerPump1()
         {

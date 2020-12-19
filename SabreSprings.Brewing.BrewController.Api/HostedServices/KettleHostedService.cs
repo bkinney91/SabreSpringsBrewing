@@ -32,10 +32,11 @@ namespace SabreSprings.Brewing.BrewController.HostedServices
 
         private void DoWork(object state)
         {
-            decimal kettleTemperature = KettleService.GetTemperature();
+            //decimal kettleTemperature = KettleService.GetTemperature();
             Task.Run(() =>
             {
-                KettleHubContext.Clients.All.SendAsync("KettleTemperature", kettleTemperature);
+                Console.WriteLine("Working");
+            KettleHubContext.Clients.All.SendAsync("KettleTemperature", "test");// kettleTemperature);
             });
             
         }
