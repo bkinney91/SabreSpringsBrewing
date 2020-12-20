@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace SabreSprings.Brewing.BrewController.Services
 {
@@ -24,12 +25,12 @@ namespace SabreSprings.Brewing.BrewController.Services
                 {
                     result += process.StandardOutput.ReadToEnd();
                 }
-                Console.WriteLine("Value is " + result + "| END");
                 if (result != "")
                 {
                     //Clean up input
-                    result = string.Concat(result.Where(c => !char.IsWhiteSpace(c)));
-                    temperature = Convert.ToInt32(result);
+                    result = result.Trim();      
+                    decimal temp = Convert.ToDecimal(result);
+                    temperature = (int)temp;
                 }
                 else
                 {
@@ -56,12 +57,12 @@ namespace SabreSprings.Brewing.BrewController.Services
                 {
                     result += process.StandardOutput.ReadToEnd();
                 }
-                Console.WriteLine("Value is " + result + "| END");
                 if (result != "")
                 {
                     //Clean up input
-                    result = string.Concat(result.Where(c => !char.IsWhiteSpace(c)));
-                    temperature = Convert.ToInt32(result);
+                    result = result.Trim();
+                    decimal temp = Convert.ToDecimal(result);
+                    temperature = (int)temp;
                 }
                 else
                 {
