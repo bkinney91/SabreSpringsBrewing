@@ -19,6 +19,18 @@
     <ProjectReference Include="..\SabreSprings.Brewing.BrewController.Services\SabreSprings.Brewing.BrewController.Services.csproj" />
   </ItemGroup>
 
+   <ItemGroup>
+     <None Update="Scripts\pidController.py">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </None>
+     <None Update="Scripts\pumpRelay.py">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </None>
+     <None Update="Scripts\test.py">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </None>
+   </ItemGroup>
+
  
 
 </Project>
