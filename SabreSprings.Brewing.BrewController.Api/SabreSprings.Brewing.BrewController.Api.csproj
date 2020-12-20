@@ -21,13 +21,13 @@
   </ItemGroup>
 
    <ItemGroup>
-     <None Update="Scripts\pidController.py">
+     <None Update="PythonScripts\pidController.py">
        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
      </None>
-     <None Update="Scripts\pumpRelay.py">
+     <None Update="PythonScripts\pumpRelay.py">
        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
      </None>
-     <None Update="Scripts\test.py">
+     <None Update="PythonScripts\test.py">
        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
      </None>
    </ItemGroup>

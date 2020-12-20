@@ -5,9 +5,9 @@ import { AppSettingsHelper } from "@/core/helpers";
 import { injectable, inject } from "inversify";
 
 @injectable()
-export class KettleHubService
+export class PumpHubService
 {
-    private hubName: string = "kettleHub";
+    private hubName: string = "pumpHub";
     private hubConnection!: SignalR.HubConnection;
     constructor()
     {
@@ -22,22 +22,30 @@ export class KettleHubService
         return this.hubConnection.state;
     }
 
-    public SetCurrentTemperatureCallback(receiveFunc: Function){
-        this.hubConnection.on("CurrentTemperature", function(data: any){
+    public SetPump1PowerStateCallback(receiveFunc: Function){
+        this.hubConnection.on("Pump1PowerState", function(data: any){
+            console.log("Getting pump1 data: |" + data + "|");
             receiveFunc(data);
         });
     }
 
-    public SetTargetTemperatureCallback(receiveFunc: Function){
-        this.hubConnection.on("TargetTemperature", function(data: any){
+    public SetPump2PowerStateCallback(receiveFunc: Function){
+        this.hubConnection.on("Pump2PowerState", function(data: any){
+            console.log("Getting pump2 data: |" + data + "|");
             receiveFunc(data);
         });
     }
 
-    public SetTemperature(temperature: number){
-        this.hubConnection.invoke("SetTemperature", temperature);
+    public SetPump1PowerState(powerEnabled: boolean){
+        console.log("Setting pump1 data: |" + powerEnabled + "|");
+        this.hubConnection.invoke("SetPump1PowerState", powerEnabled);
     }
-    
+
+    public SetPump2PowerState(powerEnabled: boolean){
+        console.log("Setting pump2 data: |" + powerEnabled + "|");
+        this.hubConnection.invoke("SetPump2PowerState", powerEnabled);
+    }
+
 
     private async InitializeConnection(){
         if(!this.hubConnection)

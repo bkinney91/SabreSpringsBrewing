@@ -11,15 +11,16 @@
       <div class="col-lg-6">
         <h3>Kettle</h3>
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-6">      
         <div class="onoffswitch">
           <input
+          v-on:click="setPump1PowerState"
             type="checkbox"
             name="kettlePumpSwitch"
             class="onoffswitch-checkbox"
             id="kettlePumpSwitch"
             tabindex="0"
-            v-model="kettlePumpPower"
+            v-model="pump1PowerEnabled"
           />
           <label class="onoffswitch-label" for="kettlePumpSwitch">
             <span class="onoffswitch-inner"></span>
@@ -36,12 +37,13 @@
         <div class="col-lg-6">
           <div class="onoffswitch">
             <input
+            v-on:click="setPump2PowerState"
               type="checkbox"
               name="mashPumpSwitch"
               class="onoffswitch-checkbox"
               id="mashPumpSwitch"
               tabindex="0"
-              v-model="mashPumpPower"
+              v-model="pump2PowerEnabled"
             />
             <label class="onoffswitch-label" for="mashPumpSwitch">
               <span class="onoffswitch-inner"></span>
@@ -130,9 +132,10 @@
 
 <script lang="ts">
 // IMPORTS ----------------------------------
-import { Vue, Component, Inject, Prop } from "vue-property-decorator";
+import { Vue, Component, Inject, Prop, Watch } from "vue-property-decorator";
 import { ServiceTypes } from "@/core/symbols";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
+import { PumpHubService } from "@/core/services"
 import { DxSlider } from "devextreme-vue/slider";
 import { DxNumberBox } from "devextreme-vue/number-box";
 import {
@@ -152,13 +155,36 @@ import {
   },
 })
 export default class PumpControllerComponent extends Vue {
-  private targetTemperature: number = 0;
-  private currentTemperature: number = 187;
-  private kettlePower: boolean = false;
+  @Inject(ServiceTypes.PumpHubService)
+  private pumpHubService!: PumpHubService;
+  private pump1PowerEnabled: boolean = false;
+  private pump2PowerEnabled: boolean = false;
   constructor() {
     super();
+    this.pumpHubService.StartConnection();
   }
 
-  created(): void {}
+  created(): void {
+    this.pumpHubService.SetPump1PowerStateCallback(this.receivePump1);
+    this.pumpHubService.SetPump2PowerStateCallback(this.receivePump2);
+  }
+
+
+
+  private receivePump1(data: any){
+    this.pump1PowerEnabled = data;
+  }
+
+  private receivePump2(data: any){
+    this.pump2PowerEnabled = data;
+  }
+
+  private setPump1PowerState(){
+    this.pumpHubService.SetPump1PowerState(this.pump1PowerEnabled == false);
+  }
+
+  private setPump2PowerState(){
+    this.pumpHubService.SetPump2PowerState(this.pump2PowerEnabled == false);
+  }
 }
 </script>

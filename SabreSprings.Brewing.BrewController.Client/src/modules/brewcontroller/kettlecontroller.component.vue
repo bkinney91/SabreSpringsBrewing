@@ -126,7 +126,7 @@
 import { Vue, Component, Inject, Prop, Watch } from "vue-property-decorator";
 import { ServiceTypes } from "@/core/symbols";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
-import { KettleHubService, KettleApiService } from "@/core/services";
+import { KettleHubService } from "@/core/services";
 import { DxSlider } from "devextreme-vue/slider";
 import { DxNumberBox } from "devextreme-vue/number-box";
 import {
@@ -148,8 +148,6 @@ import {
 export default class KettleControllerComponent extends Vue {
   @Inject(ServiceTypes.KettleHubService)
   private kettleHubService!: KettleHubService;
-  @Inject(ServiceTypes.KettleApiService)
-  private kettleApiService!: KettleApiService;
   private targetTemperature: number = 0;
   private pidTargetTemperature: number = 0
   private currentTemperature: number = 0;
@@ -184,14 +182,8 @@ export default class KettleControllerComponent extends Vue {
     }
 
     private setTemperature(e:any){
-      this.kettleApiService
-      .setTemperature(e)
-      .then(response => {
-        NotifyHelper.displayMessage("Temperature has been set to " + e + "F");
-      })
-      .catch(error => {
-        NotifyHelper.displayError(error);
-      });
+      this.kettleHubService.SetTemperature(e);
+      NotifyHelper.displayMessage("Temperature has been set to " + e + "°F");
     }
 
 

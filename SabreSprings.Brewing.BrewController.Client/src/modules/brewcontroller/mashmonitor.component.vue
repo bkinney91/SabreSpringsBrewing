@@ -81,7 +81,15 @@ export default class MashMonitorComponent extends Vue {
     }
 
     private updateTemperature(temperature: number){
-      this.mashTemperature  = temperature;
+      if(temperature < 0 || temperature > 1000){
+        this.mashTemperature = 0;
+        return;
+      }
+      this.mashTemperature  = this.roundToOne(temperature);
     }
+
+    private roundToOne(num:number) : number{    
+    return Number(Number(num).toFixed(1));
+}
 }
 </script>

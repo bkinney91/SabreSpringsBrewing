@@ -60,6 +60,7 @@ namespace SabreSprings.Brewing.BrewController.Api
 
             builder.RegisterType<KettleService>().As<IKettleService>(); 
             builder.RegisterType<MashService>().As<IMashService>();     
+            builder.RegisterType<PumpService>().As<IPumpService>().SingleInstance();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
