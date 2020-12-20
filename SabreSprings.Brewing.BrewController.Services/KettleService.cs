@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 
 namespace SabreSprings.Brewing.BrewController.Services
 {
@@ -12,16 +13,27 @@ namespace SabreSprings.Brewing.BrewController.Services
         {
             int temperature;
             ProcessStartInfo start = new ProcessStartInfo();
-            start.FileName = "python";
+            start.FileName = "python3";
             start.Arguments = AppDomain.CurrentDomain.BaseDirectory + "Scripts/pidController.py --current";
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             using (Process process = Process.Start(start))
             {
-                using (StreamReader reader = process.StandardOutput)
+                string result = "";
+                while (!process.HasExited)
                 {
-                    temperature = Convert.ToInt32(reader.ReadToEnd());
-                    
+                    result += process.StandardOutput.ReadToEnd();
+                }
+                Console.WriteLine("Value is " + result + "| END");
+                if (result != "")
+                {
+                    //Clean up input
+                    result = string.Concat(result.Where(c => !char.IsWhiteSpace(c)));
+                    temperature = Convert.ToInt32(result);
+                }
+                else
+                {
+                    temperature = 0;
                 }
             }
             return temperature;
@@ -33,16 +45,27 @@ namespace SabreSprings.Brewing.BrewController.Services
         {
             int temperature;
             ProcessStartInfo start = new ProcessStartInfo();
-            start.FileName = "python";
+            start.FileName = "python3";
             start.Arguments = AppDomain.CurrentDomain.BaseDirectory + "Scripts/pidController.py --target";
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             using (Process process = Process.Start(start))
             {
-                using (StreamReader reader = process.StandardOutput)
+                string result = "";
+                while (!process.HasExited)
                 {
-                    temperature = Convert.ToInt32(reader.ReadToEnd());
-                    
+                    result += process.StandardOutput.ReadToEnd();
+                }
+                Console.WriteLine("Value is " + result + "| END");
+                if (result != "")
+                {
+                    //Clean up input
+                    result = string.Concat(result.Where(c => !char.IsWhiteSpace(c)));
+                    temperature = Convert.ToInt32(result);
+                }
+                else
+                {
+                    temperature = 0;
                 }
             }
             return temperature;
@@ -51,7 +74,7 @@ namespace SabreSprings.Brewing.BrewController.Services
         public void SetTemperature(int temperature)
         {
             ProcessStartInfo start = new ProcessStartInfo();
-            start.FileName = "python";
+            start.FileName = "python3";
             start.Arguments = AppDomain.CurrentDomain.BaseDirectory + "Scripts/pidController.py --target" + temperature;
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
