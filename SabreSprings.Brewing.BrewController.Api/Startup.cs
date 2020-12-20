@@ -71,12 +71,12 @@ namespace SabreSprings.Brewing.BrewController.Api
             }
 
             app.UseRouting();
-
-            app.UseAuthorization();
+            app.UseCors(r => r.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:8080", "http://10.0.0.5", "http://10.0.0.5:8000"));
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<Hubs.KettleHub>("/kettleHub");
             });
         }
     }

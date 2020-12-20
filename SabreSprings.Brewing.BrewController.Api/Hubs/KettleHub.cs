@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.SignalR;
-using SabreSprings.Brewing.BrewController.Services.Interfaces;
 using System.Threading.Tasks;
 
 namespace SabreSprings.Brewing.BrewController.Api.Hubs

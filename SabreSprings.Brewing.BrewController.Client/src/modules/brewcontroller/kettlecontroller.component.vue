@@ -28,7 +28,7 @@
           <h4>Current Temperature</h4>
           <DxLinearGauge :value.sync="currentTemperature">
             <DxScale :start-value="120" :end-value="220" :tick-interval="20">
-              <DxLabel :customize-text="customizeText" />
+             
             </DxScale>
             <DxValueIndicator type="textCloud" color="#734F96" />
           </DxLinearGauge>
@@ -47,9 +47,11 @@
             style="margin-left: 4%"
             width="92%"
             v-model:value="targetTemperature"
+            @value-changed="changeTemperature"
             :min="120"
             :max="220"
             :tooltip="{ enabled: true }"
+            
           />
         </div>
         <div class="col-lg-2">
@@ -139,11 +141,10 @@
 
 <script lang="ts">
 // IMPORTS ----------------------------------
-import { Vue, Component, Inject, Prop } from "vue-property-decorator";
+import { Vue, Component, Inject, Prop, Watch } from "vue-property-decorator";
 import { ServiceTypes } from "@/core/symbols";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
-import { KettleHubService } from "@/core/services";
-import BootstrapToggle from "vue-bootstrap-toggle";
+import { KettleHubService, KettleApiService } from "@/core/services";
 import { DxSlider } from "devextreme-vue/slider";
 import { DxNumberBox } from "devextreme-vue/number-box";
 import {
@@ -165,20 +166,48 @@ import {
 export default class KettleControllerComponent extends Vue {
   @Inject(ServiceTypes.KettleHubService)
   private kettleHubService!: KettleHubService;
-  private targetTemperature: number = 0;
+  @Inject(ServiceTypes.KettleApiService)
+  private kettleApiService!: KettleApiService;
+  private targetTemperature: number = 133;
   private currentTemperature: number = 187;
   private kettlePower: boolean = false;
 
+ private changeTemperature(e:any){
+    console.log("it is ", e);
+  }
+
   constructor() {
     super();
+    this.kettleHubService.StartConnection();
   }
 
   created(): void {
-    this.kettleHubService.SetTapDataCallback(this.updateCurrentTemperature);
+    this.kettleHubService.SetTargetTemperatureCallback(this.updateTargetTemperature);
+    this.kettleHubService.SetCurrentTemperatureCallback(this.updateCurrentTemperature);
     }
 
-    public updateCurrentTemperature(temperature: number){
+    private updateTargetTemperature(temperature: number){
+      if(temperature != this.targetTemperature){
+        this.setTemperature(this.targetTemperature);
+      }
+      else{
       this.targetTemperature = temperature;
+      }
+    }
+
+     private updateCurrentTemperature(temperature: number){
+      this.currentTemperature = temperature;
+    }
+
+    private setTemperature(e:any){
+      this.kettleApiService
+      .setTemperature(e)
+      .then(response => {
+        NotifyHelper.displayMessage("Temperature has been set to " + e + "F");
+      })
+      .catch(error => {
+        NotifyHelper.displayError(error);
+      });
     }
 
 }

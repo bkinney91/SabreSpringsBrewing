@@ -20,7 +20,8 @@
 import Router from "./router";
 import {
   KettleHubService,
-  PumpApiService
+  PumpApiService,
+  KettleApiService
 } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
 import NavigationComponent from "@/modules/layout/nav-container.component.vue";
@@ -43,7 +44,9 @@ let container = configureContainer();
     [ServiceTypes.PumpApiService]: container.get<PumpApiService>(
       ServiceTypes.PumpApiService
     ),
-   
+     [ServiceTypes.KettleApiService]: container.get<KettleApiService>(
+      ServiceTypes.KettleApiService
+    ),
   },
 })
 

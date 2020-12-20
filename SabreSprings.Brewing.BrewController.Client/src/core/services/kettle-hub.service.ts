@@ -22,8 +22,14 @@ export class KettleHubService
         return this.hubConnection.state;
     }
 
-    public SetTapDataCallback(receiveFunc: Function){
-        this.hubConnection.on("KettleData", function(data: any){
+    public SetCurrentTemperatureCallback(receiveFunc: Function){
+        this.hubConnection.on("CurrentTemperature", function(data: any){
+            receiveFunc(data);
+        });
+    }
+
+    public SetTargetTemperatureCallback(receiveFunc: Function){
+        this.hubConnection.on("TargetTemperature", function(data: any){
             receiveFunc(data);
         });
     }

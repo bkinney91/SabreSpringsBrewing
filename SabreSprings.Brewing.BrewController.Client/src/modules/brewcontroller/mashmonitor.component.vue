@@ -35,8 +35,6 @@
 import { Vue, Component, Inject, Prop } from "vue-property-decorator";
 import { ServiceTypes } from "@/core/symbols";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
-
-import BootstrapToggle from "vue-bootstrap-toggle";
 import { DxSlider } from "devextreme-vue/slider";
 import { DxNumberBox } from "devextreme-vue/number-box";
 import {
