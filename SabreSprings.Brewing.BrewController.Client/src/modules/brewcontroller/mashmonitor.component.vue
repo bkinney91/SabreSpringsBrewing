@@ -50,6 +50,7 @@ import {
   DxTitle,
   DxFont,
 } from "devextreme-vue/circular-gauge";
+import { MashHubService } from "@/core/services";
 @Component({
   components: {
     DxSlider,
@@ -66,11 +67,21 @@ import {
   },
 })
 export default class MashMonitorComponent extends Vue {
-  private mashTemperature: number = 145;
+  @Inject(ServiceTypes.MashHubService)
+  private mashHubService!: MashHubService;
+  private mashTemperature: number = 0;
   constructor() {
     super();
+    this.mashHubService.StartConnection();
   }
 
-  created(): void {}
+  created(): void {
+    this.mashHubService.SetTemperatureCallback(this.updateTemperature);
+   
+    }
+
+    private updateTemperature(temperature: number){
+      this.mashTemperature  = temperature;
+    }
 }
 </script>

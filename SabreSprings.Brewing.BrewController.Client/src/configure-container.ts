@@ -4,7 +4,8 @@ import {
 	BaseApiService,
 	KettleHubService,
 	PumpApiService,
-	KettleApiService
+	KettleApiService,
+	MashHubService,
 
 } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
@@ -37,9 +38,13 @@ export function configureContainer(): Container {
 		.bind<KettleHubService>(ServiceTypes.KettleHubService)
 		.to(KettleHubService)
 		.inSingletonScope();
-		container
+	container
 		.bind<KettleApiService>(ServiceTypes.KettleApiService)
 		.to(KettleApiService)
+		.inSingletonScope();
+	container
+		.bind<MashHubService>(ServiceTypes.MashHubService)
+		.to(MashHubService)
 		.inSingletonScope();
 	return container;
 }

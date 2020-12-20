@@ -20,6 +20,7 @@
 import Router from "./router";
 import {
   KettleHubService,
+  MashHubService,
   PumpApiService,
   KettleApiService
 } from "@/core/services";
@@ -40,6 +41,9 @@ let container = configureContainer();
     [ServiceTypes.Container]: container,
     [ServiceTypes.KettleHubService]: container.get<KettleHubService>(
       ServiceTypes.KettleHubService
+    ),
+    [ServiceTypes.MashHubService]: container.get<MashHubService>(
+      ServiceTypes.MashHubService
     ),
     [ServiceTypes.PumpApiService]: container.get<PumpApiService>(
       ServiceTypes.PumpApiService

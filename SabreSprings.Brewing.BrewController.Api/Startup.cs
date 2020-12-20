@@ -57,7 +57,8 @@ namespace SabreSprings.Brewing.BrewController.Api
                                 .CreateLogger();
 
             builder.RegisterType<PumpService>().As<IPumpService>();
-            builder.RegisterType<KettleService>().As<IKettleService>();      
+            builder.RegisterType<KettleService>().As<IKettleService>(); 
+            builder.RegisterType<MashService>().As<IMashService>();     
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,6 +78,7 @@ namespace SabreSprings.Brewing.BrewController.Api
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<Hubs.KettleHub>("/kettleHub");
+                endpoints.MapHub<Hubs.MashHub>("/mashHub");
             });
         }
     }

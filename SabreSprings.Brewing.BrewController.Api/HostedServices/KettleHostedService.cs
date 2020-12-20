@@ -15,12 +15,19 @@ namespace SabreSprings.Brewing.BrewController.HostedServices
     {
         private Timer _timer;
         private readonly IKettleService KettleService;
+        private readonly IMashService MashService;
         private readonly IHubContext<KettleHub> KettleHubContext;
+        private readonly IHubContext<MashHub> MashHubContext;
 
-        public KettleHostedService(IKettleService kettleService, IHubContext<KettleHub> kettleHubContext)
+        public KettleHostedService(IKettleService kettleService,
+         IHubContext<KettleHub> kettleHubContext, 
+         IHubContext<MashHub> mashHubContext,
+          IMashService mashService)
         {
             KettleService = kettleService;
             KettleHubContext = kettleHubContext;
+            MashHubContext = mashHubContext;
+            MashService = mashService;
         }
 
         public Task StartAsync(CancellationToken stoppingToken)
@@ -34,12 +41,14 @@ namespace SabreSprings.Brewing.BrewController.HostedServices
         {
             int currentTemperature = KettleService.GetCurrentTemperature();
             int targetTemperature = KettleService.GetTargetTemperature();
+            decimal mashTemperature = MashService.GetTemperature();
             Console.WriteLine("Current temperature is " + currentTemperature);
             Console.WriteLine("Target temperature is " + targetTemperature);
             Task.Run(() =>
             {
                 KettleHubContext.Clients.All.SendAsync("TargetTemperature", targetTemperature);
                 KettleHubContext.Clients.All.SendAsync("CurrentTemperature", currentTemperature);
+                MashHubContext.Clients.All.SendAsync("MashTemperature", mashTemperature);
             });
             
         }
