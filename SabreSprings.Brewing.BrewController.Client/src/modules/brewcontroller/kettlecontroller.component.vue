@@ -187,9 +187,12 @@ export default class KettleControllerComponent extends Vue {
     }
 
     private updateTargetTemperature(temperature: number){
+      console.log("temp |" + temperature + "|");
+      console.log("target |"+ this.targetTemperature + "|");
       if(temperature != this.targetTemperature){
         this.setTemperature(this.targetTemperature);
       }
+
       else{
       this.targetTemperature = temperature;
       }

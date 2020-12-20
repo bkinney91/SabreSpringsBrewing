@@ -79,13 +79,8 @@ namespace SabreSprings.Brewing.BrewController.Services
             start.Arguments = AppDomain.CurrentDomain.BaseDirectory + "Scripts/pidController.py --set" + temperature;
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
-            using (Process process = Process.Start(start))
-            {
-                using (StreamReader reader = process.StandardOutput)
-                {
-                    string output = reader.ReadToEnd();                    
-                }
-            }
+            Process process = Process.Start(start); 
+            while(!process.HasExited)      {}     //Wait for process to finish 
         }
     }
 }
