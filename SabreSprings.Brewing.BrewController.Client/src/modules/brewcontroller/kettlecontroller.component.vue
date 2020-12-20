@@ -27,7 +27,7 @@
         <div class="col-lg-10">
           <h4>Current Temperature</h4>
           <DxLinearGauge :value.sync="currentTemperature">
-            <DxScale :start-value="120" :end-value="220" :tick-interval="20">
+            <DxScale :start-value="0" :end-value="220" :tick-interval="20">
              
             </DxScale>
             <DxValueIndicator type="textCloud" color="#734F96" />
@@ -48,7 +48,7 @@
             width="92%"
             v-model:value="targetTemperature"
             @value-changed="changeTemperature"
-            :min="120"
+            :min="0"
             :max="220"
             :tooltip="{ enabled: true }"
             
@@ -168,8 +168,8 @@ export default class KettleControllerComponent extends Vue {
   private kettleHubService!: KettleHubService;
   @Inject(ServiceTypes.KettleApiService)
   private kettleApiService!: KettleApiService;
-  private targetTemperature: number = 133;
-  private currentTemperature: number = 187;
+  private targetTemperature: number = 0;
+  private currentTemperature: number = 0;
   private kettlePower: boolean = false;
 
  private changeTemperature(e:any){
