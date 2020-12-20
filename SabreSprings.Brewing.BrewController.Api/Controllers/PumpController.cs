@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SabreSprings.Brewing.BrewController.Api.Models;
 using SabreSprings.Brewing.BrewController.Services.Interfaces;
@@ -20,8 +20,8 @@ namespace SabreSprings.Brewing.BrewController.Api.Controllers
         }
 
 
-        [Route("SetTemperature")]
-        [HttpPost]
+        [Route("Pump1")]
+        [HttpGet]
         public async Task<IActionResult> SetTemperature(KettleTemperatureDto dto)
         {
             try

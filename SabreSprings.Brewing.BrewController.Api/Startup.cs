@@ -41,6 +41,8 @@ namespace SabreSprings.Brewing.BrewController.Api
             services.AddControllers();
             services.AddSignalR();
             services.AddHostedService<KettleHostedService>();
+            services.AddHostedService<MashHostedService>();
+            services.AddHostedService<PumpHostedService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SabreSprings.Brewing.BrewController.Api", Version = "v1" });
@@ -56,7 +58,6 @@ namespace SabreSprings.Brewing.BrewController.Api
                                 .WriteTo.File("Log-.txt", rollingInterval: RollingInterval.Day)
                                 .CreateLogger();
 
-            builder.RegisterType<PumpService>().As<IPumpService>();
             builder.RegisterType<KettleService>().As<IKettleService>(); 
             builder.RegisterType<MashService>().As<IMashService>();     
         }
@@ -79,6 +80,7 @@ namespace SabreSprings.Brewing.BrewController.Api
                 endpoints.MapControllers();
                 endpoints.MapHub<Hubs.KettleHub>("/kettleHub");
                 endpoints.MapHub<Hubs.MashHub>("/mashHub");
+                endpoints.MapHub<Hubs.PumpHub>("/pumpHub");
             });
         }
     }

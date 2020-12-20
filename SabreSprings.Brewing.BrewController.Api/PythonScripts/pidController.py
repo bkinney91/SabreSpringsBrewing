@@ -33,13 +33,15 @@ def setKettleTarget(value):
 def main(argv):
     
     parser = argparse.ArgumentParser()
-    parser.add_argument("-c", "--current", action="store_true") #Used to get current temp
-    parser.add_argument("-t", "--target", action="store_true") #Used to get target temp (SV on the PID)
-    parser.add_argument("-s","--set", type=int) 
+    parser.add_argument("-c", "--current", action="store_true", help="Returns the current temperature of the kettle") #Used to get current temp
+    parser.add_argument("-t", "--target", action="store_true", help="Returns the target temperature of the PID") #Used to get target temp (SV on the PID)
+    parser.add_argument("-s","--set", type=int, help="Requires an integer value above 0, sets the PID target to the provided value.") 
    
     args = parser.parse_args()
     try:
         if(args.set):
+            if(args.set < 1):
+                raise Exception("PID will not accept value below 1")
             setKettleTarget(args.set)
         elif(args.current):
             print(getCurrentTemperature())

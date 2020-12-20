@@ -15,7 +15,7 @@ namespace SabreSprings.Brewing.BrewController.Services
             int temperature;
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = "python3";
-            start.Arguments = AppDomain.CurrentDomain.BaseDirectory + "Scripts/pidController.py --current";
+            start.Arguments = AppDomain.CurrentDomain.BaseDirectory + "PythonScripts/pidController.py --current";
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             using (Process process = Process.Start(start))
@@ -47,7 +47,7 @@ namespace SabreSprings.Brewing.BrewController.Services
             int temperature;
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = "python3";
-            start.Arguments = AppDomain.CurrentDomain.BaseDirectory + "Scripts/pidController.py --target";
+            start.Arguments = AppDomain.CurrentDomain.BaseDirectory + "PythonScripts/pidController.py --target";
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             using (Process process = Process.Start(start))
@@ -76,11 +76,13 @@ namespace SabreSprings.Brewing.BrewController.Services
         {
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = "python3";
-            start.Arguments = AppDomain.CurrentDomain.BaseDirectory + "Scripts/pidController.py --set " + temperature;
+            start.Arguments = AppDomain.CurrentDomain.BaseDirectory + "PythonScripts/pidController.py --set " + temperature;
             start.UseShellExecute = false;
-            start.RedirectStandardOutput = true;
-            Process process = Process.Start(start); 
-            while(!process.HasExited)      {}     //Wait for process to finish 
+            start.RedirectStandardOutput = true;           
+            using (Process process = Process.Start(start))
+            {
+                while(!process.HasExited)      {}     //Wait for process to finish 
+            }
         }
     }
 }
