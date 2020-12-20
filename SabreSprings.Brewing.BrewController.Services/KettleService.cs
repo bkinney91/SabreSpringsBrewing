@@ -76,7 +76,7 @@ namespace SabreSprings.Brewing.BrewController.Services
         {
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = "python3";
-            start.Arguments = AppDomain.CurrentDomain.BaseDirectory + "Scripts/pidController.py --set" + temperature;
+            start.Arguments = AppDomain.CurrentDomain.BaseDirectory + "Scripts/pidController.py --set " + temperature;
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             Process process = Process.Start(start); 

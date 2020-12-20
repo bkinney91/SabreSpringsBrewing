@@ -31,6 +31,7 @@ namespace SabreSprings.Brewing.BrewController.Api.Controllers
             }
             catch (Exception ex)
             {
+                throw;
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
         }

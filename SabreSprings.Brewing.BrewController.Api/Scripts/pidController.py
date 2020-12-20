@@ -25,6 +25,7 @@ def getTargetTemperature():
     return pid.read_float(0)
 
 def setKettleTarget(value):
+    print("setting temperature to ", value)
     pid.write_float(0, value)
 
 

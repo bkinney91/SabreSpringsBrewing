@@ -3,24 +3,7 @@
     <div class="card-body">
       <div class="row">
         <div class="col-lg-10"><h2>Kettle</h2></div>
-        <div class="col-lg-2">
-          <div class="float-right">
-            <div class="onoffswitch">
-              <input
-                type="checkbox"
-                name="onoffswitch"
-                class="onoffswitch-checkbox"
-                id="myonoffswitch"
-                tabindex="0"
-                v-model="kettlePower"
-              />
-              <label class="onoffswitch-label" for="myonoffswitch">
-                <span class="onoffswitch-inner"></span>
-                <span class="onoffswitch-switch"></span>
-              </label>
-            </div>
-          </div>
-        </div>
+       
       </div>
       <hr />
       <div class="row">
@@ -46,8 +29,7 @@
           <DxSlider
             style="margin-left: 4%"
             width="92%"
-            v-model:value="targetTemperature"
-            @value-changed="changeTemperature"
+            v-model:value="targetTemperature"            
             :min="0"
             :max="220"
             :tooltip="{ enabled: true }"
@@ -169,12 +151,11 @@ export default class KettleControllerComponent extends Vue {
   @Inject(ServiceTypes.KettleApiService)
   private kettleApiService!: KettleApiService;
   private targetTemperature: number = 0;
+  private pidTargetTemperature: number = 0
   private currentTemperature: number = 0;
-  private kettlePower: boolean = false;
 
- private changeTemperature(e:any){
-    console.log("it is ", e);
-  }
+  
+
 
   constructor() {
     super();
@@ -186,19 +167,19 @@ export default class KettleControllerComponent extends Vue {
     this.kettleHubService.SetCurrentTemperatureCallback(this.updateCurrentTemperature);
     }
 
-    private updateTargetTemperature(temperature: number){
-      console.log("temp |" + temperature + "|");
-      console.log("target |"+ this.targetTemperature + "|");
-      if(temperature != this.targetTemperature){
+    private updateTargetTemperature(temperature: number){   
+      if(temperature != this.pidTargetTemperature){
+        //store new value from PID
+        this.pidTargetTemperature = temperature;
+        this.targetTemperature = temperature;       
+      }
+      else if(temperature != this.targetTemperature && this.targetTemperature != 0){
         this.setTemperature(this.targetTemperature);
       }
-
-      else{
-      this.targetTemperature = temperature;
-      }
+      
     }
 
-     private updateCurrentTemperature(temperature: number){
+    private updateCurrentTemperature(temperature: number){
       this.currentTemperature = temperature;
     }
 
@@ -212,6 +193,8 @@ export default class KettleControllerComponent extends Vue {
         NotifyHelper.displayError(error);
       });
     }
+
+
 
 }
 </script>

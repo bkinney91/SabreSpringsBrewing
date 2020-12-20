@@ -26,7 +26,7 @@ namespace SabreSprings.Brewing.BrewController.HostedServices
         public Task StartAsync(CancellationToken stoppingToken)
         {
             _timer = new Timer(DoWork, null, TimeSpan.Zero,
-                TimeSpan.FromSeconds(15));
+                TimeSpan.FromSeconds(1));
             return Task.CompletedTask;
         }
 
