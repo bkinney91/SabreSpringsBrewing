@@ -13,7 +13,7 @@ namespace SabreSprings.Brewing.BrewController.Services
             int temperature;
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = "python";
-            start.Arguments = AppDomain.CurrentDomain.BaseDirectory + "Scripts\\pidController.py --current";
+            start.Arguments = AppDomain.CurrentDomain.BaseDirectory + "Scripts/pidController.py --current";
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             using (Process process = Process.Start(start))
@@ -34,7 +34,7 @@ namespace SabreSprings.Brewing.BrewController.Services
             int temperature;
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = "python";
-            start.Arguments = AppDomain.CurrentDomain.BaseDirectory + "Scripts\\pidController.py --target";
+            start.Arguments = AppDomain.CurrentDomain.BaseDirectory + "Scripts/pidController.py --target";
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             using (Process process = Process.Start(start))
@@ -52,7 +52,7 @@ namespace SabreSprings.Brewing.BrewController.Services
         {
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = "python";
-            start.Arguments = AppDomain.CurrentDomain.BaseDirectory + "Scripts\\pidController.py --target" + temperature;
+            start.Arguments = AppDomain.CurrentDomain.BaseDirectory + "Scripts/pidController.py --target" + temperature;
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             using (Process process = Process.Start(start))

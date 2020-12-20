@@ -1,0 +1,14 @@
+[Unit]
+Description=SabreSpringsBrewController.Api
+After=network.target
+[Service]
+Type=simple
+Restart=always
+RestartSec=10
+User=root
+WorkingDirectory=/home/bryce/BrewControllerApi/
+ExecStart=/usr/bin/sudo /usr/share/dotnet/dotnet /home/bryce/BrewControllerApi/SabreSprings.Brewing.BrewController.Api.dll --environment="Production"
+Environment=ASPNETCORE_ENVIRONMENT=Production
+
+[Install]
+WantedBy=multi-user.target
