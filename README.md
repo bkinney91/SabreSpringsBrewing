@@ -37,8 +37,7 @@ This application suite is for automating my home brewery. It includes a .NET 5.0
     <ul>
         <li>
             Tap line flowmeters - This idea was based on the <a href="https://learn.adafruit.com/adafruit-keg-bot/overview" >Adafruit Kegomatic</a>, but instead of using a python
-            GUI I decided to have my script send an HTTP request to the Web Api portion of this application. Check out the <a href="/Taproom/OnTap">On Tap</a> page to see a how much
-            beer is left in each keg.       
+            GUI I decided to have my script send an HTTP request to an API endpoint on my main node. From there the server would use SignalR to send a message to any client that had the "On Tap" page open with the amount that was poured from the tap.
         </li>
     </ul>
 </p>
