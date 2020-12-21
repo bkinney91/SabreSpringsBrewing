@@ -8,7 +8,7 @@
       <hr />
       <div class="row">
         <div class="col-lg-10">
-          <h4>Current Temperaturez</h4>
+          <h4>Current Temperature</h4>
           <DxLinearGauge :value.sync="currentTemperature">
             <DxScale :start-value="0" :end-value="220" :tick-interval="20">
              
