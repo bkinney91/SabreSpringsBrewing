@@ -15,13 +15,13 @@ This application suite is for automating my home brewery. It includes a .NET 5.0
         </li>
         <li>
             Pump Control - Using a <a href="https://www.electronics-salon.com/products/electronics-salon-rpi-power-relay-board-expansion-module-for-raspberry-pi-a-b-2b-3b">Rapsberry pi Relay hat</a> and some panel mounted NEMA connectors the application is able to control both pumps via toggle switches on the GUI.
-        <li>
+        </li>
     </ul>
 </p>
-![Control Box wiring](photos/wiring.jpg)
-![PID screen and a display screen for measuring amps](photos/pidScreen.jpg)
-![Screenshot of the GUI to control the box](photos/brewcontrollergui.png)
-![GUI and the box](photos/guiAndBox.png)
+![Control Box wiring](https://i.imgur.com/kw4wAD4.jpg)
+![PID screen and a display screen for measuring amps](https://i.imgur.com/GmCVmwS.jpg)
+![Screenshot of the GUI to control the box](https://i.imgur.com/jQalSbG.png)
+![GUI and the box](https://i.imgur.com/0XiLflq.jpg)
 
 <h3>Fermenting</h3>
 <p>
