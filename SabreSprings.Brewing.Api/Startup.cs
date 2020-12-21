@@ -44,7 +44,7 @@ namespace SabreSprings.Brewing.Api
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
-
+            services.AddControllers();
             services.AddSignalR();
         }
 
