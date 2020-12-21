@@ -42,6 +42,7 @@ This application suite is for automating my home brewery. It includes a .NET 5.0
         </li>
     </ul>
 </p>
+<img src="https://i.imgur.com/obdGXPV.png" alt="SignalR and Vue Typescript UI for what is on tap"></img>
 <h3>Planning</h3>
 <p>
     <ul>
@@ -53,3 +54,4 @@ This application suite is for automating my home brewery. It includes a .NET 5.0
         </li>
     </ul>
 </p>
+<img src="https://i.imgur.com/29hX7kT.png" alt="Interface for updating batches"></img>
