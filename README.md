@@ -8,7 +8,7 @@ This application suite is for automating my home brewery. It includes a .NET 5.0
     2 <a href="https://www.blichmannengineering.com/riptide-brewing-pump.html">Blichmann Riptide </a> pumps. In order to do a full re-circulation brew I would need my software to manage the heating element and 2 pumps along with monitoring my mash tun's temperature. The GUI for these features is built using SignalR so that the GUI can update in realtime.
     <ul>
         <li> 
-            Kettle Control - A GUI to control an <a href="https://www.auberins.com/index.php?main_page=product_info&products_id=651">Auber SYL2831 PID</a> wired to an SSR, the interface allows for viewing current temperature of the kettle as well setting the target temperature on the PID. The GUI will also update if the buttons on the PID itself are utilized. To communicate with the PID the raspberry pi is wired via a USB to Modbus RS485 adapter, with the actual controlling functions written using MinimalModbus and python.
+            Kettle Control - A GUI to control an <a href="https://www.auberins.com/index.php?main_page=product_info&products_id=651">Auber SYL2831 PID</a> wired to an SSR, the interface allows for viewing current temperature of the kettle as well as setting the target temperature on the PID. The GUI will also update if the buttons on the PID itself are utilized. To communicate with the PID the raspberry pi is wired via a USB to Modbus RS485 adapter, with the actual controlling functions written using MinimalModbus and python.
         </li>
         <li>
             Mash Tun monitoring - A Pt100 RTD sensor has been installed into the mash tun in order to have the GUI display the temperature. This was wired up using a <a href="https://sequentmicrosystems.com/product/rtd-data-acquisition-card-for-rpi/" >SequentMicrosystems Mega-RTD Raspberry pi hat</a>.
@@ -26,18 +26,11 @@ This application suite is for automating my home brewery. It includes a .NET 5.0
 
 <h3>Fermenting</h3>
 <p>
-    <ul>
-    <li>
-        Tap line flowmeters - This idea was based on the <a href="https://learn.adafruit.com/adafruit-keg-bot/overview" >Adafruit Kegomatic</a>, but instead of using a python
-        GUI I decided to have my script send an HTTP request to the Web Api portion of this application. Check out the <a href="/Taproom/OnTap">On Tap</a> page to see a how much
-        beer is left in each keg.       
-    </li>
-    <li>
-        Fermentation Monitoring - API endpoints for gathering temperature and gravity of a currently fermenting beer, including history and graphs. To gather this data I used
-        following the hardware guide provided by <a href="https://www.opensourcedistilling.com/ispindel-assembly/">Open Source Distilling</a>
-        along with the open source <a href="http://www.ispindel.de/">iSpindel</a> software.
-    </li>
-</ul>
+    <ul>    
+        <li>
+            Fermentation Monitoring - API endpoints for gathering temperature and gravity of a currently fermenting beer, including history and graphs. The data is collected by devices I soldered up using guide provided by <a href="https://www.opensourcedistilling.com/ispindel-assembly/">Open Source Distilling</a> with the software being provided by <a href="http://www.ispindel.de/">iSpindel</a>.
+        </li>
+    </ul>
 
 <h3>Serving</h3>
 <p>
