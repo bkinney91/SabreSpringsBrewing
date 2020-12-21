@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SabreSprings.Brewing.Data",
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SabreSprings.Brewing.Database", "SabreSprings.Brewing.Database\SabreSprings.Brewing.Database.sqlproj", "{5AEA2AB2-21D5-4B62-A6C0-121CFFD3E768}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SabreSprings.Brewing.Web", "SabreSprings.Brewing.Web\SabreSprings.Brewing.Web.csproj", "{769B8482-D690-4254-8F64-0496A1233C3E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SabreSprings.Brewing.Models", "SabreSprings.Brewing.Models\SabreSprings.Brewing.Models.csproj", "{E5073F41-F5FB-4A8D-A9A4-9D847EA650DB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TapListener", "TapListener", "{BD74DBF7-BAFD-4D33-84BD-9B6EA59CFC5D}"
@@ -19,6 +17,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TapListener", "TapListener"
 		TapListener\TapListener.py = TapListener\TapListener.py
 		TapListener\TapListener.service = TapListener\TapListener.service
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SabreSprings.Brewing.BrewController.Api", "SabreSprings.Brewing.BrewController.Api\SabreSprings.Brewing.BrewController.Api.csproj", "{426F9C4E-4EC6-44F1-8C8F-5C904AC2A50B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SabreSprings.Brewing.Api", "SabreSprings.Brewing.Api\SabreSprings.Brewing.Api.csproj", "{A6006623-65F4-4518-8E22-C4C241474B40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SabreSprings.Brewing.BrewController.Services", "SabreSprings.Brewing.BrewController.Services\SabreSprings.Brewing.BrewController.Services.csproj", "{2D9F2755-6C32-4911-9945-2D3BAFA4BB3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,18 +52,30 @@ Global
 		{5AEA2AB2-21D5-4B62-A6C0-121CFFD3E768}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AEA2AB2-21D5-4B62-A6C0-121CFFD3E768}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5AEA2AB2-21D5-4B62-A6C0-121CFFD3E768}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{769B8482-D690-4254-8F64-0496A1233C3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{769B8482-D690-4254-8F64-0496A1233C3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{769B8482-D690-4254-8F64-0496A1233C3E}.Production|Any CPU.ActiveCfg = Production|Any CPU
-		{769B8482-D690-4254-8F64-0496A1233C3E}.Production|Any CPU.Build.0 = Production|Any CPU
-		{769B8482-D690-4254-8F64-0496A1233C3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{769B8482-D690-4254-8F64-0496A1233C3E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E5073F41-F5FB-4A8D-A9A4-9D847EA650DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E5073F41-F5FB-4A8D-A9A4-9D847EA650DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5073F41-F5FB-4A8D-A9A4-9D847EA650DB}.Production|Any CPU.ActiveCfg = Production|Any CPU
 		{E5073F41-F5FB-4A8D-A9A4-9D847EA650DB}.Production|Any CPU.Build.0 = Production|Any CPU
 		{E5073F41-F5FB-4A8D-A9A4-9D847EA650DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5073F41-F5FB-4A8D-A9A4-9D847EA650DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{426F9C4E-4EC6-44F1-8C8F-5C904AC2A50B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{426F9C4E-4EC6-44F1-8C8F-5C904AC2A50B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{426F9C4E-4EC6-44F1-8C8F-5C904AC2A50B}.Production|Any CPU.ActiveCfg = Production|Any CPU
+		{426F9C4E-4EC6-44F1-8C8F-5C904AC2A50B}.Production|Any CPU.Build.0 = Production|Any CPU
+		{426F9C4E-4EC6-44F1-8C8F-5C904AC2A50B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{426F9C4E-4EC6-44F1-8C8F-5C904AC2A50B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6006623-65F4-4518-8E22-C4C241474B40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6006623-65F4-4518-8E22-C4C241474B40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6006623-65F4-4518-8E22-C4C241474B40}.Production|Any CPU.ActiveCfg = Production|Any CPU
+		{A6006623-65F4-4518-8E22-C4C241474B40}.Production|Any CPU.Build.0 = Production|Any CPU
+		{A6006623-65F4-4518-8E22-C4C241474B40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6006623-65F4-4518-8E22-C4C241474B40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D9F2755-6C32-4911-9945-2D3BAFA4BB3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D9F2755-6C32-4911-9945-2D3BAFA4BB3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D9F2755-6C32-4911-9945-2D3BAFA4BB3D}.Production|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D9F2755-6C32-4911-9945-2D3BAFA4BB3D}.Production|Any CPU.Build.0 = Debug|Any CPU
+		{2D9F2755-6C32-4911-9945-2D3BAFA4BB3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D9F2755-6C32-4911-9945-2D3BAFA4BB3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
