@@ -18,9 +18,12 @@ This application suite is for automating my home brewery. It includes a .NET 5.0
         </li>
     </ul>
 </p>
-![Control Box wiring](https://i.imgur.com/kw4wAD4.jpg)
-![PID screen and a display screen for measuring amps](https://i.imgur.com/GmCVmwS.jpg)
-![Screenshot of the GUI to control the box](https://i.imgur.com/jQalSbG.png)
+![Control Box wiring]
+(https://i.imgur.com/kw4wAD4.jpg)
+![PID screen and a display screen for measuring amps]
+(https://i.imgur.com/GmCVmwS.jpg)
+![Screenshot of the GUI to control the box]
+(https://i.imgur.com/jQalSbG.png)
 ![GUI and the box](https://i.imgur.com/0XiLflq.jpg)
 
 <h3>Fermenting</h3>
