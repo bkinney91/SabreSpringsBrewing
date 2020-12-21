@@ -20,6 +20,7 @@ This application suite is for automating my home brewery. It includes a .NET 5.0
 </p>
 ![Control Box wiring]
 (https://i.imgur.com/kw4wAD4.jpg)
+<img src="https://i.imgur.com/kw4wAD4.jpg"></img>
 ![PID screen and a display screen for measuring amps]
 (https://i.imgur.com/GmCVmwS.jpg)
 ![Screenshot of the GUI to control the box]
