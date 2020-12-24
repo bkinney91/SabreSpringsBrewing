@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <!-- Don't forget to update this package manually if you update the client in the package.json file -->
+    <script src="oidc-client.min.js"></script>
+    <script>
+        new Oidc.UserManager().signinSilentCallback()
+            .catch((err) => {
+                console.log(err);
+            });
+    </script>
+</body>
+</html>

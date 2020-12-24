@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.png" />
+    <!-- Bootstrap Styles -->
+    <link href="<%= BASE_URL %>Content/bootstrap/bootstrap.css" rel="stylesheet" />
+    <!-- Styles -->
+    <link href="<%= BASE_URL %>Content/font-awesome-pro.css" rel="stylesheet" />
+    <link href="<%= BASE_URL %>Content/sabresprings-styles.css" rel="stylesheet" />
+    <!-- DevExtreme -->
+    <link href="<%= BASE_URL %>Content/devExtreme/dx.common.css" rel="stylesheet" />
+    <link href="<%= BASE_URL %>Content/devExtreme/dx.dark.css" rel="stylesheet" />
+
+    <!--Moment-->
+    <script type="text/javascript" src="<%= BASE_URL %>Scripts/moment.min.js"></script>
+    <!--Jquery-->
+    <script src="<%= BASE_URL %>Scripts/jquery/jquery-3.3.1.min.js"></script>
+    <!--BootStrap-->
+    <script src="<%= BASE_URL %>Scripts/bootstrap/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+		//This fixes the formating of time to the user timezone instead of UTC
+		Date.prototype.toJSON = function() {
+			return moment(this).format();
+		};
+    </script>
+    <title>Sabre Springs Brewing</title>
+</head>
+<body>
+    <noscript>
+        <strong>
+            We're sorry but client doesn't work properly without JavaScript enabled. Please enable it to continue.
+        </strong>
+    </noscript>
+    <div id="app"><i class="fal fa-spinner fa-spin ml-2 mr-1"></i> Loading... Please wait...</div>
+    <!-- built files will be auto injected -->
+</body>
+</html>

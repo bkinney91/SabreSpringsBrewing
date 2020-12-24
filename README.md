@@ -1,44 +1,56 @@
 # SabreSpringsBrewing
 <p>
-    This website is designed to help me automate and organize all my brewing activities, and to make naming variables easier I decided 
-    to give my home brewery a name. 
+This application suite is for automating my home brewery. It includes a .NET 5.0 middle tier, SQL Express backend, a Vue Typescript front end with SignalR, and python with Modbus RS485. The application is hosted using kestrel, Apache2, and systemd. The infrasturcture includes 2 Raspberry pi's, one for the TapController and one for the BrewController, as well as an Odroid N2 that hosts the main node.
 </p>
-
-<h3>Goals</h3>
-<p>
-    What I want to ultimately achieve with this project is to create a management interface for data (inventory, batches, recipes) and automation
-    for fermenting (temperature, gravity). Long term I would love
-    to tackle automating the brewing process itself.
-</p>
-
-<h3>Data and organization</h3>
-<p>
-    Most of this functionality will be simple CRUD for entering batches and recipes, but there are a few features that require a bit of logic to execute.
+<h3>Brew Controller</h3>
+<p>    
+    My brewing setup has 3 devices to control or monitor including a <a href="https://www.blichmannengineering.com/boilermaker-g2.html">Blichmann G2 electic kettle </a> with 5500W heating element, a <a href="https://www.chapmanequipment.com/products/10-gallon-thermobarrel">Chappmann thermobarrel</a> (mash tun), and 
+    2 <a href="https://www.blichmannengineering.com/riptide-brewing-pump.html">Blichmann Riptide </a> pumps. In order to do a full re-circulation brew I would need my software to manage the heating element and 2 pumps along with monitoring my mash tun's temperature. The GUI for these features is built using SignalR so that the GUI can update in realtime.
     <ul>
-        <li>
-            Recipe Workflow - Workflow that will create a new batch based on the recipe, but still allows me to make changes so I can catalog what 
-            was <i>actually</i> put into the batch.
+        <li> 
+            Kettle Control - A GUI to control an <a href="https://www.auberins.com/index.php?main_page=product_info&products_id=651">Auber SYL2831 PID</a> wired to an SSR, the interface allows for viewing current temperature of the kettle as well as setting the target temperature on the PID. The GUI will also update if the buttons on the PID itself are utilized. To communicate with the PID the raspberry pi is wired via a USB to Modbus RS485 adapter, with the actual controlling functions written using MinimalModbus and python.
         </li>
         <li>
-            Inventory Management - Full CRUD for managing inventory, will be integrated into the recipe interface (to show if I have current stock 
-            of everything in the recipe) and the recipe workflow so that inventory is automatically deducted when a new batch is created.
+            Mash Tun monitoring - A Pt100 RTD sensor has been installed into the mash tun in order to have the GUI display the temperature. This was wired up using a <a href="https://sequentmicrosystems.com/product/rtd-data-acquisition-card-for-rpi/" >SequentMicrosystems Mega-RTD Raspberry pi hat</a>.
+        </li>
+        <li>
+            Pump Control - Using a <a href="https://www.electronics-salon.com/products/electronics-salon-rpi-power-relay-board-expansion-module-for-raspberry-pi-a-b-2b-3b">Rapsberry pi Relay hat</a> and some panel mounted NEMA connectors the application is able to control both pumps via toggle switches on the GUI.
         </li>
     </ul>
 </p>
 
-<h3>Automation</h3>
+<img src="https://i.imgur.com/kw4wAD4.jpg" alt="Control box wiring"></img>
+<img src="https://i.imgur.com/GmCVmwS.jpg" height="600px" alt="PID screen and a multimeter screen"></img>
+<img src="https://i.imgur.com/jQalSbG.png" alt="Screenshot of the Vue Typescript/SignalR GUI to control the box"></img>
+<img src="https://i.imgur.com/0XiLflq.jpg" alt="GUI and the box"></img>
+
+<h3>Fermenting</h3>
 <p>
-   Most of the automation efforts are on data collecting during the fermentation process. 
+    <ul>    
+        <li>
+            Fermentation Monitoring - API endpoints for gathering temperature and gravity of a currently fermenting beer, including history and graphs. The data is collected by devices I soldered up using guide provided by <a href="https://www.opensourcedistilling.com/ispindel-assembly/">Open Source Distilling</a> with the software being provided by <a href="http://www.ispindel.de/">iSpindel</a>.
+        </li>
+    </ul>
+
+<h3>Serving</h3>
+<p>
     <ul>
         <li>
             Tap line flowmeters - This idea was based on the <a href="https://learn.adafruit.com/adafruit-keg-bot/overview" >Adafruit Kegomatic</a>, but instead of using a python
-            GUI I decided to have my script send an HTTP request to the Web Api portion of this application. Check out the <a href="/Taproom/OnTap">On Tap</a> page to see a how much
-            beer is left in each keg!       
-        </li>
-        <li>
-            Fermentation Monitoring - API endpoints for gathering temperature and gravity of a currently fermenting beer, including history and graphs. To gather this data I will be 
-            following the hardware guide provided by <a href="https://www.opensourcedistilling.com/ispindel-assembly/">Open Source Distilling</a>
-            along with the open source <a href="http://www.ispindel.de/">iSpindel</a> software.
+            GUI I decided to have my script send an HTTP request to an API endpoint on my main node. From there the server would use SignalR to send a message to any client that had the "On Tap" page open with the amount that was poured from the tap.
         </li>
     </ul>
 </p>
+<img src="https://i.imgur.com/obdGXPV.png" alt="SignalR and Vue Typescript UI for what is on tap"></img>
+<h3>Planning</h3>
+<p>
+    <ul>
+        <li>
+            Beer and batch management - A GUI to add, edit and view beer batches for record keeping.     
+        </li>
+        <li>
+            PLANNED - Inventory Management - A way to track current inventory as well as relating it to a recipe.
+        </li>
+    </ul>
+</p>
+<img src="https://i.imgur.com/29hX7kT.png" alt="Interface for updating batches"></img>

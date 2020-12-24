@@ -4,6 +4,7 @@ namespace SabreSprings.Brewing.Models.DataTransfer
 {
     public class BatchDetailsDto
     {
+        public int Id { get;set; }
         public string Beer { get; set; }
         public int BatchNumber { get; set; }
         public string BatchName { get; set; }

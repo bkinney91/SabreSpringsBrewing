@@ -4,6 +4,7 @@ using SabreSprings.Brewing.Models.Domain;
 using SabreSprings.Brewing.Models.Entities;
 using SabreSprings.Brewing.Services.Interfaces;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -51,6 +52,7 @@ namespace SabreSprings.Brewing.Services
                 tapDisplay.TapNumber = tapNumber;                
                 tapList.Add(tapDisplay);
             }
+            tapList = tapList.OrderBy(x=> x.TapNumber).ToList();
             return tapList;
         }
 
