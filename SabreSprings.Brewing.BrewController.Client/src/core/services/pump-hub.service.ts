@@ -24,25 +24,21 @@ export class PumpHubService
 
     public SetPump1PowerStateCallback(receiveFunc: Function){
         this.hubConnection.on("Pump1PowerState", function(data: any){
-            console.log("Getting pump1 data: |" + data + "|");
             receiveFunc(data);
         });
     }
 
     public SetPump2PowerStateCallback(receiveFunc: Function){
         this.hubConnection.on("Pump2PowerState", function(data: any){
-            console.log("Getting pump2 data: |" + data + "|");
             receiveFunc(data);
         });
     }
 
     public SetPump1PowerState(powerEnabled: boolean){
-        console.log("Setting pump1 data: |" + powerEnabled + "|");
         this.hubConnection.invoke("SetPump1PowerState", powerEnabled);
     }
 
     public SetPump2PowerState(powerEnabled: boolean){
-        console.log("Setting pump2 data: |" + powerEnabled + "|");
         this.hubConnection.invoke("SetPump2PowerState", powerEnabled);
     }
 
