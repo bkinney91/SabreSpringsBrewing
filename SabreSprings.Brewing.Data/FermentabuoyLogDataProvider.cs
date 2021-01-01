@@ -123,7 +123,7 @@ namespace SabreSprings.Brewing.Data
 
 
         /// <summary>
-        /// returns all logs from db associated with given batch id.
+        /// returns every 8th record of logs from db associated with given batch id.
         /// </summary>
         /// <param name="batchId"></param>
         /// <returns></returns>
@@ -141,7 +141,8 @@ namespace SabreSprings.Brewing.Data
                             RSSI,
                             Created
                             from FermentationLog
-                            where Batch = @Batch;";
+                            where Batch = @Batch
+                            and Id%8 =0";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 IEnumerable<FermentabuoyLog> logs = await db.QueryAsync<FermentabuoyLog>(sql, new { Batch = batchId });

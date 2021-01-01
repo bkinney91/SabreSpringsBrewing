@@ -16,7 +16,11 @@
           type="line"
           color="red"
         />
-
+<DxTooltip
+      :enabled="true"
+      :shared="true"
+     
+    />
         <DxArgumentAxis> </DxArgumentAxis>
       </DxChart>
     </div>
@@ -34,7 +38,11 @@
           type="line"
           color="green"
         />
-
+<DxTooltip
+      :enabled="true"
+      :shared="true"
+      :customize-tooltip="customizeTooltip"
+    />
         <DxArgumentAxis> </DxArgumentAxis>
       </DxChart>
     </div>

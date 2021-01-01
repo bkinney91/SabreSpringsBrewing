@@ -33,13 +33,13 @@
               <b :style="'color:' + getColor(batchDetails.status)"
                 >Pre-boil Gravity:</b
               >
-              {{ batchDetails.preboilGravity }}
+              {{ batchDetails.preBoilGravity }}
             </li>
             <li>
               <b :style="'color:' + getColor(batchDetails.status)"
                 >Original Gravity:</b
               >
-              {{ batchDetails.OriginalGravity }}
+              {{ batchDetails.originalGravity }}
             </li>
             <li>
               <b :style="'color:' + getColor(batchDetails.status)"

@@ -174,7 +174,8 @@ namespace SabreSprings.Brewing.Services
 
         private decimal ConvertPlatoToSpecificGravity(decimal plato)
         {
-            return 1+ (plato / (258.6m - ((plato/258.2m) *227.1m)));
+            decimal sg = 1+ (plato / (258.6m - ((plato/258.2m) *227.1m)));
+            return Math.Round(sg, 3);
         }
     }
 }
