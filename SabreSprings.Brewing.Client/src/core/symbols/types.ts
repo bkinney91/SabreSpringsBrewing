@@ -9,6 +9,7 @@ const ServiceTypes =
 	TapApiService: Symbol.for("TapApiService"),
 	FermentabuoyApiService: Symbol.for("FermentabuoyApiService"),
 	FermentabuoyAssignmentApiService: Symbol.for("FermentabuoyAssignmentApiService"),
+	FermentabuoyLogApiService: Symbol.for("FermentabuoyLogApiService"),
 	Container: Symbol.for("Container")
 };
 
