@@ -144,7 +144,7 @@ namespace SabreSprings.Brewing.Data
                             where Batch = @Batch;";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
-                IEnumerable<FermentabuoyLog> logs = await db.QueryAsync<FermentabuoyLog>(sql, new { BatchId = batchId });
+                IEnumerable<FermentabuoyLog> logs = await db.QueryAsync<FermentabuoyLog>(sql, new { Batch = batchId });
                 return logs.ToList();
             }
         }
