@@ -40,7 +40,8 @@ namespace SabreSprings.Brewing.Services
                 Temperature = fermentabuoyLogDto.Temperature,
                 Battery = fermentabuoyLogDto.Battery,
                 Gravity = fermentabuoyLogDto.Gravity,
-                RSSI = fermentabuoyLogDto.RSSI
+                RSSI = fermentabuoyLogDto.RSSI,
+                Created = DateTime.Now
             };
             await FermentabuoyLogDataProvider.AddFermentabuoyLog(log);   
         }
@@ -64,9 +65,9 @@ namespace SabreSprings.Brewing.Services
                 Angle = log.Angle,
                 Temperature = log.Temperature,
                 Battery = log.Battery,
-                Gravity = log.Gravity,
+                Gravity = ConvertPlatoToSpecificGravity(log.Gravity),
                 RSSI = log.RSSI,
-                Created = log.Created
+                Created = log.Created.ToString("g")
             };
             return logDto;
         }
@@ -88,9 +89,9 @@ namespace SabreSprings.Brewing.Services
                     Angle = entity.Angle,
                     Temperature = entity.Temperature,
                     Battery = entity.Battery,
-                    Gravity = entity.Gravity,
+                    Gravity = ConvertPlatoToSpecificGravity(entity.Gravity),
                     RSSI = entity.RSSI,
-                    Created = entity.Created
+                    Created = entity.Created.ToString("g")
                 };
                 dtos.Add(fermentabuoyLogDto);
             }
@@ -134,13 +135,47 @@ namespace SabreSprings.Brewing.Services
                     Angle = entity.Angle,
                     Temperature = entity.Temperature,
                     Battery = entity.Battery,
-                    Gravity = entity.Gravity,
+                    Gravity = ConvertPlatoToSpecificGravity(entity.Gravity),
                     RSSI = entity.RSSI,
-                    Created = entity.Created
+                    Created = entity.Created.ToString("g")
                 };
                 dtos.Add(fermentabuoyLogDto);
             }
             return dtos;
+        }
+    
+
+        /// <summary>
+        /// gets all logs for a specifc buoy name
+        /// </summary>
+        /// <param name="buoyName"></param>
+        /// <returns></returns>
+        public async Task<List<FermentabuoyLogDto>> GetLogsByBatch(int batch)
+        {
+            List<FermentabuoyLogDto> dtos = new List<FermentabuoyLogDto>();
+            List<FermentabuoyLog> entities = await FermentabuoyLogDataProvider.GetLogsByBatchId(batch);
+            foreach (FermentabuoyLog entity in entities)
+            {
+                FermentabuoyLogDto fermentabuoyLogDto = new FermentabuoyLogDto()
+                {
+                    Name = entity.Name,
+                    ID = entity.DeviceId,
+                    Angle = entity.Angle,
+                    Temperature = entity.Temperature,
+                    Battery = entity.Battery,
+                    Gravity = ConvertPlatoToSpecificGravity(entity.Gravity),
+                    RSSI = entity.RSSI,
+                    Created = entity.Created.ToString("g"),
+                };
+                dtos.Add(fermentabuoyLogDto);
+            }
+            return dtos;
+        }
+
+        private decimal ConvertPlatoToSpecificGravity(decimal plato)
+        {
+            decimal sg = 1+ (plato / (258.6m - ((plato/258.2m) *227.1m)));
+            return Math.Round(sg, 3);
         }
     }
 }

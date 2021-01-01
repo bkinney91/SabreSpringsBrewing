@@ -25,6 +25,7 @@ import {
   TapApiService,
   FermentabuoyApiService,
   FermentabuoyAssignmentApiService,
+  FermentabuoyLogApiService,
 } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
 import NavigationComponent from "@/modules/layout/nav-container.component.vue";
@@ -53,12 +54,15 @@ let container = configureContainer();
     [ServiceTypes.TapApiService]: container.get<TapApiService>(
       ServiceTypes.TapApiService
     ),
-    [ServiceTypes.FermentabuoyApiService]: container.get<
-      FermentabuoyApiService
-    >(ServiceTypes.FermentabuoyApiService),
-    [ServiceTypes.FermentabuoyAssignmentApiService]: container.get<
-      FermentabuoyAssignmentApiService
-    >(ServiceTypes.FermentabuoyAssignmentApiService),
+    [ServiceTypes.FermentabuoyApiService]: container.get<FermentabuoyApiService>(
+      ServiceTypes.FermentabuoyApiService
+    ),
+    [ServiceTypes.FermentabuoyAssignmentApiService]: container.get<FermentabuoyAssignmentApiService>(
+      ServiceTypes.FermentabuoyAssignmentApiService
+    ),
+    [ServiceTypes.FermentabuoyLogApiService]: container.get<FermentabuoyLogApiService>(
+      ServiceTypes.FermentabuoyLogApiService
+    ),
   },
 })
 
