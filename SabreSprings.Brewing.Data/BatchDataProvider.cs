@@ -14,12 +14,10 @@ namespace SabreSprings.Brewing.Data
     public class BatchDataProvider : IBatchDataProvider
     {
         private readonly IConfiguration _configuration;
-        private readonly ILogger _logger;
 
-        public BatchDataProvider(IConfiguration configuration, ILogger logger)
+        public BatchDataProvider(IConfiguration configuration)
         {
             _configuration = configuration;
-            _logger = logger;
         }
 
         public async Task<Batch> Get(int id)

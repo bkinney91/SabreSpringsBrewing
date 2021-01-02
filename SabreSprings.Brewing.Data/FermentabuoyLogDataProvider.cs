@@ -14,11 +14,9 @@ namespace SabreSprings.Brewing.Data
     public class FermentabuoyLogDataProvider : IFermentabuoyLogDataProvider
     {
         private readonly IConfiguration _configuration;
-        private readonly ILogger _logger;
-        public FermentabuoyLogDataProvider(IConfiguration configuration, ILogger logger)
+        public FermentabuoyLogDataProvider(IConfiguration configuration)
         {
             _configuration = configuration;
-            _logger = logger;
         }
 
         /// <summary>

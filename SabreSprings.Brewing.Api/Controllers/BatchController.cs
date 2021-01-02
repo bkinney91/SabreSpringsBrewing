@@ -17,11 +17,9 @@ namespace SabreSprings.Brewing.Api.Controllers
     public class BatchController : ControllerBase
     {
         private readonly IBatchService BatchService;
-        private readonly ILogger Logger;
-        public BatchController(IBatchService batchService, ILogger logger)
+        public BatchController(IBatchService batchService)
         {
             BatchService = batchService;
-            Logger = logger;
         }
         
 
