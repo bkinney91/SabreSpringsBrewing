@@ -55,7 +55,7 @@ namespace SabreSprings.Brewing.Api
                                 .WriteTo.Console()
                                 .WriteTo.File("ApiLog-.txt", rollingInterval: RollingInterval.Day)
                                 .CreateLogger();
-
+            Log.Information("Logger succesfully created");
             //Data Providers
             builder.RegisterType<BatchDataProvider>().As<IBatchDataProvider>();
             builder.RegisterType<BeerDataProvider>().As<IBeerDataProvider>();
