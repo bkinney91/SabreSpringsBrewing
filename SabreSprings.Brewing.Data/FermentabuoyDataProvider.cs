@@ -18,7 +18,7 @@ namespace SabreSprings.Brewing.Data
     {
 
         private readonly IConfiguration _configuration;
-        public FermentabuoyDataProvider(IConfiguration configuration
+        public FermentabuoyDataProvider(IConfiguration configuration)
         {
             _configuration = configuration;
         }
