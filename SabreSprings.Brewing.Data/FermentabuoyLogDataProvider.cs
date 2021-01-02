@@ -142,7 +142,7 @@ namespace SabreSprings.Brewing.Data
                             Created
                             from FermentationLog
                             where Batch = @Batch
-                            and Id%8 =0";
+                            and Id%16 =0";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 IEnumerable<FermentabuoyLog> logs = await db.QueryAsync<FermentabuoyLog>(sql, new { Batch = batchId });
