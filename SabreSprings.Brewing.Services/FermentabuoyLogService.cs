@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System;
 using SabreSprings.Brewing.Data;
+using Serilog;
 
 namespace SabreSprings.Brewing.Services
 {
@@ -30,6 +31,7 @@ namespace SabreSprings.Brewing.Services
         /// <returns></returns>
         public async Task AddFermentabuoyLog(FermentabuoyLogDto fermentabuoyLogDto) 
         {
+            Log.Information($"Adding new Log with ID:{fermentabuoyLogDto.ID}");
             FermentabuoyAssignment currentAssignment = await FermentabuoyAssignmentDataProvider.GetLatestAssginment(fermentabuoyLogDto.ID);
             FermentabuoyLog log = new FermentabuoyLog()
             {
