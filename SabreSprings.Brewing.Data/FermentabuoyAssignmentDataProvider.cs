@@ -47,9 +47,12 @@ namespace SabreSprings.Brewing.Data
             string sql = @"Select * from FermentabuoyAssignment assign join Fermentabuoy buoy on assign.Fermentabuoy = buoy.Id where buoy.DeviceId = @DeviceId order  by Created desc;";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
-                var assignmentQuery = await db.QueryAsync<FermentabuoyAssignment>(sql, new { DeviceId = deviceId });
-                if(assignmentQuery.Any() == false){
+                var queryResults = await db.QueryAsync<FermentabuoyAssignment>(sql, new { DeviceId = deviceId });
+                if(queryResults.Any() == false){
                 throw new InvalidOperationException($"Fermentabuoy {deviceId} does not have an assignment");
+                }
+                else{
+                    assignment = queryResults.First();
                 }
             }
             
