@@ -6,9 +6,9 @@
         id="chart"
         :data-source="logs"
         palette="Harmony Light"
-        title="Gravity"
-        width="1000"
+        title="Gravity"       
       >
+       
         <DxCommonSeriesSettings argument-field="created" type="line" />
 
         <DxSeries
@@ -32,6 +32,7 @@
         palette="Harmony Light"
         title="Temperature"
       >
+      
         <DxCommonSeriesSettings argument-field="created" type="line" />
         <DxSeries
           name="Temperature"
@@ -47,7 +48,13 @@
     </div>
   </div>
 </template>
+<style>
+ 
 
+#chart {  
+  width : 1600px;  
+}
+</style>
 <script lang="ts">
 import { Vue, Component, Inject, Prop } from "vue-property-decorator";
 import {
@@ -68,6 +75,8 @@ import {
   DxTooltip,
   DxValueAxis,
   DxConstantLine,
+  DxLoadingIndicator,
+  DxSize
 } from "devextreme-vue/chart";
 @Component({
   components: {
@@ -80,6 +89,8 @@ import {
     DxTooltip,
     DxValueAxis,
     DxConstantLine,
+    DxLoadingIndicator,
+    DxSize
   },
 })
 export default class FermentationGraphComponent extends Vue {
