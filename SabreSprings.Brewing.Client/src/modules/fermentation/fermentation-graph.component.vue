@@ -1,11 +1,13 @@
 <template>
-  <div class="row">
-    <div class="col-lg-6">
+  <div >
+    <div class="row">
+      <div class="col-lg-12">
       <DxChart
         id="chart"
         :data-source="logs"
         palette="Harmony Light"
         title="Gravity"
+        width="1000"
       >
         <DxCommonSeriesSettings argument-field="created" type="line" />
 
@@ -16,18 +18,14 @@
           type="line"
           color="red"
         />
-<DxTooltip
-      :enabled="true"
-      
-     
-    />
-    <DxLoadingIndicator
-            :enabled="true"
-        />
+        <DxTooltip :enabled="true" />
+        <DxLoadingIndicator :enabled="true" />
         <DxArgumentAxis> </DxArgumentAxis>
       </DxChart>
+      </div>
     </div>
-    <div class="col-lg-6">
+    <div class="row">
+      <div class="col-lg-12">
       <DxChart
         id="chart"
         :data-source="logs"
@@ -41,14 +39,11 @@
           type="line"
           color="green"
         />
-<DxTooltip
-      :enabled="true"
-    />
-    <DxLoadingIndicator
-            :enabled="true"
-        />
+        <DxTooltip :enabled="true" />
+        <DxLoadingIndicator :enabled="true" />
         <DxArgumentAxis> </DxArgumentAxis>
       </DxChart>
+      </div>
     </div>
   </div>
 </template>
