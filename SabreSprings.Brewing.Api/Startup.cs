@@ -51,12 +51,11 @@ namespace SabreSprings.Brewing.Api
         public void ConfigureContainer(ContainerBuilder builder)
         {
             //Create and register logger
-            ILogger logger = new LoggerConfiguration()
+            Log.Logger = new LoggerConfiguration()
                                 .WriteTo.Console()
-                                .WriteTo.File("Log-.txt", rollingInterval: RollingInterval.Day)
+                                .WriteTo.File("ApiLog-.txt", rollingInterval: RollingInterval.Day)
                                 .CreateLogger();
-            //Register logger
-            builder.RegisterInstance(logger);
+
             //Data Providers
             builder.RegisterType<BatchDataProvider>().As<IBatchDataProvider>();
             builder.RegisterType<BeerDataProvider>().As<IBeerDataProvider>();
