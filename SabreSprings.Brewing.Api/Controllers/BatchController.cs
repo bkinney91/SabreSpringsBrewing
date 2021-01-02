@@ -17,11 +17,9 @@ namespace SabreSprings.Brewing.Api.Controllers
     public class BatchController : ControllerBase
     {
         private readonly IBatchService BatchService;
-        private readonly ILogger Logger;
-        public BatchController(IBatchService batchService, ILogger logger)
+        public BatchController(IBatchService batchService)
         {
             BatchService = batchService;
-            Logger = logger;
         }
         
 
@@ -59,6 +57,7 @@ namespace SabreSprings.Brewing.Api.Controllers
         [Route("GetBatchDetails")]
         public async Task<IActionResult> GetBatchDetails(int id)
         {
+            Log.Information($"Geting Batch Details for ID {id}");
             try
             {
                 BatchDetailsDto batch = await BatchService.GetBatchDetails(id);

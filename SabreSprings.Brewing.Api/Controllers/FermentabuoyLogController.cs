@@ -31,8 +31,20 @@ namespace SabreSprings.Brewing.Api.Controllers
         [Route("Post")]
         public async Task<IActionResult> Post([FromBody] FermentabuoyLogDto fermentabuoyLogDto)
         {
-            await FermentabuoyLogService.AddFermentabuoyLog(fermentabuoyLogDto);
-            return NoContent();
+            Log.Information($"New Buoy Post. Name: {fermentabuoyLogDto.Name}, Temp: {fermentabuoyLogDto.Temperature}");
+            try
+            {
+                await FermentabuoyLogService.AddFermentabuoyLog(fermentabuoyLogDto);
+                return NoContent();
+            }
+            catch(InvalidOperationException invalidEx){
+                Log.Error(invalidEx, "Invalid Buoy configuration, see exception");
+                return BadRequest();
+            }
+            catch(Exception ex){
+                Log.Error(ex, "Could not log buoy POST");
+                throw;
+            }
         }
 
         /// <summary>

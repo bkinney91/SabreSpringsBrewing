@@ -14,11 +14,9 @@ namespace SabreSprings.Brewing.Data
     public class BeerDataProvider : IBeerDataProvider
     {
         private readonly IConfiguration _configuration;
-        private readonly ILogger _logger;
-        public BeerDataProvider(IConfiguration configuration, ILogger logger)
+        public BeerDataProvider(IConfiguration configuration)
         {
             _configuration = configuration;
-            _logger = logger;
         }
 
 
