@@ -139,11 +139,14 @@ namespace SabreSprings.Brewing.Data
                             RSSI,
                             Created
                             from FermentationLog
-                            where Batch = @Batch
-                            and Id%48 =0";
+                            where Batch = @Batch";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 IEnumerable<FermentabuoyLog> logs = await db.QueryAsync<FermentabuoyLog>(sql, new { Batch = batchId });
+                //if there is more than 100 hours of logs only take a log from every 4 hours
+                if(logs.Count() > 100){
+                    logs = logs.Where(x=> x.Id%4 ==0);
+                }
                 return logs.ToList();
             }
         }
