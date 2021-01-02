@@ -18,9 +18,12 @@
         />
 <DxTooltip
       :enabled="true"
-      :shared="true"
+      
      
     />
+    <DxLoadingIndicator
+            :enabled="true"
+        />
         <DxArgumentAxis> </DxArgumentAxis>
       </DxChart>
     </div>
@@ -40,9 +43,10 @@
         />
 <DxTooltip
       :enabled="true"
-      :shared="true"
-      :customize-tooltip="customizeTooltip"
     />
+    <DxLoadingIndicator
+            :enabled="true"
+        />
         <DxArgumentAxis> </DxArgumentAxis>
       </DxChart>
     </div>
