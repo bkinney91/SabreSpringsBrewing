@@ -10,5 +10,7 @@ namespace SabreSprings.Brewing.Services.Interfaces
     {
         Task<RecipeDto> GetRecipe(int id);
         Task<List<RecipeHeaderDto>> GetRecipeHeaders();
+        Task AddRecipe(RecipeDto dto);
+        Task UpdateRecipe(RecipeDto dto);
     }
 }

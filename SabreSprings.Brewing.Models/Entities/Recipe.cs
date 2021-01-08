@@ -7,6 +7,7 @@ namespace SabreSprings.Brewing.Models.Entities
     public class Recipe
     {
         public int Id { get; set; }
+        public int Beer { get; set; }
         public string Yeast { get; set; }
         public int PitchTemperature { get; set; }
         public int FermentationTemperatureLow { get; set; }
@@ -16,14 +17,14 @@ namespace SabreSprings.Brewing.Models.Entities
         public int MashTemperature { get; set; }
         public string MashInstructions { get; set; }
         public int DaysInPrimaryFermentation { get; set; }
-        public int DaysInSecondaryFermentation { get; set; }
+        public int? DaysInSecondaryFermentation { get; set; }
         public decimal PreBoilGravity { get; set; }
         public decimal OriginalGravity { get; set; }
         public decimal FinalGravity { get; set; }
         public decimal ABV { get; set; }
-        public decimal IBU { get; set; }
-        public decimal SRM { get; set; }
-        public decimal MashPh { get; set; }
+        public decimal? IBU { get; set; }
+        public decimal? SRM { get; set; }
+        public decimal? MashPh { get; set; }
         public string BrewingNotes { get; set; }
         public string FermentationNotes { get; set; }
         public DateTime Created { get; set; }

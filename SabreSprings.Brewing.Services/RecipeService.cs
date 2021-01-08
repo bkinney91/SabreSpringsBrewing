@@ -55,10 +55,66 @@ namespace SabreSprings.Brewing.Services
                 MashPh = recipe.MashPh,
                 BrewingNotes = recipe.BrewingNotes,
                 FermentationNotes = recipe.FermentationNotes,
-                Created = recipe.Created,
-                CreatedBy = recipe.CreatedBy
+                Created = recipe.Created
             };            
             return recipeDto;
+        }
+
+        public async Task AddRecipe(RecipeDto dto)
+        {
+            Recipe entity = new Recipe()
+            {
+                Yeast = dto.Yeast,
+                PitchTemperature = dto.PitchTemperature,
+                FermentationTemperatureLow = dto.FermentationTemperatureLow,
+                FermentationTemperatureHigh = dto.FermentationTemperatureHigh,
+                StrikeWaterVolume = dto.StrikeWaterVolume,
+                StrikeWaterTemperature = dto.StrikeWaterTemperature,
+                MashTemperature = dto.MashTemperature,
+                MashInstructions = dto.MashInstructions,
+                DaysInPrimaryFermentation = dto.DaysInPrimaryFermentation,
+                DaysInSecondaryFermentation = dto.DaysInSecondaryFermentation,
+                PreBoilGravity = dto.PreBoilGravity,
+                OriginalGravity = dto.OriginalGravity,
+                FinalGravity = dto.FinalGravity,
+                ABV = dto.ABV,
+                IBU = dto.IBU,
+                SRM = dto.SRM,
+                MashPh = dto.MashPh,
+                BrewingNotes = dto.BrewingNotes,
+                FermentationNotes = dto.FermentationNotes,
+                Created = dto.Created
+            };
+            await RecipeDataProvider.Add(entity);
+        }
+
+        public async Task UpdateRecipe(RecipeDto dto)
+        {
+            Recipe entity = new Recipe()
+            {
+                Id = dto.Id,
+                Yeast = dto.Yeast,
+                PitchTemperature = dto.PitchTemperature,
+                FermentationTemperatureLow = dto.FermentationTemperatureLow,
+                FermentationTemperatureHigh = dto.FermentationTemperatureHigh,
+                StrikeWaterVolume = dto.StrikeWaterVolume,
+                StrikeWaterTemperature = dto.StrikeWaterTemperature,
+                MashTemperature = dto.MashTemperature,
+                MashInstructions = dto.MashInstructions,
+                DaysInPrimaryFermentation = dto.DaysInPrimaryFermentation,
+                DaysInSecondaryFermentation = dto.DaysInSecondaryFermentation,
+                PreBoilGravity = dto.PreBoilGravity,
+                OriginalGravity = dto.OriginalGravity,
+                FinalGravity = dto.FinalGravity,
+                ABV = dto.ABV,
+                IBU = dto.IBU,
+                SRM = dto.SRM,
+                MashPh = dto.MashPh,
+                BrewingNotes = dto.BrewingNotes,
+                FermentationNotes = dto.FermentationNotes,
+                Created = dto.Created
+            };
+            await RecipeDataProvider.Update(entity);
         }
 
         public async Task<List<RecipeHeaderDto>> GetRecipeHeaders()

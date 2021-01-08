@@ -57,6 +57,89 @@ namespace SabreSprings.Brewing.Data
         }
 
 
+        public async Task Add(Recipe recipe)
+        {
+            string sql = @"Insert into Recipes 
+                            (Beer,
+                            Yeast,
+                            PitchTemperature,
+                            FermentationTemperatureLow,
+                            FermentationTemperatureHigh,
+                            StrikeWaterVolume,
+                            StrikeWaterTemperature,
+                            MashTemperature,
+                            MashInstructions,
+                            DaysInPrimaryFermentation,
+                            DaysInSecondaryFermentation
+                            PreBoilGravity,
+                            OriginalGravity,
+                            FinalGravity,
+                            ABV,
+                            IBU,
+                            SRM,
+                            MashPh,
+                            BrewingNotes,
+                            FermentationNotes,
+                            Created)
+                        VALUES 
+                            (@Beer,
+                            @Yeast,
+                            @PitchTemperature,
+                            @FermentationTemperatureLow,
+                            @FermentationTemperatureHigh,
+                            @StrikeWaterVolume,
+                            @StrikeWaterTemperature,
+                            @MashTemperature,
+                            @MashInstructions,
+                            @DaysInPrimaryFermentation,
+                            @DaysInSecondaryFermentation
+                            @PreBoilGravity,
+                            @OriginalGravity,
+                            @FinalGravity,
+                            @ABV,
+                            @IBU,
+                            @SRM,
+                            @MashPh,
+                            @BrewingNotes,
+                            @FermentationNotes,
+                            @Created);";
+            using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
+            {
+                await db.ExecuteAsync(sql, recipe);
+            }
+        }
+
+
+        public async Task Update(Recipe recipe)
+        {
+            string sql = @"Update Recipes Set
+                            Yeast = @Yeast,
+                            PitchTemperature = @PitchTemperature,
+                            FermentationTemperatureLow = @FermentationTemperatureLow,
+                            FermentationTemperatureHigh = @FermentationTemperatureHigh,
+                            StrikeWaterVolume = @StrikeWaterVolume,
+                            StrikeWaterTemperature = @StrikeWaterTemperature,
+                            MashTemperature = @MashTemperature,
+                            MashInstructions = @MashInstructions,
+                            DaysInPrimaryFermentation = @DaysInPrimaryFermentation,
+                            DaysInSecondaryFermentation = @DaysInSecondaryFermentation,
+                            PreBoilGravity = @PreBoilGravity,
+                            OriginalGravity = @OriginalGravity,
+                            FinalGravity = @FinalGravity,
+                            ABV = @ABV,
+                            IBU = @IBU,
+                            SRM = @SRM,
+                            MashPh = @MashPh,
+                            BrewingNotes = @BrewingNotes,
+                            FermentationNotes = @FermentationNotes
+                            Where Id = @Id;";
+            using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
+            {
+                await db.ExecuteAsync(sql, recipe);
+            }
+        }
+
+
         public async Task<List<RecipeMaterialDto>> GetRecipeMaterials(int recipeId)
         {
             List<RecipeMaterialDto> recipeMaterials = new List<RecipeMaterialDto>();

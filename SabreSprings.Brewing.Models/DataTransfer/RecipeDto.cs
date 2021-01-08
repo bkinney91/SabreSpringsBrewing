@@ -20,14 +20,14 @@ namespace SabreSprings.Brewing.Models.DataTransfer
         public int MashTemperature { get; set; }
         public string MashInstructions { get; set; }
         public int DaysInPrimaryFermentation { get; set; }
-        public int DaysInSecondaryFermentation { get; set; }
+        public int? DaysInSecondaryFermentation { get; set; }
         public decimal PreBoilGravity { get; set; }
         public decimal OriginalGravity { get; set; }
         public decimal FinalGravity { get; set; }
         public decimal ABV { get; set; }
-        public decimal IBU { get; set; }
-        public decimal SRM { get; set; }
-        public decimal MashPh { get; set; }
+        public decimal? IBU { get; set; }
+        public decimal? SRM { get; set; }
+        public decimal? MashPh { get; set; }
         public string BrewingNotes { get; set; }
         public string FermentationNotes { get; set; }
         public DateTime Created { get; set; }
