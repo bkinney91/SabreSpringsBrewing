@@ -31,7 +31,7 @@ namespace SabreSprings.Brewing.Services
            return dto;    
        }
 
-       public async Task AddMaterial(MaterialDto dto)
+       public async Task Add(MaterialDto dto)
        {
            Material entity = new Material(){
                Description = dto.Description,
