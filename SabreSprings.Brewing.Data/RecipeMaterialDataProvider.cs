@@ -64,7 +64,7 @@ namespace SabreSprings.Brewing.Data
             }
         }
 
-        public async Task<List<RecipeMaterial>> GetRecipeSteps(int recipe)
+        public async Task<List<RecipeMaterial>> GetRecipeMaterials(int recipe)
         {
  
             List<RecipeMaterial> materials = new List<RecipeMaterial>();
