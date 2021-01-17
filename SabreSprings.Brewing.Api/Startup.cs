@@ -53,7 +53,7 @@ namespace SabreSprings.Brewing.Api
             //Create and register logger
             ILogger logger = new LoggerConfiguration()
                                 .WriteTo.Console()
-                                .WriteTo.File("Log-.txt", rollingInterval: RollingInterval.Day)
+                                .WriteTo.File("Logs/Api-.log", rollingInterval: RollingInterval.Day)
                                 .CreateLogger();
             //Register logger
             builder.RegisterInstance(logger);

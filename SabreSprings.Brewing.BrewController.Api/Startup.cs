@@ -55,7 +55,7 @@ namespace SabreSprings.Brewing.BrewController.Api
             //Create and register logger
             Log.Logger = new LoggerConfiguration()
                                 .WriteTo.Console()
-                                .WriteTo.File("Log-.txt", rollingInterval: RollingInterval.Day)
+                                .WriteTo.File("Logs/BrewController-.log", rollingInterval: RollingInterval.Day)
                                 .CreateLogger();
 
             builder.RegisterType<KettleService>().As<IKettleService>(); 

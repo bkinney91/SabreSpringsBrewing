@@ -1,0 +1,10 @@
+FermentABuoy001
+Station MAC: 84:0D:8E:8F:45:36
+Access Point MAC: 86:0D:8E:8F:45:36
+
+Update Interval 3600
+Battery conversion factor 191.80
+Port 8080
+Path/URI /Api/FermentabuoyLog/Post
+Gravity -0.001492196*tilt^2+0.584310312*tilt-13.06840991
+
