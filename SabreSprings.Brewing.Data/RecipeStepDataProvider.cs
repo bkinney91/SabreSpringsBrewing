@@ -58,7 +58,7 @@ namespace SabreSprings.Brewing.Data
         }
 
 
-        public async Task Update(Recipe recipe)
+        public async Task Update(RecipeStep step)
         {
             string sql = @"Update RecipeSteps Set                         
                             Recipe = @Recipe
@@ -70,7 +70,7 @@ namespace SabreSprings.Brewing.Data
                             Where Id = @Id;";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
-                await db.ExecuteAsync(sql, recipe);
+                await db.ExecuteAsync(sql, step);
             }
         }
 

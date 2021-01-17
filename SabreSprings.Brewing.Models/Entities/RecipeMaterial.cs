@@ -11,6 +11,5 @@ namespace SabreSprings.Brewing.Models.Entities
         public int Material { get; set; }
         public decimal Quantity { get; set; }
         public DateTime Created { get; set; }
-        public string CreatedBy { get; set; }
     }
 }

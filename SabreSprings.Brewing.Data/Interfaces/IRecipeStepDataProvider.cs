@@ -10,7 +10,7 @@ namespace SabreSprings.Brewing.Data.Interfaces
     {
         Task<RecipeStep> GetRecipeStep(int id);
         Task Add(RecipeStep step);
-        Task Update(Recipe recipe);
+        Task Update(RecipeStep recipe);
         Task<List<RecipeStep>> GetRecipeSteps(int recipe);
        
     }
