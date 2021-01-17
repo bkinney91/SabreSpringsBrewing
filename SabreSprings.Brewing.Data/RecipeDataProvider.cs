@@ -15,11 +15,9 @@ namespace SabreSprings.Brewing.Data
     public class RecipeDataProvider : IRecipeDataProvider
     {
         private readonly IConfiguration _configuration;
-        private readonly ILogger _logger;
-        public RecipeDataProvider(IConfiguration configuration, ILogger logger)
+        public RecipeDataProvider(IConfiguration configuration)
         {
             _configuration = configuration;
-            _logger = logger;
         }
         public async Task<Recipe> GetRecipe(int id)
         {
