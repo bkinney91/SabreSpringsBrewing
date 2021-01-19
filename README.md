@@ -1,6 +1,6 @@
 # SabreSpringsBrewing
 <p>
-This application suite is for automating my home brewery. It includes a .NET 5.0 middle tier, SQL Express backend, a Vue Typescript front end with SignalR, and python with Modbus RS485. The application is hosted using kestrel, Apache2, and systemd. The infrasturcture includes 2 Raspberry pi's, one for the TapController and one for the BrewController, as well as an Odroid N2 that hosts the main node.
+This application suite is for automating my home brewery. It includes a .NET 5.0 middle tier, SQLite backend, a Vue Typescript front end with SignalR, and python with Modbus RS485. The application is hosted using kestrel, Apache2, and systemd. The infrasturcture includes 2 Raspberry pi's, one for the TapController and one for the BrewController, as well as an Odroid N2 that hosts the main node.
 </p>
 <h3>Brew Controller</h3>
 <p>    
