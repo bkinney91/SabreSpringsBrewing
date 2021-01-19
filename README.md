@@ -42,7 +42,7 @@ This application suite is for automating my home brewery. It includes a .NET 5.0
     </ul>
 </p>
 <img src="https://i.imgur.com/obdGXPV.png" alt="SignalR and Vue Typescript UI for what is on tap"></img>
-<img src="https://i.imgur.com/PRLrg5j.jpeg" alt="Flowmeter in the tapline"></img>
+<img src="https://i.imgur.com/PRLrg5j.jpeg" height="600px" alt="Flowmeter in the tapline"></img>
 <h3>Planning</h3>
 <p>
     <ul>
