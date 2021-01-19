@@ -18,20 +18,20 @@ This application suite is for automating my home brewery. It includes a .NET 5.0
         </li>
     </ul>
 </p>
-
 <img src="https://i.imgur.com/kw4wAD4.jpg" alt="Control box wiring"></img>
 <img src="https://i.imgur.com/GmCVmwS.jpg" height="600px" alt="PID screen and a multimeter screen"></img>
 <img src="https://i.imgur.com/jQalSbG.png" alt="Screenshot of the Vue Typescript/SignalR GUI to control the box"></img>
 <img src="https://i.imgur.com/0XiLflq.jpg" alt="GUI and the box"></img>
+<img src="https://i.imgur.com/S3nIwRo.jpg" alt="Mash tun on the left and the kettle on the right">
 
 <h3>Fermenting</h3>
 <p>
     <ul>    
         <li>
-            Fermentation Monitoring - API endpoints for gathering temperature and gravity of a currently fermenting beer, including history and graphs. The data is collected by devices I soldered up using guide provided by <a href="https://www.opensourcedistilling.com/ispindel-assembly/">Open Source Distilling</a> with the software being provided by <a href="http://www.ispindel.de/">iSpindel</a>.
+            Fermentation Monitoring - API endpoints for gathering temperature and gravity of a currently fermenting beer, including history and graphs. The data is collected by devices (I call them fermentabuoys) I soldered up using guide provided by <a href="https://www.opensourcedistilling.com/ispindel-assembly/">Open Source Distilling</a> with the software being provided by <a href="http://www.ispindel.de/">iSpindel</a>.
         </li>
     </ul>
-
+<img src="https://i.imgur.com/cSpBOxY.jpg" alt="Fermentabuoys">
 <h3>Serving</h3>
 <p>
     <ul>
@@ -42,11 +42,15 @@ This application suite is for automating my home brewery. It includes a .NET 5.0
     </ul>
 </p>
 <img src="https://i.imgur.com/obdGXPV.png" alt="SignalR and Vue Typescript UI for what is on tap"></img>
+<img src="https://i.imgur.com/PRLrg5j.jpeg" alt="Flowmeter in the tapline"></img>
 <h3>Planning</h3>
 <p>
     <ul>
         <li>
             Beer and batch management - A GUI to add, edit and view beer batches for record keeping.     
+        </li>
+        <li>
+            IN WORK - Recipe Management - GUI for managing recipes and materials
         </li>
         <li>
             PLANNED - Inventory Management - A way to track current inventory as well as relating it to a recipe.
