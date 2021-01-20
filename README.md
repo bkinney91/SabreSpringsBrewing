@@ -28,7 +28,7 @@ This application suite is for automating my home brewery. It includes a .NET 5.0
 <p>
     <ul>    
         <li>
-            Fermentation Monitoring - API endpoints for gathering temperature and gravity of a currently fermenting beer, including history and graphs. The data is collected by devices (I call them fermentabuoys) I soldered up using guide provided by <a href="https://www.opensourcedistilling.com/ispindel-assembly/">Open Source Distilling</a> with the software being provided by <a href="http://www.ispindel.de/">iSpindel</a>.
+            Fermentation Monitoring - API endpoints for gathering temperature and gravity of a currently fermenting beer, including history and graphs. The data is collected by devices (I call them fermentabuoys) I soldered up using a video provided by <a href="https://www.opensourcedistilling.com/ispindel-assembly/">Open Source Distilling</a> with the software being provided by <a href="http://www.ispindel.de/">iSpindel</a>.
         </li>
     </ul>
 <img src="https://i.imgur.com/cSpBOxY.jpg" alt="Fermentabuoys">
