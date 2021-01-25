@@ -22,7 +22,7 @@ This application suite is for automating my home brewery. It includes a .NET 5.0
 <img src="https://i.imgur.com/GmCVmwS.jpg" height="600px" alt="PID screen and a multimeter screen"></img>
 <img src="https://i.imgur.com/jQalSbG.png" alt="Screenshot of the Vue Typescript/SignalR GUI to control the box"></img>
 <img src="https://i.imgur.com/0XiLflq.jpg" alt="GUI and the box"></img>
-<img src="https://i.imgur.com/S3nIwRo.jpg" alt="Mash tun on the left and the kettle on the right">
+<img src="https://i.imgur.com/FnAiur6.jpg" alt="Mash tun on the left and the kettle on the right">
 
 <h3>Fermenting</h3>
 <p>
