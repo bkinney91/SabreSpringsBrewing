@@ -122,16 +122,6 @@ namespace SabreSprings.Brewing.Services
             return await RecipeDataProvider.GetRecipeHeaders();
         }
 
-        /// <summary>
-        /// Retrieves all of the recipe materials for a recipe.
-        /// Note: is called by GetRecipe, and recipe materials 
-        /// are in the DTO for Recipe.
-        /// </summary>
-        /// <param name="recipeId"></param>
-        /// <returns></returns>
-        public async Task<List<RecipeMaterialDto>> GetRecipeMaterials(int recipeId)
-        {            
-            return await RecipeDataProvider.GetRecipeMaterials(recipeId);            
-        }
+        
     }
 }

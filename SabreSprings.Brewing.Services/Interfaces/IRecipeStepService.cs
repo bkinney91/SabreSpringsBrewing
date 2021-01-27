@@ -8,7 +8,7 @@ namespace SabreSprings.Brewing.Services.Interfaces
 {
     public interface IRecipeStepService
     {
-        Task<RecipeStepDto> GetRecipeStep(int id);
+        Task<RecipeStepDto> Get(int id);
         Task Add(RecipeStepDto dto);
         Task Update(RecipeStepDto dto);
         Task<List<RecipeStepDto>> GetRecipeSteps(int recipe);

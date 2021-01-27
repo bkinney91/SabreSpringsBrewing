@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SabreSprings.Brewing.Services
 {
-    public class RecipeStepService : IRecipeMaterialService
+    public class RecipeStepService : IRecipeStepService
     {
         private readonly IRecipeStepDataProvider RecipeStepDataProvider;
         public RecipeStepService(IRecipeStepDataProvider recipeStepDataProvider)
@@ -18,7 +18,7 @@ namespace SabreSprings.Brewing.Services
             RecipeStepDataProvider = recipeStepDataProvider;
         }
 
-        public async Task<RecipeStepDto> GetRecipeStep(int id)
+        public async Task<RecipeStepDto> Get(int id)
         {
             RecipeStep entity = await RecipeStepDataProvider.GetRecipeStep(id);
             RecipeStepDto dto = new RecipeStepDto()

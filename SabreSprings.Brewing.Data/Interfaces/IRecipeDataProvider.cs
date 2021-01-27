@@ -10,7 +10,6 @@ namespace SabreSprings.Brewing.Data.Interfaces
     public interface IRecipeDataProvider
     {
         Task<Recipe> GetRecipe(int id);
-        Task<List<RecipeMaterialDto>> GetRecipeMaterials(int recipeId);
         Task<List<RecipeHeaderDto>> GetRecipeHeaders();
         Task Update(Recipe recipe);
         Task Add(Recipe recipe);
