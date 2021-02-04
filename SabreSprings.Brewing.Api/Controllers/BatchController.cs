@@ -34,7 +34,8 @@ namespace SabreSprings.Brewing.Api.Controllers
             }
             catch(Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                Log.Error($"Error geting batch with ID \"{id}\".");
+                throw;
             }
         }
 
@@ -49,7 +50,8 @@ namespace SabreSprings.Brewing.Api.Controllers
             }
             catch(Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                Log.Error($"Error getting batch table.");
+                throw;
             }
         }
 
@@ -65,7 +67,8 @@ namespace SabreSprings.Brewing.Api.Controllers
             }
             catch(Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                Log.Error($"Error getting batch details for batch with ID \"{id}\".");
+                throw;
             }
         }
 
@@ -81,7 +84,8 @@ namespace SabreSprings.Brewing.Api.Controllers
             }
             catch(Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                Log.Error($"Error posting batch.");
+                throw;
             }
         }
 
@@ -96,7 +100,8 @@ namespace SabreSprings.Brewing.Api.Controllers
             }
             catch(Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                Log.Error($"Error updating batch with ID \"{dto.Id}\".");
+                throw;
             }
         }
 
