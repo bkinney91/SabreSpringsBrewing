@@ -33,13 +33,20 @@ namespace SabreSprings.Brewing.Data
 
         public async Task<int> GetLatestBatchNumber(int beer)
         {
-            int batchNumber = 0;
             string sql = "Select BatchNumber from Batches where Beer = @Beer order by BatchNumber desc;";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
-                batchNumber = await db.QueryFirstAsync<int>(sql, new { Beer = beer });
+                var results = await db.QueryAsync<int>(sql, new { Beer = beer });
+                if(results.Any())
+                {
+                    return results.First();
+                }
+                else
+                {
+                    return 1;
+                }
             }
-            return batchNumber;
+           
         }
 
         public async Task<List<Batch>> GetOnTap()
