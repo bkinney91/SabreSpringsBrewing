@@ -97,8 +97,8 @@ namespace SabreSprings.Brewing.Data
         public async Task Add(Batch batch)
         {
             string sql = @"Insert into Batches 
-            (Beer, BatchNumber, BatchName, Status, Created)
-            VALUES (@Beer, @BatchNumber, @BatchName, @Status, @Created);";
+            (Beer, BatchNumber, BatchName, PintsRemaining, Status, Created)
+            VALUES (@Beer, @BatchNumber, @BatchName, 40, @Status, @Created);";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 await db.ExecuteAsync(sql, batch);
