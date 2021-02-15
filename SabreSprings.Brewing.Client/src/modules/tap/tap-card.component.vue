@@ -2,12 +2,15 @@
 <div>
   <div v-if="tap != null">
     <div class="card">
+
       <img
+      v-if="tap.logo"
         class="card-img-top"
-        style="max-height:400px;width:auto"
+        style="height:400px;width:auto"
         :src="'/Content/images' + tap.logo"
         alt="Card image cap"
       />
+      <div v-if="!tap.logo" style="min-height:400px"></div>
       <div class="card-body">
         <h2 class="card-title"><b>{{tap.beerDisplayName}}</b></h2>
         <i>
