@@ -8,4 +8,5 @@ export interface BatchTableRow
     style: string;
     dateBrewed: Date;
     datePackaged: Date;
+    logo: string;
 }

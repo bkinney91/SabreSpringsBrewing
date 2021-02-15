@@ -9,7 +9,18 @@
       class="card-header"
       :style="'border-color:'+ getColor() + ';border-bottom-width: 10px'"
     >{{batch.statusText}}</div>
+     
     <div class="card-body">
+     <div class="row">
+       <div class="col-lg-2">
+         <img
+        v-if="batch.logo"
+        style="max-height:100px;max-width:100px"
+        :src="'/Content/images' + batch.logo"
+        alt="Card image cap"
+      /> 
+      </div>
+      <div class="colg-log-10">
       <h5 class="card-title">{{batch.beerName}} Batch #{{batch.batchNumber}}</h5>
       <h6 class="card-subtitle mb-2 text-muted">{{batch.style}}</h6>
       <div class="card-text" v-if="batch.dateBrewed !== null || new Date(batch.dateBrewed).toLocaleDateString('en-US') !== '12/31/1969'">
@@ -25,6 +36,8 @@
       <div v-else>
         Planned
         </div>
+    </div>
+    </div>
     </div>
   </div>
   <br/>
