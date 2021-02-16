@@ -14,6 +14,7 @@ import FermentationLandingComponent from "./modules/fermentation/fermentation-la
 import BatchEditorComponent from "./modules/batch/batch-editor.component.vue";
 import BeerTableComponent from "./modules/beer/beer-table.component.vue";
 import RecipeDetailsComponent from "./modules/beer/recipe-details.component.vue";
+import MaterialTableComponent from "./modules/material/material-table.component.vue";
 Vue.use(Router);
 
 export default new Router({
@@ -92,6 +93,11 @@ export default new Router({
 			path: "/fermentation",
 			name: "Fermentation",
 			component: FermentationLandingComponent
+		},
+		{
+			path: "/materials",
+			name: "materials",
+			component: MaterialTableComponent
 		},
 		{
 			path: "/",

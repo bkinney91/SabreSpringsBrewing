@@ -8,6 +8,6 @@ export class RecipeApiService extends BaseApiService
 {
     constructor(@inject(ServiceTypes.BaseAxiosInstance) protected client: AxiosInstance)
     {
-        super(client, "Beer");
+        super(client, "Recipe");
     }
 }

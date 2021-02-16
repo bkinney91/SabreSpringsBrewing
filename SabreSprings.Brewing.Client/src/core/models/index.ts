@@ -8,3 +8,4 @@ export { FermentabuoyAssignmentDto } from "./fermentabuoy-assignment.dto.model";
 export { BatchDto } from "./batch.dto.model";
 export { BeerDto } from "./beer.dto.model";
 export { MaterialDto } from "./material.dto.model";
+export { MaterialTypeDto } from "./material-type.dto.model";

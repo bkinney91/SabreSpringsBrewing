@@ -34,7 +34,7 @@ namespace SabreSprings.Brewing.Data
 
         public async Task Add(Material material)
         {
-            string sql = @"Insert into Material 
+            string sql = @"Insert into Materials 
                             (Type,
                             Description,
                             UnitOfMeasure,                            
@@ -78,6 +78,33 @@ namespace SabreSprings.Brewing.Data
             return materials;
         }
 
+
+        public async Task<List<Material>> GetAll()
+        {
+            List<Material> materials = new List<Material>();
+            string connectionString = _configuration.GetConnectionString("SabreSpringsBrewing");
+            string sql = "Select * from Materials;";
+            using (IDbConnection db = new SqliteConnection(connectionString))
+            {
+                var results = await db.QueryAsync<Material>(sql);
+                materials = results.ToList();
+            }
+            return materials;
+        }
+
+
+        public async Task<List<MaterialType>> GetMaterialTypes()
+        {
+            List<MaterialType> types = new List<MaterialType>();
+            string connectionString = _configuration.GetConnectionString("SabreSpringsBrewing");
+            string sql = "Select * from MaterialTypes;";
+            using (IDbConnection db = new SqliteConnection(connectionString))
+            {
+                var results = await db.QueryAsync<MaterialType>(sql);
+                types = results.ToList();
+            }
+            return types;
+        }
         
     }
 }

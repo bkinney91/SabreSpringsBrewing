@@ -31,6 +31,24 @@ namespace SabreSprings.Brewing.Services
            return dto;    
        }
 
+
+       public async Task<List<MaterialDto>> GetAll()
+       {           
+           List<MaterialDto> dtos = new List<MaterialDto>();
+           List<Material> entities = await MaterialDataProvider.GetAll();
+           foreach(Material entity in entities){
+            MaterialDto dto = new MaterialDto()
+            {
+                Description = entity.Description,
+                UnitOfMeasure = entity.UnitOfMeasure,
+                Type = entity.Type,
+                Created = entity.Created
+            };
+            dtos.Add(dto);
+           }
+           return dtos;    
+       }
+
        public async Task Add(MaterialDto dto)
        {
            Material entity = new Material(){
@@ -51,6 +69,23 @@ namespace SabreSprings.Brewing.Services
                Type = dto.Type
            };
            await MaterialDataProvider.Update(entity);
+       }
+
+
+       public async Task<List<MaterialTypeDto>> GetMaterialTypes()
+       {
+         List<MaterialTypeDto> dtos = new List<MaterialTypeDto>();
+           List<MaterialType> entities = await MaterialDataProvider.GetMaterialTypes();
+           foreach(MaterialType entity in entities){
+            MaterialTypeDto dto = new MaterialTypeDto()
+            {
+               Id = entity.Id,
+                Type = entity.Type,
+                Created = entity.Created
+            };
+            dtos.Add(dto);
+           }
+           return dtos;
        }
     }
 }

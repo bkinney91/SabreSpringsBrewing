@@ -63,6 +63,9 @@ namespace SabreSprings.Brewing.Api
             builder.RegisterType<FermentabuoyLogDataProvider>().As<IFermentabuoyLogDataProvider>();
             builder.RegisterType<FermentabuoyDataProvider>().As<IFermentabuoyDataProvider>();
             builder.RegisterType<FermentabuoyAssignmentDataProvider>().As<IFermentabuoyAssignmentDataProvider>();
+            builder.RegisterType<MaterialDataProvider>().As<IMaterialDataProvider>();
+            builder.RegisterType<RecipeService>().As<IRecipeService>();
+            builder.RegisterType<RecipeStepService>().As<IRecipeStepService>();
 
             //Services
             builder.RegisterType<TapService>().As<ITapService>();
@@ -71,6 +74,9 @@ namespace SabreSprings.Brewing.Api
             builder.RegisterType<FermentabuoyLogService>().As<IFermentabuoyLogService>();
             builder.RegisterType<FermentabuoyService>().As<IFermentabuoyService>();
             builder.RegisterType<FermentabuoyAssignmentService>().As<IFermentabouyAssignmentService>();
+            builder.RegisterType<MaterialService>().As<IMaterialService>();
+            builder.RegisterType<RecipeService>().As<IRecipeService>();
+            builder.RegisterType<RecipeStepService>().As<IRecipeStepService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

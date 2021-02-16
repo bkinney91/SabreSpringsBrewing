@@ -1,6 +1,6 @@
 <template>
   <div style="margin-left: 15%; margin-right: 15%">
-    <h1>Beers</h1>
+    <h1>Materials</h1>
     <DxDataGrid
       :data-source="materials"
       :show-borders="true"
@@ -19,6 +19,7 @@
         mode="form"
       >
         <DxForm>
+          <DxItem data-field="type" />
           <DxItem data-field="description" />
           <DxItem data-field="unitOfMeasure" />
         </DxForm>
@@ -29,7 +30,13 @@
       <DxColumn data-field="unitOfMeasure">
         <DxRequiredRule message="Unit of Measure is required" />
       </DxColumn>
-     
+      <DxColumn data-field="type">
+        <DxLookup
+          :data-source="materialTypes"
+          display-expr="type"
+          value-expr="id"
+        />
+      </DxColumn>
     </DxDataGrid>
   </div>
 </template>
@@ -39,7 +46,7 @@
 import { Vue, Component, Inject, Prop } from "vue-property-decorator";
 import { MaterialApiService } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
-import { MaterialDto } from "@/core/models";
+import { MaterialDto, MaterialTypeDto } from "@/core/models";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 import {
   DxDataGrid,
@@ -50,15 +57,17 @@ import {
   DxForm,
   DxHeaderFilter,
   DxSearchPanel,
+  DxLookup,
   DxPosition,
 } from "devextreme-vue/data-grid";
 import { DxItem } from "devextreme-vue/form";
-import notify from 'devextreme/ui/notify';
+import notify from "devextreme/ui/notify";
 
 @Component({
   components: {
     DxDataGrid,
     DxColumn,
+    DxLookup,
     DxEditing,
     DxRequiredRule,
     DxPopup,
@@ -74,12 +83,15 @@ export default class MaterialTableComponent extends Vue {
   private materialApiService!: MaterialApiService;
 
   private materials: MaterialDto[] = [];
+  private materialTypes: MaterialTypeDto[] = [];
+
   constructor() {
     super();
   }
 
   created(): void {
     this.getMaterials();
+    this.getMaterialTypes();
   }
 
   private getMaterials() {
@@ -93,11 +105,22 @@ export default class MaterialTableComponent extends Vue {
       });
   }
 
+  private getMaterialTypes() {
+    this.materialApiService
+      .getMaterialTypes()
+      .then((response) => {
+        this.materialTypes = response;
+      })
+      .catch((error) => {
+        NotifyHelper.displayError(error);
+      });
+  }
+
   private add(e: any) {
     this.materialApiService
       .post(e.data)
       .then((response) => {
-        NotifyHelper.displayMessage("Sucessfully added beer.")
+        NotifyHelper.displayMessage("Sucessfully added material.");
       })
       .catch((error) => {
         NotifyHelper.displayError(error);
@@ -108,15 +131,12 @@ export default class MaterialTableComponent extends Vue {
     this.materialApiService
       .put(e.oldData)
       .then((response) => {
-        NotifyHelper.displayMessage("Sucessfully updated beer.")
+        NotifyHelper.displayMessage("Sucessfully updated material.");
       })
       .catch((error) => {
         NotifyHelper.displayError(error);
       });
   }
 
-  private openRecipe(e: any){
-    this.$router.push("/beer/recipe?id=" + e.selectedRowsData[0].id);
-  }
 }
 </script>

@@ -5,7 +5,6 @@ using SabreSprings.Brewing.Services.Interfaces;
 using Serilog;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SabreSprings.Brewing.Api.Controllers
@@ -29,6 +28,23 @@ namespace SabreSprings.Brewing.Api.Controllers
             {
                 MaterialDto Material = await MaterialService.GetMaterial(id);
                 return Ok(Material);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error getting Material.");
+                throw;
+            }
+        }
+
+
+        [HttpGet]
+        [Route("GetAll")]
+        public async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                List<MaterialDto> materials = await MaterialService.GetAll();
+                return Ok(materials);
             }
             catch (Exception ex)
             {
@@ -67,6 +83,23 @@ namespace SabreSprings.Brewing.Api.Controllers
             catch (Exception ex)
             {
                 Log.Error(ex, "Error updating Material with ID \"{id}\".");
+                throw;
+            }
+        }
+
+
+        [HttpGet]
+        [Route("GetMaterialTypes")]
+        public async Task<IActionResult> GetMaterialTypes()
+        {
+            try
+            {
+                List<MaterialTypeDto> types = await MaterialService.GetMaterialTypes();
+                return Ok(types);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error getting Material Types.");
                 throw;
             }
         }

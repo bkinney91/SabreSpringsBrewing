@@ -73,8 +73,19 @@ namespace SabreSprings.Brewing.Api.Controllers
 
         [HttpGet]
         [Route("GetRecipeSteps")]
-        public async Task<IActionResult> GetRecipeSteps(int recipeId){
-            return Ok();
+        public async Task<IActionResult> GetRecipeSteps(int recipeId)
+        {
+             
+             try
+            {
+                List<RecipeStepDto> steps = await RecipeStepService.GetRecipeSteps(recipeId);
+                return Ok(steps);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error getting Recipe Step.");
+                throw;
+            }
         }
     }
 }
