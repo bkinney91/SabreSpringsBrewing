@@ -23,6 +23,7 @@ namespace SabreSprings.Brewing.Services
            Material entity = await MaterialDataProvider.GetMaterial(id);
            MaterialDto dto = new MaterialDto()
            {
+               Id = entity.Id,
                Description = entity.Description,
                UnitOfMeasure = entity.UnitOfMeasure,
                Type = entity.Type,
@@ -39,6 +40,7 @@ namespace SabreSprings.Brewing.Services
            foreach(Material entity in entities){
             MaterialDto dto = new MaterialDto()
             {
+                Id = entity.Id,
                 Description = entity.Description,
                 UnitOfMeasure = entity.UnitOfMeasure,
                 Type = entity.Type,
