@@ -37,16 +37,11 @@
                   '12/31/1969'
               "
             >
-              <div v-if="batch.dateBrewed > new Date()">
-                Planned Brew Date:{{
-                  new Date(batch.dateBrewed).toLocaleDateString("en-US")
-                }}
-              </div>
-              <div v-if="batch.dateBrewed < new Date()">
+              <div>
                 Date Brewed:
                 {{ new Date(batch.dateBrewed).toLocaleDateString("en-US") }}
               </div>
-              <br />
+             
               <div
                 v-if="
                   batch.datePackaged !== null ||
