@@ -26,8 +26,8 @@ namespace SabreSprings.Brewing.Data
         /// <returns></returns>
         public async Task AddFermentabuoyLog(FermentabuoyLog log) 
         {            
-            string sql = "Insert into FermentationLog (Name, Batch, Temperature, Gravity, Angle, DeviceId, Battery, RSSI) " +
-                "VALUES (@Name, @Batch, @Temperature, @Gravity, @Angle, @DeviceId, @Battery, @RSSI);";
+            string sql = "Insert into FermentationLog (Name, Batch, Temperature, Gravity, Angle, DeviceId, Battery, RSSI, Created) " +
+                "VALUES (@Name, @Batch, @Temperature, @Gravity, @Angle, @DeviceId, @Battery, @RSSI, @Created);";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 await db.ExecuteAsync(sql, log);
