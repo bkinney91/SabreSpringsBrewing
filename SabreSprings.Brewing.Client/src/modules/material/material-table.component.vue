@@ -137,6 +137,5 @@ export default class MaterialTableComponent extends Vue {
         NotifyHelper.displayError(error);
       });
   }
-
 }
 </script>
