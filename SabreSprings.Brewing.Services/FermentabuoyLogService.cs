@@ -40,7 +40,8 @@ namespace SabreSprings.Brewing.Services
                 Temperature = fermentabuoyLogDto.Temperature,
                 Battery = fermentabuoyLogDto.Battery,
                 Gravity = fermentabuoyLogDto.Gravity,
-                RSSI = fermentabuoyLogDto.RSSI
+                RSSI = fermentabuoyLogDto.RSSI,
+                Created = DateTime.Now
             };
             await FermentabuoyLogDataProvider.AddFermentabuoyLog(log);   
         }
