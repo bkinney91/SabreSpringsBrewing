@@ -74,7 +74,7 @@ namespace SabreSprings.Brewing.Api.Controllers
         [HttpGet]
         [Route("GetRecipeSteps")]
         public async Task<IActionResult> GetRecipeSteps(int recipeId){
-            
+            return Ok();
         }
     }
 }

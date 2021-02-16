@@ -2,11 +2,10 @@
   <div style="margin-left: 15%; margin-right: 15%">
     <h1>Beers</h1>
     <DxDataGrid
-      :data-source="beers"
+      :data-source="materials"
       :show-borders="true"
-      @row-inserting="addBeer"
-      @row-updating="updateBeer"
-      @selection-changed="openRecipe"
+      @row-inserting="add"
+      @row-updating="update"
       key-expr="id"
       :selection="{ mode: 'single' }"
       :hover-state-enabled="true"
@@ -20,20 +19,17 @@
         mode="form"
       >
         <DxForm>
-          <DxItem data-field="name" />
-          <DxItem data-field="style" />
-          <DxItem data-field="suggestedGlassType" />
-          <DxItem data-field="logo" />
+          <DxItem data-field="description" />
+          <DxItem data-field="unitOfMeasure" />
         </DxForm>
       </DxEditing>
-      <DxColumn data-field="name">
-        <DxRequiredRule message="Name is required" />
+      <DxColumn data-field="description">
+        <DxRequiredRule message="Description is required" />
       </DxColumn>
-      <DxColumn data-field="style">
-        <DxRequiredRule message="Style is required" />
+      <DxColumn data-field="unitOfMeasure">
+        <DxRequiredRule message="Unit of Measure is required" />
       </DxColumn>
-      <DxColumn data-field="suggestedGlassType"> </DxColumn>
-      <DxColumn data-field="logo"/>
+     
     </DxDataGrid>
   </div>
 </template>
@@ -41,9 +37,9 @@
 <script lang="ts">
 // IMPORTS ----------------------------------
 import { Vue, Component, Inject, Prop } from "vue-property-decorator";
-import { BeerApiService } from "@/core/services";
+import { MaterialApiService } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
-import { BeerDto } from "@/core/models";
+import { MaterialDto } from "@/core/models";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 import {
   DxDataGrid,
@@ -73,32 +69,32 @@ import notify from 'devextreme/ui/notify';
     DxItem,
   },
 })
-export default class BeerTableComponent extends Vue {
-  @Inject(ServiceTypes.BeerApiService)
-  private beerApiService!: BeerApiService;
-  private newBeer: BeerDto = <BeerDto>{};
-  private beers: BeerDto[] = [];
+export default class MaterialTableComponent extends Vue {
+  @Inject(ServiceTypes.MaterialApiService)
+  private materialApiService!: MaterialApiService;
+
+  private materials: MaterialDto[] = [];
   constructor() {
     super();
   }
 
   created(): void {
-    this.getBeers();
+    this.getMaterials();
   }
 
-  private getBeers() {
-    this.beerApiService
+  private getMaterials() {
+    this.materialApiService
       .getAll()
       .then((response) => {
-        this.beers = response;
+        this.materials = response;
       })
       .catch((error) => {
         NotifyHelper.displayError(error);
       });
   }
 
-  private addBeer(e: any) {
-    this.beerApiService
+  private add(e: any) {
+    this.materialApiService
       .post(e.data)
       .then((response) => {
         NotifyHelper.displayMessage("Sucessfully added beer.")
@@ -108,8 +104,8 @@ export default class BeerTableComponent extends Vue {
       });
   }
 
-  private updateBeer(e: any) {
-    this.beerApiService
+  private update(e: any) {
+    this.materialApiService
       .put(e.oldData)
       .then((response) => {
         NotifyHelper.displayMessage("Sucessfully updated beer.")

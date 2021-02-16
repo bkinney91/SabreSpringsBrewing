@@ -6,8 +6,11 @@ import {
 	BeerApiService,
 	TapHubService,
 	TapApiService,
+	MaterialApiService,
 	FermentabuoyApiService,
-	FermentabuoyAssignmentApiService
+	FermentabuoyAssignmentApiService,
+	RecipeApiService,
+	RecipeStepsApiService
 
 } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
@@ -47,6 +50,18 @@ export function configureContainer(): Container {
 	container
 		.bind<TapApiService>(ServiceTypes.TapApiService)
 		.to(TapApiService)
+		.inSingletonScope();
+		container
+		.bind<MaterialApiService>(ServiceTypes.MaterialApiService)
+		.to(MaterialApiService)
+		.inSingletonScope();
+		container
+		.bind<RecipeApiService>(ServiceTypes.RecipeApiService)
+		.to(RecipeApiService)
+		.inSingletonScope();
+		container
+		.bind<RecipeStepsApiService>(ServiceTypes.RecipeStepsApiService)
+		.to(RecipeStepsApiService)
 		.inSingletonScope();
 	container
 		.bind<FermentabuoyApiService>(ServiceTypes.FermentabuoyApiService)

@@ -23,6 +23,9 @@ import {
   BeerApiService,
   TapHubService,
   TapApiService,
+  MaterialApiService,
+  RecipeApiService,
+  RecipeStepsApiService,
   FermentabuoyApiService,
   FermentabuoyAssignmentApiService,
 } from "@/core/services";
@@ -52,6 +55,15 @@ let container = configureContainer();
     ),
     [ServiceTypes.TapApiService]: container.get<TapApiService>(
       ServiceTypes.TapApiService
+    ),
+     [ServiceTypes.MaterialApiService]: container.get<MaterialApiService>(
+      ServiceTypes.MaterialApiService
+    ),
+     [ServiceTypes.RecipeApiService]: container.get<RecipeApiService>(
+      ServiceTypes.RecipeApiService
+    ),
+     [ServiceTypes.RecipeStepsApiService]: container.get<RecipeStepsApiService>(
+      ServiceTypes.RecipeStepsApiService
     ),
     [ServiceTypes.FermentabuoyApiService]: container.get<
       FermentabuoyApiService

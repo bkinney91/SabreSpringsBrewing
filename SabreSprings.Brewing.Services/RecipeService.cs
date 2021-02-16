@@ -32,7 +32,7 @@ namespace SabreSprings.Brewing.Services
             Beer beer = await BeerDataProvider.GetBeerFromRecipe(id);
             RecipeDto recipeDto = new RecipeDto()
             {
-                Materials = await GetRecipeMaterials(id),
+                //Materials = await GetRecipeMaterials(id),
                 Id = recipe.Id,
                 Name = beer.Name,
                 Style = beer.Style,

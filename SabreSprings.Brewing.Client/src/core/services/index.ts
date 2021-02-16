@@ -7,4 +7,7 @@ export { TapHubService } from "./tap-hub.service";
 export { TapApiService } from "./tap-api.service";
 export { FermentabuoyApiService } from "./fermentabuoy-api.service";
 export { FermentabuoyAssignmentApiService } from "./fermentabuoy-assignment-api.service";
+export { MaterialApiService } from "./material-api.service";
+export { RecipeApiService } from "./recipe-api.service";
+export { RecipeStepsApiService } from "./recipe-steps-api.service";
 

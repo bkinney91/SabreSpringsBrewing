@@ -13,6 +13,7 @@ import OnTapComponent from "./modules/tap/on-tap.component.vue";
 import FermentationLandingComponent from "./modules/fermentation/fermentation-landing.component.vue";
 import BatchEditorComponent from "./modules/batch/batch-editor.component.vue";
 import BeerTableComponent from "./modules/beer/beer-table.component.vue";
+import RecipeDetailsComponent from "./modules/beer/recipe-details.component.vue";
 Vue.use(Router);
 
 export default new Router({
@@ -71,6 +72,11 @@ export default new Router({
 			path: "/batch/details",
 			name: "batch/details",
 			component: BatchDetailsComponent
+		},
+		{
+			path:"/beer/recipe",
+			name:"beer/recipe",
+			component: RecipeDetailsComponent
 		},
 		{
 			path: "/batch/editor",
