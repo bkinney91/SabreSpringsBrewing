@@ -1,5 +1,5 @@
 <template>
- <div style="margin-left:15%;margin-right:15%">
+ <div style="margin-left:5%;margin-right:5%">
    <button class="btn btn-primary" v-on:click="launchEditor">Add Batch</button>
    <hr/>
    <div v-for="batch in batchTableRows" v-bind:key="batch">

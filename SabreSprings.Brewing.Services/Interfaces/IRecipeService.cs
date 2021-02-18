@@ -12,5 +12,6 @@ namespace SabreSprings.Brewing.Services.Interfaces
         Task<List<RecipeHeaderDto>> GetRecipeHeaders();
         Task AddRecipe(RecipeDto dto);
         Task UpdateRecipe(RecipeDto dto);
+        Task<RecipeDto> GetRecipeByBeer(int beer);
     }
 }

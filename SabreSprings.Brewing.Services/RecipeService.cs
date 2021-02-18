@@ -60,6 +60,13 @@ namespace SabreSprings.Brewing.Services
             return recipeDto;
         }
 
+
+        public async Task<RecipeDto> GetRecipeByBeer(int beer)
+        {            
+            Recipe recipe = await RecipeDataProvider.GetRecipeByBeer(beer);   
+            return await GetRecipe(recipe.Id);         
+        }
+
         public async Task AddRecipe(RecipeDto dto)
         {
             Recipe entity = new Recipe()

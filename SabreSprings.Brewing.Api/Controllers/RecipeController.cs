@@ -37,6 +37,22 @@ namespace SabreSprings.Brewing.Api.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("Get")]
+        public async Task<IActionResult> GetByBeer(int beer)
+        {
+            try
+            {
+                RecipeDto recipe = await RecipeService.GetRecipeByBeer(beer);
+                return Ok(recipe);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error getting Recipe.");
+                throw;
+            }
+        }
+
 
 
         [HttpPost]

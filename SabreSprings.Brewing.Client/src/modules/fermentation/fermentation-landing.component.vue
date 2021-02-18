@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-left:15%;margin-right:15%">
+  <div style="margin-left:5%;margin-right:5%">
     <h1>Fermentation</h1>
     <div>
       <div class="row">

@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-left:15%;margin-right:15%">
+  <div style="margin-left:5%;margin-right:5%">
     <h3>Fermentabuoys</h3>
     <DxDataGrid
       id="grid-container"

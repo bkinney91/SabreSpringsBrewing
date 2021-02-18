@@ -1,6 +1,6 @@
 <template>
   <div v-if="batchDetails != null">
-    <div style="margin-left:15%;margin-right:15%" id="attributes">
+    <div style="margin-left:5%;margin-right:5%" id="attributes">
       <h1 id="header" :style="'color:' + getColor(batchDetails.status)">{{batchDetails.beer}}</h1>
       <ul>
         <li>
