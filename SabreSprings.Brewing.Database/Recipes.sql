@@ -1,6 +1,8 @@
 ﻿CREATE TABLE [Recipes]
 (
-	[Id] INT NOT NULL PRIMARY KEY,
+	[Id] INTEGER NOT NULL PRIMARY KEY,
+	[BoilTime] INTEGER NOT NULL,
+	[Beer] integer not null,
 	[Yeast] TEXT not null,
 	[PitchTemperature] int not null,
 	[FermentationTemperatureLow] int null,

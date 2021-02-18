@@ -1,7 +1,33 @@
 <template>
 <div style="margin-left:5%;margin-right:5%">
   <h2>{{beer.name}} Recipe</h2>
-  <div>{{recipe.yeast}}</div>
+  <hr/>
+  <div>
+    <table class="table">
+      <tbody>
+      <tr>
+       
+        <td>
+        Yeast: {{recipe.yeast}}
+        </td>
+         <td>Boil Time: {{recipe.boilTime}}</td>
+        <td>
+          ABV: {{recipe.abv}}
+          </td>
+          </tr>
+          <tr>
+            <td>Preboil Gravity: {{recipe.preBoilGravity}}
+            <td>Original Gravity: {{recipe.originalGravity}}</td>
+            <td>Final Gravity: {{recipe.finalGravity}}</td>
+            </tr>
+            <tr>
+              <td>IBU: {{recipe.ibu}}</td>
+              <td>SRM: {{recipe.srm}}</td>
+              <td>Mash PH: {{recipe.mashPh}}</td>
+              </tr>
+              </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -49,7 +75,7 @@ export default class BatchDetailsComponent extends Vue {
     this.recipeApiService
       .getFromBeer(id)
       .then((response) => {
-        this.beer = response;
+        this.recipe = response;
       })
       .catch((error) => {
         NotifyHelper.displayError(error);

@@ -29,14 +29,12 @@ namespace SabreSprings.Brewing.Services
         public async Task<RecipeDto> GetRecipe(int id)
         {            
             Recipe recipe = await RecipeDataProvider.GetRecipe(id);
-            Beer beer = await BeerDataProvider.GetBeerFromRecipe(id);
             RecipeDto recipeDto = new RecipeDto()
             {
                 //Materials = await GetRecipeMaterials(id),
                 Id = recipe.Id,
-                Name = beer.Name,
-                Style = beer.Style,
                 Yeast = recipe.Yeast,
+                BoilTime = recipe.BoilTime,
                 PitchTemperature = recipe.PitchTemperature,
                 FermentationTemperatureLow = recipe.FermentationTemperatureLow,
                 FermentationTemperatureHigh = recipe.FermentationTemperatureHigh,
@@ -72,6 +70,7 @@ namespace SabreSprings.Brewing.Services
             Recipe entity = new Recipe()
             {
                 Yeast = dto.Yeast,
+                BoilTime = dto.BoilTime,
                 PitchTemperature = dto.PitchTemperature,
                 FermentationTemperatureLow = dto.FermentationTemperatureLow,
                 FermentationTemperatureHigh = dto.FermentationTemperatureHigh,
@@ -101,6 +100,7 @@ namespace SabreSprings.Brewing.Services
             {
                 Id = dto.Id,
                 Yeast = dto.Yeast,
+                BoilTime = dto.BoilTime,
                 PitchTemperature = dto.PitchTemperature,
                 FermentationTemperatureLow = dto.FermentationTemperatureLow,
                 FermentationTemperatureHigh = dto.FermentationTemperatureHigh,

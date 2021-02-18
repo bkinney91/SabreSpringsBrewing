@@ -7,6 +7,7 @@ namespace SabreSprings.Brewing.Models.Entities
     public class Recipe
     {
         public int Id { get; set; }
+        public int BoilTime {get;set;}
         public string Yeast { get; set; }
         public int PitchTemperature { get; set; }
         public int FermentationTemperatureLow { get; set; }

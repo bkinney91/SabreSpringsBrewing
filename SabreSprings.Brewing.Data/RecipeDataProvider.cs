@@ -26,6 +26,7 @@ namespace SabreSprings.Brewing.Data
             string sql = "Select " +
                             "Id, " +
                             "Yeast, " + 
+                            "BoilTime, " +
                             "PitchTemperature, " +
                             "FermentationTemperatureLow, " + 
                             "FermentationTemperatureHigh, " +
@@ -57,7 +58,7 @@ namespace SabreSprings.Brewing.Data
         public async Task<Recipe> GetRecipeByBeer(int beer)
         {
             string connectionString = _configuration.GetConnectionString("SabreSpringsBrewing");
-            string sql = "Select ID from Recipe where Beer=@Beer;"; 
+            string sql = "Select ID from Recipes where Beer=@Beer;"; 
             using (IDbConnection db = new SqliteConnection(connectionString))
             {
                 var recipeId = await db.QueryFirstAsync<int>(sql);
@@ -72,6 +73,7 @@ namespace SabreSprings.Brewing.Data
                             (Beer,
                             Yeast,
                             PitchTemperature,
+                            BoilTime,
                             FermentationTemperatureLow,
                             FermentationTemperatureHigh,
                             StrikeWaterVolume,
@@ -94,6 +96,7 @@ namespace SabreSprings.Brewing.Data
                             (@Beer,
                             @Yeast,
                             @PitchTemperature,
+                            @BoilTime,
                             @FermentationTemperatureLow,
                             @FermentationTemperatureHigh,
                             @StrikeWaterVolume,
@@ -123,6 +126,7 @@ namespace SabreSprings.Brewing.Data
         {
             string sql = @"Update Recipes Set
                             Yeast = @Yeast,
+                            BoilTime = @BoilTime,
                             PitchTemperature = @PitchTemperature,
                             FermentationTemperatureLow = @FermentationTemperatureLow,
                             FermentationTemperatureHigh = @FermentationTemperatureHigh,
