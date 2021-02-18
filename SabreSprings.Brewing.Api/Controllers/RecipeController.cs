@@ -38,7 +38,7 @@ namespace SabreSprings.Brewing.Api.Controllers
         }
 
         [HttpGet]
-        [Route("Get")]
+        [Route("GetByBeer")]
         public async Task<IActionResult> GetByBeer(int beer)
         {
             try

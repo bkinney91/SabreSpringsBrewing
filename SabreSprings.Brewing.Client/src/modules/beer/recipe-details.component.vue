@@ -1,6 +1,7 @@
 <template>
 <div style="margin-left:5%;margin-right:5%">
   <h2>{{beer.name}} Recipe</h2>
+  <div>{{recipe.yeast}}</div>
   </div>
 </template>
 
