@@ -3,7 +3,12 @@
   <h2>{{beer.name}} Recipe</h2>
   <hr/>
   <div>
-    <table class="table">
+    <table class="table" style="border-color:grey;border:1px;">
+       <colgroup>
+    <col style="width:33%">
+    <col style="width:33%">
+    <col style="width:33%">
+  </colgroup> 
       <tbody>
       <tr>
        
@@ -30,7 +35,12 @@
     </div>
   </div>
 </template>
-
+<style scoped>
+table td {
+            font-weight:bold;
+            text-align:center;
+        }
+</style>
 <script lang="ts">
 // IMPORTS ----------------------------------
 import { Vue, Component, Inject } from "vue-property-decorator";
