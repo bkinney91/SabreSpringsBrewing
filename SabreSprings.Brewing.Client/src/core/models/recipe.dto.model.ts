@@ -1,5 +1,6 @@
 export interface RecipeDto
 {
+   id: number;
    boilTime: number;
    yeast: string;
    pitchTemperature: number;
