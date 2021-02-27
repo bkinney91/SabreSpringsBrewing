@@ -12,6 +12,7 @@
       />
       <div v-if="!tap.logo" style="min-height:400px"></div>
       <div class="card-body">
+        <div style="height:90%">
         <h2 class="card-title"><b>{{tap.beerDisplayName}}</b></h2>
         <i>
           <h3>{{tap.style}}</h3>
@@ -27,6 +28,7 @@
         >Approx. Pints Remaining: {{Math.round(tap.pintsRemaining *10) / 10}}</h5>
         <div style="min-height:120px">
           <p class="card-text">{{tap.tastingNotes}}</p>
+        </div>
         </div>
         <button
           href="#"
