@@ -1,6 +1,6 @@
 <template>
-<div>
-  <div v-if="tap != null">
+<div style="height:100%">
+  <div v-if="tap != null" style="height:100%">
     <div class="card" style="height:100%">
 
       <img
