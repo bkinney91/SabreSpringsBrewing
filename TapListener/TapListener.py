@@ -41,19 +41,19 @@ GPIO.add_event_detect(25, GPIO.RISING, callback=registerDrawTap3, bouncetime=20)
 # main loop
 while True:  
   currentTime = int(time.time() * FlowMeter.MS_IN_A_SECOND)
-  if (tap1.thisPour > 0.05 and currentTime - tap1.lastClick > 3000): # 3 seconds of inactivity triggers http request
+  if (tap1.thisPour > 0.125 and currentTime - tap1.lastClick > 3000): # 3 seconds of inactivity triggers http request
     print('Tap2:' + tap2.getThisPourInPints())
     postContent = {'TapNumber': 1, 'AmountPoured': tap1.getThisPourInPints()}
     request = requests.post('http://10.0.0.2:8080/api/Tap/ProcessPour', json = postContent)
     tap1.thisPour = 0.0
  
-  if (tap2.thisPour > 0.05 and currentTime - tap2.lastClick > 3000): # 3 seconds of inactivity triggers http request    
+  if (tap2.thisPour > 0.125 and currentTime - tap2.lastClick > 3000): # 3 seconds of inactivity triggers http request    
     print('Tap2:' + tap2.getThisPourInPints())
     postContent = {'TapNumber': 2, 'AmountPoured': tap2.getThisPourInPints()}
     request = requests.post('http://10.0.0.2:8080/api/Tap/ProcessPour', json = postContent)
     tap2.thisPour = 0.0
 
-  if (tap3.thisPour > 0.05 and currentTime - tap3.lastClick > 3000): # 3 seconds of inactivity triggers http request    
+  if (tap3.thisPour > 0.125 and currentTime - tap3.lastClick > 3000): # 3 seconds of inactivity triggers http request    
     print('Tap3:' + tap3.getThisPourInPints())
     postContent = {'TapNumber': 3, 'AmountPoured': tap3.getThisPourInPints()}
     request = requests.post('http://10.0.0.2:8080/api/Tap/ProcessPour', json = postContent)
