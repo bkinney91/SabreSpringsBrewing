@@ -1,7 +1,7 @@
 <template>
 <div>
   <div v-if="tap != null">
-    <div class="card">
+    <div class="card" style="height:100%">
 
       <img
       v-if="tap.logo"
