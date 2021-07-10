@@ -17,16 +17,16 @@
     "tsc:nwatch": "tsc --watch"
   },
   "dependencies": {
-    "@microsoft/signalr": "^3.1.10",
+    "@microsoft/signalr": "^3.1.16",
     "axios": "0.21.1",
     "core-js": "2.6.5",
     "devextreme": "19.2.6",
-    "devextreme-aspnet-data-nojquery": "^2.8.0",
+    "devextreme-aspnet-data-nojquery": "^2.8.5",
     "devextreme-vue": "19.2.6",
     "inversify": "5.0.1",
     "lodash": "4.17.19",
     "oidc-client": "1.5.4",
-    "qs": "^6.9.4",
+    "qs": "^6.10.1",
     "reflect-metadata": "0.1.13",
     "rxjs": "6.5.2",
     "util": "0.12.1",
@@ -41,7 +41,7 @@
   "devDependencies": {
     "@types/chai": "4.1.0",
     "@types/mocha": "5.2.4",
-    "@types/node": "^12.19.11",
+    "@types/node": "^12.20.16",
     "@vue/cli-plugin-babel": "3.12.0",
     "@vue/cli-plugin-e2e-nightwatch": "3.12.0",
     "@vue/cli-plugin-eslint": "4.1.1",

@@ -34,7 +34,7 @@ namespace SabreSprings.Brewing.Api.Controllers
             }
             catch(Exception ex)
             {
-                Log.Error($"Error geting batch with ID \"{id}\".");
+                Log.Error(ex, $"Error geting batch with ID \"{id}\".");
                 throw;
             }
         }
@@ -50,7 +50,7 @@ namespace SabreSprings.Brewing.Api.Controllers
             }
             catch(Exception ex)
             {
-                Logger.Error(ex, $"Error getting batch table.");
+                Log.Error(ex, $"Error getting batch table.");
                 throw;
             }
         }
@@ -67,7 +67,7 @@ namespace SabreSprings.Brewing.Api.Controllers
             }
             catch(Exception ex)
             {
-                Logger.Error($"Error getting details for batch with ID \"{id}\".");
+                Log.Error(ex, $"Error getting details for batch with ID \"{id}\".");
                 throw;
             }
         }
@@ -84,7 +84,7 @@ namespace SabreSprings.Brewing.Api.Controllers
             }
             catch(Exception ex)
             {
-                Log.Error($"Error posting batch.");
+                Log.Error(ex, $"Error posting batch.");
                 throw;
             }
         }
@@ -100,7 +100,7 @@ namespace SabreSprings.Brewing.Api.Controllers
             }
             catch(Exception ex)
             {
-                Log.Error($"Error updating batch with ID \"{dto.Id}\".");
+                Log.Error(ex, $"Error updating batch with ID \"{dto.Id}\".");
                 throw;
             }
         }
