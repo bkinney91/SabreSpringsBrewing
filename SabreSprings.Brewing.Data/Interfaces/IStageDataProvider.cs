@@ -6,10 +6,10 @@ using SabreSprings.Brewing.Models.Entities;
 
 namespace SabreSprings.Brewing.Data.Interfaces
 {
-    public interface IRecipeStepStageDataProvider
+    public interface IStageDataProvider
     {
-        Task<RecipeStepStage> GetRecipeStepStage(int id);
-        Task<List<RecipeStepStage>> GetRecipeStepStages();
+        Task<Stage> GetStage(int id);
+        Task<List<Stage>> GetStages();
        
     }
 }

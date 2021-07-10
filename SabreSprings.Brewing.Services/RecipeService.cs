@@ -29,6 +29,10 @@ namespace SabreSprings.Brewing.Services
         public async Task<RecipeDto> GetRecipe(int id)
         {            
             Recipe recipe = await RecipeDataProvider.GetRecipe(id);
+            if(recipe == null)
+            {
+                return null;
+            }
             RecipeDto recipeDto = new RecipeDto()
             {
                 //Materials = await GetRecipeMaterials(id),

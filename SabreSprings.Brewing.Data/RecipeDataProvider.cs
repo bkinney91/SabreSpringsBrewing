@@ -50,7 +50,15 @@ namespace SabreSprings.Brewing.Data
                             " from Recipes where Id = @Id;";
             using (IDbConnection db = new SqliteConnection(connectionString))
             {
-                recipe = await db.QueryFirstAsync<Recipe>(sql, new { Id = id });                
+                var result = await db.QueryAsync<Recipe>(sql, new { Id = id });  
+                if(result.Any())
+                {
+                    recipe = result.First();    
+                }
+                else
+                {
+                    return null;
+                }          
             }
             return recipe;
         }

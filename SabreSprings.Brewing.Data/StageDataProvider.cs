@@ -12,36 +12,36 @@ using SabreSprings.Brewing.Models.Entities;
 
 namespace SabreSprings.Brewing.Data
 {
-    public class RecipeStepStageDataProvider : IRecipeStepStageDataProvider
+    public class StageDataProvider : IStageDataProvider
     {
         private readonly IConfiguration _configuration;
-        public RecipeStepStageDataProvider(IConfiguration configuration)
+        public StageDataProvider(IConfiguration configuration)
         {
             _configuration = configuration;
         }
-        public async Task<RecipeStepStage> GetRecipeStepStage(int id)
+        public async Task<Stage> GetStage(int id)
         {
-            RecipeStepStage stage = new RecipeStepStage();
+            Stage stage = new Stage();
             string connectionString = _configuration.GetConnectionString("SabreSpringsBrewing");
-            string sql = "Select * from RecipeStepStage where Id = @Id;";
+            string sql = "Select * from Stages where Id = @Id;";
                          
             using (IDbConnection db = new SqliteConnection(connectionString))
             {
-                stage = await db.QueryFirstAsync<RecipeStepStage>(sql, new { Id = id });                
+                stage = await db.QueryFirstAsync<Stage>(sql, new { Id = id });                
             }
             return stage;
         }
 
 
-        public async Task<List<RecipeStepStage>> GetRecipeStepStages()
+        public async Task<List<Stage>> GetStages()
         {
  
-            List<RecipeStepStage> stages= new List<RecipeStepStage>();
+            List<Stage> stages= new List<Stage>();
             string connectionString = _configuration.GetConnectionString("SabreSpringsBrewing");
-            string sql = "Select * from RecipeStepStages;";
+            string sql = "Select * from Stages;";
             using (IDbConnection db = new SqliteConnection(connectionString))
             {
-                var results = await db.QueryAsync<RecipeStepStage>(sql);
+                var results = await db.QueryAsync<Stage>(sql);
                 stages = results.ToList();
             }
             return stages;
