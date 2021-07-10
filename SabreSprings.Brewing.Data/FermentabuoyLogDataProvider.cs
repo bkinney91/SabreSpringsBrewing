@@ -14,11 +14,9 @@ namespace SabreSprings.Brewing.Data
     public class FermentabuoyLogDataProvider : IFermentabuoyLogDataProvider
     {
         private readonly IConfiguration _configuration;
-        private readonly ILogger _logger;
-        public FermentabuoyLogDataProvider(IConfiguration configuration, ILogger logger)
+        public FermentabuoyLogDataProvider(IConfiguration configuration)
         {
             _configuration = configuration;
-            _logger = logger;
         }
 
         /// <summary>
@@ -123,7 +121,7 @@ namespace SabreSprings.Brewing.Data
 
 
         /// <summary>
-        /// returns all logs from db associated with given batch id.
+        /// returns every 8th record of logs from db associated with given batch id.
         /// </summary>
         /// <param name="batchId"></param>
         /// <returns></returns>
@@ -141,10 +139,14 @@ namespace SabreSprings.Brewing.Data
                             RSSI,
                             Created
                             from FermentationLog
-                            where Batch = @Batch;";
+                            where Batch = @Batch";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
-                IEnumerable<FermentabuoyLog> logs = await db.QueryAsync<FermentabuoyLog>(sql, new { BatchId = batchId });
+                IEnumerable<FermentabuoyLog> logs = await db.QueryAsync<FermentabuoyLog>(sql, new { Batch = batchId });
+                //if there is more than 100 hours of logs only take a log from every 4 hours
+                if(logs.Count() > 100){
+                    logs = logs.Where(x=> x.Id%4 ==0);
+                }
                 return logs.ToList();
             }
         }

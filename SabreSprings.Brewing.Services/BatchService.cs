@@ -77,7 +77,8 @@ namespace SabreSprings.Brewing.Services
                     Style = beer.Style,
                     DateBrewed = batch.DateBrewed,
                     DatePackaged = batch.DatePackaged,
-                    StatusText = statusText
+                    StatusText = statusText,
+                    Logo = beer.Logo
                 };
                 tableRows.Add(row);
             }

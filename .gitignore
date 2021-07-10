@@ -46,7 +46,6 @@ msbuild.wrn
 *.dbmdl
 *.jfm
 
-
-#Log files
-*.txt
+#Serilog log files
 *.log
+*.txt

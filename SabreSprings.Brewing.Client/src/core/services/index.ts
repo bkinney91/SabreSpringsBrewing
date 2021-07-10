@@ -10,4 +10,5 @@ export { FermentabuoyAssignmentApiService } from "./fermentabuoy-assignment-api.
 export { MaterialApiService } from "./material-api.service";
 export { RecipeApiService } from "./recipe-api.service";
 export { RecipeStepsApiService } from "./recipe-steps-api.service";
+export { FermentabuoyLogApiService } from "./fermentabuoy-log-api.service"
 

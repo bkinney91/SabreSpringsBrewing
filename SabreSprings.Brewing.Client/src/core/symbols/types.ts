@@ -12,6 +12,7 @@ const ServiceTypes =
 	MaterialApiService: Symbol.for("MaterialApiService"),
 	RecipeApiService: Symbol.for("RecipeApiService"),
 	RecipeStepsApiService: Symbol.for("RecipeStepsApiService"),
+	FermentabuoyLogApiService: Symbol.for("FermentabuoyLogApiService"),
 	Container: Symbol.for("Container")
 };
 

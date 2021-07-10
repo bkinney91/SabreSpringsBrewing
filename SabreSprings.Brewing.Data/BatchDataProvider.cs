@@ -14,12 +14,10 @@ namespace SabreSprings.Brewing.Data
     public class BatchDataProvider : IBatchDataProvider
     {
         private readonly IConfiguration _configuration;
-        private readonly ILogger _logger;
 
-        public BatchDataProvider(IConfiguration configuration, ILogger logger)
+        public BatchDataProvider(IConfiguration configuration)
         {
             _configuration = configuration;
-            _logger = logger;
         }
 
         public async Task<Batch> Get(int id)
@@ -35,13 +33,20 @@ namespace SabreSprings.Brewing.Data
 
         public async Task<int> GetLatestBatchNumber(int beer)
         {
-            int batchNumber = 0;
             string sql = "Select BatchNumber from Batches where Beer = @Beer order by BatchNumber desc;";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
-                batchNumber = await db.QueryFirstAsync<int>(sql, new { Beer = beer });
+                var results = await db.QueryAsync<int>(sql, new { Beer = beer });
+                if(results.Any())
+                {
+                    return results.First();
+                }
+                else
+                {
+                    return 1;
+                }
             }
-            return batchNumber;
+           
         }
 
         public async Task<List<Batch>> GetOnTap()
@@ -92,8 +97,8 @@ namespace SabreSprings.Brewing.Data
         public async Task Add(Batch batch)
         {
             string sql = @"Insert into Batches 
-            (Beer, BatchNumber, BatchName, Status, Created)
-            VALUES (@Beer, @BatchNumber, @BatchName, @Status, @Created);";
+            (Beer, BatchNumber, BatchName, PintsRemaining, Status, Created)
+            VALUES (@Beer, @BatchNumber, @BatchName, 40, @Status, @Created);";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 await db.ExecuteAsync(sql, batch);

@@ -12,5 +12,6 @@ namespace SabreSprings.Brewing.Services.Interfaces
         Task<List<FermentabuoyLogDto>> GetAllLogs();
         Task<List<FermentabuoyLogDto>> GetBuoyNames();
         Task<List<FermentabuoyLogDto>> GetLogsByBuoy(string buoyName);
+        Task<List<FermentabuoyLogDto>> GetLogsByBatch(int batch);
     }
 }

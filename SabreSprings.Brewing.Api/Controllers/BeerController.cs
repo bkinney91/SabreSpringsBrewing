@@ -17,11 +17,9 @@ namespace SabreSprings.Brewing.Api.Controllers
     public class BeerController : ControllerBase
     {
         private readonly IBeerService BeerService;
-        private readonly ILogger Logger;
-        public BeerController(IBeerService beerService, ILogger logger)
+        public BeerController(IBeerService beerService)
         {
             BeerService = beerService;
-            Logger = logger;
         }
         
 

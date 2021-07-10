@@ -10,3 +10,4 @@ export { BeerDto } from "./beer.dto.model";
 export { MaterialDto } from "./material.dto.model";
 export { MaterialTypeDto } from "./material-type.dto.model";
 export { RecipeDto } from "./recipe.dto.model";
+export { FermentabuoyLogDto } from "./fermentabuoy-log.dto.model";

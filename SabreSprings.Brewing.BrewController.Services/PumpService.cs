@@ -13,8 +13,8 @@ namespace SabreSprings.Brewing.BrewController.Services
         public bool Pump1Enabled {get; private set;}
         public bool Pump2Enabled {get; private set;}
         private GpioController Rpi;
-        private const int Pump1Pin = 26;
-        private const int Pump2Pin = 20;
+        private const int Pump1Pin = 20;
+        private const int Pump2Pin = 26;
         public PumpService()
         {
             Pump1Enabled = false;

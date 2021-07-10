@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace SabreSprings.Brewing.Data
 {
@@ -17,11 +18,9 @@ namespace SabreSprings.Brewing.Data
 
 
         private readonly IConfiguration _configuration;
-        private readonly ILogger _logger;
-        public FermentabuoyAssignmentDataProvider(IConfiguration configuration, ILogger logger)
+        public FermentabuoyAssignmentDataProvider(IConfiguration configuration)
         {
             _configuration = configuration;
-            _logger = logger;
         }
 
       
@@ -32,6 +31,28 @@ namespace SabreSprings.Brewing.Data
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
                 await db.ExecuteAsync(sql, assignment);
+            }
+        }
+
+        public async Task<List<FermentabuoyAssignment>> GetAllAssignments()
+        {
+            FermentabuoyAssignment assignment = new FermentabuoyAssignment();
+            string sql = @"Select * from FermentabuoyAssignment assign join Fermentabuoy buoy on assign.Fermentabuoy = buoy.Id where buoy.DeviceId = @DeviceId order  by Created desc;";
+            using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
+            {
+                var queryResults = await db.QueryAsync<FermentabuoyAssignment>(sql);
+                return queryResults.ToList();
+            }
+        }
+
+
+        public async Task DeleteAssignment(int id)
+        {
+           
+            string sql = @"Delete from FermentabuoyAssignment where Id = @Id;";
+            using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
+            {
+                await db.ExecuteAsync(sql, new {Id = id});               
             }
         }
 
@@ -48,8 +69,17 @@ namespace SabreSprings.Brewing.Data
             string sql = @"Select * from FermentabuoyAssignment assign join Fermentabuoy buoy on assign.Fermentabuoy = buoy.Id where buoy.DeviceId = @DeviceId order  by Created desc;";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
-                assignment = await db.QueryFirstAsync<FermentabuoyAssignment>(sql, new { DeviceId = deviceId });
+                var queryResults = await db.QueryAsync<FermentabuoyAssignment>(sql, new { DeviceId = deviceId });
+                if(queryResults.Any() == false)
+                {
+                    throw new InvalidOperationException($"Fermentabuoy {deviceId} does not have an assignment");
+                }
+                else
+                {
+                    assignment = queryResults.First();
+                }
             }
+            
             return assignment;
         }
 

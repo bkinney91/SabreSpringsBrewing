@@ -7,7 +7,7 @@ Restart=always
 RestartSec=10
 User=root
 WorkingDirectory=/home/bryce/SabreSpringsBrewing/Api/
-ExecStart=/usr/bin/sudo /home/bryce/dotnet/dotnet /home/bryce/SabreSpringsBrewing/Api/SabreSprings.Brewing.Web.dll --environment="Production"
+ExecStart=/usr/bin/sudo /usr/share/dotnet/dotnet /home/bryce/SabreSpringsBrewing/Api/SabreSprings.Brewing.Api.dll --environment="Production"
 Environment=ASPNETCORE_ENVIRONMENT=Production
 
 [Install]

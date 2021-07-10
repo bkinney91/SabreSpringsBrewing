@@ -10,6 +10,7 @@ namespace SabreSprings.Brewing.Models.View
         public string BatchName { get; set; }
         public string BeerName { get; set; }
         public string Style { get; set; }
+        public string Logo{get;set;}
         public DateTime? DateBrewed { get; set; }
         public DateTime? DatePackaged { get; set; }
         

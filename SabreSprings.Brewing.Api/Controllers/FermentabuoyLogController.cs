@@ -17,11 +17,9 @@ namespace SabreSprings.Brewing.Api.Controllers
     public class FermentabuoyLogController : ControllerBase
     {
         private readonly IFermentabuoyLogService FermentabuoyLogService;
-        private readonly ILogger Logger;   
-        public FermentabuoyLogController(IFermentabuoyLogService fermentabuoyLogService, ILogger logger)
+        public FermentabuoyLogController(IFermentabuoyLogService fermentabuoyLogService)
         {
             FermentabuoyLogService = fermentabuoyLogService;
-            Logger = logger;
         }
 
         /// <summary>
@@ -33,14 +31,19 @@ namespace SabreSprings.Brewing.Api.Controllers
         [Route("Post")]
         public async Task<IActionResult> Post([FromBody] FermentabuoyLogDto fermentabuoyLogDto)
         {
+            Log.Information($"New Buoy Post. Name: {fermentabuoyLogDto.Name}, Temp: {fermentabuoyLogDto.Temperature}");
             try
             {
                 await FermentabuoyLogService.AddFermentabuoyLog(fermentabuoyLogDto);
-                return Ok();
+                return NoContent();
             }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+            catch(InvalidOperationException invalidEx){
+                Log.Error(invalidEx, "Invalid Buoy configuration, see exception");
+                return BadRequest();
+            }
+            catch(Exception ex){
+                Log.Error(ex, "Could not log buoy POST");
+                throw;
             }
         }
 
@@ -54,15 +57,8 @@ namespace SabreSprings.Brewing.Api.Controllers
         [Produces(typeof(FermentabuoyLogDto))]
         public async Task<IActionResult> Get(int id)
         {
-            try
-            {
-                FermentabuoyLogDto log = await FermentabuoyLogService.GetLog(id);
-                return Ok(log);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
-            }
+            FermentabuoyLogDto log = await FermentabuoyLogService.GetLog(id);
+            return Ok(log);
         }
 
         /// <summary>
@@ -74,15 +70,8 @@ namespace SabreSprings.Brewing.Api.Controllers
         [Produces(typeof(List<FermentabuoyLogDto>))]
         public async Task<IActionResult> GetAll()
         {
-            try
-            {
-                List<FermentabuoyLogDto> logs = await FermentabuoyLogService.GetAllLogs();
-                return Ok(logs);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
-            }
+            List<FermentabuoyLogDto> logs = await FermentabuoyLogService.GetAllLogs();
+            return Ok(logs);
         }
 
         /// <summary>
@@ -94,15 +83,8 @@ namespace SabreSprings.Brewing.Api.Controllers
         [Produces(typeof(List<FermentabuoyLogDto>))]
         public async Task<IActionResult> GetBuoyNames()
         {
-            try
-            {
-                List<FermentabuoyLogDto> logs = await FermentabuoyLogService.GetBuoyNames();
-                return Ok(logs);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
-            }
+            List<FermentabuoyLogDto> logs = await FermentabuoyLogService.GetBuoyNames();
+            return Ok(logs);
         }
 
         /// <summary>
@@ -115,15 +97,22 @@ namespace SabreSprings.Brewing.Api.Controllers
         [Produces(typeof(List<FermentabuoyLogDto>))]
         public async Task<IActionResult> GetLogsByBuoy(string buoyName)
         {
-            try
-            {
-                List<FermentabuoyLogDto> logs = await FermentabuoyLogService.GetLogsByBuoy(buoyName);
-                return Ok(logs);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
-            }
+            List<FermentabuoyLogDto> logs = await FermentabuoyLogService.GetLogsByBuoy(buoyName);
+            return Ok(logs);
+        }
+
+        /// <summary>
+        /// Gets all logs associated with a batch
+        /// </summary>
+        /// <param name="batch"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("GetLogsByBatch")]
+        [Produces(typeof(List<FermentabuoyLogDto>))]
+        public async Task<IActionResult> GetLogsByBatch(int batch)
+        {
+            List<FermentabuoyLogDto> logs = await FermentabuoyLogService.GetLogsByBatch(batch);
+            return Ok(logs);
         }
     }
 }
