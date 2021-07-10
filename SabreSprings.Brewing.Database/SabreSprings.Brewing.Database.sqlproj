@@ -80,5 +80,6 @@
     <Build Include="Materials.sql" />
     <Build Include="FermentabouyAssignment.sql" />
     <Build Include="Fermentabuoy.sql" />
+    <Build Include="Stages.sql" />
   </ItemGroup>
 </Project>
