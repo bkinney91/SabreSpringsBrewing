@@ -18,7 +18,7 @@
 <style>
   .tapCard
   {
-    height: 400px;
+    height: auto;
     width: auto;
   }
 </style>
