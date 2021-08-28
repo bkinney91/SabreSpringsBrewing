@@ -7,7 +7,7 @@
             <img
               v-if="tap.logo"
               class="card-img-left"
-              style="height: 400px; width: 400px"
+              style="height: 300px; width: 300px"
               :src="'/Content/images' + tap.logo"
               alt="Card image cap"
             />
@@ -15,45 +15,44 @@
           </div>
           <div class="col-lg-8">
             <div class="card-body">
-              <div class="row" style="height: 90%">
-                <div class="col-md-6">
-                  <h1 class="card-title">
-                    <b>Tap #{{ tap.tapNumber }}</b>
-                  </h1>
-                  <h2>
-                    {{ tap.beerDisplayName }}
-                  </h2>
-                  <i>
-                    <h3>{{ tap.style }}</h3>
-                  </i>
-                  <h5>
-                    <b>Batch #{{ tap.batchNumber }}</b>
-                  </h5>
-                  <h5>ABV: {{ tap.abv }}%</h5>
-                  <h5 id="tap1PintsRemaining">
-                    Approx. Pints Remaining:
-                    {{ Math.round(tap.pintsRemaining * 10) / 10 }}
-                  </h5>
-                    <hr/>
-                  <button
-                    href="#"
-                    class="btn btn-primary"
-                    v-on:click="launchBatchDetails(tap.batchId)"
-                  >
-                    View Batch Details
-                  </button>                
-                </div>
-                <div class="col-md-6" >
-                  <div style="margin:10%">
-                  <h3>Notes</h3>
-                  <div style="min-height: 120px;">
-                    <p class="card-text">{{ tap.tastingNotes }}</p>
-                  </div>
-                  </div>
-                </div>
+              <div style="height: 90%">
+                <h1 class="card-title">
+                  <b>Tap #{{ tap.tapNumber }}</b>
+                </h1>
+                <h2>
+                  {{ tap.beerDisplayName }}
+                </h2>
+                <i>
+                  <h3>{{ tap.style }}</h3>
+                </i>
+                <h5>
+                  <b>Batch #{{ tap.batchNumber }}</b>
+                </h5>
+                <h5>ABV: {{ tap.abv }}%</h5>
+                <h5 id="tap1PintsRemaining">
+                  Approx. Pints Remaining:
+                  {{ Math.round(tap.pintsRemaining * 10) / 10 }}
+                </h5>
+
+                <button
+                  href="#"
+                  class="btn btn-primary"
+                  v-on:click="launchBatchDetails(tap.batchId)"
+                >
+                  View Batch Details
+                </button>
+              </div>
+               <div class="row">
+            <div style="margin: 5%">
+              <h3>Notes</h3>
+              <div style="min-height: 120px">
+                <p class="card-text">{{ tap.tastingNotes }}</p>
               </div>
             </div>
           </div>
+            </div>
+          </div>
+         
         </div>
       </div>
     </div>
