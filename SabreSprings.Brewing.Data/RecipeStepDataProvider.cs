@@ -40,6 +40,7 @@ namespace SabreSprings.Brewing.Data
                             Stage,
                             Step,
                             StepNumber,
+                            ParentId,
                             DisplayText,
                             TimerMinutes
                             Created)
@@ -47,6 +48,7 @@ namespace SabreSprings.Brewing.Data
                             (@Recipe,
                             @Stage,
                             @Step,
+                            @StepNumber,
                             @StepNumber,
                             @DisplayText,
                             @TimerMinutes,
@@ -65,6 +67,7 @@ namespace SabreSprings.Brewing.Data
                             Stage, = @Stage,
                             Step = @Step,
                             StepNumber = @StepNumber,
+                            ParentId = @ParentId,
                             DisplayText = @DisplayText,
                             TimerMinutes = @TimerMinutes
                             Where Id = @Id;";

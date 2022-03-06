@@ -33,6 +33,8 @@ namespace SabreSprings.Brewing.Data
                             "CAST(StrikeWaterVolume AS REAL) as StrikeWaterVolume, " +
                             "StrikeWaterTemperature, " + 
                             "CAST(SpargeWaterVolume AS REAL) as SpargeWaterVolume, " +
+                            "SpargeWaterTemperature, " +
+                            "CAST(PreBoilVolume AS REAL) as PreBoilVolume, " +
                             "MashTemperature, " +
                             "MashInstructions, " +
                             "DaysInPrimaryFermentation, " + 

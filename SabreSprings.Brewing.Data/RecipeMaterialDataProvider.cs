@@ -38,12 +38,10 @@ namespace SabreSprings.Brewing.Data
             string sql = @"Insert into RecipeMaterial 
                             (Recipe,
                             Material,
-                            Quantity,
                             Created)
                         VALUES 
                             (@Recipe,
                             @Material,
-                            @Quantity,
                             @Created);";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
             {
@@ -54,8 +52,7 @@ namespace SabreSprings.Brewing.Data
 
         public async Task Update(RecipeMaterial material)
         {
-            string sql = @"Update RecipeMaterial Set                         
-                            Quantity = @Quantity,
+            string sql = @"Update RecipeMaterial Set
                             Material = @Material                           
                             Where Id = @Id;";
             using (IDbConnection db = new SqliteConnection(_configuration.GetConnectionString("SabreSpringsBrewing")))
