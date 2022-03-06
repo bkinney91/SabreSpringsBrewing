@@ -1,13 +1,14 @@
 using SabreSprings.Brewing.BrewController.Services.Interfaces;
 using System.Device.Gpio;
-
+using System;
+using Microsoft.Extensions.Hosting;
 
 namespace SabreSprings.Brewing.BrewController.Services
 {
     public class PumpService : IPumpService
     {
-        public bool Pump1Enabled {get; private set;}
-        public bool Pump2Enabled {get; private set;}
+        public bool Pump1Enabled { get; private set; }
+        public bool Pump2Enabled { get; private set; }
         private GpioController Rpi;
         private const int Pump1Pin = 20;
         private const int Pump2Pin = 26;
@@ -16,8 +17,11 @@ namespace SabreSprings.Brewing.BrewController.Services
             Pump1Enabled = false;
             Pump2Enabled = false;
             Rpi = new GpioController();
-            Rpi.OpenPin(Pump1Pin, PinMode.Output);
-            Rpi.OpenPin(Pump2Pin, PinMode.Output);
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == Environments.Production)
+            {
+                Rpi.OpenPin(Pump1Pin, PinMode.Output);
+                Rpi.OpenPin(Pump2Pin, PinMode.Output);
+            }
         }
 
         ~PumpService()
@@ -28,13 +32,13 @@ namespace SabreSprings.Brewing.BrewController.Services
         public void Pump1(bool enablePower)
         {
             Pump1Enabled = enablePower;
-            Rpi.Write(Pump1Pin, enablePower ? PinValue.High: PinValue.Low);
+            Rpi.Write(Pump1Pin, enablePower ? PinValue.High : PinValue.Low);
         }
 
         public void Pump2(bool enablePower)
         {
             Pump2Enabled = enablePower;
-            Rpi.Write(Pump2Pin, enablePower ? PinValue.High: PinValue.Low);
+            Rpi.Write(Pump2Pin, enablePower ? PinValue.High : PinValue.Low);
         }
 
         public bool GetPump1PowerState()
