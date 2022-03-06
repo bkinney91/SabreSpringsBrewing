@@ -29,6 +29,7 @@
     "qs": "^6.9.4",
     "reflect-metadata": "0.1.13",
     "rxjs": "6.5.2",
+    "sass-loader": "^10.2.1",
     "util": "0.12.1",
     "vue": "2.6.10",
     "vue-axios": "2.1.4",
@@ -36,7 +37,8 @@
     "vue-jquery": "^1.0.6",
     "vue-property-decorator": "8.1.0",
     "vue-router": "3.0.3",
-    "vuex": "3.0.1"
+    "vuex": "3.0.1",
+    "webpack": "^4.42.0"
   },
   "devDependencies": {
     "@types/chai": "4.1.0",
@@ -54,8 +56,7 @@
     "chai": "4.1.2",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "node-sass": "^7.0.0",
-    "sass-loader": "8.0.0",
+    "node-sass": "^6.0.0",
     "typescript": "3.4.3",
     "vue-template-compiler": "2.6.10"
   }
