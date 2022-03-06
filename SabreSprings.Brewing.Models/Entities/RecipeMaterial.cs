@@ -8,8 +8,7 @@ namespace SabreSprings.Brewing.Models.Entities
     {
         public int Id { get; set; }
         public int Recipe { get; set; }
-        public int Material { get; set; }
-        public decimal Quantity { get; set; }
+        public string Material { get; set; }
         public DateTime Created { get; set; }
     }
 }
