@@ -3,7 +3,28 @@
     <div class="card-body">
       <div class="row">
         <div class="col-lg-10"><h2>Kettle</h2></div>
-       
+        <div class="col-lg-2">
+          <div class="row">
+            <div class="col-md-6">
+              <button
+                v-on:click="deccrementTemperature"
+                class="btn btn-secondary"
+                style="height: 50px; width: 100px; padding:10px"
+              >
+                <span class="fa fa-minus"></span>
+              </button>
+            </div>
+            <div class="col-md-6">
+              <button
+                v-on:click="incrementTemperature"
+                class="btn btn-secondary"
+                style="height: 50px; width: 100px; padding:10px"
+              >
+                <span class="fa fa-plus"></span>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
       <hr />
       <div class="row">
@@ -11,7 +32,6 @@
           <h4>Current Temperature</h4>
           <DxLinearGauge :value.sync="currentTemperature">
             <DxScale :start-value="0" :end-value="220" :tick-interval="20">
-             
             </DxScale>
             <DxValueIndicator type="textCloud" color="#734F96" />
           </DxLinearGauge>
@@ -29,11 +49,10 @@
           <DxSlider
             style="margin-left: 4%"
             width="92%"
-            v-model:value="targetTemperature"            
+            v-model:value="targetTemperature"
             :min="0"
             :max="220"
             :tooltip="{ enabled: true }"
-            
           />
         </div>
         <div class="col-lg-2">
@@ -149,11 +168,8 @@ export default class KettleControllerComponent extends Vue {
   @Inject(ServiceTypes.KettleHubService)
   private kettleHubService!: KettleHubService;
   private targetTemperature: number = 0;
-  private pidTargetTemperature: number = 0
+  private pidTargetTemperature: number = 0;
   private currentTemperature: number = 0;
-
-  
-
 
   constructor() {
     super();
@@ -161,32 +177,48 @@ export default class KettleControllerComponent extends Vue {
   }
 
   created(): void {
-    this.kettleHubService.SetTargetTemperatureCallback(this.updateTargetTemperature);
-    this.kettleHubService.SetCurrentTemperatureCallback(this.updateCurrentTemperature);
+    this.kettleHubService.SetTargetTemperatureCallback(
+      this.updateTargetTemperature
+    );
+    this.kettleHubService.SetCurrentTemperatureCallback(
+      this.updateCurrentTemperature
+    );
+  }
+
+  private updateTargetTemperature(temperature: number) {
+    if (temperature != this.pidTargetTemperature) {
+      //store new value from PID
+      this.pidTargetTemperature = temperature;
+      this.targetTemperature = temperature;
+    } else if (
+      temperature != this.targetTemperature &&
+      this.targetTemperature != 0
+    ) {
+      this.setTemperature(this.targetTemperature);
     }
+  }
 
-    private updateTargetTemperature(temperature: number){   
-      if(temperature != this.pidTargetTemperature){
-        //store new value from PID
-        this.pidTargetTemperature = temperature;
-        this.targetTemperature = temperature;       
-      }
-      else if(temperature != this.targetTemperature && this.targetTemperature != 0){
-        this.setTemperature(this.targetTemperature);
-      }
-      
+  private updateCurrentTemperature(temperature: number) {
+    this.currentTemperature = temperature;
+  }
+
+  private setTemperature(e: any) {
+    this.kettleHubService.SetTemperature(e);
+    NotifyHelper.displayMessage("Temperature has been set to " + e + "°F");
+  }
+
+  private incrementTemperature() {
+    this.kettleHubService.IncrementTemperature();
+    {
+      NotifyHelper.displayMessage("Temperature incremented.");
     }
+  }
 
-    private updateCurrentTemperature(temperature: number){
-      this.currentTemperature = temperature;
+  private deccrementTemperature() {
+    this.kettleHubService.DecrementTemperature();
+    {
+      NotifyHelper.displayMessage("Temperature decremented.");
     }
-
-    private setTemperature(e:any){
-      this.kettleHubService.SetTemperature(e);
-      NotifyHelper.displayMessage("Temperature has been set to " + e + "°F");
-    }
-
-
-
+  }
 }
 </script>
