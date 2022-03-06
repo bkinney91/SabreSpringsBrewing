@@ -2,19 +2,26 @@
   <div style="margin-left:10%;margin-right:10%">
     <!--<META http-equiv="refresh" content="3600"></META> -->
     <h1>On Tap</h1>
-    <div class="row">
-      <div class="col-md-4">
+    
+      <div class="tapCard">
         <TapCardComponent :tap="this.taps.find(x => x.tapNumber === 1)"></TapCardComponent>
       </div>
-      <div class="col-md-4">
+      <div class="tapCard">
         <TapCardComponent :tap="this.taps.find(x => x.tapNumber === 2)"></TapCardComponent>
       </div>
-      <div class="col-md-4">
+      <div class="tapCard">
         <TapCardComponent :tap="this.taps.find(x => x.tapNumber === 3)"></TapCardComponent>
       </div>
-    </div>
+  
   </div>
 </template>
+<style>
+  .tapCard
+  {
+    height: auto;
+    width: auto;
+  }
+</style>
 
 <script lang="ts">
 // IMPORTS ----------------------------------

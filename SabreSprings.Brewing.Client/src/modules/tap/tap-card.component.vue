@@ -1,43 +1,61 @@
 <template>
-<div style="height:100%">
-  <div v-if="tap != null" style="height:100%">
-    <div class="card" style="height:100%">
+  <div style="height: 100%">
+    <div v-if="tap != null" style="height: 100%">
+      <div class="card" style="height: 100%">
+        <div class="row">
+          <div class="col-lg-4">
+            <img
+              v-if="tap.logo"
+              class="card-img-left"
+              style="height: 300px; width: 300px"
+              :src="'/Content/images' + tap.logo"
+              alt="Card image cap"
+            />
+            <div v-if="!tap.logo" style="min-height: 400px"></div>
+          </div>
+          <div class="col-lg-8">
+            <div class="card-body">
+              <div style="height: 90%">
+                <h1 class="card-title">
+                  <b>Tap #{{ tap.tapNumber }}</b>
+                </h1>
+                <h2>
+                  {{ tap.beerDisplayName }}
+                </h2>
+                <i>
+                  <h3>{{ tap.style }}</h3>
+                </i>
+                <h5>
+                  <b>Batch #{{ tap.batchNumber }}</b>
+                </h5>
+                <h5>ABV: {{ tap.abv }}%</h5>
+                <h5 id="tap1PintsRemaining">
+                  Approx. Pints Remaining:
+                  {{ Math.round(tap.pintsRemaining * 10) / 10 }}
+                </h5>
 
-      <img
-      v-if="tap.logo"
-        class="card-img-top"
-        style="height:400px;width:auto"
-        :src="'/Content/images' + tap.logo"
-        alt="Card image cap"
-      />
-      <div v-if="!tap.logo" style="min-height:400px"></div>
-      <div class="card-body">
-        <div style="height:90%">
-        <h2 class="card-title"><b>{{tap.beerDisplayName}}</b></h2>
-        <i>
-          <h3>{{tap.style}}</h3>
-        </i>
-        <h5>
-          
-            <b>Batch #{{tap.batchNumber}}</b>
-          
-        </h5>
-        <h5>ABV: {{tap.abv}}%</h5>
-        <h5
-          id="tap1PintsRemaining"
-        >Approx. Pints Remaining: {{Math.round(tap.pintsRemaining *10) / 10}}</h5>
-        <div style="min-height:120px">
-          <p class="card-text">{{tap.tastingNotes}}</p>
+                <button
+                  href="#"
+                  class="btn btn-primary"
+                  v-on:click="launchBatchDetails(tap.batchId)"
+                >
+                  View Batch Details
+                </button>
+              </div>
+               <div class="row">
+            <div style="margin: 5%">
+              <h3>Notes</h3>
+              <div style="min-height: 120px">
+                <p class="card-text">{{ tap.tastingNotes }}</p>
+              </div>
+            </div>
+          </div>
+            </div>
+          </div>
+         
         </div>
-        </div>
-        <button
-          href="#"
-          class="btn btn-primary"
-          v-on:click="launchBatchDetails(tap.batchId)"
-        >View Batch Details</button>
       </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -52,7 +70,7 @@ import { TapDto } from "@/core/models";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 import * as SignalR from "@microsoft/signalr";
 @Component({
-  components: {}
+  components: {},
 })
 export default class TapCardComponent extends Vue {
   @Prop() public tap!: TapDto;
