@@ -15,7 +15,7 @@ namespace SabreSprings.Brewing.Models.DataTransfer
         public int FermentationTemperatureLow { get; set; }
         public int FermentationTemperatureHigh { get; set; }
         public decimal StrikeWaterVolume { get; set; }
-        public decimal StrikeWaterTemperature { get; set; }
+        public int StrikeWaterTemperature { get; set; }
         public int MashTemperature { get; set; }
         public string MashInstructions { get; set; }
         public int DaysInPrimaryFermentation { get; set; }

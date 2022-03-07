@@ -25,7 +25,6 @@ namespace SabreSprings.Brewing.Services
             {
                 Recipe = entity.Recipe,
                 Material = entity.Material,
-                Quantity = entity.Quantity,
                 Created = entity.Created
             };
             return dto;
@@ -37,7 +36,6 @@ namespace SabreSprings.Brewing.Services
             {
                 Recipe = dto.Recipe,
                 Material = dto.Material,
-                Quantity = dto.Quantity,
                 Created = dto.Created
             };
             await RecipeMaterialDataProvider.Add(entity);
@@ -48,8 +46,7 @@ namespace SabreSprings.Brewing.Services
             RecipeMaterial entity = new RecipeMaterial()
             {
                 Id = dto.Id,
-                Material = dto.Material,
-                Quantity = dto.Quantity
+                Material = dto.Material
             };
             await RecipeMaterialDataProvider.Update(entity);
         }
@@ -64,7 +61,6 @@ namespace SabreSprings.Brewing.Services
                 {
                     Recipe = entity.Recipe,
                     Material = entity.Material,
-                    Quantity = entity.Quantity,
                     Created = entity.Created
                 };
                 dtos.Add(dto);

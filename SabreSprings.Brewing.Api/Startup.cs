@@ -62,7 +62,6 @@ namespace SabreSprings.Brewing.Api
             builder.RegisterType<FermentabuoyLogDataProvider>().As<IFermentabuoyLogDataProvider>();
             builder.RegisterType<FermentabuoyDataProvider>().As<IFermentabuoyDataProvider>();
             builder.RegisterType<FermentabuoyAssignmentDataProvider>().As<IFermentabuoyAssignmentDataProvider>();
-            builder.RegisterType<MaterialDataProvider>().As<IMaterialDataProvider>();
             builder.RegisterType<RecipeDataProvider>().As<IRecipeDataProvider>();
             builder.RegisterType<RecipeStepDataProvider>().As<IRecipeStepDataProvider>();
             builder.RegisterType<RecipeMaterialDataProvider>().As<IRecipeMaterialDataProvider>();
@@ -74,7 +73,6 @@ namespace SabreSprings.Brewing.Api
             builder.RegisterType<FermentabuoyLogService>().As<IFermentabuoyLogService>();
             builder.RegisterType<FermentabuoyService>().As<IFermentabuoyService>();
             builder.RegisterType<FermentabuoyAssignmentService>().As<IFermentabouyAssignmentService>();
-            builder.RegisterType<MaterialService>().As<IMaterialService>();
             builder.RegisterType<RecipeService>().As<IRecipeService>();
             builder.RegisterType<RecipeStepService>().As<IRecipeStepService>();
             builder.RegisterType<RecipeMaterialService>().As<IRecipeMaterialService>();
