@@ -30,7 +30,7 @@
     "qs": "^6.10.1",
     "reflect-metadata": "0.1.13",
     "rxjs": "6.5.2",
-    "sass-loader": "^10.2.0",
+    "sass-loader": "^10.2.1",
     "util": "0.12.1",
     "vue": "2.6.10",
     "vue-axios": "2.1.4",
