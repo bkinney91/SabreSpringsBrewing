@@ -58,8 +58,8 @@ namespace SabreSprings.Brewing.BrewController.Api
                                 .WriteTo.File("Log-.txt", rollingInterval: RollingInterval.Day)
                                 .CreateLogger();
 
-            builder.RegisterType<KettleService>().As<IKettleService>(); 
-            builder.RegisterType<MashService>().As<IMashService>();     
+            builder.RegisterType<KettleService>().As<IKettleService>().SingleInstance(); 
+            builder.RegisterType<MashService>().As<IMashService>().SingleInstance();     
             builder.RegisterType<PumpService>().As<IPumpService>().SingleInstance();
         }
 

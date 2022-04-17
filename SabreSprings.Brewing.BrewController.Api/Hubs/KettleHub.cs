@@ -22,6 +22,16 @@ namespace SabreSprings.Brewing.BrewController.Api.Hubs
             KettleService.SetTemperature(temperature);
         }
 
+        public void DecrementTemperature(){
+            int current = KettleService.GetCurrentTemperature();
+            KettleService.SetTemperature(current-1);
+        }
+
+        public void IncrementTemperature(){
+            int current = KettleService.GetCurrentTemperature();
+            KettleService.SetTemperature(current+1);
+        }
+
 
     }
 }

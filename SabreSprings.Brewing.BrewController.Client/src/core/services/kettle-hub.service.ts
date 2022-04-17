@@ -37,7 +37,14 @@ export class KettleHubService
     public SetTemperature(temperature: number){
         this.hubConnection.invoke("SetTemperature", temperature);
     }
+
+    public DecrementTemperature(){
+        this.hubConnection.invoke("DecrementTemperature");
+    }
     
+    public IncrementTemperature(){
+        this.hubConnection.invoke("IncrementTemperature");
+    }
 
     private async InitializeConnection(){
         if(!this.hubConnection)

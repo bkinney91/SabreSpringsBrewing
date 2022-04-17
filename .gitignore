@@ -43,3 +43,4 @@ msbuild.wrn
 #Serilog log files
 *.log
 *.txt
+node_modules

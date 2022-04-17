@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Hosting;
 using SabreSprings.Brewing.BrewController.Services.Interfaces;
 using System;
 using System.Diagnostics;
@@ -13,31 +14,38 @@ namespace SabreSprings.Brewing.BrewController.Services
         public decimal GetTemperature()
         {
             decimal temperature;
-            ProcessStartInfo start = new ProcessStartInfo();
-            start.FileName = "rtd";
-            start.Arguments = "0 read 5";
-            start.UseShellExecute = false;
-            start.RedirectStandardOutput = true;
-            using (Process process = Process.Start(start))
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == Environments.Production)
             {
-                string result = "";
-                while (!process.HasExited)
+                ProcessStartInfo start = new ProcessStartInfo();
+                start.FileName = "rtd";
+                start.Arguments = "0 read 5";
+                start.UseShellExecute = false;
+                start.RedirectStandardOutput = true;
+                using (Process process = Process.Start(start))
                 {
-                    result += process.StandardOutput.ReadToEnd();
+                    string result = "";
+                    while (!process.HasExited)
+                    {
+                        result += process.StandardOutput.ReadToEnd();
+                    }
+                    if (result != "")
+                    {
+                        //Clean up input
+                        result = result.Trim();
+                        //Convert to decimal and save
+                        temperature = Convert.ToDecimal(result);
+                        //Covnert from Celsius to Farenheit
+                        temperature = ((9.0m / 5.0m) * temperature) + 32;
+                    }
+                    else
+                    {
+                        temperature = 0;
+                    }
                 }
-                if (result != "")
-                {
-                    //Clean up input
-                    result = result.Trim();      
-                    //Convert to decimal and save
-                    temperature = Convert.ToDecimal(result);
-                    //Covnert from Celsius to Farenheit
-                    temperature = ((9.0m / 5.0m) * temperature) + 32;
-                }
-                else
-                {
-                    temperature = 0;
-                }
+            }
+            else
+            {
+                temperature = -1;
             }
             return temperature;
         }
