@@ -1,4 +1,4 @@
-﻿CREATE TABLE FermentationTank (
+﻿CREATE TABLE FermentationTanks (
 	Id INTEGER PRIMARY KEY, 
     [Type] TEXT NULL, 
     Volume decimal NULL,

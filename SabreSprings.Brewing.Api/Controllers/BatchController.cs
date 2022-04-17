@@ -23,21 +23,6 @@ namespace SabreSprings.Brewing.Api.Controllers
         }
         
 
-        [HttpGet]
-        [Route("Get")]
-        public async Task<IActionResult> Get(int id)
-        {
-            try
-            {
-                BatchDto batch = await BatchService.GetBatch(id);
-                return Ok(batch);
-            }
-            catch(Exception ex)
-            {
-                Log.Error($"Error geting batch with ID \"{id}\".");
-                throw;
-            }
-        }
 
         [HttpGet]
         [Route("GetBatchTable")]
@@ -62,7 +47,7 @@ namespace SabreSprings.Brewing.Api.Controllers
             Log.Information($"Geting Batch Details for ID {id}");
             try
             {
-                BatchDetailsDto batch = await BatchService.GetBatchDetails(id);
+                BatchDto batch = await BatchService.GetBatch(id);
                 return Ok(batch);
             }
             catch(Exception ex)

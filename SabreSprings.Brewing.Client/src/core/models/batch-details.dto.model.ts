@@ -6,9 +6,9 @@ export interface BatchDetailsDto
     batchName: string;
     style: string;
     status: string;
-    subStatus: string;
     brewers: string;
-    recipe: string;
+    tapNumber: number;
+    fermentationTank: number;
     yeast: string;
     preboilGravity: string;
     originalGravity: string;

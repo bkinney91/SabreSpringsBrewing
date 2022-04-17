@@ -13,6 +13,8 @@ namespace SabreSprings.Brewing.Models.Entities
         public string Brewers { get; set; }
         public string Recipe { get; set; }
         public string Yeast { get; set; }
+        public int FermentationTank { get; set; }
+        public int TapNumber { get; set; }
         public decimal PreBoilGravity { get; set; }
         public decimal OriginalGravity { get; set; }
         public decimal FinalGravity { get; set; }

@@ -11,6 +11,8 @@ namespace SabreSprings.Brewing.Models.View
         public string BeerName { get; set; }
         public string Style { get; set; }
         public string Logo{get;set;}
+        public int FermentationTank { get; set; }
+        public int TapNumber { get; set; }
         public DateTime? DateBrewed { get; set; }
         public DateTime? DatePackaged { get; set; }
         
