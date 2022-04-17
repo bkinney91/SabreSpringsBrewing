@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29503.13
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SabreSprings.Brewing.Services", "SabreSprings.Brewing.Services\SabreSprings.Brewing.Services.csproj", "{200695C6-8E1C-4DD9-A7D4-4E076B09E26F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SabreSprings.Brewing.Data", "SabreSprings.Brewing.Data\SabreSprings.Brewing.Data.csproj", "{77EA5F01-06EA-4DF7-A945-A566A4306B2B}"
-EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SabreSprings.Brewing.Database", "SabreSprings.Brewing.Database\SabreSprings.Brewing.Database.sqlproj", "{5AEA2AB2-21D5-4B62-A6C0-121CFFD3E768}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SabreSprings.Brewing.Models", "SabreSprings.Brewing.Models\SabreSprings.Brewing.Models.csproj", "{E5073F41-F5FB-4A8D-A9A4-9D847EA650DB}"
 EndProject
@@ -22,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SabreSprings.Brewing.BrewCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SabreSprings.Brewing.Api", "SabreSprings.Brewing.Api\SabreSprings.Brewing.Api.csproj", "{A6006623-65F4-4518-8E22-C4C241474B40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SabreSprings.Brewing.BrewController.Services", "SabreSprings.Brewing.BrewController.Services\SabreSprings.Brewing.BrewController.Services.csproj", "{2D9F2755-6C32-4911-9945-2D3BAFA4BB3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SabreSprings.Brewing.BrewController.Services", "SabreSprings.Brewing.BrewController.Services\SabreSprings.Brewing.BrewController.Services.csproj", "{2D9F2755-6C32-4911-9945-2D3BAFA4BB3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,15 +41,6 @@ Global
 		{77EA5F01-06EA-4DF7-A945-A566A4306B2B}.Production|Any CPU.Build.0 = Production|Any CPU
 		{77EA5F01-06EA-4DF7-A945-A566A4306B2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77EA5F01-06EA-4DF7-A945-A566A4306B2B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5AEA2AB2-21D5-4B62-A6C0-121CFFD3E768}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5AEA2AB2-21D5-4B62-A6C0-121CFFD3E768}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5AEA2AB2-21D5-4B62-A6C0-121CFFD3E768}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{5AEA2AB2-21D5-4B62-A6C0-121CFFD3E768}.Production|Any CPU.ActiveCfg = Production|Any CPU
-		{5AEA2AB2-21D5-4B62-A6C0-121CFFD3E768}.Production|Any CPU.Build.0 = Production|Any CPU
-		{5AEA2AB2-21D5-4B62-A6C0-121CFFD3E768}.Production|Any CPU.Deploy.0 = Production|Any CPU
-		{5AEA2AB2-21D5-4B62-A6C0-121CFFD3E768}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5AEA2AB2-21D5-4B62-A6C0-121CFFD3E768}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5AEA2AB2-21D5-4B62-A6C0-121CFFD3E768}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{E5073F41-F5FB-4A8D-A9A4-9D847EA650DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E5073F41-F5FB-4A8D-A9A4-9D847EA650DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5073F41-F5FB-4A8D-A9A4-9D847EA650DB}.Production|Any CPU.ActiveCfg = Production|Any CPU
