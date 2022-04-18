@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-right:10%;margin-left:10%">
+  <div style="margin-right: 10%; margin-left: 10%">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
         <a
@@ -25,7 +25,6 @@
           >Fermentation</a
         >
       </li>
-      
     </ul>
     <div class="tab-content" id="myTabContent">
       <div
@@ -36,10 +35,16 @@
       >
         <div v-if="batchDetails != null">
           <div id="attributes">
-            <h1 id="header" :style="'color:' + getColor(batchDetails.status)">
-              {{ batchDetails.beer }}
+            <h1 id="header" :style="'color:' + getColor(batchDetails.status)" >
+              {{ beerDto.name }} - {{ beerDto.style }}
             </h1>
             <ul>
+              <li>
+                <b :style="'color:' + getColor(batchDetails.status)"
+                  >Status:</b
+                >
+                {{ batchDetails.status }}
+              </li>
               <li>
                 <b :style="'color:' + getColor(batchDetails.status)"
                   >Batch Number:</b
@@ -55,14 +60,14 @@
                   >Brewers:</b
                 >
                 {{ batchDetails.brewers }}
-              </li>
-              <li>
-                <b :style="'color:' + getColor(batchDetails.status)">Recipe:</b>
-                {{ batchDetails.recipe }}
-              </li>
+              </li>             
               <li>
                 <b :style="'color:' + getColor(batchDetails.status)">Yeast:</b>
                 {{ batchDetails.yeast }}
+              </li>
+              <li v-if="(batchDetails.status == 'Fermenting' || batchDetails.status == 'Souring' || batchDetails.status == 'Conditioning') && fermentationTankDto" >
+                <b :style="'color:' + getColor(batchDetails.status)">Fermentation Tank:</b>
+                {{ fermentationTankDto.volume }} gal {{fermentationTankDto.type}} #{{fermentationTankDto.tankNumber}}
               </li>
               <li>
                 <b :style="'color:' + getColor(batchDetails.status)"
@@ -161,7 +166,6 @@
       >
         <FermentationGraphComponent :batch="batchDetails.id" />
       </div>
-     
     </div>
   </div>
 </template>
@@ -169,9 +173,13 @@
 <script lang="ts">
 // IMPORTS ----------------------------------
 import { Vue, Component, Inject } from "vue-property-decorator";
-import { BatchApiService } from "@/core/services";
+import {
+  BatchApiService,
+  FermentationTankApiService,
+  BeerApiService,
+} from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
-import { BatchDetailsDto } from "@/core/models";
+import { BatchDto, BeerDto, FermentationTankDto } from "@/core/models";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 import FermentationGraphComponent from "../fermentation/fermentation-graph.component.vue";
 @Component({
@@ -180,14 +188,23 @@ import FermentationGraphComponent from "../fermentation/fermentation-graph.compo
 export default class BatchDetailsComponent extends Vue {
   @Inject(ServiceTypes.BatchApiService)
   private batchApiService!: BatchApiService;
-  private batchDetails!: BatchDetailsDto | null;
+  @Inject(ServiceTypes.FermentationTankApiService)
+  private fermentationTankApiService!: FermentationTankApiService;
+  @Inject(ServiceTypes.BeerApiService)
+  private beerApiService!: BeerApiService;
+  private batchDetails!: BatchDto | null;
+  private fermentationTankDto!: FermentationTankDto | null;
+  private beerDto!: BeerDto | null;
+
   constructor() {
     super();
     this.batchDetails = null;
+    this.beerDto = null;
+    this.fermentationTankDto = null;
   }
 
   created(): void {
-    this.getBatchDetails(+this.$route.query.id);
+    this.getBatchDetails(+this.$route.query.id);    
   }
 
   private getBatchDetails(id: number) {
@@ -195,6 +212,32 @@ export default class BatchDetailsComponent extends Vue {
       .getBatchDetails(id)
       .then((response) => {
         this.batchDetails = response;
+        this.getBeer(response.beer);
+        if (response.style == "Fermenting") {
+          this.getFermentationTank(response.fermentationTank);
+      }
+      })
+      .catch((error) => {
+        NotifyHelper.displayError(error);
+      });
+  }
+
+  private getFermentationTank(id: number) {
+    this.fermentationTankApiService
+      .get(id)
+      .then((response) => {
+        this.fermentationTankDto = response;
+      })
+      .catch((error) => {
+        NotifyHelper.displayError(error);
+      });
+  }
+
+  private getBeer(id: number){
+    this.beerApiService
+      .get(id)
+      .then((response) => {
+        this.beerDto = response;
       })
       .catch((error) => {
         NotifyHelper.displayError(error);

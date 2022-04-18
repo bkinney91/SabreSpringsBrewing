@@ -7,10 +7,10 @@ export interface BatchDto
     batchName: string;
     style: string;
     status: string;
-    subStatus: string;
     brewers: string;
-    recipe: string;
     yeast: string;
+    tapNumber: number;
+    fermentationTank: number;
     preboilGravity: string;
     originalGravity: string;
     finalGravity: string;

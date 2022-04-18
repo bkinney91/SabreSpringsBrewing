@@ -30,11 +30,15 @@
           
           />
         </div>
-        <div class="col-lg-6" v-if="this.batchId">
-          <h5>Substatus</h5>
-          <DxTextBox            
-           :value.sync="batch.subStatus"         
-          />
+        <div class="col-lg-6" v-if="this.fermentationTankDto">
+          <h5>Fermentation Tank</h5>
+         <DxSelectBox
+                  v-if="fermentationTanks != null"
+                  v-model="batch.fermentationTank"
+                  :items="fermentationTanks"
+                  :display-expr="showBatchForSelectBox"
+                  value-expr="id"
+                />
         </div>
       </div>
       <hr />
@@ -53,12 +57,12 @@
           <DxItem
             data-field="brewingNotes"
             editor-type="dxTextArea"
-            :col-span="3"
+            :editor-options="height=600"
           />
           <DxItem
             data-field="tastingNotes"
             editor-type="dxTextArea"
-            :col-span="3"
+            :editor-options="height=600"
           />
         </DxGroupItem>
       </DxForm>
@@ -86,9 +90,9 @@
 <script lang="ts">
 // IMPORTS ----------------------------------
 import { Vue, Component, Inject } from "vue-property-decorator";
-import { BatchApiService, BeerApiService } from "@/core/services";
+import { BatchApiService, BeerApiService, FermentationTankApiService } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
-import { BatchDto, BeerDto } from "@/core/models";
+import { BatchDto, BeerDto, FermentationTankDto } from "@/core/models";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 import { DxForm, DxItem, DxGroupItem } from "devextreme-vue/form";
 import { DxTextArea } from "devextreme-vue/text-area";
@@ -109,8 +113,11 @@ export default class BatchEditorComponent extends Vue {
   private batchApiService!: BatchApiService;
   @Inject(ServiceTypes.BeerApiService)
   private beerApiService!: BeerApiService;
+   @Inject(ServiceTypes.FermentationTankApiService)
+  private fermentationTankApiService!: FermentationTankApiService;
   private beers: BeerDto[] = [];
   private batch: BatchDto = <BatchDto>{};
+  private fermentationTankDto!: FermentationTankDto | null;
   private batchId: number | null = null;
   private beerName: string = "";
 
@@ -143,23 +150,13 @@ export default class BatchEditorComponent extends Vue {
       .get(id)
       .then((response) => {
         this.batch = response;
-        this.getBatchDetails(id);
       })
       .catch((error) => {
         NotifyHelper.displayError(error);
       });
   }
 
-  private getBatchDetails(id: number) {
-    this.batchApiService
-      .getBatchDetails(id)
-      .then((response) => {
-        this.beerName = response.beer;
-      })
-      .catch((error) => {
-        NotifyHelper.displayError(error);
-      });
-  }
+
 
   private updateBatch() {
     this.batchApiService

@@ -34,6 +34,7 @@ namespace SabreSprings.Brewing.Services
             batches = batches.OrderByDescending(x=>x.Status == "On Tap")
                 .ThenByDescending(x=> x.Status == "Conditioning")
                 .ThenByDescending(x=> x.Status == "Fermenting")
+                .ThenByDescending(X => X.Status == "Souring")
                 .ThenByDescending(x=> x.Status == "Planned")
                 .ThenByDescending(x=> x.Status == "Archived")
                 .ThenByDescending(x=> x.DateBrewed).ToList();

@@ -9,6 +9,7 @@ import {
 	FermentabuoyApiService,
 	FermentabuoyAssignmentApiService,
 	FermentabuoyLogApiService,
+	FermentationTankApiService,
 
 } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
@@ -60,6 +61,10 @@ export function configureContainer(): Container {
 	container
 		.bind<FermentabuoyLogApiService>(ServiceTypes.FermentabuoyLogApiService)
 		.to(FermentabuoyLogApiService)
+		.inSingletonScope();
+	container
+		.bind<FermentationTankApiService>(ServiceTypes.FermentationTankApiService)
+		.to(FermentationTankApiService)
 		.inSingletonScope();
 	return container;
 }

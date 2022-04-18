@@ -41,7 +41,7 @@ namespace SabreSprings.Brewing.Api.Controllers
         }
 
         [HttpGet]
-        [Route("GetBatchDetails")]
+        [Route("Get")]
         public async Task<IActionResult> GetBatchDetails(int id)
         {
             Log.Information($"Geting Batch Details for ID {id}");
