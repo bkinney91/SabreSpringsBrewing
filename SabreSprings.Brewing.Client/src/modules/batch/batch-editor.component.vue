@@ -25,18 +25,18 @@
         <div class="col-lg-6" v-if="this.batchId">
           <h5>Status</h5>
           <DxSelectBox            
-            :items="['Planned', 'Fermenting', 'Conditioning', 'On Tap', 'Archived']"
+            :items="['Planned', 'Fermenting', 'Souring', 'Conditioning', 'On Tap', 'Archived']"
             :value.sync="batch.status"
           
           />
         </div>
-        <div class="col-lg-6" v-if="this.fermentationTankDto">
+        <div class="col-lg-6" v-if="this.batch.status =='Fermenting' || this.batch.status == 'Conditioning' || this.batch.status == 'Souring'">
           <h5>Fermentation Tank</h5>
          <DxSelectBox
                   v-if="fermentationTanks != null"
                   v-model="batch.fermentationTank"
                   :items="fermentationTanks"
-                  :display-expr="showBatchForSelectBox"
+                  :display-expr="showTankForSelectBox"
                   value-expr="id"
                 />
         </div>
@@ -117,6 +117,7 @@ export default class BatchEditorComponent extends Vue {
   private fermentationTankApiService!: FermentationTankApiService;
   private beers: BeerDto[] = [];
   private batch: BatchDto = <BatchDto>{};
+  private fermentationTanks: FermentationTankDto[] = [];
   private fermentationTankDto!: FermentationTankDto | null;
   private batchId: number | null = null;
   private beerName: string = "";
@@ -126,6 +127,7 @@ export default class BatchEditorComponent extends Vue {
   }
 
   created(): void {
+    this.getFermentationTanks();
     this.batchId = +this.$route.query.id;
     if (this.batchId != 0) {
       this.getBatch(this.batchId);
@@ -149,13 +151,23 @@ export default class BatchEditorComponent extends Vue {
     this.batchApiService
       .get(id)
       .then((response) => {
-        this.batch = response;
+        this.batch = response;       
       })
       .catch((error) => {
         NotifyHelper.displayError(error);
       });
   }
 
+private getFermentationTanks(){
+this.fermentationTankApiService
+      .getAll()
+      .then((response) => {
+        this.fermentationTanks = response;        
+      })
+      .catch((error) => {
+        NotifyHelper.displayError(error);
+      });
+}
 
 
   private updateBatch() {
@@ -181,6 +193,11 @@ export default class BatchEditorComponent extends Vue {
         NotifyHelper.displayError(error);
       });
   }
+  
+  private showTankForSelectBox(item: any): string {
+    return item ? `${item.volume} gal ${item.type} #${item.tankNumber}` : "";
+  }
+  
 
   private getColor(status: string): string {
     return AppSettingsHelper.getStatusColor(status);

@@ -209,7 +209,7 @@ export default class BatchDetailsComponent extends Vue {
 
   private getBatchDetails(id: number) {
     this.batchApiService
-      .getBatchDetails(id)
+      .get(id)
       .then((response) => {
         this.batchDetails = response;
         this.getBeer(response.beer);
