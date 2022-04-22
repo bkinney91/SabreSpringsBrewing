@@ -1,8 +1,10 @@
 <template>
-  <div v-if="batch != null" style="padding:30px">
+  <div v-if="batch != null" style="padding: 30px">
     <div
       class="card"
-      :style="'border-color:' + getColor() + ';border-top-width:5px;border-width:5px'"
+      :style="
+        'border-color:' + getColor() + ';border-top-width:5px;border-width:5px'
+      "
       v-on:click="openBatchDetails(batch.batchId)"
     >
       <div
@@ -13,9 +15,8 @@
 
         <div v-if="fermentationTankDto">
           <h4 style="padding: 5px">
-            {{ fermentationTankDto.volume }} gal {{ fermentationTankDto.type }} #{{
-              fermentationTankDto.tankNumber
-            }}
+            {{ fermentationTankDto.volume }} gal
+            {{ fermentationTankDto.type }} #{{ fermentationTankDto.tankNumber }}
           </h4>
         </div>
       </div>
@@ -39,30 +40,35 @@
               class="card-text"
               v-if="
                 batch.dateBrewed !== null ||
-                new Date(batch.dateBrewed).toLocaleDateString('en-US') !== '12/31/1969'
+                new Date(batch.dateBrewed).toLocaleDateString('en-US') !==
+                  '12/31/1969'
               "
             >
               <table class="table">
                 <tr>
                   <th>Date Brewed:</th>
                   <th v-if="showYeastDump()">Yeast Dump</th>
-                  <th v-if="showDryHop()">Dry Hop </th>
+                  <th v-if="showDryHop()">Dry Hop</th>
                   <th v-if="showColdCrash()">Cold Crash</th>
                   <th v-if="showForceCarbonation()">Force Carb</th>
                   <th>Package Date</th>
                 </tr>
                 <tr>
-                  <td>{{ new Date(batch.dateBrewed).toLocaleDateString("en-US") }}</td>
-                  <td v-if="showYeastDump()">
-                    {{ this.brewEventService.getScheduledYeastDump(batch.dateBrewed) }}
+                  <td>
+                    {{ new Date(batch.dateBrewed).toLocaleDateString("en-US") }}
                   </td>
-                  <td v-if="showDryHop()">
-{{
-                      this.brewEventService.getScheduledDryHop(
+                  <td v-if="showYeastDump()">
+                    {{
+                      this.brewEventService.getScheduledYeastDump(
                         batch.dateBrewed
                       )
                     }}
-                    </td>
+                  </td>
+                  <td v-if="showDryHop()">
+                    {{
+                      this.brewEventService.getScheduledDryHop(batch.dateBrewed)
+                    }}
+                  </td>
                   <td v-if="showColdCrash()">
                     {{
                       this.brewEventService.getScheduledColdCrash(
@@ -82,17 +88,21 @@
                   <td
                     v-if="
                       batch.datePackaged !== null ||
-                      new Date(batch.datePackaged).toLocaleDateString('en-US') !==
-                        '12/31/1969'
+                      new Date(batch.datePackaged).toLocaleDateString(
+                        'en-US'
+                      ) !== '12/31/1969'
                     "
                   >
-                    {{ new Date(batch.datePackaged).toLocaleDateString("en-US") }}
+                    {{
+                      new Date(batch.datePackaged).toLocaleDateString("en-US")
+                    }}
                   </td>
                   <td
                     v-if="
                       batch.datePackaged == null ||
-                      new Date(batch.datePackaged).toLocaleDateString('en-US') ==
-                        '12/31/1969'
+                      new Date(batch.datePackaged).toLocaleDateString(
+                        'en-US'
+                      ) == '12/31/1969'
                     "
                   >
                     {{
@@ -103,13 +113,11 @@
                     }}
                   </td>
                 </tr>
-              </table>                
-              </div>
+              </table>
             </div>
           </div>
         </div>
       </div>
-      
     </div>
   </div>
 </template>
@@ -188,22 +196,28 @@ export default class BatchTableRowComponent extends Vue {
 
   private showYeastDump() {
     return (
-      new Date(this.batch.dateBrewed).toLocaleDateString("en-US") !== "12/31/1969" &&
-      this.brewEventService.getYeastDumpDateEnd(this.batch.dateBrewed) > new Date()
+      new Date(this.batch.dateBrewed).toLocaleDateString("en-US") !==
+        "12/31/1969" &&
+      this.brewEventService.getYeastDumpDateEnd(this.batch.dateBrewed) >
+        new Date()
     );
   }
 
   private showColdCrash() {
     return (
-      new Date(this.batch.dateBrewed).toLocaleDateString("en-US") !== "12/31/1969" &&
-      this.brewEventService.getColdCrashDateEnd(this.batch.dateBrewed, this.batch.style) >
-        new Date()
+      new Date(this.batch.dateBrewed).toLocaleDateString("en-US") !==
+        "12/31/1969" &&
+      this.brewEventService.getColdCrashDateEnd(
+        this.batch.dateBrewed,
+        this.batch.style
+      ) > new Date()
     );
   }
 
   private showForceCarbonation() {
     return (
-      new Date(this.batch.dateBrewed).toLocaleDateString("en-US") !== "12/31/1969" &&
+      new Date(this.batch.dateBrewed).toLocaleDateString("en-US") !==
+        "12/31/1969" &&
       this.brewEventService.getForceCarbonationDateEnd(
         this.batch.dateBrewed,
         this.batch.style
@@ -214,10 +228,9 @@ export default class BatchTableRowComponent extends Vue {
   private showDryHop() {
     return (
       this.batch.style.includes("IPA") &&
-      new Date(this.batch.dateBrewed).toLocaleDateString("en-US") !== "12/31/1969" &&
-      this.brewEventService.getDryHopDateEnd(
-        this.batch.dateBrewed
-      ) > new Date()
+      new Date(this.batch.dateBrewed).toLocaleDateString("en-US") !==
+        "12/31/1969" &&
+      this.brewEventService.getDryHopDateEnd(this.batch.dateBrewed) > new Date()
     );
   }
 }
