@@ -9,4 +9,5 @@ export interface BatchTableRow
     dateBrewed: Date;
     datePackaged: Date;
     logo: string;
+    fermentationTank: number;
 }

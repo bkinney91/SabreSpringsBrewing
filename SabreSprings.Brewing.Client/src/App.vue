@@ -26,6 +26,7 @@ import {
   FermentabuoyApiService,
   FermentabuoyAssignmentApiService,
   FermentabuoyLogApiService,
+  FermentationTankApiService
 } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
 import NavigationComponent from "@/modules/layout/nav-container.component.vue";
@@ -62,6 +63,12 @@ let container = configureContainer();
     ),
     [ServiceTypes.FermentabuoyLogApiService]: container.get<FermentabuoyLogApiService>(
       ServiceTypes.FermentabuoyLogApiService
+    ),
+     [ServiceTypes.FermentationTankApiService]: container.get<FermentationTankApiService>(
+      ServiceTypes.FermentationTankApiService
+    ),
+     [ServiceTypes.BrewEventService]: container.get<BrewEventService>(
+      ServiceTypes.BrewEventService
     ),
   },
 })

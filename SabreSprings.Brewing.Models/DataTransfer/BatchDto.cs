@@ -9,9 +9,9 @@ namespace SabreSprings.Brewing.Models.DataTransfer
         public int BatchNumber { get; set; }
         public string BatchName { get; set; }
         public string Status { get; set; }
-        public string SubStatus { get; set; }
+        public int FermentationTank { get; set; }
+        public int TapNumber { get; set; }
         public string Brewers { get; set; }
-        public string Recipe { get; set; }
         public string Yeast { get; set; }
         public decimal PreBoilGravity { get; set; }
         public decimal OriginalGravity { get; set; }

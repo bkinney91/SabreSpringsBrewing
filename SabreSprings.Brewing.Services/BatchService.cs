@@ -23,31 +23,8 @@ namespace SabreSprings.Brewing.Services
 
         public async Task<BatchDto> GetBatch(int id)
         {
-            Batch batch = await BatchDataProvider.GetBatch(id);
-            BatchDto dto = new BatchDto()
-            {
-                Id = batch.Id,
-                Beer = batch.Beer,
-                BatchName = batch.BatchName,
-                BatchNumber = batch.BatchNumber,
-                Status = batch.Status,
-                SubStatus = batch.SubStatus,
-                Brewers = batch.Brewers,
-                Recipe = batch.Recipe,
-                Yeast = batch.Yeast,
-                PreBoilGravity = batch.PreBoilGravity,
-                OriginalGravity = batch.OriginalGravity,
-                FinalGravity = batch.FinalGravity,
-                ABV = batch.ABV,
-                DateBrewed = batch.DateBrewed,
-                DatePackaged = batch.DatePackaged,
-                DateTapped = batch.DateTapped,
-                BrewingNotes = batch.BrewingNotes,
-                TastingNotes = batch.TastingNotes,
-                Created = batch.Created,
-                CreatedBy = batch.CreatedBy
-            };
-            return dto;
+            Batch batch = await BatchDataProvider.GetBatch(id);           
+            return this.MapToDto(batch);
         }
 
         public async Task<List<BatchTableRow>> GetBatchTable()
@@ -57,16 +34,12 @@ namespace SabreSprings.Brewing.Services
             batches = batches.OrderByDescending(x=>x.Status == "On Tap")
                 .ThenByDescending(x=> x.Status == "Conditioning")
                 .ThenByDescending(x=> x.Status == "Fermenting")
+                .ThenByDescending(X => X.Status == "Souring")
                 .ThenByDescending(x=> x.Status == "Planned")
                 .ThenByDescending(x=> x.Status == "Archived")
                 .ThenByDescending(x=> x.DateBrewed).ToList();
             foreach(Batch batch in batches)
-            {
-                string statusText = batch.Status;
-                if (string.IsNullOrEmpty(batch.SubStatus) == false)
-                {
-                    statusText += ": " + batch.SubStatus;
-                }
+            {               
                 Beer beer = await BeerDataProvider.GetBeer(batch.Beer);
                 BatchTableRow row = new BatchTableRow()
                 {
@@ -77,7 +50,9 @@ namespace SabreSprings.Brewing.Services
                     Style = beer.Style,
                     DateBrewed = batch.DateBrewed,
                     DatePackaged = batch.DatePackaged,
-                    StatusText = statusText,
+                    StatusText = batch.Status,
+                    TapNumber = batch.TapNumber,
+                    FermentationTank = batch.FermentationTank,
                     Logo = beer.Logo
                 };
                 tableRows.Add(row);
@@ -86,36 +61,7 @@ namespace SabreSprings.Brewing.Services
             return tableRows;
         }
 
-        public async Task<BatchDetailsDto> GetBatchDetails(int id)
-        {
-            Batch batch = await BatchDataProvider.GetBatch(id);
-            Beer beer = await BeerDataProvider.GetBeer(batch.Beer);
-            BatchDetailsDto batchDetailsDto = new BatchDetailsDto()
-            {
-                Id = batch.Id,
-                Beer = beer.Name,
-                Style = beer.Style,
-                BatchName = batch.BatchName,
-                BatchNumber = batch.BatchNumber,
-                Status = batch.Status,
-                SubStatus = batch.SubStatus,
-                Brewers = batch.Brewers,
-                Recipe = batch.Recipe,
-                Yeast = batch.Yeast,
-                PreBoilGravity = batch.PreBoilGravity,
-                OriginalGravity = batch.OriginalGravity,
-                FinalGravity = batch.FinalGravity,
-                ABV = batch.ABV,
-                DateBrewed = batch.DateBrewed,
-                DatePackaged = batch.DatePackaged,
-                DateTapped = batch.DateTapped,
-                BrewingNotes = batch.BrewingNotes,
-                TastingNotes = batch.TastingNotes,
-                Created = batch.Created,
-                CreatedBy = batch.CreatedBy
-            };
-            return batchDetailsDto;
-        }
+      
 
         public async Task Add(BatchDto dto)
         {
@@ -151,9 +97,10 @@ namespace SabreSprings.Brewing.Services
             entity.ABV = dto.ABV;
             entity.BatchName = dto.BatchName;
             entity.Status = dto.Status;
-            entity.SubStatus = dto.SubStatus;
             entity.Brewers = dto.Brewers;
             entity.Yeast = dto.Yeast;
+            entity.TapNumber = dto.TapNumber;
+            entity.FermentationTank = dto.FermentationTank;
             entity.PreBoilGravity = dto.PreBoilGravity;
             entity.OriginalGravity = dto.OriginalGravity;
             entity.FinalGravity = dto.FinalGravity;
@@ -165,6 +112,35 @@ namespace SabreSprings.Brewing.Services
             entity.TastingNotes = dto.TastingNotes;
             entity.Created = DateTime.Now;            
             await BatchDataProvider.Update(entity);
+        }
+
+
+        private BatchDto MapToDto(Batch batch)
+        {
+            BatchDto dto = new BatchDto()
+            {
+                Id = batch.Id,
+                Beer = batch.Beer,
+                BatchName = batch.BatchName,
+                BatchNumber = batch.BatchNumber,
+                Status = batch.Status,
+                Brewers = batch.Brewers,               
+                Yeast = batch.Yeast,
+                FermentationTank = batch.FermentationTank,
+                TapNumber = batch.TapNumber,
+                PreBoilGravity = batch.PreBoilGravity,
+                OriginalGravity = batch.OriginalGravity,
+                FinalGravity = batch.FinalGravity,
+                ABV = batch.ABV,
+                DateBrewed = batch.DateBrewed,
+                DatePackaged = batch.DatePackaged,
+                DateTapped = batch.DateTapped,
+                BrewingNotes = batch.BrewingNotes,
+                TastingNotes = batch.TastingNotes,
+                Created = batch.Created,
+                CreatedBy = batch.CreatedBy
+            };
+            return dto;
         }
     }
 }
