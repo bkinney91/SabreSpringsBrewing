@@ -120,10 +120,10 @@ import { Vue, Component, Prop, Inject } from "vue-property-decorator";
 import {
   BatchApiService,
   BrewEventService,
-  FermentationTankService,
+  FermentationTankApiService,
 } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
-import { BatchTableRow } from "@/core/models";
+import { BatchTableRow, FermentationTankDto } from "@/core/models";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 
 @Component({
