@@ -67,6 +67,9 @@ let container = configureContainer();
      [ServiceTypes.FermentationTankApiService]: container.get<FermentationTankApiService>(
       ServiceTypes.FermentationTankApiService
     ),
+     [ServiceTypes.BrewEventService]: container.get<BrewEventService>(
+      ServiceTypes.BrewEventService
+    ),
   },
 })
 

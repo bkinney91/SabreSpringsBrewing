@@ -53,7 +53,7 @@ namespace SabreSprings.Brewing.Api
             //Create and register logger
             Log.Logger = new LoggerConfiguration()
                                 .WriteTo.Console()
-                                .WriteTo.File("ApiLog-.txt", rollingInterval: RollingInterval.Day)
+                                .WriteTo.File("Logs/ApiLog-.txt", rollingInterval: RollingInterval.Day)
                                 .CreateLogger();
             Log.Information("Logger succesfully created");
             //Data Providers
