@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@microsoft/signalr": "^3.1.16",
+    "assert": "^2.0.0",
     "axios": "0.21.1",
     "core-js": "2.6.5",
     "devextreme": "19.2.6",
