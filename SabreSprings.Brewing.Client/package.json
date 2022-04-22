@@ -19,6 +19,7 @@
   "dependencies": {
     "@microsoft/signalr": "^3.1.16",
     "assert": "^2.0.0",
+    "asserts": "^4.0.2",
     "axios": "0.21.1",
     "core-js": "2.6.5",
     "devextreme": "19.2.6",
@@ -44,7 +45,7 @@
   "devDependencies": {
     "@types/chai": "4.1.0",
     "@types/mocha": "5.2.4",
-    "@types/node": "^12.20.16",
+    "@types/node": "^12.20.48",
     "@vue/cli-plugin-babel": "3.12.0",
     "@vue/cli-plugin-e2e-nightwatch": "3.12.0",
     "@vue/cli-plugin-eslint": "4.1.1",

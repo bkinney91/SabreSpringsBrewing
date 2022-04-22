@@ -216,8 +216,7 @@ export default class BatchTableRowComponent extends Vue {
       this.batch.style.includes("IPA") &&
       new Date(this.batch.dateBrewed).toLocaleDateString("en-US") !== "12/31/1969" &&
       this.brewEventService.getDryHopDateEnd(
-        this.batch.dateBrewed,
-        this.batch.style
+        this.batch.dateBrewed
       ) > new Date()
     );
   }
