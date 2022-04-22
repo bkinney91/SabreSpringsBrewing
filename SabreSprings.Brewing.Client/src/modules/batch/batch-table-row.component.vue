@@ -59,8 +59,7 @@
                   <td v-if="showDryHop()">
 {{
                       this.brewEventService.getScheduledDryHop(
-                        batch.dateBrewed,
-                        batch.style
+                        batch.dateBrewed
                       )
                     }}
                     </td>
