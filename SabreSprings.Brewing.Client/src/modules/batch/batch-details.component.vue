@@ -46,7 +46,7 @@
                   <b :style="'color:' + getColor(batchDetails.status)">Status:</b>
                   {{ batchDetails.status }}
                 </li>
-                 <li>
+                <li>
                   <b :style="'color:' + getColor(batchDetails.status)">Date Brewed:</b>
                   {{ new Date(batchDetails.dateBrewed).toLocaleDateString("en-US") }}
                 </li>
@@ -101,7 +101,7 @@
                   <b :style="'color:' + getColor(batchDetails.status)">ABV:</b>
                   {{ batchDetails.abv }}%
                 </li>
-               
+
                 <li
                   v-if="
                     new Date(batchDetails.datePackaged).toLocaleDateString('en-US') !==
@@ -168,14 +168,18 @@
                   <h6>
                     Cold Crash:
                     {{
-                      this.brewEventService.getScheduledColdCrash(batchDetails.dateBrewed, beerDto.style)
+                      this.brewEventService.getScheduledColdCrash(
+                        batchDetails.dateBrewed,
+                        beerDto.style
+                      )
                     }}
                   </h6>
                   <h6>
                     Force Carb:
                     {{
                       this.brewEventService.getScheduledForceCarbonation(
-                        batchDetails.dateBrewed, beerDto.style
+                        batchDetails.dateBrewed,
+                        beerDto.style
                       )
                     }}
                   </h6>
@@ -183,14 +187,18 @@
                     Dry Hop:
                     {{
                       this.brewEventService.getScheduledDryHop(
-                        batchDetails.dateBrewed, beerDto.style
+                        batchDetails.dateBrewed,
+                        beerDto.style
                       )
                     }}
                   </h6>
                   <h6>
                     Scheduled Package Date:
                     {{
-                      this.brewEventService.getScheduledPackage(batchDetails.dateBrewed, beerDto.style)
+                      this.brewEventService.getScheduledPackage(
+                        batchDetails.dateBrewed,
+                        beerDto.style
+                      )
                     }}
                   </h6>
                 </div>
@@ -263,7 +271,9 @@ export default class BatchDetailsComponent extends Vue {
           response.Status == "Conditioning" ||
           response.Status == "Souring"
         ) {
-          this.getFermentationTank(response.fermentationTank);
+          if (response.fermentationTankApiService != 0) {
+            this.getFermentationTank(response.fermentationTank);
+          }
         }
       })
       .catch((error) => {
