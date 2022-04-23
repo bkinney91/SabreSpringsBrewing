@@ -226,7 +226,7 @@
           </div>
         </div>
         <div class="row">
-          <div>
+          
             <h3 :style="'color:' + getColor(batchDetails.status)">
               Brewing Notes
             </h3>
@@ -234,7 +234,7 @@
               {{ batchDetails.brewingNotes }}
             </p>
           </div>
-          <div>
+          <div class="row">
             <h3 :style="'color:' + getColor(batchDetails.status)">
               Tasting Notes
             </h3>
@@ -242,8 +242,10 @@
               {{ batchDetails.tastingNotes }}
             </p>
           </div>
+          
+
           <div class="row">
-            <br />
+           
             <a
               :href="'/batch/editor?id=' + batchDetails.id"
               class="btn btn-primary"
@@ -251,7 +253,7 @@
               >Edit</a
             >
           </div>
-        </div>
+       
       </div>
 
       <div
