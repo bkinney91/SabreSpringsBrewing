@@ -43,27 +43,43 @@
             <div id="attributes">
               <ul>
                 <li>
-                  <b :style="'color:' + getColor(batchDetails.status)">Status:</b>
+                  <b :style="'color:' + getColor(batchDetails.status)"
+                    >Status:</b
+                  >
                   {{ batchDetails.status }}
                 </li>
                 <li>
-                  <b :style="'color:' + getColor(batchDetails.status)">Date Brewed:</b>
-                  {{ new Date(batchDetails.dateBrewed).toLocaleDateString("en-US") }}
+                  <b :style="'color:' + getColor(batchDetails.status)"
+                    >Date Brewed:</b
+                  >
+                  {{
+                    new Date(batchDetails.dateBrewed).toLocaleDateString(
+                      "en-US"
+                    )
+                  }}
                 </li>
                 <li>
-                  <b :style="'color:' + getColor(batchDetails.status)">Batch Number:</b>
+                  <b :style="'color:' + getColor(batchDetails.status)"
+                    >Batch Number:</b
+                  >
                   {{ batchDetails.batchNumber }}
                 </li>
                 <li>
-                  <b :style="'color:' + getColor(batchDetails.status)">Style:</b>
+                  <b :style="'color:' + getColor(batchDetails.status)"
+                    >Style:</b
+                  >
                   {{ beerDto.style }}
                 </li>
                 <li>
-                  <b :style="'color:' + getColor(batchDetails.status)">Brewers:</b>
+                  <b :style="'color:' + getColor(batchDetails.status)"
+                    >Brewers:</b
+                  >
                   {{ batchDetails.brewers }}
                 </li>
                 <li>
-                  <b :style="'color:' + getColor(batchDetails.status)">Yeast:</b>
+                  <b :style="'color:' + getColor(batchDetails.status)"
+                    >Yeast:</b
+                  >
                   {{ batchDetails.yeast }}
                 </li>
                 <li
@@ -77,7 +93,8 @@
                   <b :style="'color:' + getColor(batchDetails.status)"
                     >Fermentation Tank:</b
                   >
-                  {{ fermentationTankDto.volume }} gal {{ fermentationTankDto.type }} #{{
+                  {{ fermentationTankDto.volume }} gal
+                  {{ fermentationTankDto.type }} #{{
                     fermentationTankDto.tankNumber
                   }}
                 </li>
@@ -94,7 +111,9 @@
                   {{ batchDetails.originalGravity }}
                 </li>
                 <li>
-                  <b :style="'color:' + getColor(batchDetails.status)">Final Gravity:</b>
+                  <b :style="'color:' + getColor(batchDetails.status)"
+                    >Final Gravity:</b
+                  >
                   {{ batchDetails.finalGravity }}
                 </li>
                 <li>
@@ -104,52 +123,48 @@
 
                 <li
                   v-if="
-                    new Date(batchDetails.datePackaged).toLocaleDateString('en-US') !==
-                    '12/31/1969'
+                    new Date(batchDetails.datePackaged).toLocaleDateString(
+                      'en-US'
+                    ) !== '12/31/1969'
                   "
                 >
-                  <b :style="'color:' + getColor(batchDetails.status)">Date Packaged:</b>
-                  {{ new Date(batchDetails.datePackaged).toLocaleDateString("en-US") }}
+                  <b :style="'color:' + getColor(batchDetails.status)"
+                    >Date Packaged:</b
+                  >
+                  {{
+                    new Date(batchDetails.datePackaged).toLocaleDateString(
+                      "en-US"
+                    )
+                  }}
                 </li>
                 <li
                   v-if="
-                    new Date(batchDetails.dateTapped).toLocaleDateString('en-US') !==
-                    '12/31/1969'
+                    new Date(batchDetails.dateTapped).toLocaleDateString(
+                      'en-US'
+                    ) !== '12/31/1969'
                   "
                 >
-                  <b :style="'color:' + getColor(batchDetails.status)">Date Tapped:</b>
-                  {{ new Date(batchDetails.dateTapped).toLocaleDateString("en-US") }}
+                  <b :style="'color:' + getColor(batchDetails.status)"
+                    >Date Tapped:</b
+                  >
+                  {{
+                    new Date(batchDetails.dateTapped).toLocaleDateString(
+                      "en-US"
+                    )
+                  }}
                 </li>
               </ul>
-              <div>
-                <h3 :style="'color:' + getColor(batchDetails.status)">Brewing Notes</h3>
-                <p style="padding-left: 30px; white-space: pre-line">
-                  {{ batchDetails.brewingNotes }}
-                </p>
-              </div>
-              <div>
-                <h3 :style="'color:' + getColor(batchDetails.status)">Tasting Notes</h3>
-                <p style="padding-left: 30px; white-space: pre-line">
-                  {{ batchDetails.tastingNotes }}
-                </p>
-              </div>
-              <div class="row">
-                <br />
-                <a
-                  :href="'/batch/editor?id=' + batchDetails.id"
-                  class="btn btn-primary"
-                  onclick="goToEditor(batchDetails.id)"
-                  >Edit</a
-                >
-              </div>
             </div>
           </div>
           <div class="col-md-6">
             <div clas="row">
-              <h2 :style="'color:' + getColor(batchDetails.status)">Fermentation Tank</h2>
+              <h2 :style="'color:' + getColor(batchDetails.status)">
+                Fermentation Tank
+              </h2>
               <h5 v-if="fermentationTankDto != null">
                 <div style="padding: 2%">
-                  {{ fermentationTankDto.volume }} gal {{ fermentationTankDto.type }} #{{
+                  {{ fermentationTankDto.volume }} gal
+                  {{ fermentationTankDto.type }} #{{
                     fermentationTankDto.tankNumber
                   }}
                 </div>
@@ -157,12 +172,16 @@
             </div>
             <div class="row" style="padding-top: 5%">
               <div class="col-lg-12">
-                <h2 :style="'color:' + getColor(batchDetails.status)">Schedule</h2>
+                <h2 :style="'color:' + getColor(batchDetails.status)">
+                  Schedule
+                </h2>
                 <div style="padding: 2%">
                   <h6>
                     Yeast Dump:
                     {{
-                      this.brewEventService.getScheduledYeastDump(batchDetails.dateBrewed)
+                      this.brewEventService.getScheduledYeastDump(
+                        batchDetails.dateBrewed
+                      )
                     }}
                   </h6>
                   <h6>
@@ -204,6 +223,33 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <h3 :style="'color:' + getColor(batchDetails.status)">
+              Brewing Notes
+            </h3>
+            <p style="padding-left: 30px; white-space: pre-line">
+              {{ batchDetails.brewingNotes }}
+            </p>
+          </div>
+          <div>
+            <h3 :style="'color:' + getColor(batchDetails.status)">
+              Tasting Notes
+            </h3>
+            <p style="padding-left: 30px; white-space: pre-line">
+              {{ batchDetails.tastingNotes }}
+            </p>
+          </div>
+          <div class="row">
+            <br />
+            <a
+              :href="'/batch/editor?id=' + batchDetails.id"
+              class="btn btn-primary"
+              onclick="goToEditor(batchDetails.id)"
+              >Edit</a
+            >
           </div>
         </div>
       </div>
