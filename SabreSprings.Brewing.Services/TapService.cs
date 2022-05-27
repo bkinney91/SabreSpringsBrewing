@@ -40,16 +40,9 @@ namespace SabreSprings.Brewing.Services
                     SuggestedGlassType = beer.SuggestedGlassType,
                     Brewers = batch.Brewers,
                     TastingNotes = batch.TastingNotes,
-                    Logo = beer.Logo
-                };
-                int tapNumber = 0;
-                bool properFormat = Int32.TryParse(batch.SubStatus, out tapNumber);
-                if(properFormat == false)
-                {
-                    throw new FormatException("SubStatus for this beer could not be parsed to determine a tap number," +
-                        $" please configure sub status for batch ID \"{batch.Id}\" properly.");
-                }
-                tapDisplay.TapNumber = tapNumber;                
+                    Logo = beer.Logo,
+                    TapNumber = batch.TapNumber
+                };            
                 tapList.Add(tapDisplay);
             }
             tapList = tapList.OrderBy(x=> x.TapNumber).ToList();
