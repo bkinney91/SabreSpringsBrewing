@@ -48,6 +48,13 @@
                   >
                   {{ batchDetails.status }}
                 </li>
+
+                <li>
+                  <b :style="'color:' + getColor(batchDetails.status)"
+                    >Tap Number:</b
+                  >
+                  {{ batchDetails.tapNumber }}
+                </li>
                 <li>
                   <b :style="'color:' + getColor(batchDetails.status)"
                     >Date Brewed:</b

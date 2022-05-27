@@ -8,12 +8,12 @@
       >
         {{ beerName }} Batch #{{ batch.batchNumber }}
       </h1>
-      <hr/>
+      <hr />
       <h1 v-if="this.batchId == false">Add new batch</h1>
-     
+
       <div class="row">
         <div class="col-lg-6" v-if="this.batchId == false">
-           <h5>Select a beer</h5>
+          <h5>Select a beer</h5>
           <DxSelectBox
             v-if="beers"
             :items="beers"
@@ -24,26 +24,39 @@
         </div>
         <div class="col-lg-6" v-if="this.batchId">
           <h5>Status</h5>
-          <DxSelectBox            
-            :items="['Planned', 'Fermenting', 'Souring', 'Conditioning', 'On Tap', 'Archived']"
+          <DxSelectBox
+            :items="[
+              'Planned',
+              'Fermenting',
+              'Souring',
+              'Conditioning',
+              'On Tap',
+              'Archived',
+            ]"
             :value.sync="batch.status"
-          
           />
         </div>
-        <div class="col-lg-6" v-if="this.batch.status =='Fermenting' || this.batch.status == 'Conditioning' || this.batch.status == 'Souring'">
+        <div
+          class="col-lg-6"
+          v-if="
+            this.batch.status == 'Fermenting' ||
+            this.batch.status == 'Conditioning' ||
+            this.batch.status == 'Souring'
+          "
+        >
           <h5>Fermentation Tank</h5>
-         <DxSelectBox
-                  v-if="fermentationTanks != null"
-                  v-model="batch.fermentationTank"
-                  :items="fermentationTanks"
-                  :display-expr="showTankForSelectBox"
-                  value-expr="id"
-                />
+          <DxSelectBox
+            v-if="fermentationTanks != null"
+            v-model="batch.fermentationTank"
+            :items="fermentationTanks"
+            :display-expr="showTankForSelectBox"
+            value-expr="id"
+          />
         </div>
       </div>
       <hr />
       <h5>Details</h5>
-      <DxForm id="form" :form-data="batch" label-location="top" col-count="3">
+      <DxForm id="form" :form-data="this.batch" label-location="top" col-count="3">      
         <DxItem data-field="brewers" name="Brewers" />
         <DxItem data-field="yeast" />
         <DxItem data-field="abv" editor-type="dxNumberBox" />
@@ -53,16 +66,23 @@
         <DxItem data-field="dateBrewed" editor-type="dxDateBox" />
         <DxItem data-field="datePackaged" editor-type="dxDateBox" />
         <DxItem data-field="dateTapped" editor-type="dxDateBox" />
-        <DxGroupItem col-span="3" caption="Notes">
+        <DxItem
+          v-if="this.batch.status == 'On Tap'"
+          data-field="tapNumber"
+          editor-type="dxNumberBox"
+        />
+        <DxItem />
+        <DxItem/>
+        <DxGroupItem :col-span="3" caption="Notes">
           <DxItem
             data-field="brewingNotes"
             editor-type="dxTextArea"
-            :editor-options="height=600"
+            :editor-options="{ height: 300 }"
           />
           <DxItem
             data-field="tastingNotes"
             editor-type="dxTextArea"
-            :editor-options="height=600"
+            :editor-options="{ height: 300 }"
           />
         </DxGroupItem>
       </DxForm>
@@ -90,14 +110,18 @@
 <script lang="ts">
 // IMPORTS ----------------------------------
 import { Vue, Component, Inject } from "vue-property-decorator";
-import { BatchApiService, BeerApiService, FermentationTankApiService } from "@/core/services";
+import {
+  BatchApiService,
+  BeerApiService,
+  FermentationTankApiService,
+} from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
 import { BatchDto, BeerDto, FermentationTankDto } from "@/core/models";
 import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 import { DxForm, DxItem, DxGroupItem } from "devextreme-vue/form";
 import { DxTextArea } from "devextreme-vue/text-area";
 import DxSelectBox from "devextreme-vue/select-box";
-import DxTextBox from 'devextreme-vue/text-box';
+import DxTextBox from "devextreme-vue/text-box";
 @Component({
   components: {
     DxForm,
@@ -105,7 +129,7 @@ import DxTextBox from 'devextreme-vue/text-box';
     DxTextArea,
     DxGroupItem,
     DxSelectBox,
-    DxTextBox
+    DxTextBox,
   },
 })
 export default class BatchEditorComponent extends Vue {
@@ -113,7 +137,7 @@ export default class BatchEditorComponent extends Vue {
   private batchApiService!: BatchApiService;
   @Inject(ServiceTypes.BeerApiService)
   private beerApiService!: BeerApiService;
-   @Inject(ServiceTypes.FermentationTankApiService)
+  @Inject(ServiceTypes.FermentationTankApiService)
   private fermentationTankApiService!: FermentationTankApiService;
   private beers: BeerDto[] = [];
   private batch: BatchDto = <BatchDto>{};
@@ -151,26 +175,26 @@ export default class BatchEditorComponent extends Vue {
     this.batchApiService
       .get(id)
       .then((response) => {
-        this.batch = response;       
+        this.batch = response;
       })
       .catch((error) => {
         NotifyHelper.displayError(error);
       });
   }
 
-private getFermentationTanks(){
-this.fermentationTankApiService
+  private getFermentationTanks() {
+    this.fermentationTankApiService
       .getAll()
       .then((response) => {
-        this.fermentationTanks = response;        
+        this.fermentationTanks = response;
       })
       .catch((error) => {
         NotifyHelper.displayError(error);
       });
-}
-
+  }
 
   private updateBatch() {
+    console.log("dis batch", this.batch);
     this.batchApiService
       .put(this.batch)
       .then((response) => {
@@ -193,11 +217,10 @@ this.fermentationTankApiService
         NotifyHelper.displayError(error);
       });
   }
-  
+
   private showTankForSelectBox(item: any): string {
     return item ? `${item.volume} gal ${item.type} #${item.tankNumber}` : "";
   }
-  
 
   private getColor(status: string): string {
     return AppSettingsHelper.getStatusColor(status);
