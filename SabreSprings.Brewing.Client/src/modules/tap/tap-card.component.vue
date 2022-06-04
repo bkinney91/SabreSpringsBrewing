@@ -29,10 +29,12 @@
                   <b>Batch #{{ tap.batchNumber }}</b>
                 </h5>
                 <h5>ABV: {{ tap.abv }}%</h5>
-                <h5 id="tap1PintsRemaining">
+                <!--
+                  <h5 id="tap1PintsRemaining">
                   Approx. Pints Remaining:
                   {{ Math.round(tap.pintsRemaining * 10) / 10 }}
-                </h5>
+                  </h5>
+                -->
 
                 <button
                   href="#"
