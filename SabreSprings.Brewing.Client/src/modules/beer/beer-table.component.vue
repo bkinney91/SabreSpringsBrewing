@@ -110,7 +110,7 @@ export default class BaeerTableComponent extends Vue {
   private updateBeer(e: any) {
     console.log("beer", e);
     this.beerApiService
-      .put(e.data)
+      .put(e.oldData)
       .then((response) => {
         NotifyHelper.displayMessage("Sucessfully updated beer.")
       })
