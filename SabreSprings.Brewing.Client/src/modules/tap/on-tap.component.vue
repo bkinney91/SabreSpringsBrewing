@@ -2,7 +2,7 @@
   <div style="margin-left: 10%; margin-right: 10%">
     <!--<META http-equiv="refresh" content="3600"></META> -->
     <h1>On Tap</h1>
-
+<button class="btn btn-primary" onclick="this.getOnTap()">Refresh</button>
     <div class="tapCard">
       <TapCardComponent
         v-if="this.taps"

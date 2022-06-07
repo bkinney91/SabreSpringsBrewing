@@ -3,13 +3,13 @@
     <div
       class="card"
       :style="
-        'border-color:' + getColor() + ';border-top-width:5px;border-width:5px'
+        'border-color:' + this.getColor() + ';border-top-width:5px;border-width:5px'
       "
       v-on:click="openBatchDetails(batch.batchId)"
     >
       <div
         class="card-header"
-        :style="'border-color:' + getColor() + ';border-bottom-width: 10px'"
+        :style="'border-color:' + this.getColor() + ';border-bottom-width: 10px'"
       >
         <h3>{{ batch.statusText }}</h3>
 
@@ -172,8 +172,8 @@ export default class BatchTableRowComponent extends Vue {
       });
   }
 
-   private getColor(statusText: string) {
-    return AppSettingsHelper.getStatusColor(statusText);
+   private getColor() {
+    return AppSettingsHelper.getStatusColor(this.batch.statusText);
   }
 
   private openBatchDetails(batchId: number) {

@@ -39,16 +39,27 @@
           </h1>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <img
               v-if="beerDto.logo"
               style="max-height: 400px; max-width: 400px"
-              :src="'/Content/images' + batch.logo"
+              :src="'/Content/images' + beerDto.logo"
               alt="Card image cap"
             />
           </div>
-           <div class="col-md-6" v-if="batchDetails != null">
+          <div
+            class="col-md-4"
+            v-if="batchDetails != null"
+            style="padding-left: 30px"
+          >
             <div id="attributes">
+              <h3
+                :style="
+                  'padding-left:10px;color:' + getColor(batchDetails.status)
+                "
+              >
+                Details
+              </h3>
               <ul>
                 <li>
                   <b :style="'color:' + getColor(batchDetails.status)"
@@ -56,8 +67,23 @@
                   >
                   {{ batchDetails.status }}
                 </li>
-
-                <li>
+                <li
+                  v-if="
+                    (batchDetails.status == 'Fermenting' ||
+                      batchDetails.status == 'Souring' ||
+                      batchDetails.status == 'Conditioning') &&
+                    fermentationTankDto
+                  "
+                >
+                  <b :style="'color:' + getColor(batchDetails.status)"
+                    >Fermentation Tank:</b
+                  >
+                  {{ fermentationTankDto.volume }} gal
+                  {{ fermentationTankDto.type }} #{{
+                    fermentationTankDto.tankNumber
+                  }}
+                </li>
+                <li v-if="batchDetails.tapNumber != 0">
                   <b :style="'color:' + getColor(batchDetails.status)"
                     >Tap Number:</b
                   >
@@ -81,12 +107,6 @@
                 </li>
                 <li>
                   <b :style="'color:' + getColor(batchDetails.status)"
-                    >Style:</b
-                  >
-                  {{ beerDto.style }}
-                </li>
-                <li>
-                  <b :style="'color:' + getColor(batchDetails.status)"
                     >Brewers:</b
                   >
                   {{ batchDetails.brewers }}
@@ -97,22 +117,7 @@
                   >
                   {{ batchDetails.yeast }}
                 </li>
-                <li
-                  v-if="
-                    (batchDetails.status == 'Fermenting' ||
-                      batchDetails.status == 'Souring' ||
-                      batchDetails.status == 'Conditioning') &&
-                    fermentationTankDto
-                  "
-                >
-                  <b :style="'color:' + getColor(batchDetails.status)"
-                    >Fermentation Tank:</b
-                  >
-                  {{ fermentationTankDto.volume }} gal
-                  {{ fermentationTankDto.type }} #{{
-                    fermentationTankDto.tankNumber
-                  }}
-                </li>
+
                 <li>
                   <b :style="'color:' + getColor(batchDetails.status)"
                     >Pre-boil Gravity:</b
@@ -171,107 +176,85 @@
               </ul>
             </div>
           </div>
-        </div> 
-        <div class="row">
-         
-          <div class="col-md-6">
-            <div clas="row">
-              <h2 :style="'color:' + getColor(batchDetails.status)">
-                Fermentation Tank
-              </h2>
-              <h5 v-if="fermentationTankDto != null">
-                <div style="padding: 2%">
-                  {{ fermentationTankDto.volume }} gal
-                  {{ fermentationTankDto.type }} #{{
-                    fermentationTankDto.tankNumber
-                  }}
-                </div>
-              </h5>
-            </div>
-            <div class="row" style="padding-top: 5%">
-              <div class="col-lg-12">
-                <h2 :style="'color:' + getColor(batchDetails.status)">
-                  Schedule
-                </h2>
-                <div style="padding: 2%">
-                  <h6>
-                    Yeast Dump:
-                    {{
-                      this.brewEventService.getScheduledYeastDump(
-                        batchDetails.dateBrewed
-                      )
-                    }}
-                  </h6>
-                  <h6>
-                    Cold Crash:
-                    {{
-                      this.brewEventService.getScheduledColdCrash(
-                        batchDetails.dateBrewed,
-                        beerDto.style
-                      )
-                    }}
-                  </h6>
-                  <h6>
-                    Force Carb:
-                    {{
-                      this.brewEventService.getScheduledForceCarbonation(
-                        batchDetails.dateBrewed,
-                        beerDto.style
-                      )
-                    }}
-                  </h6>
-                  <h6>
-                    Dry Hop:
-                    {{
-                      this.brewEventService.getScheduledDryHop(
-                        batchDetails.dateBrewed,
-                        beerDto.style
-                      )
-                    }}
-                  </h6>
-                  <h6>
-                    Scheduled Package Date:
-                    {{
-                      this.brewEventService.getScheduledPackage(
-                        batchDetails.dateBrewed,
-                        beerDto.style
-                      )
-                    }}
-                  </h6>
-                </div>
-              </div>
+          <div class="col-md-2">
+            <h2 :style="'color:' + getColor(batchDetails.status)">Schedule</h2>
+            <div style="padding: 2%">
+              <h6>
+                Yeast Dump:
+                {{
+                  this.brewEventService.getScheduledYeastDump(
+                    batchDetails.dateBrewed
+                  )
+                }}
+              </h6>
+              <h6>
+                Cold Crash:
+                {{
+                  this.brewEventService.getScheduledColdCrash(
+                    batchDetails.dateBrewed,
+                    beerDto.style
+                  )
+                }}
+              </h6>
+              <h6>
+                Force Carb:
+                {{
+                  this.brewEventService.getScheduledForceCarbonation(
+                    batchDetails.dateBrewed,
+                    beerDto.style
+                  )
+                }}
+              </h6>
+              <h6>
+                Dry Hop:
+                {{
+                  this.brewEventService.getScheduledDryHop(
+                    batchDetails.dateBrewed,
+                    beerDto.style
+                  )
+                }}
+              </h6>
+              <h6>
+                Scheduled Package Date:
+                {{
+                  this.brewEventService.getScheduledPackage(
+                    batchDetails.dateBrewed,
+                    beerDto.style
+                  )
+                }}
+              </h6>
             </div>
           </div>
         </div>
         <div class="row">
-          
-            <h3 :style="'color:' + getColor(batchDetails.status)">
-              Brewing Notes
-            </h3>
-            <p style="padding-left: 30px; white-space: pre-line">
-              {{ batchDetails.brewingNotes }}
-            </p>
-          </div>
-          <div class="row">
-            <h3 :style="'color:' + getColor(batchDetails.status)">
-              Tasting Notes
-            </h3>
-            <p style="padding-left: 30px; white-space: pre-line">
-              {{ batchDetails.tastingNotes }}
-            </p>
-          </div>
-          
+          <br />
+          <div class="col-md-6"></div>
+        </div>
+        <div class="row">
+          <h3 :style="'color:' + getColor(batchDetails.status)">
+            Brewing Notes
+          </h3>
+          <p style="padding-left: 30px; white-space: pre-line">
+            {{ batchDetails.brewingNotes }}
+          </p>
+        </div>
+        <div class="row">
+          <h3 :style="'color:' + getColor(batchDetails.status)">
+            Tasting Notes
+          </h3>
+          <p style="padding-left: 30px; white-space: pre-line">
+            {{ batchDetails.tastingNotes }}
+          </p>
+        </div>
 
-          <div class="row">
-           
-            <a
-              :href="'/batch/editor?id=' + batchDetails.id"
-              class="btn btn-primary"
-              onclick="goToEditor(batchDetails.id)"
-              >Edit</a
-            >
-          </div>
-       
+        <div class="row">
+          <a
+            :href="'/batch/editor?id=' + batchDetails.id"
+            class="btn btn-primary"
+            onclick="goToEditor(batchDetails.id)"
+            >Edit</a
+          >
+        </div>
       </div>
 
       <div

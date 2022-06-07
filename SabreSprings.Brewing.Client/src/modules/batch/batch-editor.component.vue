@@ -6,7 +6,7 @@
         id="header"
         :style="'color:' + getColor(batch.status)"
       >
-        {{ beerName }} Batch #{{ batch.batchNumber }}
+        {{ this.beer.name }} Batch #{{ batch.batchNumber }}
       </h1>
       <hr />
       <h1 v-if="this.batchId == false">Add new batch</h1>
@@ -69,15 +69,14 @@
         <DxItem
           v-if="this.batch.status == 'On Tap'"
           data-field="tapNumber"
-          editor-type="dxNumberBox"
+          editor-type="dxNumberBox"         
         />
-        <DxItem />
-        <DxItem/>
+      
         <DxGroupItem :col-span="3" caption="Notes">
           <DxItem
             data-field="brewingNotes"
             editor-type="dxTextArea"
-            :editor-options="{ height: 300 }"
+            :editor-options="{ height: 300}"
           />
           <DxItem
             data-field="tastingNotes"
@@ -141,24 +140,40 @@ export default class BatchEditorComponent extends Vue {
   private fermentationTankApiService!: FermentationTankApiService;
   private beers: BeerDto[] = [];
   private batch: BatchDto = <BatchDto>{};
+  private beer: BeerDto = <BeerDto>{};
   private fermentationTanks: FermentationTankDto[] = [];
   private fermentationTankDto!: FermentationTankDto | null;
   private batchId: number | null = null;
-  private beerName: string = "";
+
 
   constructor() {
     super();
   }
+
 
   created(): void {
     this.getFermentationTanks();
     this.batchId = +this.$route.query.id;
     if (this.batchId != 0) {
       this.getBatch(this.batchId);
+
     } else {
       this.getBeers();
+    
     }
   }
+
+ private getBeer(id: number) {
+    this.beerApiService
+      .get(id)
+      .then((response) => {
+        this.beer = response;
+      })
+      .catch((error) => {
+        NotifyHelper.displayError(error);
+      });
+  }
+
 
   private getBeers() {
     this.beerApiService
@@ -176,6 +191,7 @@ export default class BatchEditorComponent extends Vue {
       .get(id)
       .then((response) => {
         this.batch = response;
+        this.getBeer(this.batch.beer);
       })
       .catch((error) => {
         NotifyHelper.displayError(error);
