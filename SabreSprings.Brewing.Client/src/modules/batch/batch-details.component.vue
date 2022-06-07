@@ -177,8 +177,8 @@
             </div>
           </div>
           <div class="col-md-3">
-            <h2 :style="'color:' + getColor(batchDetails.status)">Schedule</h2>
-            <div style="padding: 2%">
+            <h3 :style="'color:' + getColor(batchDetails.status)">Schedule</h3>
+            <div style="padding: 1%">
               <b :style="'color:' + getColor(batchDetails.status)">
                 Yeast Dump:
                 </b>                
