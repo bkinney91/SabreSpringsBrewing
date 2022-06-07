@@ -172,22 +172,8 @@ export default class BatchTableRowComponent extends Vue {
       });
   }
 
-  private getColor() {
-    let color: string = "";
-    if (this.batch.statusText.includes("On Tap")) {
-      color = "green";
-    } else if (this.batch.statusText === "Fermenting") {
-      color = "red";
-    } else if (this.batch.statusText === "Conditioning") {
-      color = "#D2D545";
-    } else if (this.batch.statusText === "Archived") {
-      color = "#1369B1";
-    } else if (this.batch.statusText === "Planned") {
-      color = "#B11313";
-    } else if (this.batch.statusText === "Souring") {
-      color = "#3d004f";
-    }
-    return color;
+   private getColor(statusText: string) {
+    return AppSettingsHelper.getStatusColor(statusText);
   }
 
   private openBatchDetails(batchId: number) {
