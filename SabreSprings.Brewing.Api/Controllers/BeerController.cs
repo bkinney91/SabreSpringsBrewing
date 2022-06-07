@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using SabreSprings.Brewing.Data.Interfaces;
 using SabreSprings.Brewing.Models.DataTransfer;
 using SabreSprings.Brewing.Models.Entities;
@@ -76,7 +77,7 @@ namespace SabreSprings.Brewing.Api.Controllers
         {
             try
             {
-                Console.WriteLine($"Update Beer: " + JsonConvert.SerailizeObject(dto));
+                Console.WriteLine($"Update Beer: " + JsonConvert.SerializeObject(dto));
                 await BeerService.Update(dto);
                 return NoContent();
             }
