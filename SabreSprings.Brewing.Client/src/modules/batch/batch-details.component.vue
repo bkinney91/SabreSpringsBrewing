@@ -176,53 +176,67 @@
               </ul>
             </div>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-3">
             <h2 :style="'color:' + getColor(batchDetails.status)">Schedule</h2>
             <div style="padding: 2%">
-              <h6>
+              <b :style="'color:' + getColor(batchDetails.status)">
                 Yeast Dump:
+                </b>                
+                <i>
                 {{
                   this.brewEventService.getScheduledYeastDump(
                     batchDetails.dateBrewed
                   )
                 }}
-              </h6>
-              <h6>
+              </i>
+              </br>
+              <b :style="'color:' + getColor(batchDetails.status)">
                 Cold Crash:
+                </b>
+                <i>
                 {{
                   this.brewEventService.getScheduledColdCrash(
                     batchDetails.dateBrewed,
                     beerDto.style
                   )
                 }}
-              </h6>
-              <h6>
+              </i>
+              </br>
+              <b :style="'color:' + getColor(batchDetails.status)">
                 Force Carb:
+                </b>
+                <i>
                 {{
                   this.brewEventService.getScheduledForceCarbonation(
                     batchDetails.dateBrewed,
                     beerDto.style
                   )
                 }}
-              </h6>
-              <h6>
+              </i>
+              </br>
+              <b :style="'color:' + getColor(batchDetails.status)">
                 Dry Hop:
+                </b>
+                <i>
                 {{
                   this.brewEventService.getScheduledDryHop(
                     batchDetails.dateBrewed,
                     beerDto.style
                   )
                 }}
-              </h6>
-              <h6>
+              </i>
+              </br>
+              <b :style="'color:' + getColor(batchDetails.status)">
                 Scheduled Package Date:
+                </b>
+                <i>
                 {{
                   this.brewEventService.getScheduledPackage(
                     batchDetails.dateBrewed,
                     beerDto.style
                   )
                 }}
-              </h6>
+              </i>
             </div>
           </div>
         </div>
