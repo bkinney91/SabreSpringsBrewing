@@ -55,7 +55,7 @@ export class AppSettingsHelper {
 		} else if (statusText === "Planned") {
 			color = "#B11313";
 		} else if (statusText === "Souring") {
-			color = "#3d004f";
+			color = "#9100BD";
 		}
 		return color;
 	}

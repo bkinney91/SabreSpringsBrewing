@@ -41,7 +41,7 @@
         <div class="row">
           <div class="col-md-6">
             <img
-              v-if="batchDetails.logo"
+              v-if="beerDto.logo"
               style="max-height: 400px; max-width: 400px"
               :src="'/Content/images' + batch.logo"
               alt="Card image cap"
