@@ -230,7 +230,7 @@
           <br />
           <div class="col-md-6"></div>
         </div>
-        <div class="row">
+        <div class="row" style="min-height:100px;">
           <h3 :style="'color:' + getColor(batchDetails.status)">
             Brewing Notes
           </h3>
@@ -238,7 +238,7 @@
             {{ batchDetails.brewingNotes }}
           </p>
         </div>
-        <div class="row">
+        <div class="row" style="min-height:100px;">
           <h3 :style="'color:' + getColor(batchDetails.status)">
             Tasting Notes
           </h3>

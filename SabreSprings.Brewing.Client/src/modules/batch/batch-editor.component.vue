@@ -71,6 +71,8 @@
           data-field="tapNumber"
           editor-type="dxNumberBox"         
         />
+        <DxItem  v-if="this.batch.status == 'On Tap'"/>
+        <DxItem  v-if="this.batch.status == 'On Tap'"/>
       
         <DxGroupItem :col-span="3" caption="Notes">
           <DxItem
