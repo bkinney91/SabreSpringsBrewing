@@ -1,8 +1,14 @@
 <template>
   <div style="margin-left: 10%; margin-right: 10%">
     <!--<META http-equiv="refresh" content="3600"></META> -->
-    <h1>On Tap</h1>
-<button class="btn btn-primary" onclick="this.getOnTap()">Refresh</button>
+    <div class="row">
+      <div class="col-lg-10"><h1>On Tap</h1></div>
+      <div class="col-lg-2">
+        <button class="btn btn-primary float float-right" onclick="this.getOnTap()">
+          Refresh
+        </button>
+      </div>
+    </div>
     <div class="tapCard">
       <TapCardComponent
         v-if="this.taps"
