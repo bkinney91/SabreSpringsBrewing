@@ -26,7 +26,7 @@
           <div class="col-lg-2">
             <img
               v-if="batch.logo"
-              style="max-height: 100px; max-width: 100px"
+              style="max-height: 200px; max-width: 200px"
               :src="'/Content/images' + batch.logo"
               alt="Card image cap"
             />

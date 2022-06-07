@@ -39,7 +39,15 @@
           </h1>
         </div>
         <div class="row">
-          <div class="col-md-6" v-if="batchDetails != null">
+          <div class="col-md-6">
+            <img
+              v-if="batchDetails.logo"
+              style="max-height: 400px; max-width: 400px"
+              :src="'/Content/images' + batch.logo"
+              alt="Card image cap"
+            />
+          </div>
+           <div class="col-md-6" v-if="batchDetails != null">
             <div id="attributes">
               <ul>
                 <li>
@@ -163,6 +171,9 @@
               </ul>
             </div>
           </div>
+        </div> 
+        <div class="row">
+         
           <div class="col-md-6">
             <div clas="row">
               <h2 :style="'color:' + getColor(batchDetails.status)">
