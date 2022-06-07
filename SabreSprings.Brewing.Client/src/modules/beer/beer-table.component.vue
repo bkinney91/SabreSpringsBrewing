@@ -108,9 +108,18 @@ export default class BaeerTableComponent extends Vue {
   }
 
   private updateBeer(e: any) {
-    console.log("beer", e);
+    console.log("beer", e.oldData);
+    const model = <BeerDto>({
+      id : e.oldData.id,
+    name: e.newData.name ? e.newData.name : e.oldData.name,
+    style: e.newData.style ? e.newData.style :  e.oldData.style,
+    logo: e.newData.logo ? e.newData.logo : e.oldData.logo,
+    suggestedGlassType: e.newData.suggestedGlassType ? e.newData.suggestedGlassType : e.oldData.suggestedGlassType
+    
+ });
+ console.log("model", model);
     this.beerApiService
-      .put(e.oldData)
+      .put(model)
       .then((response) => {
         NotifyHelper.displayMessage("Sucessfully updated beer.")
       })
