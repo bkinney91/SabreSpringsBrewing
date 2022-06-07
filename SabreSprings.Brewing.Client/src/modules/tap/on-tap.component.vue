@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-lg-10"><h1>On Tap</h1></div>
       <div class="col-lg-2">
-        <button class="btn btn-primary float float-right" onclick="this.getOnTap()">
+        <button class="btn btn-primary float float-right" v-on:click="getOnTap()">
           Refresh
         </button>
       </div>
@@ -72,7 +72,7 @@ export default class OnTapComponent extends Vue {
     this.taps = data;
   }
 
-  private getOnTap() {
+  public getOnTap() {
     this.tapApiService
       .getOnTap()
       .then((response) => {
