@@ -76,6 +76,7 @@ namespace SabreSprings.Brewing.Api.Controllers
         {
             try
             {
+                Console.WriteLine($"Update Beer: " + JsonConvert.SerailizeObject(dto));
                 await BeerService.Update(dto);
                 return NoContent();
             }
