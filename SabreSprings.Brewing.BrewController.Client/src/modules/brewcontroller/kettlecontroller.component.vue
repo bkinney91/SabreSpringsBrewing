@@ -141,11 +141,11 @@
 </style>
 
 <script lang="ts">
-// IMPORTS ----------------------------------
-import { Vue, Component, Inject, Prop, Watch } from "vue-property-decorator";
+import { defineComponent } from "vue";
 import { ServiceTypes } from "@/core/symbols";
-import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
+import { NotifyHelper } from "@/core/helpers";
 import { KettleHubService } from "@/core/services";
+import { configureContainer } from "@/configure-container";
 import { DxSlider } from "devextreme-vue/slider";
 import { DxNumberBox } from "devextreme-vue/number-box";
 import {
@@ -154,7 +154,9 @@ import {
   DxLabel,
   DxValueIndicator,
 } from "devextreme-vue/linear-gauge";
-@Component({
+const kettleHubService = configureContainer().get<KettleHubService>(ServiceTypes.KettleHubService);
+
+export default defineComponent({
   components: {
     DxSlider,
     DxNumberBox,
@@ -163,62 +165,42 @@ import {
     DxLabel,
     DxValueIndicator,
   },
-})
-export default class KettleControllerComponent extends Vue {
-  @Inject(ServiceTypes.KettleHubService)
-  private kettleHubService!: KettleHubService;
-  private targetTemperature: number = 0;
-  private pidTargetTemperature: number = 0;
-  private currentTemperature: number = 0;
-
-  constructor() {
-    super();
-    this.kettleHubService.StartConnection();
-  }
-
-  created(): void {
-    this.kettleHubService.SetTargetTemperatureCallback(
-      this.updateTargetTemperature
-    );
-    this.kettleHubService.SetCurrentTemperatureCallback(
-      this.updateCurrentTemperature
-    );
-  }
-
-  private updateTargetTemperature(temperature: number) {
-    if (temperature != this.pidTargetTemperature) {
-      //store new value from PID
-      this.pidTargetTemperature = temperature;
-      this.targetTemperature = temperature;
-    } else if (
-      temperature != this.targetTemperature &&
-      this.targetTemperature != 0
-    ) {
-      this.setTemperature(this.targetTemperature);
-    }
-  }
-
-  private updateCurrentTemperature(temperature: number) {
-    this.currentTemperature = temperature;
-  }
-
-  private setTemperature(e: any) {
-    this.kettleHubService.SetTemperature(e);
-    NotifyHelper.displayMessage("Temperature has been set to " + e + "°F");
-  }
-
-  private incrementTemperature() {
-    this.kettleHubService.IncrementTemperature();
-    {
+  data() {
+    return {
+      targetTemperature: 0,
+      pidTargetTemperature: 0,
+      currentTemperature: 0
+    };
+  },
+  async created() {
+    await kettleHubService.StartConnection();
+    kettleHubService.SetTargetTemperatureCallback((temperature: number) => this.updateTargetTemperature(temperature));
+    kettleHubService.SetCurrentTemperatureCallback((temperature: number) => this.updateCurrentTemperature(temperature));
+  },
+  methods: {
+    updateTargetTemperature(temperature: number) {
+      if (temperature !== this.pidTargetTemperature) {
+        this.pidTargetTemperature = temperature;
+        this.targetTemperature = temperature;
+      } else if (temperature !== this.targetTemperature && this.targetTemperature !== 0) {
+        this.setTemperature(this.targetTemperature);
+      }
+    },
+    updateCurrentTemperature(temperature: number) {
+      this.currentTemperature = temperature;
+    },
+    setTemperature(temperature: number) {
+      kettleHubService.SetTemperature(temperature);
+      NotifyHelper.displayMessage(`Temperature has been set to ${temperature}°F`);
+    },
+    incrementTemperature() {
+      kettleHubService.IncrementTemperature();
       NotifyHelper.displayMessage("Temperature incremented.");
-    }
-  }
-
-  private deccrementTemperature() {
-    this.kettleHubService.DecrementTemperature();
-    {
+    },
+    deccrementTemperature() {
+      kettleHubService.DecrementTemperature();
       NotifyHelper.displayMessage("Temperature decremented.");
     }
   }
-}
+});
 </script>

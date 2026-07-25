@@ -13,57 +13,20 @@
 <!-- SCRIPTS ---------------------------------------------------------------------------------- -->
 <!-- ------------------------------------------------------------------------------------------ -->
 <script lang="ts">
-// IMPORTS ----------------------------------
-import { Component, Inject, Vue } from "vue-property-decorator";
-import { ServiceTypes } from "@/core/symbols";
-import { ApplicationConstants } from "@/core/services";
-import { Subscription } from "rxjs";
-import { ApplicationSettings } from "@/core/models";
-import { NotifyHelper, AppSettingsHelper } from "@/core/helpers";
+import { defineComponent } from "vue";
+import { AppSettingsHelper } from "@/core/helpers";
 import BrewControllerComponent from "../brewcontroller/brewcontroller.component.vue";
 
-@Component({
+export default defineComponent({
   components: {
     BrewControllerComponent
-   
+  },
+  data() {
+    return {
+      appSettings: AppSettingsHelper.getSettings()
+    };
   }
-})
-
-// HOME COMPONENT ---------------------------
-export default class HomeComponent extends Vue {
-  private subscription: Subscription;
-  private ticket: string = "";
-  private appSettings!: ApplicationSettings;
-
-  public isLoggedIn: boolean = false;
-  public hasPermission: boolean = false;
-  public name: string = "";
-
-  constructor() {
-    super();
-    this.subscription = new Subscription();
-  }
-
-  created(): void {
-    this.appSettings = AppSettingsHelper.getSettings();
-  }
-
-  beforeDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
-  get appDescription(): string {
-    return this.appSettings.appDescription;
-  }
-
-  get appName(): string {
-    return this.appSettings.appName;
-  }
-
-  get appIcon(): string {
-    return "fas " + this.appSettings.appIcon;
-  }
-}
+});
 </script>
 
 

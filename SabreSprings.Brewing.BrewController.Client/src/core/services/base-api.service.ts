@@ -1,7 +1,7 @@
-import { AxiosInstance } from "axios";
+import type { AxiosInstance } from "axios";
 import { ServiceTypes } from "../symbols";
 import { injectable, unmanaged } from "inversify";
-import { AppSettingsHelper, NotifyHelper } from "@/core/helpers"; 
+import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 
 @injectable()
 export class BaseApiService {
@@ -10,7 +10,7 @@ export class BaseApiService {
 	constructor(protected client: AxiosInstance, @unmanaged() apiPath: string) {
 		this.apiUrl = `${AppSettingsHelper.apiUrl()}/${apiPath}`;
 	}
-	
+
 	public get(id: number): Promise<any> {
 		return this.client
 			.get(`${this.apiUrl}/Get/?id=${id}`)

@@ -1,58 +1,71 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
+using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using System.IO;
-using System.Runtime.InteropServices;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi;
+using SabreSprings.Brewing.BrewController.Api.Hubs;
+using SabreSprings.Brewing.BrewController.HostedServices;
+using SabreSprings.Brewing.BrewController.Services;
+using SabreSprings.Brewing.BrewController.Services.Interfaces;
+using Serilog;
 
-namespace SabreSprings.Brewing.BrewController.Api
+var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.UseUrls(builder.Environment.IsDevelopment()
+    ? "http://localhost:8090"
+    : "http://*:8080");
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>((_, container) =>
 {
-    public class Program
+    Log.Logger = new LoggerConfiguration()
+        .WriteTo.Console()
+        .WriteTo.File("Log-.txt", rollingInterval: RollingInterval.Day)
+        .CreateLogger();
+
+    container.RegisterType<KettleService>().As<IKettleService>().SingleInstance();
+    container.RegisterType<MashService>().As<IMashService>().SingleInstance();
+    container.RegisterType<PumpService>().As<IPumpService>().SingleInstance();
+});
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("BrewControllerClient", policy =>
     {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+        policy.WithOrigins("http://localhost:8080", "http://10.0.0.2", "http://10.0.0.2:8000", "http://10.0.0.5", "http://10.0.0.5:8000")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
+builder.Services.AddControllers();
+builder.Services.AddSignalR();
+builder.Services.AddHostedService<KettleHostedService>();
+builder.Services.AddHostedService<MashHostedService>();
+builder.Services.AddHostedService<PumpHostedService>();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "SabreSprings.Brewing.BrewController.Api",
+        Version = "v1"
+    });
+});
 
-        public static IHostBuilder CreateHostBuilder(string[] args)
-        {
+var app = builder.Build();
 
-            var host = Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                    var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-                    if (environment == Environments.Development)
-                    {
-
-                        webBuilder.UseUrls("http://localhost:8090");
-                    }
-                    else
-                    {
-                        webBuilder.UseUrls("http://*:8080");
-                    }
-
-                }).UseServiceProviderFactory(new AutofacServiceProviderFactory());
-            host.ConfigureAppConfiguration((hostingContext, config) =>
-            {
-                config.SetBasePath(Directory.GetCurrentDirectory());
-                config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-                bool isWindows = System.Runtime.InteropServices.RuntimeInformation
-                                               .IsOSPlatform(OSPlatform.Windows);
-                if (isWindows)
-                {
-                    Console.WriteLine("Detected OS: Windows");
-                    config.AddJsonFile("appsettings.Windows.Development.json", optional: true, reloadOnChange: true);
-                }
-                else
-                {
-                    Console.WriteLine("Detected OS: Linux");
-                    config.AddJsonFile("appsettings.Linux.Development.json", optional: true, reloadOnChange: true);
-                }
-            });
-            return host;
-        }
-    }
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "SabreSprings.Brewing.BrewController.Api v1"));
 }
+
+app.UseCors("BrewControllerClient");
+app.MapControllers();
+app.MapHub<KettleHub>("/kettleHub");
+app.MapHub<MashHub>("/mashHub");
+app.MapHub<PumpHub>("/pumpHub");
+
+app.Run();

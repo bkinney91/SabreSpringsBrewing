@@ -11,53 +11,38 @@
 <!-- SCRIPTS ---------------------------------------------------------------------------------- -->
 <!-- ------------------------------------------------------------------------------------------ -->
 <script lang="ts">
-
-    // IMPORTS ----------------------------------
-    import { Component, Vue } from "vue-property-decorator";
-    import { ApplicationSettings } from "@/core/models";
+    import { defineComponent } from "vue";
     import { AppSettingsHelper } from "../../core/helpers";
     import NavHeaderComponent from "./nav-header.component.vue";
     import NavControlsComponent from "./nav-controls.component.vue";
 
-    @Component({
+    export default defineComponent({
         components: {
             NavHeaderComponent, NavControlsComponent
-        }
-    })
-
-    // NAV CONTAINER COMPONENT ------------------
-    export default class NavContainerComponent extends Vue {
-        private applicationSettings: ApplicationSettings;
-
-        constructor() {
-            super();
-            this.applicationSettings = AppSettingsHelper.getSettings();
-        }
-
-        public created(): void {
+        },
+        data() {
+            return {
+                applicationSettings: AppSettingsHelper.getSettings(),
+                show: false
+            };
+        },
+        mounted() {
             document.addEventListener("click", this.documentClick);
-        }
-
-        public destroyed(): void {
+        },
+        beforeUnmount() {
             document.removeEventListener("click", this.documentClick);
-        }
-
-        public documentClick(event: any) {
+        },
+        methods: {
+          documentClick(event: MouseEvent) {
             if (!this.$el.contains(event.target) && this.show) {
                 this.toggle();
             }
-        }
-
-        public show: boolean = false;
-
-        public get appAbbreviation(): string {
-            return this.applicationSettings.appAbbreviation;
-        }
-
-        public toggle(): void {
+          },
+          toggle() {
             this.show = !this.show;
+          }
         }
-    }
+    });
 </script>
 
 

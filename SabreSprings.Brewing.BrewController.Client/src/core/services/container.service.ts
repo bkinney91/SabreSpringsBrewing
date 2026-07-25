@@ -1,5 +1,4 @@
 import { Container } from "inversify";
-import { isNullOrUndefined } from "util";
 import { ServiceTypes } from "../symbols";
 
 export class ContainerService {
@@ -11,7 +10,7 @@ export class ContainerService {
     }
 
     static get instance(): ContainerService {
-        if (isNullOrUndefined(ContainerService.instanceInternal)) {
+        if (!ContainerService.instanceInternal) {
             ContainerService.instanceInternal = new ContainerService();
         }
         return ContainerService.instanceInternal;

@@ -16,46 +16,14 @@
 <!-- SCRIPTS ---------------------------------------------------------------------------------- -->
 <!-- ------------------------------------------------------------------------------------------ -->
 <script lang="ts">
-// IMPORTS ----------------------------------
-import Router from "./router";
-import {
-  KettleHubService,
-  MashHubService,
-  PumpHubService,
-} from "@/core/services";
-import { ServiceTypes } from "@/core/symbols";
+import { defineComponent } from "vue";
 import NavigationComponent from "@/modules/layout/nav-container.component.vue";
-import { configureContainer } from "@/configure-container";
-import { Inject, Component, Vue } from "vue-property-decorator";
-import { Template } from "devextreme/core/templates/template";
 
-// VARIABLES --------------------------------
-let container = configureContainer();
-
-@Component({
+export default defineComponent({
   components: {
     NavigationComponent,
-  },
-  provide: {
-    [ServiceTypes.Container]: container,
-    [ServiceTypes.KettleHubService]: container.get<KettleHubService>(
-      ServiceTypes.KettleHubService
-    ),
-    [ServiceTypes.MashHubService]: container.get<MashHubService>(
-      ServiceTypes.MashHubService
-    ),
-    [ServiceTypes.PumpHubService]: container.get<PumpHubService>(
-      ServiceTypes.PumpHubService
-    ),
-  },
-})
-
-// APP --------------------------------------
-export default class App extends Vue {
-  constructor() {
-    super();
   }
-}
+});
 </script>
 
 

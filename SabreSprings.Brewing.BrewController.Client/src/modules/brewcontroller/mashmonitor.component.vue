@@ -7,7 +7,7 @@
 
       <div class="row">
         <div class="col-lg-12">
-          <DxCircularGauge id="gauge" :value.sync="mashTemperature">
+          <DxCircularGauge id="gauge" v-model:value="mashTemperature">
             <DxScale :start-value="120" :end-value="180" :tick-interval="10">
               <DxLabel :use-range-colors="true" />
             </DxScale>
@@ -31,10 +31,8 @@
 
 
 <script lang="ts">
-// IMPORTS ----------------------------------
-import { Vue, Component, Inject, Prop } from "vue-property-decorator";
+import { defineComponent } from "vue";
 import { ServiceTypes } from "@/core/symbols";
-import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
 import { DxSlider } from "devextreme-vue/slider";
 import { DxNumberBox } from "devextreme-vue/number-box";
 import {
@@ -51,7 +49,11 @@ import {
   DxFont,
 } from "devextreme-vue/circular-gauge";
 import { MashHubService } from "@/core/services";
-@Component({
+import { configureContainer } from "@/configure-container";
+
+const mashHubService = configureContainer().get<MashHubService>(ServiceTypes.MashHubService);
+
+export default defineComponent({
   components: {
     DxSlider,
     DxNumberBox,
@@ -65,31 +67,24 @@ import { MashHubService } from "@/core/services";
     DxTitle,
     DxFont
   },
-})
-export default class MashMonitorComponent extends Vue {
-  @Inject(ServiceTypes.MashHubService)
-  private mashHubService!: MashHubService;
-  private mashTemperature: number = 0;
-  constructor() {
-    super();
-    this.mashHubService.StartConnection();
-  }
-
-  created(): void {
-    this.mashHubService.SetTemperatureCallback(this.updateTemperature);
-   
-    }
-
-    private updateTemperature(temperature: number){
-      if(temperature < 0 || temperature > 1000){
+  data() {
+    return { mashTemperature: 0 };
+  },
+  async created() {
+    await mashHubService.StartConnection();
+    mashHubService.SetTemperatureCallback((temperature: number) => this.updateTemperature(temperature));
+  },
+  methods: {
+    updateTemperature(temperature: number) {
+      if (temperature < 0 || temperature > 1000) {
         this.mashTemperature = 0;
         return;
       }
-      this.mashTemperature  = this.roundToOne(temperature);
+      this.mashTemperature = this.roundToOne(temperature);
+    },
+    roundToOne(value: number): number {
+      return Number(value.toFixed(1));
     }
-
-    private roundToOne(num:number) : number{    
-    return Number(Number(num).toFixed(1));
-}
-}
+  }
+});
 </script>

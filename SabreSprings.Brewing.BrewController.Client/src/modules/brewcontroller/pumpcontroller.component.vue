@@ -11,7 +11,7 @@
       <div class="col-lg-6">
         <h3>Kettle</h3>
       </div>
-      <div class="col-lg-6">      
+      <div class="col-lg-6">
         <div class="onoffswitch">
           <input
           v-on:click="setPump1PowerState"
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <br />   
+    <br />
       <div class="row">
         <div class="col-lg-6">
           <h3>Mash</h3>
@@ -131,11 +131,10 @@
 </style>
 
 <script lang="ts">
-// IMPORTS ----------------------------------
-import { Vue, Component, Inject, Prop, Watch } from "vue-property-decorator";
+import { defineComponent } from "vue";
 import { ServiceTypes } from "@/core/symbols";
-import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
-import { PumpHubService } from "@/core/services"
+import { PumpHubService } from "@/core/services";
+import { configureContainer } from "@/configure-container";
 import { DxSlider } from "devextreme-vue/slider";
 import { DxNumberBox } from "devextreme-vue/number-box";
 import {
@@ -144,7 +143,9 @@ import {
   DxLabel,
   DxValueIndicator,
 } from "devextreme-vue/linear-gauge";
-@Component({
+const pumpHubService = configureContainer().get<PumpHubService>(ServiceTypes.PumpHubService);
+
+export default defineComponent({
   components: {
     DxSlider,
     DxNumberBox,
@@ -153,38 +154,24 @@ import {
     DxLabel,
     DxValueIndicator,
   },
-})
-export default class PumpControllerComponent extends Vue {
-  @Inject(ServiceTypes.PumpHubService)
-  private pumpHubService!: PumpHubService;
-  private pump1PowerEnabled: boolean = false;
-  private pump2PowerEnabled: boolean = false;
-  constructor() {
-    super();
-    this.pumpHubService.StartConnection();
+  data() {
+    return {
+      pump1PowerEnabled: false,
+      pump2PowerEnabled: false
+    };
+  },
+  async created() {
+    await pumpHubService.StartConnection();
+    pumpHubService.SetPump1PowerStateCallback((enabled: boolean) => { this.pump1PowerEnabled = enabled; });
+    pumpHubService.SetPump2PowerStateCallback((enabled: boolean) => { this.pump2PowerEnabled = enabled; });
+  },
+  methods: {
+    setPump1PowerState() {
+      pumpHubService.SetPump1PowerState(!this.pump1PowerEnabled);
+    },
+    setPump2PowerState() {
+      pumpHubService.SetPump2PowerState(!this.pump2PowerEnabled);
+    }
   }
-
-  created(): void {
-    this.pumpHubService.SetPump1PowerStateCallback(this.receivePump1);
-    this.pumpHubService.SetPump2PowerStateCallback(this.receivePump2);
-  }
-
-
-
-  private receivePump1(data: any){
-    this.pump1PowerEnabled = data;
-  }
-
-  private receivePump2(data: any){
-    this.pump2PowerEnabled = data;
-  }
-
-  private setPump1PowerState(){
-    this.pumpHubService.SetPump1PowerState(this.pump1PowerEnabled == false);
-  }
-
-  private setPump2PowerState(){
-    this.pumpHubService.SetPump2PowerState(this.pump2PowerEnabled == false);
-  }
-}
+});
 </script>

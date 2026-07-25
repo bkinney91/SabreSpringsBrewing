@@ -15,30 +15,20 @@
         <PumpController/>
       </div>
     </div>
-    </div>
   </div>
 </template>
 
 <script lang="ts">
-// IMPORTS ----------------------------------
-import { Vue, Component, Inject, Prop } from "vue-property-decorator";
-import { ServiceTypes } from "@/core/symbols";
-import { AppSettingsHelper, NotifyHelper } from "@/core/helpers";
+import { defineComponent } from "vue";
 import KettleController from "./kettlecontroller.component.vue";
 import PumpController from "./pumpcontroller.component.vue";
 import MashMonitor from "./mashmonitor.component.vue";
-@Component({
+
+export default defineComponent({
   components: {
     KettleController,
     MashMonitor,
     PumpController,
-  },
-})
-export default class BrewControllerComponent extends Vue {
-  constructor() {
-    super();
   }
-
-  created(): void {}
-}
+});
 </script>

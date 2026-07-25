@@ -13,34 +13,3 @@
 <!-- ------------------------------------------------------------------------------------------ -->
 <!-- SCRIPTS ---------------------------------------------------------------------------------- -->
 <!-- ------------------------------------------------------------------------------------------ -->
-<script lang="ts">
-
-    // IMPORTS ----------------------------------
-    import Vue from "vue";
-    import { Component, Inject } from "vue-property-decorator";
-    import { Subscription } from "rxjs";
-    import { ServiceTypes } from "../../core/symbols";
-
-    @Component({})
-
-    // ADMIN COMPONENT --------------------------
-    export default class AdminComponent extends Vue {
-        
-
-        constructor() {
-            super();
-          
-        }
-
-        public created(): void {
-            this.initializeSubscription();
-        }
-
-        public beforeDestroy(): void {
-            
-        }
-
-        private initializeSubscription(): void {
-           
-        }
-    }</script>

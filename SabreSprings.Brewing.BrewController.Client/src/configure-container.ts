@@ -9,7 +9,7 @@ import {
 } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
 import { AppSettingsHelper } from "@/core/helpers";
-import Axios, { AxiosInstance } from "axios";
+import Axios, { type AxiosInstance } from "axios";
 
 export function configureContainer(): Container {
 	const container = ContainerService.instance.getContainer();

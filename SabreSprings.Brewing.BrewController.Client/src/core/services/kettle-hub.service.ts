@@ -1,7 +1,7 @@
 import { BaseApiService } from "@/core/services";
 import { ServiceTypes } from "@/core/symbols";
 import * as SignalR from "@microsoft/signalr";
-import { AppSettingsHelper } from "@/core/helpers"; 
+import { AppSettingsHelper } from "@/core/helpers";
 import { injectable, inject } from "inversify";
 
 @injectable()
@@ -11,7 +11,7 @@ export class KettleHubService
     private hubConnection!: SignalR.HubConnection;
     constructor()
     {
-        
+
     }
 
     public async StartConnection(){
@@ -41,7 +41,7 @@ export class KettleHubService
     public DecrementTemperature(){
         this.hubConnection.invoke("DecrementTemperature");
     }
-    
+
     public IncrementTemperature(){
         this.hubConnection.invoke("IncrementTemperature");
     }
@@ -53,12 +53,12 @@ export class KettleHubService
     }
 
 
-    private BuildConnection() : signalR.HubConnection
+    private BuildConnection() : SignalR.HubConnection
     {
         let connection =  new SignalR.HubConnectionBuilder()
                                 .withUrl(AppSettingsHelper.hubUrl() + this.hubName)
-                                .build();       
-        
+                                .build();
+
         return connection;
     }
 
